@@ -80,36 +80,41 @@ const ctas = [
 
 export default function Home() {
   return (
-    <main className="bg-slate-50 text-slate-900">
-      <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <div className="text-lg font-semibold tracking-tight text-slate-700">villa4you</div>
-          <nav className="hidden gap-6 text-sm text-slate-700 md:flex">
-            <Link href="/for-guests">For Guests</Link>
-            <Link href="/for-owners">For Owners</Link>
-            <Link href="/collaborate">Collaborate</Link>
-            <Link href="/about">About</Link>
-            <Link href="/support">Support</Link>
-            <Link href="/blog">Blog</Link>
-          </nav>
-          <input
-            className="hidden rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm md:block"
-            value="Where to or what trip?"
-            readOnly
-          />
-        </div>
-      </header>
+    <main className="bg-[#f3f4f6] text-slate-900">
+      <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6">
+        <header className="rounded-xl border border-slate-300 bg-white px-4 py-4 shadow-sm sm:px-6">
+          <div className="flex items-center justify-between gap-4">
+            <div className="leading-none">
+              <div className="text-[40px] font-light tracking-tight text-slate-500">villa4you</div>
+              <div className="mt-1 text-xs text-slate-400">Vacations Made Simple</div>
+            </div>
+            <nav className="hidden gap-6 text-sm text-slate-600 lg:flex">
+              <Link href="/for-guests">For Guests</Link>
+              <Link href="/for-owners">For Owners</Link>
+              <Link href="/collaborate">Collaborate</Link>
+              <Link href="/about">About</Link>
+              <Link href="/support">Support</Link>
+              <Link href="/blog">Blog</Link>
+            </nav>
+            <input
+              className="hidden w-64 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-500 md:block"
+              value="Where to or what trip?"
+              readOnly
+            />
+          </div>
+        </header>
+      </div>
 
-      <section className="mx-auto max-w-6xl px-6 py-10">
-        <div className="grid gap-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:grid-cols-2 lg:p-6">
+      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+        <div className="grid gap-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:grid-cols-[1.15fr_0.85fr] lg:p-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-emerald-700">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-700">
               Trusted villa stays & management · 18+ years
             </p>
-            <h1 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">
+            <h1 className="mt-2 text-[52px] font-medium leading-[1.05] tracking-tight text-slate-900 sm:text-[58px] lg:text-[64px]">
               Find the perfect villa for your vacations in Greece
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-slate-600">
+            <p className="mt-4 max-w-2xl text-[22px] leading-relaxed text-slate-600">
               Villa4you connects vetted villas, expert trip planning, and pro property management
               across Greece. Book via Planyo, manage in Kommo, powered by ClickyTour Core.
             </p>
@@ -121,10 +126,10 @@ export default function Home() {
             </div>
 
             <div className="mt-4 flex gap-3">
-              <button className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white">
+              <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">
                 Find a Villa
               </button>
-              <button className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-medium">
+              <button className="rounded-xl border border-slate-300 px-5 py-2.5 text-sm font-medium">
                 Plan My Trip
               </button>
             </div>
@@ -145,7 +150,7 @@ export default function Home() {
           </div>
 
           <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <h2 className="text-2xl font-semibold">Quick Request</h2>
+            <h2 className="text-[34px] font-medium leading-none">Quick Request</h2>
             <p className="text-sm text-slate-600">Get a shortlist fast — 60 seconds.</p>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
