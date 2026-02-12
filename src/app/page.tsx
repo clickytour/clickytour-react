@@ -5,23 +5,47 @@ const audienceBlocks = [
     title: "For Guests",
     text: "Hand-picked villas with local support, transfers, and activities. Book with confidence.",
     href: "/vacation-assistance",
+    image:
+      "https://images.unsplash.com/photo-1505483531331-379b6c0cf8a0?q=80&w=1200&auto=format&fit=crop",
   },
   {
     title: "For Owners",
     text: "Choose the right management model and grow revenue with transparent reporting.",
     href: "/for-owners",
+    image:
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1200&auto=format&fit=crop",
   },
   {
     title: "Collaborate",
     text: "PMCs, providers, and agents: partner for net pricing, listings, and shared tools.",
     href: "/collaborate",
+    image:
+      "https://images.unsplash.com/photo-1527104772451-159ad4df4b47?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
 const destinations = [
-  { name: "Santorini", tags: ["Luxury", "Romance"], href: "/destinations/santorini" },
-  { name: "Crete", tags: ["Family", "Gastronomy"], href: "/destinations/crete" },
-  { name: "Mykonos", tags: ["Nightlife", "Beaches"], href: "/destinations/mykonos" },
+  {
+    name: "Santorini",
+    tags: ["Luxury", "Romance"],
+    href: "/destinations/santorini",
+    image:
+      "https://images.unsplash.com/photo-1505483531331-379b6c0cf8a0?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    name: "Crete",
+    tags: ["Family", "Gastronomy"],
+    href: "/destinations/crete",
+    image:
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    name: "Mykonos",
+    tags: ["Nightlife", "Beaches"],
+    href: "/destinations/mykonos",
+    image:
+      "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1200&auto=format&fit=crop",
+  },
 ];
 
 const featuredVillas = [
@@ -29,16 +53,22 @@ const featuredVillas = [
     name: "Villa Blue Calda",
     details: "Santorini · 4 BR · Pool · Caldera view",
     href: "/destinations/santorini/villa-blue-calda",
+    image:
+      "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1200&auto=format&fit=crop",
   },
   {
     name: "Villa Olive Grove",
     details: "Crete · 5 BR · Family-friendly",
     href: "/destinations/crete/villa-olive-grove",
+    image:
+      "https://images.unsplash.com/photo-1529699153480-9633a3bc8b64?q=80&w=1200&auto=format&fit=crop",
   },
   {
     name: "Villa Psarou Pearl",
     details: "Mykonos · 3 BR · Near beach clubs",
     href: "/destinations/mykonos/villa-psarou-pearl",
+    image:
+      "https://images.unsplash.com/photo-1519822473170-1dc3e09f25bb?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
@@ -176,10 +206,16 @@ export default function Home() {
           <Link
             key={block.title}
             href={block.href}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+            className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow"
           >
-            <h2 className="text-xl font-semibold">{block.title}</h2>
-            <p className="mt-2 text-sm text-slate-600">{block.text}</p>
+            <div
+              className="h-40 w-full bg-slate-200 bg-cover bg-center"
+              style={{ backgroundImage: `url(${block.image})` }}
+            />
+            <div className="p-6">
+              <h2 className="text-xl font-semibold">{block.title}</h2>
+              <p className="mt-2 text-sm text-slate-600">{block.text}</p>
+            </div>
           </Link>
         ))}
       </section>
@@ -189,15 +225,21 @@ export default function Home() {
           <Link
             key={destination.name}
             href={destination.href}
-            className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+            className="overflow-hidden rounded-2xl bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow"
           >
-            <h2 className="text-xl font-semibold">{destination.name}</h2>
-            <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
-              {destination.tags.map((tag) => (
-                <span key={tag} className="rounded-full bg-slate-100 px-2 py-1">
-                  {tag}
-                </span>
-              ))}
+            <div
+              className="h-44 w-full bg-slate-200 bg-cover bg-center"
+              style={{ backgroundImage: `url(${destination.image})` }}
+            />
+            <div className="p-6">
+              <h2 className="text-xl font-semibold">{destination.name}</h2>
+              <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-600">
+                {destination.tags.map((tag) => (
+                  <span key={tag} className="rounded-full bg-slate-100 px-2 py-1">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </Link>
         ))}
@@ -210,10 +252,16 @@ export default function Home() {
             <Link
               key={villa.name}
               href={villa.href}
-              className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-slate-300"
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:border-slate-300"
             >
-              <h3 className="font-semibold">{villa.name}</h3>
-              <p className="mt-2 text-sm text-slate-600">{villa.details}</p>
+              <div
+                className="h-44 w-full bg-slate-200 bg-cover bg-center"
+                style={{ backgroundImage: `url(${villa.image})` }}
+              />
+              <div className="p-5">
+                <h3 className="font-semibold">{villa.name}</h3>
+                <p className="mt-2 text-sm text-slate-600">{villa.details}</p>
+              </div>
             </Link>
           ))}
         </div>
