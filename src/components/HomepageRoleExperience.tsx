@@ -10,18 +10,24 @@ const roleCfg = {
     h1: "Find the perfect villa for your vacations in Greece",
     p: "Villa4you connects vetted villas, expert trip planning, and pro property management across Greece.",
     ctas: ["Find a Villa", "Plan My Trip"],
+    kpis: ["⭐ 4.8/5 guest reviews", "🏝️ 6+ top destinations", "🔄 seamless Planyo bookings"],
+    trustTitle: "Why Villa4you?",
   },
   owners: {
     eyebrow: "Owners · Transparent management & reporting",
     h1: "Grow your villa revenue with the right management model",
     p: "From Self‑Managed to Fully Managed: improve distribution, operations, and pricing.",
     ctas: ["Free evaluation", "See how it works"],
+    kpis: ["📈 Revenue strategy", "🧾 Transparent reporting", "🧰 Ops playbooks"],
+    trustTitle: "Why owners choose Villa4you",
   },
   collab: {
     eyebrow: "Partners · Agents · Providers · PMCs",
     h1: "Collaborate to sell more villas and services",
     p: "Partner for net pricing, listings, co‑marketing, and shared tools.",
     ctas: ["Partner programs", "Agents & affiliates"],
+    kpis: ["🤝 Partner programs", "🏷️ Net pricing", "🔌 Tools & integrations"],
+    trustTitle: "Why partners work with Villa4you",
   },
 } as const;
 
@@ -38,13 +44,13 @@ export function HomepageRoleExperience() {
   return (
     <main className="min-h-screen bg-[#f3f5f8] text-slate-900">
       <section className="mx-auto max-w-[1200px] px-4 py-8">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <div className="mb-4 flex gap-2">
+        <div className="rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="mb-5 flex flex-wrap gap-2">
             {(["guests", "owners", "collab"] as const).map((r) => (
               <button
                 key={r}
                 onClick={() => setRole(r)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold capitalize ${
                   role === r ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"
                 }`}
               >
@@ -53,14 +59,51 @@ export function HomepageRoleExperience() {
             ))}
           </div>
 
-          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{cfg.eyebrow}</p>
-          <h1 className="mt-2 text-4xl font-semibold leading-tight md:text-5xl">{cfg.h1}</h1>
-          <p className="mt-3 max-w-2xl text-lg text-slate-700">{cfg.p}</p>
+          <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{cfg.eyebrow}</p>
+              <h1 className="mt-2 max-w-[18ch] text-4xl font-semibold leading-tight md:text-6xl">{cfg.h1}</h1>
+              <p className="mt-3 max-w-2xl text-lg text-slate-700">{cfg.p}</p>
 
-          <div className="mt-5 flex gap-3">
-            <button className="rounded-lg bg-slate-900 px-4 py-2 text-white">{cfg.ctas[0]}</button>
-            <button className="rounded-lg border border-slate-300 bg-white px-4 py-2">{cfg.ctas[1]}</button>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <button className="rounded-lg bg-slate-900 px-4 py-2 text-white">{cfg.ctas[0]}</button>
+                <button className="rounded-lg border border-slate-300 bg-white px-4 py-2">{cfg.ctas[1]}</button>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-700">
+                {cfg.kpis.map((kpi) => (
+                  <span key={kpi} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5">
+                    {kpi}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-600">Quick Request (UI mock)</h3>
+              <div className="mt-3 grid gap-2">
+                <input className="rounded-lg border bg-white px-3 py-2 text-sm" placeholder="Destination" />
+                <div className="grid grid-cols-2 gap-2">
+                  <input className="rounded-lg border bg-white px-3 py-2 text-sm" placeholder="Check-in" />
+                  <input className="rounded-lg border bg-white px-3 py-2 text-sm" placeholder="Check-out" />
+                </div>
+                <input className="rounded-lg border bg-white px-3 py-2 text-sm" placeholder="Adults" />
+                <button className="mt-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white">Next</button>
+              </div>
+            </aside>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1200px] px-4 pb-6">
+        <div className="rounded-2xl border bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold">{cfg.trustTitle}</h2>
+          <ul className="mt-3 grid gap-2 text-sm text-slate-700 md:grid-cols-2">
+            <li>• Trusted network and operational consistency</li>
+            <li>• Structured listings and better booking readiness</li>
+            <li>• Clear process visibility for teams and partners</li>
+            <li>• Baseline aligned to approved homepage system</li>
+          </ul>
         </div>
       </section>
 
