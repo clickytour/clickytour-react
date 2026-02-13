@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { LandingHero } from "@/components/LandingHero";
 import { ForGuestsSections } from "@/components/ForGuestsSections";
 import { ForOwnersSections } from "@/components/ForOwnersSections";
+import { CollaborateSections } from "@/components/CollaborateSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -17,6 +18,7 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
       <LandingHero config={page} />
       {slug === "for-guests" && <ForGuestsSections />}
       {slug === "for-owners" && <ForOwnersSections />}
+      {slug === "collaborate" && <CollaborateSections />}
     </div>
   );
 }
