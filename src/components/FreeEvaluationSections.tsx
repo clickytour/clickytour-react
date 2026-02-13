@@ -279,6 +279,17 @@ export function FreeEvaluationSections() {
           </div>
         </form>
       </section>
+
+      <section className="mx-auto max-w-[1280px] px-4 pb-10">
+        <div className="rounded-2xl border border-slate-300 bg-white px-4 py-8 text-center md:px-8">
+          <h3 className="text-[42px] font-semibold leading-none text-slate-900">Ready to see your villa’s revenue upside?</h3>
+          <p className="mt-2 text-[21px] text-slate-600">Submit the form above or schedule a quick intro call.</p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+            <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-base font-medium text-white">Start Free Evaluation</button>
+            <button className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-base font-medium text-slate-900">Book a 15-min Call</button>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
