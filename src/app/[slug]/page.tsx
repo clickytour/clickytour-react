@@ -6,10 +6,19 @@ import { CollaborateSections } from "@/components/CollaborateSections";
 import { AboutSections } from "@/components/AboutSections";
 import { VacationPropertyManagementSections } from "@/components/VacationPropertyManagementSections";
 import { SearchResultsGuestSections } from "@/components/SearchResultsGuestSections";
+import { FreeEvaluationSections } from "@/components/FreeEvaluationSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (slug === "free-evaluation") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <FreeEvaluationSections />
+      </div>
+    );
+  }
+
   const page = heroPagesBySlug[slug];
 
   if (!page) {
