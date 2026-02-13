@@ -44,6 +44,32 @@ const popularDestinationCards = [
 
 ];
 
+const guideCards = [
+  {
+    title: "Santorini — Best Things to Do",
+    text: "Sunset spots, wine tours, sailing, cliff-side dining.",
+  },
+  {
+    title: "Halkidiki — Family Beaches",
+    text: "Calm bays, boat days, pine-framed waters.",
+  },
+  {
+    title: "Athens — Culture & Food",
+    text: "Acropolis, neighborhoods, restaurants, day trips.",
+  },
+  {
+    title: "Thessaloniki — City by the Sea",
+    text: "Waterfront walks, markets, Byzantine gems.",
+  },
+];
+
+const whyBookCards = [
+  { title: "18+ years", text: "Experience in Greek stays" },
+  { title: "Vetted villas", text: "Quality, safety, compliance" },
+  { title: "Trip assistance", text: "Transfers & activities" },
+  { title: "Transparent", text: "Clear pricing & policies" },
+];
+
 const guestFaqItems = [
   {
     question: "How do I check availability?",
@@ -140,6 +166,36 @@ export function ForGuestsSections() {
 
           <div className="mt-4">
             <button className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm text-slate-900">Guest Help & FAQ</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1280px] px-4 pb-6">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-sm md:p-6">
+          <h2 className="text-[42px] font-semibold tracking-[-0.01em] text-slate-900">What to do & where to go</h2>
+          <p className="mt-1 text-[22px] text-slate-700">Seasonal guides and experiences in our most popular areas.</p>
+
+          <div className="mt-4 grid gap-3 md:grid-cols-4">
+            {guideCards.map((card) => (
+              <article key={card.title} className="rounded-xl border border-slate-200 bg-white p-4">
+                <h3 className="text-[30px] font-semibold leading-none text-slate-900">{card.title}</h3>
+                <p className="mt-3 text-[21px] text-slate-700">{card.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1280px] px-4 pb-6">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-sm md:p-6">
+          <h2 className="text-[42px] font-semibold tracking-[-0.01em] text-slate-900">Why book with Villa4you</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {whyBookCards.map((card) => (
+              <article key={card.title} className="rounded-xl border border-slate-200 bg-white px-4 py-5 text-center">
+                <h3 className="text-[34px] font-semibold leading-none text-slate-900">{card.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{card.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
