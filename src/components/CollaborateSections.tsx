@@ -123,8 +123,8 @@ export function CollaborateSections() {
                 </ul>
               </div>
               <div className="flex gap-2 border-t border-slate-300 p-4">
-                <button className="rounded-xl bg-slate-900 px-4 py-2 text-sm text-white">{card.primary}</button>
-                <button className="rounded-xl border border-slate-800 px-4 py-2 text-sm">{card.secondary}</button>
+                <button className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white">{card.primary}</button>
+                <button className="rounded-xl border border-slate-800 bg-white px-4 py-2 text-sm font-medium text-slate-900">{card.secondary}</button>
               </div>
             </article>
           ))}
@@ -160,9 +160,9 @@ export function CollaborateSections() {
           <h2 className="text-[56px] font-semibold leading-none text-slate-900">Ready to collaborate?</h2>
           <p className="mt-3 text-[22px] text-slate-600">Tell us your role and region—we’ll get you set up this week.</p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
-            <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm text-white">Apply as PMC</button>
-            <button className="rounded-xl border border-slate-800 px-5 py-2.5 text-sm">List your business</button>
-            <button className="rounded-xl border border-slate-800 px-5 py-2.5 text-sm">Join as Agent</button>
+            <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">Apply as PMC</button>
+            <button className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-sm font-medium text-slate-900">List your business</button>
+            <button className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-sm font-medium text-slate-900">Join as Agent</button>
           </div>
         </div>
       </section>
