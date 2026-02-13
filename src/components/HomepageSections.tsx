@@ -1,6 +1,64 @@
+const roleCards = [
+  {
+    title: "For Guests",
+    desc: "Find villas faster with clear options and trip support.",
+    cta: "Explore guest flow",
+  },
+  {
+    title: "For Owners",
+    desc: "Transparent management model with clear performance visibility.",
+    cta: "See owner model",
+  },
+  {
+    title: "Collaborate",
+    desc: "Partners, agents and providers with structured offers.",
+    cta: "View collaboration",
+  },
+];
+
+const destinationCards = [
+  { name: "Santorini", tag: "Popular for couples" },
+  { name: "Mykonos", tag: "Lifestyle & nightlife" },
+  { name: "Paros", tag: "Family-friendly stays" },
+  { name: "Crete", tag: "Long-stay variety" },
+  { name: "Rhodes", tag: "Beach + history" },
+  { name: "Corfu", tag: "Nature + villas" },
+];
+
+const blogCards = [
+  { title: "How agents earn with net pricing", meta: "Collaborate · 4 min read" },
+  { title: "Partner onboarding checklist", meta: "Partners · 5 min read" },
+  { title: "How to list services effectively", meta: "Providers · 4 min read" },
+];
+
+const serviceCards = [
+  "Airport transfers",
+  "Private chef",
+  "Boat experiences",
+  "Housekeeping",
+  "Concierge support",
+  "Activity planning",
+];
+
 export function HomepageSections() {
   return (
     <div className="bg-[#f3f5f8] pb-20">
+      <section className="mx-auto max-w-[1280px] px-4 pb-6">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-xl font-semibold">Choose your path</h2>
+          <p className="mt-1 text-sm text-slate-600">Same platform, tailored experience by role.</p>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {roleCards.map((card) => (
+              <article key={card.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-base font-semibold">{card.title}</h3>
+                <p className="mt-2 text-sm text-slate-700">{card.desc}</p>
+                <button className="mt-3 rounded-md bg-slate-900 px-3 py-1.5 text-sm text-white">{card.cta}</button>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-[1280px] px-4 pb-6">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="text-xl font-semibold">How it works</h2>
@@ -22,10 +80,25 @@ export function HomepageSections() {
       <section className="mx-auto max-w-[1280px] px-4 pb-6">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="text-xl font-semibold">Top destinations</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+            {destinationCards.map((d) => (
+              <article key={d.name} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div className="h-24 rounded-md bg-slate-200" />
+                <h3 className="mt-3 font-semibold">{d.name}</h3>
+                <p className="text-sm text-slate-600">{d.tag}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1280px] px-4 pb-6">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-xl font-semibold">Popular villa services</h2>
           <div className="mt-4 flex flex-wrap gap-2">
-            {["Santorini", "Mykonos", "Paros", "Crete", "Rhodes", "Corfu"].map((d) => (
-              <span key={d} className="rounded-full border border-slate-300 px-3 py-1.5 text-sm text-slate-700">
-                {d}
+            {serviceCards.map((s) => (
+              <span key={s} className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1.5 text-sm text-slate-700">
+                {s}
               </span>
             ))}
           </div>
@@ -36,20 +109,31 @@ export function HomepageSections() {
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="text-xl font-semibold">Collaborate posts</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {[
-              ["How agents earn with net pricing", "Collaborate · 4 min read"],
-              ["Partner onboarding checklist", "Partners · 5 min read"],
-              ["How to list services effectively", "Providers · 4 min read"],
-            ].map(([title, meta]) => (
-              <article key={title} className="rounded-xl border border-slate-200 bg-white p-4">
+            {blogCards.map((b) => (
+              <article key={b.title} className="rounded-xl border border-slate-200 bg-white p-4">
                 <div className="h-28 rounded-md bg-slate-200" />
-                <h3 className="mt-3 font-semibold">{title}</h3>
-                <small className="text-slate-500">{meta}</small>
+                <h3 className="mt-3 font-semibold">{b.title}</h3>
+                <small className="text-slate-500">{b.meta}</small>
                 <div className="mt-3">
                   <button className="rounded-md bg-slate-900 px-3 py-1.5 text-sm text-white">Read</button>
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1280px] px-4 pb-10">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-xl font-semibold">Trusted by guests, owners and partners</h2>
+          <blockquote className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+            “Fast response, clear options, and smooth booking handoff.”
+          </blockquote>
+          <div className="mt-4 grid gap-2 text-sm text-slate-700 md:grid-cols-2">
+            <p>• 18+ years hospitality experience</p>
+            <p>• Verified providers and operations support</p>
+            <p>• Structured booking and CRM workflows</p>
+            <p>• Baseline design aligned for all next pages</p>
           </div>
         </div>
       </section>
