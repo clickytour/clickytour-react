@@ -29,5 +29,15 @@ Use the homepage hero as the baseline template for all landing-page hero builds.
 - `/search-results-page-for-guests`
 - `/vacation-property-management`
 
+## Approved 6-hero pack (2026-02-13)
+Approved by Drcris as production reference set:
+- `/for-guests`
+- `/for-owners`
+- `/collaborate`
+- `/about`
+- `/search-results-page-for-guests`
+- `/vacation-property-management`
+
 ## Process note
 When starting any new hero session, begin from this baseline first, then apply page-specific adjustments.
+This approved 6-hero set is the reusable starting point for future bots/agents.
