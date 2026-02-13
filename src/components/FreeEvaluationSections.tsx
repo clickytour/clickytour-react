@@ -272,10 +272,14 @@ export function FreeEvaluationSections() {
               a: "Crete, Halkidiki, Santorini, Athens, Mykonos, and Paros. For other regions, ask—we expand via partners.",
             },
           ].map((item, idx) => (
-            <div key={item.q} className={idx === 0 ? "" : "border-t border-slate-200"}>
-              <p className="px-4 py-3 text-lg font-semibold text-fuchsia-800">{item.q}</p>
-              <p className="px-4 pb-4 text-[18px] text-slate-700">{item.a}</p>
-            </div>
+            <details key={item.q} className={idx < 3 ? "border-b border-slate-200" : ""} open={idx === 3}>
+              <summary className="cursor-pointer list-none px-4 py-3 text-[30px] font-semibold leading-none text-slate-900 marker:content-none">
+                {item.q}
+              </summary>
+              <div className="px-4 pb-4">
+                <p className="text-[21px] text-slate-700">{item.a}</p>
+              </div>
+            </details>
           ))}
         </div>
       </section>
