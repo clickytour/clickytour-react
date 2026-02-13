@@ -113,16 +113,30 @@ export function FreeEvaluationSections() {
             <tbody className="text-slate-700">
               {[
                 ["Channel distribution", "Core OTAs setup & audits", "Full multi-channel + sync", "Full multi-channel + sync"],
-                ["Revenue/yield management", "Rules & seasonality", "Dynamic pricing", "Dynamic pricing"],
+                ["Revenue/yield management", "dot|rules & seasonality", "dot|dynamic pricing", "dot|dynamic pricing"],
                 ["Guest communications", "Owner", "Villa4you 7/7", "Villa4you 24/7"],
                 ["On-site operations", "Owner team", "Owner or Villa4you providers", "Villa4you end-to-end"],
-                ["Concierge & upsells", "Optional via partners", "Optional", "Included"],
+                ["Concierge & upsells", "Optional via partners", "dot|", "dot|"],
                 ["Reporting", "Monthly lite", "Monthly detailed", "Monthly + season planning"],
+                ["Best for", "Hands-on owner w/ local team", "Owner wanting help with sales & guests", "Hands-off owner targeting max ROI"],
               ].map((row) => (
                 <tr key={row[0]} className="border-b border-slate-200">
-                  {row.map((cell) => (
-                    <td key={cell} className="p-3">{cell}</td>
-                  ))}
+                  {row.map((cell, idx) => {
+                    const isDot = typeof cell === "string" && cell.startsWith("dot|");
+                    const text = isDot ? cell.replace("dot|", "") : cell;
+                    return (
+                      <td key={`${row[0]}-${idx}`} className="p-3">
+                        {isDot ? (
+                          <span className="inline-flex items-center gap-2">
+                            <span className="h-3 w-3 rounded-full bg-emerald-500" />
+                            <span>{text}</span>
+                          </span>
+                        ) : (
+                          text
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>
