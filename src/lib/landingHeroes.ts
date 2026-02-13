@@ -19,6 +19,33 @@ export type HeroPageConfig = {
 
 export const heroPages: HeroPageConfig[] = [
   {
+    slug: "homepage-template",
+    route: "/",
+    badge: "TRUSTED VILLA STAYS & MANAGEMENT · 18+ YEARS",
+    title: "Find the perfect villa for your vacations in Greece",
+    subtitle:
+      "Villa4you connects vetted villas, expert trip planning, and pro property management across Greece.",
+    chips: ["Guests", "Owners", "Collaborate"],
+    ctaPrimary: "Find a Villa",
+    ctaSecondary: "Plan My Trip",
+    trust: ["⭐ 4.8/5 guest reviews", "🏝️ 6+ top destinations", "🔄 seamless Planyo bookings"],
+    heroImage:
+      "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1800&auto=format&fit=crop",
+    sideMode: "panel",
+    panelTitle: "Quick Request",
+    panelItems: [
+      { label: "Destination", value: "Please Select" },
+      { label: "Check-in", value: "Please Select" },
+      { label: "Check-out", value: "Please Select" },
+      { label: "Adults", value: "Please Select" },
+      { label: "Children (3–14 age)", value: "Please Select" },
+      { label: "Children (0–3 age)", value: "0" },
+      { label: "Distance to beach", value: "Please Select" },
+      { label: "Distance to infrastructures", value: "Please Select" },
+    ],
+    panelFooter: "Get a shortlist fast — 60 seconds.",
+  },
+  {
     slug: "for-guests",
     route: "/for-guests",
     badge: "Home › For Guests",
