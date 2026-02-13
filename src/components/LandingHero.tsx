@@ -62,12 +62,12 @@ export function LandingHero({ config }: { config: HeroPageConfig }) {
               </div>
             </div>
 
-            {config.sideMode === "image" ? (
-              <aside className="w-full max-w-[420px] overflow-hidden rounded-[18px] border border-slate-200 bg-white shadow-sm">
+            {config.sideMode !== "panel" ? (
+              <aside className="w-full overflow-hidden rounded-[18px] border border-slate-200 bg-white shadow-sm lg:max-w-[420px]">
                 <img
                   src={config.sideImage || config.heroImage}
                   alt={`${config.route} hero visual`}
-                  className="h-[260px] w-full object-cover"
+                  className="h-[190px] w-full object-cover object-center sm:h-[220px] lg:h-[260px]"
                 />
               </aside>
             ) : (
