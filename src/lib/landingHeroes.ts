@@ -7,8 +7,11 @@ export type HeroPageConfig = {
   chips: string[];
   ctaPrimary: string;
   ctaSecondary: string;
+  ctaTertiary?: string;
   trust: string[];
   heroImage: string;
+  sideMode?: "panel" | "image";
+  sideImage?: string;
   panelTitle: string;
   panelItems: { label: string; value: string }[];
   panelFooter: string;
@@ -18,23 +21,23 @@ export const heroPages: HeroPageConfig[] = [
   {
     slug: "for-guests",
     route: "/for-guests",
-    badge: "Guest-first villa planning across Greece",
-    title: "Book a Greek villa holiday with confidence, speed, and local support",
+    badge: "Home › For Guests",
+    title: "Hand-picked villas in Greece + personal trip planning",
     subtitle:
-      "Discover handpicked villas, transparent pricing, and personalized destination guidance so your trip feels easy from day one.",
-    chips: ["Verified villas", "Local experts", "Fast shortlist"],
-    ctaPrimary: "Browse villas",
-    ctaSecondary: "Get trip advice",
-    trust: ["⭐ 4.8/5 guest reviews", "🏝️ Top islands + mainland", "📞 Dedicated support"],
+      "Find a verified villa in our top destinations or let our team craft a tailored plan with transfers and activities. Seamless handoff to Planyo for live availability & booking.",
+    chips: [],
+    ctaPrimary: "Find a Villa",
+    ctaSecondary: "Get a Free Trip Plan",
+    ctaTertiary: "Hot Offers",
+    trust: ["⭐ 4.8/5 guest reviews", "🏝️ Top destinations", "🔄 seamless bookings"],
     heroImage:
-      "https://images.unsplash.com/photo-1493558103817-58b2924bce98?q=80&w=1800&auto=format&fit=crop",
-    panelTitle: "How your booking journey works",
-    panelItems: [
-      { label: "1. Tell us your style", value: "Family, couples, group, event" },
-      { label: "2. Receive top matches", value: "Curated options in 24h" },
-      { label: "3. Confirm with clarity", value: "Simple terms + secure booking" },
-    ],
-    panelFooter: "No endless searching. Just better villa matches.",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800&auto=format&fit=crop",
+    sideMode: "image",
+    sideImage:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+    panelTitle: "",
+    panelItems: [],
+    panelFooter: "",
   },
   {
     slug: "for-owners",
