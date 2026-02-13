@@ -186,7 +186,7 @@ export function SearchResultsGuestSections() {
             <article key={card.name} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
               <div className="relative">
                 <img src={card.image} alt={card.name} className="h-[260px] w-full object-cover" />
-                <span className="absolute left-3 top-3 rounded-full bg-slate-800 px-3 py-1 text-sm text-white">{card.price}</span>
+                <span className="absolute left-3 top-3 rounded-full bg-slate-800 px-3 py-1 text-sm text-white">from {card.price}</span>
               </div>
               <div className="p-3">
                 <h3 className="text-[34px] font-semibold leading-none text-slate-900">{card.name}</h3>
