@@ -72,22 +72,18 @@ const faqItems = [
   {
     q: "Which regions can I cover?",
     a: "Crete, Halkidiki, Santorini, Athens, Mykonos, Paros. Ask us about expanding regions via partners.",
-    highlighted: false,
   },
   {
     q: "How are leads routed?",
     a: "We route by destination, category, and SLA. Providers receive contact details; PMCs receive owner/guest leads per scope.",
-    highlighted: false,
   },
   {
     q: "How do agents earn?",
     a: "Agents get net pricing on eligible villas or a commission plan on confirmed bookings. Details on the Agents page.",
-    highlighted: false,
   },
   {
     q: "Is there a fee?",
     a: "Listing is free for basic provider profiles; sponsored placements and advanced tools are optional add-ons.",
-    highlighted: true,
   },
 ];
 
@@ -175,14 +171,12 @@ export function CollaborateSections() {
         <h2 className="text-[42px] font-semibold tracking-[-0.01em] text-slate-900">Frequently asked questions</h2>
         <div className="mt-4 overflow-hidden rounded-xl border border-slate-300 bg-white">
           {faqItems.map((item, idx) => (
-            <div key={item.q} className={idx < faqItems.length - 1 ? "border-b border-slate-300" : ""}>
-              {item.highlighted ? (
-                <h3 className="border-b-2 border-blue-600 bg-rose-600 px-4 py-2 text-[30px] font-semibold text-white">{item.q}</h3>
-              ) : (
-                <h3 className="px-4 py-3 text-[30px] font-semibold text-rose-600">{item.q}</h3>
-              )}
-              <p className="px-4 pb-4 text-[21px] text-slate-600">{item.a}</p>
-            </div>
+            <details key={item.q} className={idx < faqItems.length - 1 ? "border-b border-slate-300" : ""} open={idx === faqItems.length - 1}>
+              <summary className="cursor-pointer list-none px-4 py-3 text-[30px] font-semibold text-slate-900 marker:content-none">
+                {item.q}
+              </summary>
+              <p className="px-4 pb-4 text-[21px] text-slate-700">{item.a}</p>
+            </details>
           ))}
         </div>
       </section>
