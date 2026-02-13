@@ -1,18 +1,19 @@
-const roleCards = [
+const whyBookCards = [
   {
-    title: "For Guests",
-    desc: "Find villas faster with clear options and trip support.",
-    cta: "Explore guest flow",
+    title: "18+ years",
+    desc: "Experience in Greek stays",
   },
   {
-    title: "For Owners",
-    desc: "Transparent management model with clear performance visibility.",
-    cta: "See owner model",
+    title: "Vetted villas",
+    desc: "Quality, safety, compliance",
   },
   {
-    title: "Collaborate",
-    desc: "Partners, agents and providers with structured offers.",
-    cta: "View collaboration",
+    title: "Trip assistance",
+    desc: "Transfers & activities",
+  },
+  {
+    title: "Transparent",
+    desc: "Clear pricing & policies",
   },
 ];
 
@@ -45,14 +46,12 @@ export function HomepageSections() {
     <div className="bg-[#f3f5f8] pb-20">
       <section className="mx-auto max-w-[1280px] px-4 pb-6">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold">Choose your path</h2>
-          <p className="mt-1 text-sm text-slate-600">Same platform, tailored experience by role.</p>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {roleCards.map((card) => (
-              <article key={card.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-base font-semibold">{card.title}</h3>
-                <p className="mt-2 text-sm text-slate-700">{card.desc}</p>
-                <button className="mt-3 rounded-md bg-slate-900 px-3 py-1.5 text-sm text-white">{card.cta}</button>
+          <h2 className="text-[40px] font-medium tracking-tight text-slate-900">Why book with Villa4you</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {whyBookCards.map((card) => (
+              <article key={card.title} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-5 text-center">
+                <h3 className="text-[34px] font-semibold leading-none text-slate-900">{card.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{card.desc}</p>
               </article>
             ))}
           </div>
