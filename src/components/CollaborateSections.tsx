@@ -42,7 +42,7 @@ const pathCards = [
     ],
     primary: "View program",
     secondary: "Join now",
-    image: "",
+
   },
 ];
 
