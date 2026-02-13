@@ -42,7 +42,8 @@ const pathCards = [
     ],
     primary: "View program",
     secondary: "Join now",
-
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
