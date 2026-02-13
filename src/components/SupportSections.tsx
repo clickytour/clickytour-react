@@ -1,3 +1,12 @@
+const supportCards = [
+  { title: "Guest FAQ", desc: "Check-in/out, payments, policies, concierge" },
+  { title: "Owner FAQ", desc: "Payouts, reporting, onboarding, tech" },
+  { title: "Policies", desc: "Rental terms, cancellations, deposits, privacy" },
+  { title: "Media / Press", desc: "Press kit, logos, interviews" },
+  { title: "Collaborate", desc: "PMC, providers, agents & affiliates" },
+  { title: "Contact", desc: "Email, WhatsApp, phone" },
+];
+
 export function SupportSections() {
   return (
     <section className="mx-auto max-w-[1280px] px-4 pb-8 pt-4">
@@ -18,6 +27,19 @@ export function SupportSections() {
             />
           </div>
           <button className="rounded-xl bg-slate-900 px-6 py-3 text-base font-medium text-white">Contact support</button>
+        </div>
+
+        <div className="mt-5 grid gap-3 md:grid-cols-3">
+          {supportCards.map((card) => (
+            <button
+              key={card.title}
+              type="button"
+              className="rounded-xl border border-slate-300 bg-white p-4 text-left transition hover:border-slate-500 hover:shadow-sm"
+            >
+              <p className="text-[30px] font-semibold leading-none text-slate-900">{card.title}</p>
+              <p className="mt-2 text-[21px] text-slate-600">{card.desc}</p>
+            </button>
+          ))}
         </div>
       </div>
     </section>
