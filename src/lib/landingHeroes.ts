@@ -162,7 +162,10 @@ export const heroPages: HeroPageConfig[] = [
     ctaSecondary: "See management scope",
     trust: ["🛎️ Full service coverage", "📊 Data-driven decisions", "🏡 Asset care mindset"],
     heroImage:
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=1800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1800&auto=format&fit=crop",
+    sideMode: "image",
+    sideImage:
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=1400&auto=format&fit=crop",
     panelTitle: "Management operating model",
     panelItems: [
       { label: "Onboarding", value: "Property readiness + standards" },
