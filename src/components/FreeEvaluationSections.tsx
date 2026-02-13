@@ -38,10 +38,42 @@ export function FreeEvaluationSections() {
   return (
     <>
       <section className="mx-auto max-w-[1280px] px-4 pb-6 pt-4">
-        <div className="rounded-2xl border border-slate-300 bg-white p-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">Owner revenue intake</p>
-          <h1 className="mt-2 text-[42px] font-semibold leading-none text-slate-900">Free Evaluation for your villa</h1>
-          <p className="mt-3 text-[21px] text-slate-600">Get a practical growth plan in minutes. Share your property details and we’ll recommend the best model.</p>
+        <div className="rounded-2xl border border-slate-300 bg-white p-5 md:p-8">
+          <p className="text-sm text-slate-500">Home › Vacation Property Management › <span className="font-semibold text-slate-700">Free Evaluation</span></p>
+
+          <div className="mt-4 grid gap-5 md:grid-cols-[1.6fr_1fr] md:items-center">
+            <div>
+              <h1 className="text-[42px] font-semibold leading-none text-slate-900">Free Villa Evaluation: pricing plan, demand insights & next-step options</h1>
+              <p className="mt-3 text-[21px] text-slate-600">Get a concise review of your property’s revenue potential across channels, with a clear plan for Self-Managed, Multi-Platform Sync, or Fully Managed models.</p>
+
+              <div className="mt-4 flex flex-wrap gap-3">
+                <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-base font-medium text-white">Start Free Evaluation</button>
+                <button className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-base font-medium text-slate-900">Book a 15-min Call</button>
+              </div>
+
+              <p className="mt-3 text-sm text-slate-500">Response within 1–2 business days. We’ll email the summary and next steps.</p>
+            </div>
+
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
+              alt="Luxury villa bedroom"
+              className="h-[260px] w-full rounded-2xl object-cover"
+            />
+          </div>
+
+          <div className="mt-5 grid gap-3 md:grid-cols-4">
+            {[
+              ["18+ yrs", "Greek hospitality & villas"],
+              ["Multi-channel", "Distribution & pricing"],
+              ["Transparent", "Reporting & KPIs"],
+              ["On-the-ground", "Trusted partners network"],
+            ].map(([title, sub]) => (
+              <div key={title} className="rounded-xl border border-slate-300 bg-white p-3">
+                <p className="text-[30px] font-semibold leading-none text-slate-900">{title}</p>
+                <p className="mt-1 text-sm text-slate-600">{sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
