@@ -21,6 +21,13 @@ const popularDestinationCards = [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop",
   },
   {
+    title: "Athos",
+    tags: ["Culture", "Nature"],
+    text: "Distinct eastern peninsula known for dramatic coastline and spiritual heritage.",
+    image:
+      "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
     title: "Crete",
     tags: ["Family", "Gastronomy"],
     text: "Largest Greek island with beaches, gorges, villages, and world-class cuisine.",
@@ -34,13 +41,7 @@ const popularDestinationCards = [
     image:
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop",
   },
-  {
-    title: "Sandorini",
-    tags: ["Romance", "Sunset"],
-    text: "Caldera views, dramatic cliffs, and postcard-perfect white architecture.",
-    image:
-      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=1200&auto=format&fit=crop",
-  },
+
 ];
 
 export function ForGuestsSections() {
@@ -78,3 +79,4 @@ export function ForGuestsSections() {
     </section>
   );
 }
+
