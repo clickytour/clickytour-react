@@ -240,6 +240,9 @@ export function ServisApplySections() {
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState("");
 
+  const selectedCategory = serviceCategories.find((c) => c.id === form.serviceCategory) ?? serviceCategories[0];
+  const availableSubcategories = selectedCategory.subcategories;
+
   const payload = useMemo(
     () => ({
       source: "villa4you-react",
@@ -273,9 +276,6 @@ export function ServisApplySections() {
   function setField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((p) => ({ ...p, [key]: value }));
   }
-
-  const selectedCategory = serviceCategories.find((c) => c.id === form.serviceCategory) ?? serviceCategories[0];
-  const availableSubcategories = selectedCategory.subcategories;
 
   async function onSubmit() {
     if (!form.termsAccepted) {
