@@ -25,7 +25,8 @@ type ComplexTemplateSectionsProps = {
     | "simonitiko-beachfront-villas"
     | "tripotsmos-beachfront-a"
     | "tripotamos-beachfront-b"
-    | "afitos-kassandra-halkidiki";
+    | "afitos-kassandra-halkidiki"
+    | "complexes-sani-club-private-villas";
 };
 
 const defaultUnitList: UnitItem[] = [
@@ -106,20 +107,27 @@ const tripotamosBUnitList: UnitItem[] = [
 ];
 
 const afitosUnitList: UnitItem[] = [
-  { name: "Afitos Traditional View Studio", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 2", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Afitos Five Guests Apartment", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 5", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Two Bedrooms Apartment (Bunk bed)", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/tripotamos-b-card-base.jpg", note: "350 meters from the beach" },
-  { name: "Two Bedrooms Apartment", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 5", image: "/tripotamos-b-card-base.jpg", note: "200 meters from the beach" },
-  { name: "Afitos Heritage Villa", type: "Villas", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Family Maisonette", type: "Villas", beds: "2 bedrooms, 2 bathrooms", guests: "Max Guests 5", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Afitos Seaside Studio", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 2", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Superior Studio", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 2", image: "/tripotamos-b-card-base.jpg", note: "200 meters from the beach" },
-  { name: "Harmony Apartment A", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 7", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Harmony Apartment B", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/tripotamos-b-card-base.jpg", note: "200 meters from the beach" },
-  { name: "Harmony Apartment E", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/tripotamos-b-card-base.jpg", note: "200 meters from the beach" },
-  { name: "Harmony Apartment F", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 7", image: "/tripotamos-b-card-base.jpg", note: "200 meters from the beach" },
-  { name: "Aegean View Apartment", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 8", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
-  { name: "Grand Pool Villa", type: "Villas", beds: "4 bedrooms, 4 bathrooms", guests: "Max Guests 14", image: "/tripotamos-b-card-base.jpg", note: "100 meters from the beach" },
+  { name: "Afitos Traditional View Studio", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 2", image: "/afitos-card-01.webp", note: "100 meters from the beach" },
+  { name: "Afitos Five Guests Apartment", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 5", image: "/afitos-card-02.jpg", note: "100 meters from the beach" },
+  { name: "Two Bedrooms Apartment (Bunk bed)", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/afitos-card-03.jpg", note: "350 meters from the beach" },
+  { name: "Two Bedrooms Apartment", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 5", image: "/afitos-card-04.jpg", note: "200 meters from the beach" },
+  { name: "Afitos Heritage Villa", type: "Villas", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/afitos-card-05.jpg", note: "100 meters from the beach" },
+  { name: "Family Maisonette", type: "Villas", beds: "2 bedrooms, 2 bathrooms", guests: "Max Guests 5", image: "/afitos-card-06.jpg", note: "100 meters from the beach" },
+  { name: "Afitos Seaside Studio", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 2", image: "/afitos-card-07.jpg", note: "100 meters from the beach" },
+  { name: "Superior Studio", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 2", image: "/afitos-card-08.jpg", note: "200 meters from the beach" },
+  { name: "Harmony Apartment A", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 7", image: "/afitos-card-09.jpg", note: "100 meters from the beach" },
+  { name: "Harmony Apartment B", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/afitos-card-10.jpg", note: "200 meters from the beach" },
+  { name: "Harmony Apartment E", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 6", image: "/afitos-card-11.jpg", note: "200 meters from the beach" },
+  { name: "Harmony Apartment F", type: "Apartments", beds: "2 bedrooms, 1 bathroom", guests: "Max Guests 7", image: "/afitos-card-12.jpg", note: "200 meters from the beach" },
+  { name: "Aegean View Apartment", type: "Apartments", beds: "1 bedroom, 1 bathroom", guests: "Max Guests 8", image: "/afitos-card-13.jpg", note: "100 meters from the beach" },
+  { name: "Grand Pool Villa", type: "Villas", beds: "4 bedrooms, 4 bathrooms", guests: "Max Guests 14", image: "/afitos-card-14.jpg", note: "100 meters from the beach" },
+];
+
+const saniClubUnitList: UnitItem[] = [
+  { name: "Luxury Villa Emmanouela", type: "Villas", beds: "4 bedrooms", guests: "3 bathrooms", image: "/sani-card-a.jpg", note: "private swimming pool" },
+  { name: "Luxury Villa Diana", type: "Villas", beds: "5 bedrooms", guests: "3 bathrooms", image: "/sani-card-b.webp", note: "private swimming pool" },
+  { name: "Luxury Villa Victoria", type: "Villas", beds: "3 bedrooms", guests: "2 bathrooms", image: "/sani-card-c.jpg", note: "private swimming pool" },
+  { name: "Luxury Villa Gizelle", type: "Villas", beds: "5 bedrooms", guests: "3 bathrooms", image: "/sani-card-d.jpg", note: "private swimming pool" },
 ];
 
 export function ComplexTemplateSections({ variant = "default" }: ComplexTemplateSectionsProps) {
@@ -131,6 +139,7 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
   const isTripotsmos = variant === "tripotsmos-beachfront-a";
   const isTripotamosB = variant === "tripotamos-beachfront-b";
   const isAfitos = variant === "afitos-kassandra-halkidiki";
+  const isSaniClub = variant === "complexes-sani-club-private-villas";
 
   const unitList = isLuxuryElsa
     ? luxuryElsaUnitList
@@ -148,10 +157,13 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                 ? tripotamosBUnitList
                 : isAfitos
                   ? afitosUnitList
-                  : defaultUnitList;
+                  : isSaniClub
+                    ? saniClubUnitList
+                    : defaultUnitList;
 
   const [activeType, setActiveType] = useState<UnitType>("All");
   const [activeUnit, setActiveUnit] = useState<string>("");
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
 
   const units = useMemo(() => {
     const typeFiltered = activeType === "All" ? unitList : unitList.filter((u) => u.type === activeType);
@@ -162,7 +174,7 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
   const heroTitle = isLuxuryElsa
     ? "Luxury Suites Elsa"
     : isGalini
-      ? "Galini Beachfront Masonettes Complex"
+      ? "Galini Beachfront Maisonettes Complex"
       : isOlea
         ? "Olea Suites & Apartments Complex"
         : isBomo
@@ -175,7 +187,9 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                 ? "Tripotamos Beachfront Villas Complex B"
                 : isAfitos
                   ? "Afitos Kassandra Halkidiki"
-                  : "Luxury Complex Template";
+                  : isSaniClub
+                    ? "Sani Club Private Villas"
+                    : "Luxury Complex Template";
 
   const heroDescription = isLuxuryElsa
     ? "The nearby Porto Carras resort offers activities including a casino, golf course, spas and restaurants."
@@ -193,7 +207,9 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                 ? "Marvel at the breathtaking sunsets from our beachfront villas in Tripotamos."
                 : isAfitos
                   ? "Discover luxury and comfort at Villa4you's handpicked properties in Afitos, Kassandra Halkidiki."
-                  : "Reusable detail-page structure for mixed villa/apartment complexes.";
+                  : isSaniClub
+                    ? "Ultimate luxury on Kassandra Peninsula."
+                    : "Reusable detail-page structure for mixed villa/apartment complexes.";
 
   const amenities = [
     "Shared swimming pool",
@@ -213,7 +229,7 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
           Home &gt; Complexes &gt; <span className="font-semibold text-white">{heroTitle}</span>
         </p>
         <h1 className="mt-3 text-center text-[56px] font-semibold leading-none text-white">
-          {isTripotamosB ? "Sunset Villas at Tripotamos" : isAfitos ? "Afitos Kassandra Halkidiki" : isGalini || isOlea || isBomo || isSimonitiko || isTripotsmos ? "Explore Vacation Villas" : heroTitle}
+          {isTripotamosB ? "Sunset Villas at Tripotamos" : isAfitos ? "Afitos Kassandra Halkidiki" : isSaniClub ? "Sani Club Private Villas" : isGalini || isOlea || isBomo || isSimonitiko || isTripotsmos ? "Explore Vacation Villas" : heroTitle}
         </h1>
         <p className="mx-auto mt-3 max-w-[900px] text-center text-[21px] text-slate-200">{heroDescription}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -272,7 +288,13 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                   <img src={u.image} alt={u.name} className={`${isGalini || isOlea || isBomo || isSimonitiko || isTripotsmos || isTripotamosB || isAfitos ? "h-44" : "h-56"} w-full object-cover`} />
                   <div className="flex flex-1 flex-col p-3 text-center">
                     <p className={`${isGalini || isOlea || isBomo || isSimonitiko || isTripotsmos || isTripotamosB || isAfitos ? "text-[24px]" : "text-[30px]"} font-semibold leading-none text-slate-900`}>{u.name}</p>
-                    {u.note ? <p className="mt-2 text-[18px] leading-none text-slate-600">{u.note}</p> : <p className="mt-2 text-[18px] leading-none text-slate-600">{u.beds ?? ""} {u.guests ? `- ${u.guests}` : ""}</p>}
+                    {isSaniClub ? (
+                      <div className="mt-2 space-y-1 text-[16px] leading-none text-slate-600">
+                        <p>{u.beds ?? ""}</p>
+                        <p>{u.guests ?? ""}</p>
+                        <p>{u.note ?? ""}</p>
+                      </div>
+                    ) : u.note ? <p className="mt-2 text-[18px] leading-none text-slate-600">{u.note}</p> : <p className="mt-2 text-[18px] leading-none text-slate-600">{u.beds ?? ""} {u.guests ? `- ${u.guests}` : ""}</p>}
                     {u.price && <p className="mt-3 text-[20px] font-semibold leading-none text-slate-900">{u.price}</p>}
                     <div className="mt-auto flex flex-nowrap items-center justify-center gap-2 pt-3">
                       <button className="whitespace-nowrap rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white">Discover more</button>
@@ -286,25 +308,45 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
       </section>
 
       <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
-        <h2 className="text-[34px] font-semibold leading-none text-slate-900">About this complex</h2>
-        <p className="mt-3 text-[18px] text-slate-700">{heroDescription}</p>
+        {isAfitos ? (
+          <div className="mx-auto max-w-[760px] text-center">
+            <p className="text-[14px] font-medium text-amber-700">Afitos Destination</p>
+            <h2 className="mt-1 text-[34px] font-semibold leading-none text-slate-900">Explore Afitos with Villa4you</h2>
+            <p className="mt-3 text-[17px] text-slate-700">Dive into the charm of Afitos in Kassandra, with our select vacation properties.</p>
+            <p className="mt-3 text-[17px] text-slate-700">Experience traditional Greek village life amidst stunning sea views and serene beaches. Our unique vacation properties offer a peaceful stay with authentic local culture and natural beauty.</p>
+          </div>
+        ) : isSaniClub ? (
+          <div className="mx-auto max-w-[760px] text-center">
+            <p className="text-[14px] font-medium text-amber-700">Sani Club Villa Destination</p>
+            <h2 className="mt-1 text-[34px] font-semibold leading-none text-slate-900">Explore Vacation Villas</h2>
+            <p className="mt-3 text-[17px] text-slate-700">Nearly everything you need will be found on the grounds of the resort.</p>
+            <p className="mt-3 text-[17px] text-slate-700">However, there is a vibrant community in the surrounding area that offers additional dining experiences and shopping options.</p>
+          </div>
+        ) : (
+          <>
+            <h2 className="text-[34px] font-semibold leading-none text-slate-900">About this complex</h2>
+            <p className="mt-3 text-[18px] text-slate-700">{heroDescription}</p>
+          </>
+        )}
       </section>
 
-      <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
-        <h2 className="text-[34px] font-semibold leading-none text-slate-900">Amenities</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {amenities.map((item) => (
-            <div key={item} className="rounded-xl border border-blue-500 px-4 py-3 text-[16px] font-medium text-slate-900">{item}</div>
-          ))}
-        </div>
-      </section>
+      {!isSaniClub && (
+        <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
+          <h2 className="text-[34px] font-semibold leading-none text-slate-900">Amenities</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {amenities.map((item) => (
+              <div key={item} className="rounded-xl border border-blue-500 px-4 py-3 text-[16px] font-medium text-slate-900">{item}</div>
+            ))}
+          </div>
+        </section>
+      )}
 
-      {(isOlea || isBomo || isSimonitiko || isTripotsmos || isTripotamosB || isAfitos) ? (
+      {(isOlea || isBomo || isSimonitiko || isTripotsmos || isTripotamosB || isAfitos || isSaniClub) ? (
         <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
           <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
             <div>
               <img
-                src={isBomo ? "/bomo-details-main.jpg" : isSimonitiko ? "/simonitiko-details-main.jpg" : isTripotsmos ? "/tripotsmos-details-main.jpg" : isTripotamosB ? "/tripotsmos-details-main.jpg" : isAfitos ? "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80" : "/olea-details-main.jpg"}
+                src={isBomo ? "/bomo-details-main.jpg" : isSimonitiko ? "/simonitiko-details-main.jpg" : isTripotsmos ? "/tripotsmos-details-main.jpg" : isTripotamosB ? "/tripotsmos-details-main.jpg" : isAfitos ? "/afitos-card-03.jpg" : isSaniClub ? "/sani-details-main.jpg" : "/olea-details-main.jpg"}
                 alt="Complex details"
                 className="h-64 w-full rounded-xl object-cover"
               />
@@ -322,7 +364,9 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                         ? "Experience the ultimate holiday escape at Tripotamos Beachfront Villas Complex. Cozy and comfortable maisonettes offer a panoramic view of the sea from your spacious, covered veranda."
                         : isAfitos
                           ? "Afitos, a picturesque village located on the Kassandra peninsula of Halkidiki, Greece, blends natural beauty with traditional stone architecture and crystal-clear Aegean waters."
-                          : "The grounds have outstanding amenities and family-friendly spaces."}
+                          : isSaniClub
+                            ? "Located on the western shores of the Kassandra peninsula, our Sani Club Private Villas provide the ultimate luxury experience with direct beach access and panoramic sea views."
+                            : "The grounds have outstanding amenities and family-friendly spaces."}
               </p>
               <p className="mt-3 text-[17px] text-slate-700">
                 {isBomo
@@ -333,7 +377,9 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                       ? "Our surrounding quiet white-sand beach is only minutes away. Enjoy peaceful holidays with nearby village amenities and easy access to Neo Marmaras."
                       : isAfitos
                         ? "Afitos is renowned for its local taverns, narrow cobblestone streets and vibrant cultural scene. The local artisan shops and nearby beaches make it ideal for a relaxing yet enriching holiday experience."
-                        : "The complex is centrally located in Nikiti with easy access to local shops and beachfront promenade."}
+                        : isSaniClub
+                          ? "Guests can enjoy amenities at Sani Club Resort, including direct beach access with umbrellas and beach chairs, pools and high-end dining experiences."
+                          : "The complex is centrally located in Nikiti with easy access to local shops and beachfront promenade."}
               </p>
 
               <h3 className="mt-5 text-[26px] font-semibold text-slate-900">Distances</h3>
@@ -374,7 +420,16 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
                     <li>🏘️ 250 meters</li>
                     <li>⚓ 200-800 meters</li>
                   </>
-                ) : (
+                 ) : isSaniClub ? (
+                  <>
+                    <li>✈ 80 km</li>
+                    <li>🏖️ 100 meters</li>
+                    <li>🛒 100 meters</li>
+                    <li>🚌 500 meters</li>
+                    <li>🏘️ 1 km</li>
+                    <li>⚓ 1 km</li>
+                  </>
+               ) : (
                   <>
                     <li>✈ 90 km</li>
                     <li>🏖️ 500 m</li>
@@ -394,21 +449,90 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
         <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
           <h2 className="text-[34px] font-semibold leading-none text-slate-900">Location highlights</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-3">
-            {["5 min to beach", "10 min to marina", "Near Porto Carras resort"].map((item) => (
+            {(isAfitos
+              ? ["Airport - 100 km", "Beach - 50-200 meters", "Marina - 200-800 meters"]
+              : ["5 min to beach", "10 min to marina", "Near Porto Carras resort"]
+            ).map((item) => (
               <div key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 text-center text-[17px] font-semibold text-slate-900">{item}</div>
             ))}
           </div>
         </section>
       )}
 
-      <section className="mt-6 rounded-2xl border border-slate-300 bg-[#091339] p-6 text-white">
-        <h2 className="text-[34px] font-semibold leading-none">Need help choosing your suite?</h2>
-        <p className="mt-3 max-w-[760px] text-[18px] text-slate-200">Tell us your travel dates and guest details - we will recommend the best available option in this complex.</p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <button className="rounded-xl bg-emerald-500 px-5 py-2.5 text-base font-semibold text-slate-900">Contact host team</button>
-          <button className="rounded-xl border border-white/40 bg-white px-5 py-2.5 text-base font-semibold text-slate-900">Check all dates</button>
-        </div>
-      </section>
+      {!isSaniClub && (
+        <section className="mt-6 rounded-2xl border border-slate-300 bg-[#091339] p-6 text-white">
+          <h2 className="text-[34px] font-semibold leading-none">Need help choosing your suite?</h2>
+          <p className="mt-3 max-w-[760px] text-[18px] text-slate-200">Tell us your travel dates and guest details - we will recommend the best available option in this complex.</p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <button className="rounded-xl bg-emerald-500 px-5 py-2.5 text-base font-semibold text-slate-900">Contact host team</button>
+            <button className="rounded-xl border border-white/40 bg-white px-5 py-2.5 text-base font-semibold text-slate-900">Check all dates</button>
+          </div>
+        </section>
+      )}
+
+      {isSaniClub && (
+        <>
+          <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
+            <h2 className="text-[34px] font-semibold leading-none text-slate-900">Why guests choose this complex</h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {[
+                { title: "Direct beach access", desc: "Sani Club beachfront is only about 100 meters from the villas with organized umbrellas and beach chairs." },
+                { title: "Private villa comfort", desc: "Each listed Sani villa includes a private swimming pool and spacious multi-bedroom layout." },
+                { title: "Family-friendly setting", desc: "Calm waters and resort amenities make this location suitable for family holidays and relaxed stays." },
+              ].map((item) => (
+                <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-4">
+                  <h3 className="text-[20px] font-semibold leading-none text-slate-900">{item.title}</h3>
+                  <p className="mt-2 text-[17px] text-slate-700">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6">
+            <h2 className="text-[52px] font-semibold leading-none text-slate-900">Complex FAQ</h2>
+            <div className="mt-4 space-y-3">
+              {[
+                {
+                  q: "How far is Sani Club beach from these villas?",
+                  a: "Based on the provided content, beach access is about 100 meters from the villas.",
+                },
+                {
+                  q: "Are these villas good for families with children?",
+                  a: "Yes, the area has calm and warm waters and family-friendly surroundings according to the provided details.",
+                },
+                {
+                  q: "What resort services are available nearby?",
+                  a: "Nearby Sani Club facilities include beach access with umbrellas/chairs, pools and dining options.",
+                },
+              ].map((item) => {
+                const isOpen = openFaq === item.q;
+                return (
+                  <div key={item.q} className="rounded-xl border border-cyan-300">
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(isOpen ? null : item.q)}
+                      className="flex w-full items-center justify-between px-4 py-3 text-left"
+                    >
+                      <p className="text-[28px] font-semibold leading-none text-slate-900">{item.q}</p>
+                      <span className="text-[28px] leading-none text-slate-900">{isOpen ? "−" : "+"}</span>
+                    </button>
+                    {isOpen && <p className="px-4 pb-4 text-[18px] text-slate-700">{item.a}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="mt-6 rounded-2xl border border-slate-300 bg-[#091339] p-6 text-center text-white">
+            <h2 className="text-[56px] font-semibold leading-none">Ready to book your Sani Club villa stay?</h2>
+            <p className="mx-auto mt-3 max-w-[900px] text-[28px] text-slate-200">Send your dates and guest count to receive the best available villa option in this complex.</p>
+            <div className="mt-5 flex flex-wrap justify-center gap-2">
+              <button className="rounded-xl bg-emerald-500 px-5 py-2.5 text-base font-semibold text-slate-900">Request availability</button>
+              <button className="rounded-xl border border-white/40 bg-white px-5 py-2.5 text-base font-semibold text-slate-900">Ask for adjustments</button>
+            </div>
+          </section>
+        </>
+      )}
     </section>
   );
 }
