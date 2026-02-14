@@ -29,39 +29,49 @@ const luxuryElsaUnitList: UnitItem[] = [
   {
     name: "Luxury Junior Suite Elsa",
     type: "Apartments",
+    beds: "1 bedroom",
+    guests: "2 guests",
     image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
-    price: "FROM €100",
-    note: "4 one bedroom suites",
+    price: "from €100/night",
+    note: "4 one-bedroom suites",
   },
   {
     name: "Luxury Senior Suite Elsa",
     type: "Apartments",
+    beds: "2 bedrooms",
+    guests: "4 guests",
     image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
-    price: "FROM €130",
-    note: "2 two bedroom suites",
+    price: "from €130/night",
+    note: "2 two-bedroom suites",
   },
 ];
 
 export function ComplexTemplateSections({ variant = "default" }: ComplexTemplateSectionsProps) {
-  const [activeType, setActiveType] = useState<UnitType>("All");
-
   const isLuxuryElsa = variant === "luxury-elsa";
   const unitList = isLuxuryElsa ? luxuryElsaUnitList : defaultUnitList;
 
-  const units = useMemo(() => (activeType === "All" ? unitList : unitList.filter((u) => u.type === activeType)), [activeType, unitList]);
+  const [activeType, setActiveType] = useState<UnitType>("All");
+  const [activeUnit, setActiveUnit] = useState<string>(unitList[0]?.name ?? "");
+
+  const units = useMemo(() => {
+    const typeFiltered = activeType === "All" ? unitList : unitList.filter((u) => u.type === activeType);
+    if (!activeUnit) return typeFiltered;
+    return typeFiltered.filter((u) => u.name === activeUnit || typeFiltered.length === 1 || !typeFiltered.some((x) => x.name === activeUnit));
+  }, [activeType, activeUnit, unitList]);
+
+  const heroTitle = isLuxuryElsa ? "Luxury Suites Elsa" : "Luxury Complex Template";
+  const heroDescription = isLuxuryElsa
+    ? "The nearby Porto Carras resort offers activities including a casino, 18-hole golf course, spas, restaurants and one of the largest organic wineries in Greece. This template now follows the same approved complex-page structure for consistency and reuse."
+    : "Reusable detail-page structure for mixed villa/apartment complexes with marketing, SEO and conversion-ready UI.";
 
   return (
     <section className="mx-auto max-w-[1280px] px-4 pb-8 pt-4">
       <div className="rounded-2xl border border-slate-300 bg-[#091339] px-4 py-10 md:px-8">
         <p className="text-sm text-slate-300">
-          Home › Complexes › <span className="font-semibold text-white">{isLuxuryElsa ? "Luxury Suites Elsa" : "Complex Template"}</span>
+          Home › Complexes › <span className="font-semibold text-white">{heroTitle}</span>
         </p>
-        <h1 className="mt-3 text-center text-[56px] font-semibold leading-none text-white">{isLuxuryElsa ? "Explore Vacation Villas" : "Luxury Complex Template"}</h1>
-        <p className="mx-auto mt-3 max-w-[900px] text-center text-[21px] text-slate-200">
-          {isLuxuryElsa
-            ? "The nearby 5-star Porto Carras resort is a great place to find activities including a casino, 18-hole golf course, spas, restaurants, and one of the largest organic wineries in Greece (which produces an exclusive local wine called Domaine Porto Carras). You might even escape the hustle and bustle of Neo Marmaras and take a day trip to the old town of Parthenonas where you can explore the quieter traditional Greek life."
-            : "Reusable detail-page structure for mixed villa/apartment complexes with marketing, SEO and conversion-ready UI."}
-        </p>
+        <h1 className="mt-3 text-center text-[56px] font-semibold leading-none text-white">{heroTitle}</h1>
+        <p className="mx-auto mt-3 max-w-[900px] text-center text-[21px] text-slate-200">{heroDescription}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button className="rounded-xl bg-emerald-500 px-5 py-2.5 text-base font-semibold text-slate-900">Check availability</button>
           <button className="rounded-xl border border-white/40 bg-white px-5 py-2.5 text-base font-semibold text-slate-900">Open map</button>
@@ -73,13 +83,26 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
           <aside className="rounded-xl border border-slate-200 bg-white p-4">
             <h3 className="text-[32px] font-semibold leading-none text-slate-900">Units in this complex</h3>
             <div className="mt-3 space-y-1">
-              {unitList.map((u) => (
-                <button key={u.name} type="button" className="block w-full rounded-lg border border-transparent px-2 py-2 text-left text-[18px] leading-none text-slate-700 hover:border-slate-200 hover:bg-slate-50">
-                  {u.name}
-                </button>
-              ))}
+              {unitList.map((u) => {
+                const isActive = activeUnit === u.name;
+                return (
+                  <button
+                    key={u.name}
+                    type="button"
+                    onClick={() => {
+                      setActiveUnit(u.name);
+                      setActiveType(u.type);
+                    }}
+                    className={`block w-full rounded-lg border px-2 py-2 text-left text-[18px] leading-none transition ${
+                      isActive ? "border-blue-500 bg-blue-50 text-slate-900" : "border-transparent text-slate-700 hover:border-slate-200 hover:bg-slate-50"
+                    }`}
+                  >
+                    {u.name}
+                  </button>
+                );
+              })}
             </div>
-            {isLuxuryElsa && <p className="mt-4 text-[21px] leading-none font-semibold text-slate-800">Shared Swimming Pool</p>}
+            {isLuxuryElsa && <p className="mt-4 text-[21px] font-semibold leading-none text-slate-800">Shared swimming pool</p>}
           </aside>
 
           <div>
@@ -87,9 +110,17 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
               {unitTypes.map((type) => (
                 <button
                   key={type}
-                  onClick={() => setActiveType(type)}
+                  onClick={() => {
+                    setActiveType(type);
+                    if (type === "All") {
+                      setActiveUnit("");
+                    } else {
+                      const firstOfType = unitList.find((u) => u.type === type);
+                      setActiveUnit(firstOfType?.name ?? "");
+                    }
+                  }}
                   className={`rounded-full border px-4 py-2 text-sm ${
-                    activeType === type ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"
+                    activeType === type ? "border-emerald-500 bg-emerald-500 text-slate-900" : "border-slate-300 bg-white text-slate-700"
                   }`}
                 >
                   {type}
@@ -99,7 +130,7 @@ export function ComplexTemplateSections({ variant = "default" }: ComplexTemplate
 
             <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-2">
               {units.map((u) => (
-                <article key={u.name} className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white">
+                <article key={u.name} className="flex h-full flex-col overflow-hidden rounded-xl border border-blue-500 bg-white">
                   <img src={u.image} alt={u.name} className="h-56 w-full object-cover" />
                   <div className="flex flex-1 flex-col p-3 text-center">
                     <p className="text-[30px] font-semibold leading-none text-slate-900">{u.name}</p>
