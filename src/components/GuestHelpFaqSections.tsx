@@ -32,8 +32,8 @@ const faqItems: FaqItem[] = [
     categories: ["Payments"],
   },
   {
-    q: "Which payment methods are accepted?",
-    a: "Most villas accept credit/debit cards and bank transfer. In some cases split payments are available.",
+    q: "What payment methods are accepted?",
+    a: "Major cards and bank transfer are accepted. A deposit confirms the booking; the balance is due per your confirmation (often 30–45 days before arrival).",
     categories: ["Payments"],
   },
   {
@@ -42,9 +42,9 @@ const faqItems: FaqItem[] = [
     categories: ["Policies"],
   },
   {
-    q: "Do you require a security deposit?",
-    a: "Some homes require a refundable security deposit, others do not. Property page terms always apply.",
-    categories: ["Policies"],
+    q: "Do you charge a security deposit?",
+    a: "Some villas require a refundable security hold. It’s released after check-out pending inspection.",
+    categories: ["Payments", "Policies"],
   },
   {
     q: "How does check-in work?",
@@ -116,18 +116,31 @@ export function GuestHelpFaqSections() {
             </div>
 
             <div className="mt-3 overflow-hidden rounded-xl border border-slate-300 bg-white">
-              {filteredFaq.map((item, idx) => (
-                <details key={item.q} className={idx < filteredFaq.length - 1 ? "border-b border-slate-200" : ""} open={idx === 0}>
-                  <summary className="list-none p-2 marker:content-none">
-                    <div className={`rounded-lg border px-3 py-2 text-[30px] font-semibold leading-none ${idx === 0 ? "border-sky-500" : "border-transparent"} text-slate-900`}>
-                      {item.q}
+              {filteredFaq.map((item, idx) => {
+                const openByDefault = idx === 0 || (activeCategory === "Payments" && idx === 1);
+                const headerClass =
+                  activeCategory === "Payments" && idx === 0
+                    ? "border-fuchsia-300 text-fuchsia-800"
+                    : activeCategory === "Payments" && idx === 1
+                      ? "border-sky-500 text-slate-900"
+                      : idx === 0
+                        ? "border-sky-500 text-slate-900"
+                        : "border-transparent text-slate-900";
+
+                return (
+                  <details key={item.q} className={idx < filteredFaq.length - 1 ? "border-b border-slate-200" : ""} open={openByDefault}>
+                    <summary className="list-none p-2 marker:content-none">
+                      <div className={`flex items-center justify-between rounded-lg border px-3 py-2 text-[30px] font-semibold leading-none ${headerClass}`}>
+                        <span>{item.q}</span>
+                        <span className="text-xl font-normal">+</span>
+                      </div>
+                    </summary>
+                    <div className="px-4 pb-4">
+                      <p className="text-[21px] text-slate-700">{item.a}</p>
                     </div>
-                  </summary>
-                  <div className="px-4 pb-4">
-                    <p className="text-[21px] text-slate-700">{item.a}</p>
-                  </div>
-                </details>
-              ))}
+                  </details>
+                );
+              })}
             </div>
 
             <p className="mt-2 text-sm text-slate-500">Didn’t find what you needed? Use the form on the right and we’ll help.</p>
