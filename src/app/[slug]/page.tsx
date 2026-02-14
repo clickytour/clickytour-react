@@ -12,6 +12,7 @@ import { BlogSections } from "@/components/BlogSections";
 import { PlansOffersSections } from "@/components/PlansOffersSections";
 import { GuestHelpFaqSections } from "@/components/GuestHelpFaqSections";
 import { DestinationsSections } from "@/components/DestinationsSections";
+import { ExploreMapSections } from "@/components/ExploreMapSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -60,6 +61,14 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="min-h-screen bg-[#f3f5f8]">
         <DestinationsSections />
+      </div>
+    );
+  }
+
+  if (slug === "explore-map") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <ExploreMapSections />
       </div>
     );
   }
