@@ -225,12 +225,12 @@ export function PmcApplySections() {
       }
 
       setSubmitState("success");
-      setSubmitMessage("Application submitted successfully. Your PMC onboarding review has started — our team will contact you with next steps shortly.");
+      setSubmitMessage("Application submitted successfully. Our team will review your PMC profile shortly.");
       setForm(initialState);
       setStep(1);
     } catch {
       setSubmitState("error");
-      setSubmitMessage("We could not submit your application right now. Please retry in a minute, or contact support so we can assist immediately.");
+      setSubmitMessage("Submission failed. Please retry in a moment or contact support.");
     } finally {
       setSubmitting(false);
     }
