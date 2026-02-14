@@ -10,6 +10,7 @@ import { FreeEvaluationSections } from "@/components/FreeEvaluationSections";
 import { SupportSections } from "@/components/SupportSections";
 import { BlogSections } from "@/components/BlogSections";
 import { PlansOffersSections } from "@/components/PlansOffersSections";
+import { GuestHelpFaqSections } from "@/components/GuestHelpFaqSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -42,6 +43,14 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="min-h-screen bg-[#f3f5f8]">
         <PlansOffersSections />
+      </div>
+    );
+  }
+
+  if (slug === "guest-help-faq") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <GuestHelpFaqSections />
       </div>
     );
   }
