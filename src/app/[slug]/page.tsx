@@ -34,6 +34,22 @@ const seoBySlug: Record<string, { title: string; description: string }> = {
     title: "Agents Apply | ClickyTour",
     description: "Submit your agent application in 3 steps and request white-label + net-pricing partnership setup.",
   },
+  "partner-pmc": {
+    title: "Partner PMC | ClickyTour",
+    description: "Explore the PMC partnership path and grow bookings with structured collaboration.",
+  },
+  "pmc-apply": {
+    title: "PMC Apply | ClickyTour",
+    description: "Apply as a Property Management Company with a 3-step onboarding form.",
+  },
+  "partner-service-providers": {
+    title: "Service Providers | ClickyTour",
+    description: "List and grow as a service provider with structured onboarding and category-based visibility.",
+  },
+  "service-apply": {
+    title: "Service Apply | ClickyTour",
+    description: "Submit your service listing in 3 steps with category/subcategory mapping and review flow.",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

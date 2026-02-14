@@ -221,6 +221,12 @@ export function AgentsApplySections() {
                 <a href="/agents" className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-base font-medium text-slate-900">Back to Agents</a>
                 <a href="/support" className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-base font-medium text-slate-900">Support</a>
               </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">⚡ Structured onboarding</span>
+                <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">🛡️ GDPR-ready consent</span>
+                <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">📊 Payload review before submit</span>
+              </div>
             </div>
 
             <img

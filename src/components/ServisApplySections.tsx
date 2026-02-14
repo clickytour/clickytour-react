@@ -344,6 +344,12 @@ export function ServisApplySections() {
           <h1 className="mt-3 text-[42px] font-semibold leading-none text-slate-900">Your service in front of thousands of customers</h1>
           <p className="mt-3 text-[21px] text-slate-600">Join ClickyTour and make your service visible to tourists, property owners, and agents — in just a few steps.</p>
 
+          <div className="mt-4 flex flex-wrap gap-2">
+            <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">⚡ Structured onboarding</span>
+            <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">🛡️ GDPR-ready consent</span>
+            <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">📊 Payload review before submit</span>
+          </div>
+
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             <div className="rounded-xl border border-slate-200 bg-white p-3">
               <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">1</div>
