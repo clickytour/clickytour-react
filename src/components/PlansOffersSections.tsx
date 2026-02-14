@@ -177,9 +177,9 @@ export function PlansOffersSections() {
 
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredOffers.map((offer) => (
-            <article key={offer.title} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+            <article key={offer.title} className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-300 bg-white">
               <img src={offer.image} alt={offer.title} className="h-52 w-full object-cover" />
-              <div className="p-4">
+              <div className="flex flex-1 flex-col p-4">
                 <h3 className="text-[30px] font-semibold leading-none text-slate-900">{offer.title}</h3>
                 <p className="mt-1 text-sm text-slate-600">{offer.meta}</p>
 
@@ -191,9 +191,11 @@ export function PlansOffersSections() {
                   ))}
                 </div>
 
-                <div className="mt-4 flex flex-nowrap gap-2">
-                  <button className="whitespace-nowrap rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white">Check availability</button>
-                  <button className="whitespace-nowrap rounded-xl border border-slate-800 bg-white px-4 py-2 text-sm font-medium text-slate-900">Plan my trip</button>
+                <div className="mt-auto pt-4">
+                  <div className="flex flex-nowrap gap-2">
+                    <button className="whitespace-nowrap rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white">Check availability</button>
+                    <button className="whitespace-nowrap rounded-xl border border-slate-800 bg-white px-4 py-2 text-sm font-medium text-slate-900">Plan my trip</button>
+                  </div>
                 </div>
               </div>
             </article>
