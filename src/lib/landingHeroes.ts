@@ -153,6 +153,28 @@ export const heroPages: HeroPageConfig[] = [
     panelFooter: "Designed for faster listing and clearer conversion.",
   },
   {
+    slug: "agents",
+    route: "/agents",
+    badge: "Home › Collaborate › Agents",
+    title: "Join as an agent and scale bookings with ClickyTour inventory",
+    subtitle:
+      "Access net pricing, share white-label offers, and grow client bookings faster with a structured agent flow.",
+    chips: ["Agents", "Net pricing", "White-label offers"],
+    ctaPrimary: "Join as Agent",
+    ctaSecondary: "Explore collaborate",
+    trust: ["🤝 Partner-ready", "⚡ Fast offer flow", "📈 Revenue-focused"],
+    heroImage:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1800&auto=format&fit=crop",
+    sideMode: "panel",
+    panelTitle: "Agent quick start",
+    panelItems: [
+      { label: "Step 1", value: "Apply and verify profile" },
+      { label: "Step 2", value: "Unlock inventory + pricing" },
+      { label: "Step 3", value: "Share offers and close" },
+    ],
+    panelFooter: "A practical flow for agents who need speed and clarity.",
+  },
+  {
     slug: "about",
     route: "/about",
     badge: "People, standards, and local know-how",

@@ -18,6 +18,7 @@ import { ComplexTemplateSections } from "@/components/ComplexTemplateSections";
 import { PartnerPmcSections } from "@/components/PartnerPmcSections";
 import { PartnerServiceProvidersSections } from "@/components/PartnerServiceProvidersSections";
 import { ServisApplySections } from "@/components/ServisApplySections";
+import { AgentsSections } from "@/components/AgentsSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -191,6 +192,7 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
       {slug === "search-results-page-for-guests" && <SearchResultsGuestSections />}
       {slug === "partner-pmc" && <PartnerPmcSections />}
       {slug === "partner-service-providers" && <PartnerServiceProvidersSections />}
+      {slug === "agents" && <AgentsSections />}
     </div>
   );
 }
