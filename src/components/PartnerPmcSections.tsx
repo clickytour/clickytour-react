@@ -144,11 +144,11 @@ export function PartnerPmcSections() {
 
       <section className="mx-auto max-w-[1280px] px-4 pb-6">
         <div className="rounded-[24px] border border-slate-200 bg-white/95 p-6 text-center shadow-sm md:p-8">
-          <h2 className="text-[42px] font-semibold leading-none tracking-[-0.01em] text-slate-900">Ready to grow PMC bookings across Greece?</h2>
-          <p className="mt-3 text-[21px] text-slate-700">Apply now to get a tailored onboarding review with distribution, pricing, and launch recommendations.</p>
+          <h2 className="text-[42px] font-semibold leading-none tracking-[-0.01em] text-slate-900">Ready to grow your PMC portfolio with Villa4you?</h2>
+          <p className="mt-3 text-[21px] text-slate-700">Apply now and we&apos;ll review your profile, coverage, and go-live plan.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <a href="/pmc-apply" className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">
-              Apply as PMC Partner
+              Apply as PMC
             </a>
             <a href="/collaborate" className="rounded-xl border border-slate-400 bg-white px-5 py-2.5 text-sm font-medium text-slate-800">
               View all collaboration paths
