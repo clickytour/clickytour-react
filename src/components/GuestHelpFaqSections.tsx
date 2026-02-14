@@ -47,14 +47,14 @@ const faqItems: FaqItem[] = [
     categories: ["Payments"],
   },
   {
-    q: "How does check-in work?",
-    a: "We share check-in details before arrival. Depending on villa, check-in is self-service or host-assisted.",
+    q: "When do I get the exact address and check-in instructions?",
+    a: "After full confirmation you’ll receive a digital guest guide with address, contact, directions and check-in details.",
     categories: ["Check-in & stay"],
   },
   {
     q: "Can I request concierge services?",
     a: "Yes. Transfers, chefs, and experiences can be arranged depending on destination and availability.",
-    categories: ["Transfers & extras", "Check-in & stay"],
+    categories: ["Transfers & extras"],
   },
   {
     q: "Can I change dates?",
