@@ -9,11 +9,13 @@ import { SearchResultsGuestSections } from "@/components/SearchResultsGuestSecti
 import { FreeEvaluationSections } from "@/components/FreeEvaluationSections";
 import { SupportSections } from "@/components/SupportSections";
 import { BlogSections } from "@/components/BlogSections";
+import { PmcApplySections } from "@/components/PmcApplySections";
 import { PlansOffersSections } from "@/components/PlansOffersSections";
 import { GuestHelpFaqSections } from "@/components/GuestHelpFaqSections";
 import { DestinationsSections } from "@/components/DestinationsSections";
 import { ExploreMapSections } from "@/components/ExploreMapSections";
 import { ComplexTemplateSections } from "@/components/ComplexTemplateSections";
+import { PartnerPmcSections } from "@/components/PartnerPmcSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -54,6 +56,14 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="min-h-screen bg-[#f3f5f8]">
         <GuestHelpFaqSections />
+      </div>
+    );
+  }
+
+  if (slug === "pmc-apply") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <PmcApplySections />
       </div>
     );
   }
@@ -146,6 +156,14 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     );
   }
 
+  if (slug === "complexes-sani-club-private-villas") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <ComplexTemplateSections variant="complexes-sani-club-private-villas" />
+      </div>
+    );
+  }
+
   const page = heroPagesBySlug[slug];
 
   if (!page) {
@@ -161,6 +179,7 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
       {slug === "about" && <AboutSections />}
       {slug === "vacation-property-management" && <VacationPropertyManagementSections />}
       {slug === "search-results-page-for-guests" && <SearchResultsGuestSections />}
+      {slug === "partner-pmc" && <PartnerPmcSections />}
     </div>
   );
 }

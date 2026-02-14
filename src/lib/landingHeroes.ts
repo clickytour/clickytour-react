@@ -109,6 +109,28 @@ export const heroPages: HeroPageConfig[] = [
     panelFooter: "Partnerships designed for long-term wins.",
   },
   {
+    slug: "partner-pmc",
+    route: "/partner-pmc",
+    badge: "Home › Collaborate › Partner PMC",
+    title: "Partner with Villa4you as a Property Management Company",
+    subtitle:
+      "Scale portfolio performance with multi-channel distribution, pricing optimization, and owner-ready reporting built for serious PMCs in Greece.",
+    chips: ["PMC growth", "Distribution", "Owner reporting"],
+    ctaPrimary: "Apply as PMC",
+    ctaSecondary: "Explore collaboration",
+    trust: ["📈 Performance-first model", "🤝 Partnership onboarding", "🏝️ Destination-focused growth"],
+    heroImage:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1800&auto=format&fit=crop",
+    sideMode: "panel",
+    panelTitle: "PMC partnership at a glance",
+    panelItems: [
+      { label: "Best for", value: "PMCs managing villas or complexes" },
+      { label: "Coverage", value: "Single destination or multi-region" },
+      { label: "Launch model", value: "Pilot first, then scale" },
+    ],
+    panelFooter: "Built to improve bookings while keeping operations structured.",
+  },
+  {
     slug: "about",
     route: "/about",
     badge: "People, standards, and local know-how",
