@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LandingHero } from "@/components/LandingHero";
 import { ForGuestsSections } from "@/components/ForGuestsSections";
@@ -17,6 +18,35 @@ import { ExploreMapSections } from "@/components/ExploreMapSections";
 import { ComplexTemplateSections } from "@/components/ComplexTemplateSections";
 import { PartnerPmcSections } from "@/components/PartnerPmcSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
+
+const seoBySlug: Record<string, Metadata> = {
+  "partner-pmc": {
+    title: "Partner with Villa4you as a PMC in Greece | Distribution, Pricing & Growth",
+    description:
+      "Join Villa4you as a Property Management Company partner. Scale bookings with multi-channel distribution, revenue-focused pricing strategy, and owner-ready reporting.",
+    keywords: [
+      "property management company Greece",
+      "PMC partnership",
+      "villa distribution channels",
+      "vacation rental revenue management",
+      "villa portfolio growth",
+      "Villa4you collaborate",
+    ],
+    alternates: { canonical: "/partner-pmc" },
+    openGraph: {
+      title: "Partner with Villa4you as a Property Management Company",
+      description:
+        "A growth-focused PMC partnership model for Greek destinations: better occupancy, stronger pricing, and operational clarity.",
+      type: "website",
+      url: "/partner-pmc",
+    },
+  },
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  return seoBySlug[slug] ?? {};
+}
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -170,8 +200,50 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     notFound();
   }
 
+  const partnerPmcFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Who is this partnership ideal for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "PMCs managing villas or complexes that want stronger occupancy, clearer owner reporting, and scalable distribution workflows.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you support one destination only or multi-region PMCs?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Both. Many PMCs start with one region and expand after the pilot phase proves conversion and operational fit.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is required to start?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A short company profile, portfolio scope, service regions, and your preferred operating model. We then run a structured onboarding review.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How fast can we go live?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Typical timeline is 7–21 days depending on portfolio readiness, media quality, and selected collaboration scope.",
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#f3f5f8]">
+      {slug === "partner-pmc" && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(partnerPmcFaqSchema) }} />
+      )}
       <LandingHero config={page} />
       {slug === "for-guests" && <ForGuestsSections />}
       {slug === "for-owners" && <ForOwnersSections />}
