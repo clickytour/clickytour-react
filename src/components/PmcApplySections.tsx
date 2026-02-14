@@ -329,7 +329,15 @@ export function PmcApplySections() {
                       {errors.contactPerson && <span className="text-xs text-red-600">{errors.contactPerson}</span>}
                     </label>
                     <label className={labelClass}>Role / position *
-                      <input className={inputClass} value={form.role} onChange={(e) => setField("role", e.target.value)} />
+                      <select className={inputClass} value={form.role} onChange={(e) => setField("role", e.target.value)}>
+                        <option value="">Please select</option>
+                        <option value="owner-founder">Owner / Founder</option>
+                        <option value="general-manager">General Manager</option>
+                        <option value="operations-manager">Operations Manager</option>
+                        <option value="sales-business-dev">Sales / Business Development</option>
+                        <option value="revenue-manager">Revenue Manager</option>
+                        <option value="other">Other</option>
+                      </select>
                       {errors.role && <span className="text-xs text-red-600">{errors.role}</span>}
                     </label>
                     <label className={labelClass}>Email *
@@ -340,8 +348,14 @@ export function PmcApplySections() {
                       <input className={inputClass} placeholder="+30 ..." value={form.phone} onChange={(e) => setField("phone", e.target.value)} />
                       {errors.phone && <span className="text-xs text-red-600">{errors.phone}</span>}
                     </label>
-                    <label className={labelClass}>Preferred chat (WhatsApp / Viber) *
-                      <input className={inputClass} value={form.messaging} onChange={(e) => setField("messaging", e.target.value)} />
+                    <label className={labelClass}>Preferred chat *
+                      <select className={inputClass} value={form.messaging} onChange={(e) => setField("messaging", e.target.value)}>
+                        <option value="">Please select</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="viber">Viber</option>
+                        <option value="telegram">Telegram</option>
+                        <option value="email">Email only</option>
+                      </select>
                       {errors.messaging && <span className="text-xs text-red-600">{errors.messaging}</span>}
                     </label>
                     <label className={labelClass}>Website *
@@ -427,7 +441,15 @@ export function PmcApplySections() {
                       <input className={inputClass} placeholder="e.g. +12% this season" value={form.occupancyTarget} onChange={(e) => setField("occupancyTarget", e.target.value)} />
                     </label>
                     <label className={labelClass}>How did you hear about us?
-                      <input className={inputClass} value={form.referral} onChange={(e) => setField("referral", e.target.value)} />
+                      <select className={inputClass} value={form.referral} onChange={(e) => setField("referral", e.target.value)}>
+                        <option value="">Please select</option>
+                        <option value="google-search">Google Search</option>
+                        <option value="social-media">Social Media</option>
+                        <option value="partner-referral">Partner Referral</option>
+                        <option value="event-webinar">Event / Webinar</option>
+                        <option value="direct-contact">Direct Contact from ClickyTour</option>
+                        <option value="other">Other</option>
+                      </select>
                     </label>
                   </div>
 
