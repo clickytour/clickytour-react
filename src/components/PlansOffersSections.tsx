@@ -113,18 +113,35 @@ export function PlansOffersSections() {
     [activeCategory],
   );
 
+  const heroCopy = useMemo(() => {
+    if (activeCategory === "Last-Minute") {
+      return {
+        title: "Last-Minute Offers: live gaps and fast booking options",
+        desc: "See near-date availability we can actually confirm. Best for flexible travelers ready to move quickly.",
+      };
+    }
+
+    if (activeCategory === "Group Deals") {
+      return {
+        title: "Group Deals: bigger villas, better value per guest",
+        desc: "Curated options for families and friends with spacious layouts, shared experiences, and smart total pricing.",
+      };
+    }
+
+    return {
+      title: "Plans & Offers: last-minute deals, group savings, and our Premium Plan",
+      desc: "We track real availability and surface genuine savings. Browse current highlights or get one email when a new match appears for your dates.",
+    };
+  }, [activeCategory]);
+
   return (
     <section className="mx-auto max-w-[1280px] px-4 pb-8 pt-4">
       <div className="rounded-2xl border border-slate-300 bg-white p-5 md:p-8">
         <p className="text-sm text-slate-500">Home › <span className="font-semibold text-slate-700">Plans & Offers</span></p>
 
-        <h1 className="mt-3 text-[56px] font-semibold leading-none text-slate-900">
-          Plans & Offers: last-minute deals, group savings, and our Premium Plan
-        </h1>
+        <h1 className="mt-3 text-[56px] font-semibold leading-none text-slate-900">{heroCopy.title}</h1>
 
-        <p className="mt-3 max-w-4xl text-[21px] text-slate-600">
-          We track real availability and surface genuine savings. Browse current highlights or get one email when a new match appears for your dates.
-        </p>
+        <p className="mt-3 max-w-4xl text-[21px] text-slate-600">{heroCopy.desc}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
           {categories.map((cat) => {
