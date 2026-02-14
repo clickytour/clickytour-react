@@ -12,6 +12,7 @@ type FormState = {
   website: string;
   region: string;
   serviceCategory: string;
+  serviceSubcategory: string;
   serviceDescription: string;
   pricingModel: string;
   packages: string;
@@ -24,6 +25,21 @@ const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/14582531/ueuzwpy/";
 const inputClass = "mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900";
 const labelClass = "text-sm font-medium text-slate-700";
 
+const subcategoryByCategory: Record<string, string[]> = {
+  "For Guests": [
+    "Local Activities",
+    "Wellness & Spa",
+    "Transfers & Transport",
+    "Vehicle Rentals",
+    "Concierge & Event Services",
+    "Outdoor Activities",
+    "Cultural Performances",
+    "Attractions & Family Activities",
+    "Photo & Viewpoint Tours",
+  ],
+  "For Owners": ["Cleaning Services", "Plumbing & Electrical", "Home Maintenance"],
+};
+
 const initial: FormState = {
   businessName: "",
   contactName: "",
@@ -31,7 +47,8 @@ const initial: FormState = {
   phone: "",
   website: "",
   region: "",
-  serviceCategory: "Cleaning & Housekeeping",
+  serviceCategory: "For Guests",
+  serviceSubcategory: "Local Activities",
   serviceDescription: "",
   pricingModel: "Per service",
   packages: "",
@@ -65,6 +82,7 @@ export function ServisApplySections() {
       },
       service: {
         category: form.serviceCategory,
+        subcategory: form.serviceSubcategory,
         description: form.serviceDescription,
         pricingModel: form.pricingModel,
         packages: form.packages,
@@ -81,6 +99,8 @@ export function ServisApplySections() {
   function setField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((p) => ({ ...p, [key]: value }));
   }
+
+  const availableSubcategories = subcategoryByCategory[form.serviceCategory] ?? [];
 
   async function onSubmit() {
     if (!form.termsAccepted) {
@@ -147,8 +167,30 @@ export function ServisApplySections() {
             <fieldset className="mt-4 rounded-xl border border-slate-200 p-3">
               <legend className="px-2 text-sm font-semibold text-slate-800">Service details</legend>
               <div className="grid gap-3 md:grid-cols-2">
-                <label className={labelClass}>Service category<select className={inputClass} value={form.serviceCategory} onChange={(e)=>setField("serviceCategory", e.target.value)}><option>Cleaning & Housekeeping</option><option>Maintenance & Repairs</option><option>Transfers & Mobility</option><option>Chef & Catering</option><option>Experiences & Activities</option><option>Wellness & Spa</option></select></label>
-                <label className={labelClass}>Pricing model<select className={inputClass} value={form.pricingModel} onChange={(e)=>setField("pricingModel", e.target.value)}><option>Per service</option><option>Per hour</option><option>Package based</option><option>Custom quote</option></select></label>
+                <label className={labelClass}>Service category
+                  <select
+                    className={inputClass}
+                    value={form.serviceCategory}
+                    onChange={(e) => {
+                      const category = e.target.value;
+                      setField("serviceCategory", category);
+                      const firstSub = (subcategoryByCategory[category] ?? [""])[0] ?? "";
+                      setField("serviceSubcategory", firstSub);
+                    }}
+                  >
+                    {Object.keys(subcategoryByCategory).map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className={labelClass}>Subcategory
+                  <select className={inputClass} value={form.serviceSubcategory} onChange={(e)=>setField("serviceSubcategory", e.target.value)}>
+                    {availableSubcategories.map((sub) => (
+                      <option key={sub} value={sub}>{sub}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className={labelClass}>Pricing model<select className={inputClass} value={form.pricingModel} onChange={(e)=>setField("pricingModel", e.target.value)}><option>Per service</option><option>Per hour</option><option>Per person</option><option>Package based</option><option>Custom quote</option></select></label>
               </div>
               <label className={`${labelClass} mt-3 block`}>Service description<textarea className={inputClass} rows={4} value={form.serviceDescription} onChange={(e)=>setField("serviceDescription", e.target.value)} /></label>
               <label className={`${labelClass} mt-3 block`}>Prices / packages<textarea className={inputClass} rows={3} value={form.packages} onChange={(e)=>setField("packages", e.target.value)} /></label>
