@@ -143,9 +143,13 @@ export function AgentsApplySections() {
 
     if (targetStep === 1) {
       if (!form.businessName.trim()) next.businessName = "Business name is required.";
+      if (!form.legalName.trim()) next.legalName = "Legal name is required.";
       if (!form.contactName.trim()) next.contactName = "Contact name is required.";
+      if (!form.role.trim()) next.role = "Role / position is required.";
       if (!form.email.trim()) next.email = "Email is required.";
       if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) next.email = "Enter a valid email.";
+      if (!form.phone.trim()) next.phone = "Phone is required.";
+      if (!form.website.trim()) next.website = "Website is required.";
       if (!form.regions.trim()) next.regions = "At least one region is required.";
       if (!form.languages.trim()) next.languages = "At least one language is required.";
     }
@@ -154,6 +158,7 @@ export function AgentsApplySections() {
       if (!form.partnershipModel) next.partnershipModel = "Please select a partnership model.";
       if (form.productsFocus.length === 0) next.productsFocus = "Select at least one focus area.";
       if (!form.monthlyLeads.trim()) next.monthlyLeads = "Monthly lead estimate is required.";
+      if (!form.referral.trim()) next.referral = "Please select how you heard about us.";
       if (!form.profileNote.trim() || form.profileNote.trim().length < 30) {
         next.profileNote = "Add a short profile note (min 30 characters).";
       }
@@ -229,7 +234,7 @@ export function AgentsApplySections() {
               <div className="mt-4 flex flex-wrap gap-2">
                 <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">⚡ Structured onboarding</span>
                 <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">🛡️ GDPR-ready consent</span>
-                <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">📊 Payload review before submit</span>
+                <span className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-sm text-slate-700">🧩 Turnstile-ready captcha slot</span>
               </div>
             </div>
 
@@ -245,7 +250,7 @@ export function AgentsApplySections() {
       <section id="agents-apply-anchor" className="mx-auto max-w-[1280px] px-4 pb-10">
         <div className="rounded-2xl border border-slate-300 bg-white p-4 md:p-6">
           <h2 className="text-[42px] font-semibold leading-none text-slate-900">Agents Application Form</h2>
-          <p className="mt-2 text-[21px] text-slate-600">3-step application with profile validation and payload review before submit.</p>
+          <p className="mt-2 text-[21px] text-slate-600">3-step application with profile validation and consent checks before submit.</p>
           <p className="mt-1 text-sm text-slate-500">Required fields are marked with *</p>
 
           <div className="mt-4 grid gap-3 md:grid-cols-3">
@@ -278,25 +283,37 @@ export function AgentsApplySections() {
                     <input className={inputClass} value={form.businessName} onChange={(e) => setField("businessName", e.target.value)} />
                     {errors.businessName && <span className="text-xs text-red-600">{errors.businessName}</span>}
                   </label>
-                  <label className={labelClass}>Legal name
+                  <label className={labelClass}>Legal name *
                     <input className={inputClass} value={form.legalName} onChange={(e) => setField("legalName", e.target.value)} />
+                    {errors.legalName && <span className="text-xs text-red-600">{errors.legalName}</span>}
                   </label>
                   <label className={labelClass}>Contact name *
                     <input className={inputClass} value={form.contactName} onChange={(e) => setField("contactName", e.target.value)} />
                     {errors.contactName && <span className="text-xs text-red-600">{errors.contactName}</span>}
                   </label>
-                  <label className={labelClass}>Role / Position
-                    <input className={inputClass} value={form.role} onChange={(e) => setField("role", e.target.value)} />
+                  <label className={labelClass}>Role / Position *
+                    <select className={inputClass} value={form.role} onChange={(e) => setField("role", e.target.value)}>
+                      <option value="">Please select</option>
+                      <option value="owner-founder">Owner / Founder</option>
+                      <option value="sales-manager">Sales Manager</option>
+                      <option value="travel-agent">Travel Agent</option>
+                      <option value="tour-operator-manager">Tour Operator Manager</option>
+                      <option value="business-development">Business Development</option>
+                      <option value="operations-manager">Operations Manager</option>
+                    </select>
+                    {errors.role && <span className="text-xs text-red-600">{errors.role}</span>}
                   </label>
                   <label className={labelClass}>Email *
                     <input type="email" className={inputClass} value={form.email} onChange={(e) => setField("email", e.target.value)} />
                     {errors.email && <span className="text-xs text-red-600">{errors.email}</span>}
                   </label>
-                  <label className={labelClass}>Phone
+                  <label className={labelClass}>Phone *
                     <input className={inputClass} value={form.phone} onChange={(e) => setField("phone", e.target.value)} />
+                    {errors.phone && <span className="text-xs text-red-600">{errors.phone}</span>}
                   </label>
-                  <label className={labelClass}>Website
-                    <input className={inputClass} value={form.website} onChange={(e) => setField("website", e.target.value)} />
+                  <label className={labelClass}>Website *
+                    <input className={inputClass} placeholder="https://..." value={form.website} onChange={(e) => setField("website", e.target.value)} />
+                    {errors.website && <span className="text-xs text-red-600">{errors.website}</span>}
                   </label>
                   <label className={labelClass}>Regions *
                     <input className={inputClass} placeholder="Halkidiki, Crete..." value={form.regions} onChange={(e) => setField("regions", e.target.value)} />
@@ -406,8 +423,17 @@ export function AgentsApplySections() {
                     <textarea className={inputClass} rows={3} placeholder="Any specific partnership request, custom flow, or support need." value={form.requestNote} onChange={(e) => setField("requestNote", e.target.value)} />
                   </label>
 
-                  <label className={`${labelClass} mt-3 block`}>How did you hear about us?
-                    <input className={inputClass} value={form.referral} onChange={(e) => setField("referral", e.target.value)} />
+                  <label className={`${labelClass} mt-3 block`}>How did you hear about us? *
+                    <select className={inputClass} value={form.referral} onChange={(e) => setField("referral", e.target.value)}>
+                      <option value="">Please select</option>
+                      <option value="google-search">Google Search</option>
+                      <option value="social-media">Social Media</option>
+                      <option value="existing-partner">Existing Partner Referral</option>
+                      <option value="event-webinar">Event / Webinar</option>
+                      <option value="direct-contact">Direct Contact from ClickyTour</option>
+                      <option value="other">Other</option>
+                    </select>
+                    {errors.referral && <span className="text-xs text-red-600">{errors.referral}</span>}
                   </label>
                 </fieldset>
               </>
@@ -415,11 +441,6 @@ export function AgentsApplySections() {
 
             {step === 3 && (
               <>
-                <fieldset className="rounded-xl border border-slate-200 p-3">
-                  <legend className="px-2 text-sm font-semibold text-slate-800">Review generated payload</legend>
-                  <textarea readOnly className="h-[260px] w-full rounded-lg border border-slate-300 bg-slate-50 p-3 font-mono text-xs text-slate-800" value={JSON.stringify(payload, null, 2)} />
-                </fieldset>
-
                 <fieldset className="rounded-xl border border-slate-200 p-3">
                   <legend className="px-2 text-sm font-semibold text-slate-800">Consent & verification</legend>
                   <label className="flex items-start gap-2 text-sm text-slate-700">
@@ -434,10 +455,19 @@ export function AgentsApplySections() {
                   </label>
                   {errors.consentAccuracy && <p className="mt-1 text-xs text-red-600">{errors.consentAccuracy}</p>}
 
-                  <label className="mt-3 block text-xs text-slate-400">
-                    Leave this field empty
-                    <input className="mt-1 w-full rounded-md border border-slate-200 px-2 py-1" value={form.websiteHp} onChange={(e) => setField("websiteHp", e.target.value)} />
-                  </label>
+                  <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
+                    Captcha: Cloudflare Turnstile placeholder (to be activated with site key + server verification).
+                  </div>
+
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    value={form.websiteHp}
+                    onChange={(e) => setField("websiteHp", e.target.value)}
+                  />
                   {errors.websiteHp && <p className="mt-1 text-xs text-red-600">{errors.websiteHp}</p>}
                 </fieldset>
               </>
