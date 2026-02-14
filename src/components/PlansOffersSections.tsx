@@ -144,6 +144,20 @@ export function PlansOffersSections() {
           })}
         </div>
 
+        <div className="mt-6 rounded-2xl border border-slate-300 bg-white p-3 md:p-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+            <p className="min-w-fit text-[30px] font-semibold leading-none text-slate-900">Deal Alerts</p>
+            <input
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 md:flex-1"
+              placeholder="you@example.com"
+            />
+            <label className="inline-flex items-center gap-2 text-sm text-slate-700">
+              <input type="checkbox" defaultChecked /> Guest tips & offers
+            </label>
+            <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-base font-medium text-white">Notify me</button>
+          </div>
+        </div>
+
         <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredOffers.map((offer) => (
             <article key={offer.title} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
