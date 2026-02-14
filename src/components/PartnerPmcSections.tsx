@@ -165,7 +165,7 @@ export function PartnerPmcSections() {
           <h2 className="text-[42px] font-semibold tracking-[-0.01em] text-slate-900">PMC partnership FAQ</h2>
           <div className="mt-4 overflow-hidden rounded-xl border border-blue-200 bg-white">
             {pmcFaqItems.map((item, idx) => (
-              <details key={item.question} className={idx < pmcFaqItems.length - 1 ? "border-b border-blue-200" : ""} open={idx === pmcFaqItems.length - 1}>
+              <details key={item.question} className={idx < pmcFaqItems.length - 1 ? "border-b border-blue-200" : ""}>
                 <summary className="cursor-pointer list-none px-4 py-3 text-[30px] font-semibold text-slate-900 marker:content-none">
                   {item.question}
                 </summary>
