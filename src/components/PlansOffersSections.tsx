@@ -204,6 +204,35 @@ export function PlansOffersSections() {
             </article>
           ))}
         </div>
+
+        <section className="mt-6">
+          <h2 className="text-[42px] font-semibold leading-none text-slate-900">FAQ</h2>
+          <div className="mt-3 overflow-hidden rounded-xl border border-slate-300 bg-white">
+            {[
+              {
+                q: "Are these discounts real?",
+                a: "Yes—offers come from partners/owners with live calendars or written confirmation.",
+              },
+              {
+                q: "Can you combine deals?",
+                a: "Sometimes (e.g., long-stay + shoulder-season). We’ll advise case by case.",
+              },
+              {
+                q: "How do I book?",
+                a: "Click “Check availability” to hand off to our booking partner or send a quick inquiry.",
+              },
+            ].map((item, idx) => (
+              <details key={item.q} className={idx < 2 ? "border-b border-slate-200" : ""} open={idx === 2}>
+                <summary className="cursor-pointer list-none px-4 py-3 text-[30px] font-semibold leading-none text-slate-900 marker:content-none">
+                  {item.q}
+                </summary>
+                <div className="px-4 pb-4">
+                  <p className="text-[21px] text-slate-700">{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
       </div>
     </section>
   );
