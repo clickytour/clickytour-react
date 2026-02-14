@@ -17,6 +17,7 @@ type FormState = {
   regions: string;
   languages: string;
   agentType: AgentType;
+  partnershipModel: "free" | "pro" | "commission";
   productsFocus: string[];
   monthlyLeads: string;
   currentTools: string;
@@ -53,6 +54,7 @@ const initial: FormState = {
   regions: "",
   languages: "",
   agentType: "independent",
+  partnershipModel: "pro",
   productsFocus: ["Rentals"],
   monthlyLeads: "",
   currentTools: "",
@@ -97,6 +99,7 @@ export function AgentsApplySections() {
       },
       agentProfile: {
         agentType: form.agentType,
+        partnershipModel: form.partnershipModel,
         productsFocus: form.productsFocus,
         regions: splitCsv(form.regions),
         languages: splitCsv(form.languages),
@@ -148,6 +151,7 @@ export function AgentsApplySections() {
     }
 
     if (targetStep === 2) {
+      if (!form.partnershipModel) next.partnershipModel = "Please select a partnership model.";
       if (form.productsFocus.length === 0) next.productsFocus = "Select at least one focus area.";
       if (!form.monthlyLeads.trim()) next.monthlyLeads = "Monthly lead estimate is required.";
       if (!form.profileNote.trim() || form.profileNote.trim().length < 30) {
@@ -242,6 +246,7 @@ export function AgentsApplySections() {
         <div className="rounded-2xl border border-slate-300 bg-white p-4 md:p-6">
           <h2 className="text-[42px] font-semibold leading-none text-slate-900">Agents Application Form</h2>
           <p className="mt-2 text-[21px] text-slate-600">3-step application with profile validation and payload review before submit.</p>
+          <p className="mt-1 text-sm text-slate-500">Required fields are marked with *</p>
 
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             {[1, 2, 3].map((n) => {
@@ -330,7 +335,30 @@ export function AgentsApplySections() {
 
                 <fieldset className="rounded-xl border border-slate-200 p-3">
                   <legend className="px-2 text-sm font-semibold text-slate-800">Workflow & tools</legend>
-                  <p className="text-sm font-medium text-slate-700">Products focus *</p>
+
+                  <p className="text-sm font-medium text-slate-700">Partnership model *</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {[
+                      { id: "free", label: "Free Access" },
+                      { id: "pro", label: "Pro Plan" },
+                      { id: "commission", label: "Commission Model" },
+                    ].map((model) => {
+                      const active = form.partnershipModel === model.id;
+                      return (
+                        <button
+                          key={model.id}
+                          type="button"
+                          onClick={() => setField("partnershipModel", model.id as FormState["partnershipModel"])}
+                          className={`rounded-full border px-3 py-1.5 text-sm ${active ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-700"}`}
+                        >
+                          {model.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {errors.partnershipModel && <p className="mt-1 text-xs text-red-600">{errors.partnershipModel}</p>}
+
+                  <p className="mt-3 text-sm font-medium text-slate-700">Products focus *</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {productOptions.map((option) => {
                       const active = form.productsFocus.includes(option);

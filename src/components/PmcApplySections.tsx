@@ -278,6 +278,7 @@ export function PmcApplySections() {
         <div className="rounded-2xl border border-slate-300 bg-white p-4 md:p-6">
           <h2 className="text-[42px] font-semibold leading-none text-slate-900">PMC Application Form</h2>
           <p className="mt-2 text-[21px] text-slate-600">3-step application with validation, dynamic fields, and live payload preview.</p>
+          <p className="mt-1 text-sm text-slate-500">Required fields are marked with *</p>
 
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             {[1, 2, 3].map((n) => {

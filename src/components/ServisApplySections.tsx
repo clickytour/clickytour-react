@@ -374,6 +374,7 @@ export function ServisApplySections() {
         <form className="rounded-2xl border border-slate-300 bg-white p-4" onSubmit={(e) => e.preventDefault()}>
           <h2 className="text-[42px] font-semibold leading-none text-slate-900">Provider Listing Form</h2>
           <p className="mt-2 text-[21px] text-slate-600">Universal provider wizard (List your service/business).</p>
+          <p className="mt-1 text-sm text-slate-500">Required fields are marked with *</p>
 
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             <button type="button" onClick={() => setStep(1)} className={`rounded-xl border p-3 text-left text-sm ${step===1?"border-slate-900 bg-slate-900 text-white":"border-slate-300 bg-slate-50 text-slate-700"}`}>Step 1 · Business</button>
