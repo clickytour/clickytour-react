@@ -52,8 +52,13 @@ const faqItems: FaqItem[] = [
     categories: ["Check-in & stay"],
   },
   {
-    q: "Can I request concierge services?",
-    a: "Yes. Transfers, chefs, and experiences can be arranged depending on destination and availability.",
+    q: "Do you arrange airport transfers?",
+    a: "Yes. We can set up private transfers, car rental, or boat taxis. Ask in the message and include flight details if available.",
+    categories: ["Transfers & extras"],
+  },
+  {
+    q: "Can you help with activities or chef services?",
+    a: "Absolutely—tastings, cruises, private chef, childcare, and more. Tell us your wishlist and we’ll coordinate.",
     categories: ["Transfers & extras"],
   },
   {
@@ -117,11 +122,12 @@ export function GuestHelpFaqSections() {
 
             <div className="mt-3 overflow-hidden rounded-xl border border-slate-300 bg-white">
               {filteredFaq.map((item, idx) => {
-                const openByDefault = idx === 0 || (activeCategory === "Payments" && idx === 1);
+                const dualHighlight = activeCategory === "Payments" || activeCategory === "Transfers & extras";
+                const openByDefault = idx === 0 || (dualHighlight && idx === 1);
                 const headerClass =
-                  activeCategory === "Payments" && idx === 0
+                  dualHighlight && idx === 0
                     ? "border-fuchsia-300 text-fuchsia-800"
-                    : activeCategory === "Payments" && idx === 1
+                    : dualHighlight && idx === 1
                       ? "border-sky-500 text-slate-900"
                       : idx === 0
                         ? "border-sky-500 text-slate-900"
