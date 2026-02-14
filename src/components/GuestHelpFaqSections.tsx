@@ -38,13 +38,13 @@ const faqItems: FaqItem[] = [
   },
   {
     q: "What is the cancellation policy?",
-    a: "Each property has its own cancellation terms. You’ll always see the exact policy before confirming.",
+    a: "Each villa has its own policy shown before payment. Most allow free cancellation within 24–48h after booking and then follow a tiered schedule.",
     categories: ["Policies"],
   },
   {
     q: "Do you charge a security deposit?",
     a: "Some villas require a refundable security hold. It’s released after check-out pending inspection.",
-    categories: ["Payments", "Policies"],
+    categories: ["Payments"],
   },
   {
     q: "How does check-in work?",
