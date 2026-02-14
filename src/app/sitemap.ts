@@ -14,6 +14,7 @@ const routes = [
   "/pmc-apply",
   "/partner-service-providers",
   "/agents",
+  "/agents-apply",
   "/service-apply",
   "/free-evaluation",
   "/support",

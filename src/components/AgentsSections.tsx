@@ -56,7 +56,7 @@ export function AgentsSections() {
         <div className="rounded-[24px] border border-slate-200 bg-white/95 p-6 text-center shadow-sm md:p-8">
           <h2 className="text-[42px] font-semibold leading-none tracking-[-0.01em] text-slate-900">Ready to join as an agent?</h2>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <a href="/service-apply" className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">Apply now</a>
+            <a href="/agents-apply" className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-medium text-white">Apply now</a>
             <a href="/collaborate" className="rounded-xl border border-slate-400 bg-white px-5 py-2.5 text-sm font-medium text-slate-800">Back to collaborate</a>
           </div>
         </div>

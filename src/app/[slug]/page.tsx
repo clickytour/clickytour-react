@@ -19,6 +19,7 @@ import { PartnerPmcSections } from "@/components/PartnerPmcSections";
 import { PartnerServiceProvidersSections } from "@/components/PartnerServiceProvidersSections";
 import { ServisApplySections } from "@/components/ServisApplySections";
 import { AgentsSections } from "@/components/AgentsSections";
+import { AgentsApplySections } from "@/components/AgentsApplySections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -75,6 +76,14 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="min-h-screen bg-[#f3f5f8]">
         <ServisApplySections />
+      </div>
+    );
+  }
+
+  if (slug === "agents-apply") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <AgentsApplySections />
       </div>
     );
   }
