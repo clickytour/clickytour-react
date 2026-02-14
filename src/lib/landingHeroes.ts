@@ -131,6 +131,28 @@ export const heroPages: HeroPageConfig[] = [
     panelFooter: "Built to improve bookings while keeping operations structured.",
   },
   {
+    slug: "partner-service-providers",
+    route: "/partner-service-providers",
+    badge: "Home › Collaborate › Service Providers",
+    title: "For Service Providers: list, offer, and grow with ClickyTour",
+    subtitle:
+      "List your business, reach guests and agents, and offer services to property owners through one clear provider pathway.",
+    chips: ["Provider growth", "Structured onboarding", "Guest + owner demand"],
+    ctaPrimary: "List your service",
+    ctaSecondary: "View provider path",
+    trust: ["📌 Fast onboarding", "📣 Promotion-ready", "🤝 Multi-audience exposure"],
+    heroImage:
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1800&auto=format&fit=crop",
+    sideMode: "panel",
+    panelTitle: "Provider quick start",
+    panelItems: [
+      { label: "Step 1", value: "Create provider profile" },
+      { label: "Step 2", value: "Add service details + prices" },
+      { label: "Step 3", value: "Publish and receive requests" },
+    ],
+    panelFooter: "Designed for faster listing and clearer conversion.",
+  },
+  {
     slug: "about",
     route: "/about",
     badge: "People, standards, and local know-how",

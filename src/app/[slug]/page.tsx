@@ -16,6 +16,8 @@ import { DestinationsSections } from "@/components/DestinationsSections";
 import { ExploreMapSections } from "@/components/ExploreMapSections";
 import { ComplexTemplateSections } from "@/components/ComplexTemplateSections";
 import { PartnerPmcSections } from "@/components/PartnerPmcSections";
+import { PartnerServiceProvidersSections } from "@/components/PartnerServiceProvidersSections";
+import { ServisApplySections } from "@/components/ServisApplySections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -64,6 +66,14 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="min-h-screen bg-[#f3f5f8]">
         <PmcApplySections />
+      </div>
+    );
+  }
+
+  if (slug === "servis-apply" || slug === "service-apply") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <ServisApplySections />
       </div>
     );
   }
@@ -180,6 +190,7 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
       {slug === "vacation-property-management" && <VacationPropertyManagementSections />}
       {slug === "search-results-page-for-guests" && <SearchResultsGuestSections />}
       {slug === "partner-pmc" && <PartnerPmcSections />}
+      {slug === "partner-service-providers" && <PartnerServiceProvidersSections />}
     </div>
   );
 }
