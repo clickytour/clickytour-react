@@ -183,6 +183,11 @@ export function GuestHelpFaqSections() {
             <label className="block text-sm font-medium text-slate-700">Issue *
               <select className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900">
                 <option>Select...</option>
+                <option>change dates</option>
+                <option>cancel</option>
+                <option>payment</option>
+                <option>special request</option>
+                <option>other</option>
               </select>
             </label>
             <label className="block text-sm font-medium text-slate-700">Property ID (optional)<input className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2" /></label>
