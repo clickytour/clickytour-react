@@ -107,35 +107,44 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         </article>
       </section>
 
-      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
-        <h2 className="text-2xl font-semibold text-slate-900">View Video</h2>
-        <div className="mt-3 overflow-hidden rounded-xl border border-slate-200">
-          <iframe
-            src={property.videoUrl}
-            title={`${property.title} video`}
-            className="h-[400px] w-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </section>
+      <section className="mt-6 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <article className="rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Property Video</h2>
+          <div className="mt-3 overflow-hidden rounded-xl border border-slate-200">
+            <iframe
+              src={property.videoUrl}
+              title={`${property.title} video`}
+              className="h-[220px] w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </article>
 
-      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
-        <h2 className="text-2xl font-semibold text-slate-900">Services Nearby</h2>
-        <div className="mt-3 grid gap-3 md:grid-cols-2">
-          {property.nearbyServices.map((service) => (
-            <article key={service.name} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <h3 className="text-sm font-semibold text-slate-900">{service.name}</h3>
-              <p className="mt-1 text-sm text-slate-600">{service.detail}</p>
-              <div className="mt-2 flex gap-2">
-                <a href={service.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">View service</a>
-                {service.blogHref && (
-                  <a href={service.blogHref} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900">Related post</a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
+        <article className="rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Services Nearby</h2>
+          <div className="mt-3 grid gap-4 md:grid-cols-2">
+            {property.nearbyServices.map((service, idx) => (
+              <article key={service.name} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+                <img
+                  src={idx % 2 === 0 ? "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1200&auto=format&fit=crop" : "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1200&auto=format&fit=crop"}
+                  alt={service.name}
+                  className="h-28 w-full object-cover"
+                />
+                <div className="p-3">
+                  <h3 className="text-sm font-semibold text-slate-900">{service.name}</h3>
+                  <p className="mt-1 text-sm text-slate-600">{service.detail}</p>
+                  <div className="mt-2 flex gap-2">
+                    <a href={service.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">View service</a>
+                    {service.blogHref && (
+                      <a href={service.blogHref} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900">Related post</a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </article>
       </section>
 
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
