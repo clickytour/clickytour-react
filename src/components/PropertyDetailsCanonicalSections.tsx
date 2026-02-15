@@ -274,13 +274,35 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
         <h2 className="text-2xl font-semibold text-slate-900">FAQ (Core-mirror readiness)</h2>
         <div className="mt-3 space-y-3">
-          {property.faqs.map((item) => (
-            <article key={item.q} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-              <h3 className="text-sm font-semibold text-slate-900">{item.q}</h3>
-              <p className="mt-1 text-sm text-slate-600">{item.a}</p>
-            </article>
+          {property.faqs.slice(0, 3).map((item) => (
+            <details key={item.q} className="group rounded-lg border border-slate-200 bg-slate-50 p-3">
+              <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
+                <span>{item.q}</span>
+                <span className="text-slate-500 group-open:rotate-180">⌄</span>
+              </summary>
+              <p className="mt-2 text-sm text-slate-600">{item.a}</p>
+            </details>
           ))}
         </div>
+
+        {property.faqs.length > 3 && (
+          <details className="group mt-4">
+            <summary className="cursor-pointer list-none text-sm font-semibold text-slate-900">
+              View more FAQs ({property.faqs.length - 3})
+            </summary>
+            <div className="mt-3 space-y-3">
+              {property.faqs.slice(3).map((item) => (
+                <details key={`${item.q}-more`} className="group rounded-lg border border-slate-200 bg-slate-50 p-3">
+                  <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
+                    <span>{item.q}</span>
+                    <span className="text-slate-500 group-open:rotate-180">⌄</span>
+                  </summary>
+                  <p className="mt-2 text-sm text-slate-600">{item.a}</p>
+                </details>
+              ))}
+            </div>
+          </details>
+        )}
       </section>
 
       <section className="mt-6">

@@ -135,6 +135,14 @@ const properties: CoreMirrorProperty[] = [
         q: "Is this page already Core-integrated?",
         a: "This version is bound to a local Core-mirror mock model and is ready to map to final Core payload contracts.",
       },
+      {
+        q: "How far is the property from key infrastructure?",
+        a: "Distance indicators on this page include airport, infrastructure, restaurants, supermarket, marina, police office, medical office, and entertainment facilities.",
+      },
+      {
+        q: "Can I request booking details from this page?",
+        a: "Yes. Use the Guest Request section to submit your dates and contact details for availability and booking follow-up.",
+      },
     ],
     related: [
       {
