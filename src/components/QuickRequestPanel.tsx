@@ -454,12 +454,11 @@ export function QuickRequestPanel() {
         if (!form.consentData) next.consentData = "Consent is required.";
       }
 
-      if (form.guestRole === "tours-activities") {
-        if (!form.serviceCategory.trim()) next.serviceCategory = "Required";
-      }
-
       if (form.guestRole === "real-estate") {
         if (form.propertyTypesMulti.length === 0) next.propertyTypesMulti = "Select at least one";
+        if (form.budgetFrom && form.budgetTo && Number(form.budgetFrom) > Number(form.budgetTo)) {
+          next.budgetTo = "Budget To should be >= Budget From.";
+        }
       }
     }
 
@@ -471,15 +470,6 @@ export function QuickRequestPanel() {
       if (!form.consentData) next.consentData = "Consent is required.";
       if (form.websiteHp.trim()) next.websiteHp = "Spam check failed.";
 
-      if (form.guestRole === "tours-activities" && form.budgetTotal && Number(form.budgetTotal) < 0) {
-        next.budgetTotal = "Invalid budget.";
-      }
-
-      if (form.guestRole === "real-estate") {
-        if (form.budgetFrom && form.budgetTo && Number(form.budgetFrom) > Number(form.budgetTo)) {
-          next.budgetTo = "Budget To should be >= Budget From.";
-        }
-      }
     }
 
     setErrors(next);
@@ -673,36 +663,13 @@ export function QuickRequestPanel() {
 
           {form.guestRole === "tours-activities" && (
             <div className="grid gap-2 sm:grid-cols-2">
-              <label className="text-[10px] font-semibold text-slate-700">Service Category*
-                <select
-                  className={inputClass}
-                  value={form.serviceCategory}
-                  onChange={(e) => {
-                    const nextCategory = e.target.value;
-                    setField("serviceCategory", nextCategory);
-                    const firstSub = quickServiceCategories.find((c) => c.id === nextCategory)?.subcategories?.[0]?.id ?? "";
-                    setField("serviceSubcategory", firstSub);
-                  }}
-                >
-                  <option value="">Please Select</option>
-                  {quickServiceCategories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
-                  ))}
-                </select>
-              </label>
               <label className="text-[10px] font-semibold text-slate-700">Subcategory (optional)
                 <select className={inputClass} value={form.serviceSubcategory} onChange={(e) => setField("serviceSubcategory", e.target.value)} disabled={!form.serviceCategory}>
-                  <option value="">— Optional —</option>
+                  <option value="">? Optional ?</option>
                   {quickServiceSubcategories.map((sub) => (
                     <option key={sub.id} value={sub.id}>{sub.name}</option>
                   ))}
                 </select>
-              </label>
-              <label className="text-[10px] font-semibold text-slate-700">Date & Time*
-                <input type="datetime-local" className={inputClass} value={form.serviceDateTime} onChange={(e) => setField("serviceDateTime", e.target.value)} />
-              </label>
-              <label className="text-[10px] font-semibold text-slate-700">Adults*
-                <input type="number" min={1} className={inputClass} value={form.adults} onChange={(e) => setField("adults", e.target.value)} />
               </label>
               <label className="text-[10px] font-semibold text-slate-700">Pickup (optional)
                 <input className={inputClass} placeholder="Hotel or address" value={form.pickup} onChange={(e) => setField("pickup", e.target.value)} />
@@ -715,21 +682,16 @@ export function QuickRequestPanel() {
                   <option value="">No preference</option><option value="morning">Morning</option><option value="afternoon">Afternoon</option><option value="evening">Evening</option>
                 </select>
               </label>
+              <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Budget (optional, total)
+                <input className={inputClass} placeholder="e.g., 120" value={form.budgetTotal} onChange={(e) => setField("budgetTotal", e.target.value)} />
+                {errors.budgetTotal && <span className="text-[10px] text-red-600">{errors.budgetTotal}</span>}
+              </label>
             </div>
           )}
 
           {form.guestRole === "real-estate" && (
             <div className="space-y-2">
               <div className="grid gap-2 sm:grid-cols-2">
-                <label className="text-[10px] font-semibold text-slate-700">Mode*
-                  <select className={inputClass} value={form.realEstateMode} onChange={(e) => setField("realEstateMode", e.target.value)}><option value="buy">Buy</option><option value="rent">Rent</option></select>
-                </label>
-                <label className="text-[10px] font-semibold text-slate-700">Type*
-                  <select className={inputClass} value={form.realEstateType} onChange={(e) => setField("realEstateType", e.target.value)}><option>Land</option><option>Home</option><option>Apartment</option><option>Villa</option><option>Commercial</option></select>
-                </label>
-                <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Regions*
-                  <input className={inputClass} value={form.regions} onChange={(e) => setField("regions", e.target.value)} />
-                </label>
                 <label className="text-[10px] font-semibold text-slate-700">Bedrooms (optional)
                   <select className={inputClass} value={form.realEstateBedrooms} onChange={(e) => setField("realEstateBedrooms", e.target.value)}><option value="any">Any</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4+">4+</option></select>
                 </label>
@@ -751,6 +713,16 @@ export function QuickRequestPanel() {
                 </label>
                 <label className="text-[10px] font-semibold text-slate-700">Max sqm
                   <input className={inputClass} value={form.maxSqm} onChange={(e) => setField("maxSqm", e.target.value)} />
+                </label>
+              </div>
+
+              <div className="grid gap-2 sm:grid-cols-2">
+                <label className="text-[10px] font-semibold text-slate-700">From (?)
+                  <input className={inputClass} placeholder="e.g., 120000" value={form.budgetFrom} onChange={(e) => setField("budgetFrom", e.target.value)} />
+                </label>
+                <label className="text-[10px] font-semibold text-slate-700">To (?)
+                  <input className={inputClass} placeholder="e.g., 250000" value={form.budgetTo} onChange={(e) => setField("budgetTo", e.target.value)} />
+                  {errors.budgetTo && <span className="text-[10px] text-red-600">{errors.budgetTo}</span>}
                 </label>
               </div>
 
@@ -820,13 +792,6 @@ export function QuickRequestPanel() {
                 {errors.budgetTo && <span className="text-[10px] text-red-600">{errors.budgetTo}</span>}
               </label>
             </div>
-          )}
-
-          {form.guestRole === "tours-activities" && (
-            <label className="text-[10px] font-semibold text-slate-700">Budget (optional, total)
-              <input className={inputClass} placeholder="e.g., 120" value={form.budgetTotal} onChange={(e) => setField("budgetTotal", e.target.value)} />
-              {errors.budgetTotal && <span className="text-[10px] text-red-600">{errors.budgetTotal}</span>}
-            </label>
           )}
 
           {form.guestRole === "real-estate" && (
