@@ -238,8 +238,13 @@ export function QuickRequestPanel() {
       if (form.websiteHp.trim()) next.websiteHp = "Spam check failed.";
 
       if (form.guestRole === "travel-rentals") {
+        if (!form.bedrooms.trim()) next.bedrooms = "Required";
         if (!form.distanceToBeach.trim()) next.distanceToBeach = "Required";
         if (!form.distanceToInfrastructure.trim()) next.distanceToInfrastructure = "Required";
+        const from = Number(form.budgetFrom || 0);
+        const to = Number(form.budgetTo || 0);
+        if (!form.budgetFrom.trim() || Number.isNaN(from) || from < 100) next.budgetFrom = "Min 100";
+        if (!form.budgetTo.trim() || Number.isNaN(to) || to < from + 50) next.budgetTo = "Must be at least +50 from Budget From";
       }
 
       if (form.guestRole === "tours-activities") {
@@ -319,7 +324,7 @@ export function QuickRequestPanel() {
                 <input type="date" className={inputClass} value={form.checkOut} onChange={(e) => setField("checkOut", e.target.value)} />
                 {errors.checkOut && <span className="text-[10px] text-red-600">{errors.checkOut}</span>}
               </label>
-              <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Destination / Region*
+              <label className="text-[10px] font-semibold text-slate-700">Destination / Region*
                 <input className={inputClass} placeholder="e.g., Santorini" value={form.destination} onChange={(e) => setField("destination", e.target.value)} />
                 {errors.destination && <span className="text-[10px] text-red-600">{errors.destination}</span>}
               </label>
@@ -390,7 +395,7 @@ export function QuickRequestPanel() {
         <div className="mt-2 space-y-2">
           {form.guestRole === "travel-rentals" && (
             <div className="grid gap-2 sm:grid-cols-2">
-              <label className="text-[10px] font-semibold text-slate-700">Bedrooms
+              <label className="text-[10px] font-semibold text-slate-700">Bedrooms*
                 <select className={inputClass} value={form.bedrooms} onChange={(e) => setField("bedrooms", e.target.value)}>
                   <option value="">Please Select</option>
                   <option value="1">1</option>
@@ -398,6 +403,7 @@ export function QuickRequestPanel() {
                   <option value="3">3</option>
                   <option value="4+">4+</option>
                 </select>
+                {errors.bedrooms && <span className="text-[10px] text-red-600">{errors.bedrooms}</span>}
               </label>
               <label className="text-[10px] font-semibold text-slate-700">Adults*
                 <input type="number" min={1} className={inputClass} value={form.adults} onChange={(e) => setField("adults", e.target.value)} />
@@ -518,9 +524,16 @@ export function QuickRequestPanel() {
       {normalizedStep === 2 && (
         <div className="mt-2 space-y-2">
           {form.guestRole === "travel-rentals" && (
-            <label className="text-[10px] font-semibold text-slate-700">Budget (per night)
-              <input className={inputClass} placeholder="From / To" value={form.budgetTotal} onChange={(e) => setField("budgetTotal", e.target.value)} />
-            </label>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <label className="text-[10px] font-semibold text-slate-700">Budget From (€)*
+                <input type="number" min={100} className={inputClass} placeholder="min 100" value={form.budgetFrom} onChange={(e) => setField("budgetFrom", e.target.value)} />
+                {errors.budgetFrom && <span className="text-[10px] text-red-600">{errors.budgetFrom}</span>}
+              </label>
+              <label className="text-[10px] font-semibold text-slate-700">Budget To (€)*
+                <input type="number" min={150} className={inputClass} placeholder="min +50 from From" value={form.budgetTo} onChange={(e) => setField("budgetTo", e.target.value)} />
+                {errors.budgetTo && <span className="text-[10px] text-red-600">{errors.budgetTo}</span>}
+              </label>
+            </div>
           )}
 
           {form.guestRole === "tours-activities" && (
