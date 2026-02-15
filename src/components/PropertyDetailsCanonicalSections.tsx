@@ -11,7 +11,12 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
 
       <section className="grid gap-6 xl:grid-cols-[1.75fr_0.95fr]">
         <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
-          <img src={property.gallery[0]} alt={property.title} className="h-[500px] w-full object-cover" />
+          <div className="relative">
+            <img src={property.gallery[0]} alt={property.title} className="h-[500px] w-full object-cover" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-5">
+              <p className="text-2xl font-semibold text-white">{property.headline}</p>
+            </div>
+          </div>
           <div className="grid grid-cols-2 gap-2 p-2 md:grid-cols-3">
             {property.gallery.slice(1).map((img) => (
               <img key={img} src={img} alt={property.title} className="h-28 w-full rounded-lg object-cover" />
@@ -22,7 +27,6 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         <aside className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{property.location.region}</p>
           <h1 className="mt-2 text-3xl font-semibold leading-tight text-slate-900">{property.title}</h1>
-          <p className="mt-2 text-base font-medium text-slate-700">{property.headline}</p>
 
           <div className="mt-3 flex flex-wrap gap-2">
             {property.badges.map((b) => (
