@@ -2,6 +2,9 @@ export type CoreMirrorProperty = {
   id: string;
   slug: string;
   title: string;
+  headline: string;
+  shortDescription: string;
+  detailDescription: string;
   type: "vacation" | "real-estate";
   location: {
     area: string;
@@ -51,6 +54,9 @@ const properties: CoreMirrorProperty[] = [
     id: "6325",
     slug: "villa-glarokavos-sea-view",
     title: "Villa Glarokavos Sea View",
+    headline: "Sea-View Luxury Villa in Halkidiki",
+    shortDescription: "Premium 5-bedroom villa for families and groups near Pefkohori beach.",
+    detailDescription: "Villa Glarokavos Sea View combines spacious interiors, private pool comfort, and quick access to key local services. It is designed for guests who want a high-comfort stay with clear availability and pricing visibility.",
     type: "vacation",
     location: {
       area: "Glarokavos",

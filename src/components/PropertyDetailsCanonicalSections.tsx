@@ -22,6 +22,8 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         <aside className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{property.location.region}</p>
           <h1 className="mt-1 text-4xl font-semibold leading-tight text-slate-900">{property.title}</h1>
+          <h2 className="mt-2 text-xl font-semibold text-slate-800">{property.headline}</h2>
+          <p className="mt-1 text-sm text-slate-600">{property.shortDescription}</p>
 
           <div className="mt-3 flex flex-wrap gap-2">
             {property.badges.map((b) => (
@@ -60,6 +62,11 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             unavailableDates={property.pricing.unavailableDates}
           />
         </aside>
+      </section>
+
+      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 className="text-2xl font-semibold text-slate-900">Detail Description</h2>
+        <p className="mt-2 text-sm leading-7 text-slate-700">{property.detailDescription}</p>
       </section>
 
       <section className="mt-6 grid gap-6 lg:grid-cols-2">
