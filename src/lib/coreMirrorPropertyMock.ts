@@ -8,6 +8,8 @@ export type CoreMirrorProperty = {
     region: string;
     country: string;
     beachDistanceM: number;
+    lat: number;
+    lng: number;
   };
   summary: string;
   highlights: string[];
@@ -55,6 +57,8 @@ const properties: CoreMirrorProperty[] = [
       region: "Pefkohori, Halkidiki",
       country: "Greece",
       beachDistanceM: 600,
+      lat: 39.9886,
+      lng: 23.6176,
     },
     summary:
       "Spacious 5-bedroom villa near Pefkohori with sea-view positioning, family-ready comfort, and group-friendly layout for summer stays.",

@@ -3,13 +3,15 @@ import { GuestRequestInlineForm } from "@/components/GuestRequestInlineForm";
 import { PlanyoAvailabilitySection } from "@/components/PlanyoAvailabilitySection";
 
 export function PropertyDetailsCanonicalSections({ property }: { property: CoreMirrorProperty }) {
+  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${property.location.lng - 0.02}%2C${property.location.lat - 0.01}%2C${property.location.lng + 0.02}%2C${property.location.lat + 0.01}&layer=mapnik&marker=${property.location.lat}%2C${property.location.lng}`;
+
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-8">
       <div className="mb-4 text-sm text-slate-500">For Guests / Property Details / {property.title}</div>
 
-      <section className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
-          <img src={property.gallery[0]} alt={property.title} className="h-[420px] w-full object-cover" />
+      <section className="grid gap-6 lg:grid-cols-[1.45fr_1fr]">
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <img src={property.gallery[0]} alt={property.title} className="h-[460px] w-full object-cover" />
           <div className="grid grid-cols-2 gap-2 p-2 md:grid-cols-3">
             {property.gallery.slice(1).map((img) => (
               <img key={img} src={img} alt={property.title} className="h-28 w-full rounded-lg object-cover" />
@@ -17,14 +19,16 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
           </div>
         </div>
 
-        <aside className="rounded-2xl border border-slate-200 bg-white p-5">
+        <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{property.location.region}</p>
           <h1 className="mt-1 text-3xl font-semibold text-slate-900">{property.title}</h1>
+
           <div className="mt-2 flex flex-wrap gap-2">
             {property.badges.map((b) => (
               <span key={b} className="rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-700">{b}</span>
             ))}
           </div>
+
           <p className="mt-3 text-sm text-slate-600">{property.summary}</p>
 
           <div className="mt-4 grid grid-cols-2 gap-2 text-sm text-slate-700">
@@ -90,13 +94,16 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         </article>
 
         <article className="rounded-2xl border border-slate-200 bg-white p-5">
-          <h2 className="text-xl font-semibold text-slate-900">Rules, Safety & Cancellation</h2>
-          <ul className="mt-3 space-y-2 text-sm text-slate-700">
-            <li>Smoking: {property.policies.smokingAllowed ? "Allowed" : "Not allowed"}</li>
-            <li>Pets: {property.policies.petsAllowed ? "Allowed" : "Not allowed"}</li>
-            <li>Tourism License: {property.policies.tourismLicense}</li>
-            <li>Cancellation: {property.policies.cancellationSummary}</li>
-          </ul>
+          <h2 className="text-xl font-semibold text-slate-900">Map Location</h2>
+          <iframe src={mapSrc} className="mt-3 h-[260px] w-full rounded-lg border border-slate-200" title="Property map location" />
+          <a
+            href={`https://www.openstreetmap.org/?mlat=${property.location.lat}&mlon=${property.location.lng}#map=14/${property.location.lat}/${property.location.lng}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900"
+          >
+            Open full map
+          </a>
         </article>
       </section>
 
