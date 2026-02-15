@@ -9,7 +9,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
     <div className="mx-auto max-w-[1320px] px-4 py-8">
       <div className="mb-4 text-sm text-slate-500">For Guests / Property Details / {property.title}</div>
 
-      <section className="grid gap-6 xl:grid-cols-[1.55fr_1fr]">
+      <section className="grid gap-6 xl:grid-cols-[1.75fr_0.95fr]">
         <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <img src={property.gallery[0]} alt={property.title} className="h-[500px] w-full object-cover" />
           <div className="grid grid-cols-2 gap-2 p-2 md:grid-cols-3">
@@ -63,7 +63,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         </aside>
       </section>
 
-      <section className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
+      <section className="mt-6 grid gap-6 lg:grid-cols-[1.6fr_0.9fr]">
         <article className="rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">Short Description</h2>
           <p className="mt-3 text-sm leading-7 text-slate-700">{property.shortDescription}</p>
