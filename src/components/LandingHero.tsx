@@ -74,11 +74,15 @@ export function LandingHero({ config }: { config: HeroPageConfig }) {
               </aside>
             ) : (
               <aside className="w-full max-w-[360px] rounded-[16px] border border-slate-300 bg-white/90 p-4 shadow-sm">
-                <h2 className="text-[18px] font-semibold leading-none text-slate-900">{config.panelTitle}</h2>
-                <p className="mt-1 text-[11px] text-slate-600">{config.panelFooter || "Contextual guidance block replacing the old quick request form."}</p>
+                {!isHomepageTemplate && (
+                  <>
+                    <h2 className="text-[18px] font-semibold leading-none text-slate-900">{config.panelTitle}</h2>
+                    <p className="mt-1 text-[11px] text-slate-600">{config.panelFooter || "Contextual guidance block replacing the old quick request form."}</p>
+                  </>
+                )}
 
                 {isHomepageTemplate ? (
-                  <div className="mt-3">
+                  <div>
                     <QuickRequestPanel />
                   </div>
                 ) : (
