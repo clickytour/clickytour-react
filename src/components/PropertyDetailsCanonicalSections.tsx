@@ -5,6 +5,10 @@ import { PlanyoAvailabilitySection } from "@/components/PlanyoAvailabilitySectio
 export function PropertyDetailsCanonicalSections({ property }: { property: CoreMirrorProperty }) {
   const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${property.location.lng - 0.02}%2C${property.location.lat - 0.01}%2C${property.location.lng + 0.02}%2C${property.location.lat + 0.01}&layer=mapnik&marker=${property.location.lat}%2C${property.location.lng}`;
 
+  const highSeasonRates = property.pricing.seasonalRates.filter((s) => s.label.toLowerCase().includes("high"));
+  const highSeasonMin = (highSeasonRates.length ? Math.min(...highSeasonRates.map((s) => s.nightly)) : Math.min(...property.pricing.seasonalRates.map((s) => s.nightly)));
+  const highSeasonMax = (highSeasonRates.length ? Math.max(...highSeasonRates.map((s) => s.nightly)) : Math.max(...property.pricing.seasonalRates.map((s) => s.nightly)));
+
   return (
     <div className="mx-auto max-w-[1320px] px-4 py-8">
       <div className="mb-4 text-sm text-slate-500">For Guests / Property Details / {property.title}</div>
@@ -46,12 +50,12 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
           </div>
 
           <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-3">
-            <p className="text-xs text-blue-700">Pricing (Core mirror logic)</p>
+            <p className="text-xs text-blue-700">Pricing (Planyo-linked property)</p>
             <p className="text-xl font-semibold text-blue-900">
-              From {property.pricing.seasonalFrom} {property.pricing.currency} / night
+              From {property.pricing.basicFrom} {property.pricing.currency} / night
             </p>
             <p className="text-xs text-blue-800">
-              {property.pricing.seasonName} · fallback basic from {property.pricing.basicFrom} {property.pricing.currency} · min stay {property.pricing.minStayNights} nights
+              High Season: {highSeasonMin} - {highSeasonMax} {property.pricing.currency} · min stay {property.pricing.minStayNights} nights
             </p>
           </div>
 
