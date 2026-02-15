@@ -138,33 +138,41 @@ export function PlanyoAvailabilitySection({
         </div>
         <p className="mt-2 text-xs text-slate-600">Minimum stay: {minStay} {minStay === 1 ? "night" : "nights"}.</p>
 
-        <div className="mt-3 space-y-2 text-sm text-slate-700">
-          <p className="font-semibold text-slate-900">{propertyTitle || "Selected Property"}</p>
-          <p>
-            {currency} {nightly.toFixed(2)} per night
-          </p>
-          <p className="text-lg font-semibold text-slate-900">{currency} {subtotal.toFixed(2)}</p>
-          <div className="border-t border-slate-200 pt-2">
-            <p>Final Cleaning</p>
-            <p className="font-medium">{currency} {cleaningFee.toFixed(2)}</p>
+        {checkIn && checkOut ? (
+          <div className="mt-3 space-y-2 text-sm text-slate-700">
+            <p className="font-semibold text-slate-900">{propertyTitle || "Selected Property"}</p>
+            <p>
+              {currency} {nightly.toFixed(2)} per night
+            </p>
+            <p className="text-lg font-semibold text-slate-900">{currency} {subtotal.toFixed(2)}</p>
+            <div className="border-t border-slate-200 pt-2">
+              <p>Final Cleaning</p>
+              <p className="font-medium">{currency} {cleaningFee.toFixed(2)}</p>
+            </div>
+            <div className="border-t border-slate-200 pt-2">
+              <p className="font-semibold text-slate-900">Total</p>
+              <p className="text-lg font-semibold text-slate-900">{currency} {total.toFixed(2)}</p>
+              {nights > 0 && <p className="text-xs text-slate-600">{nights} {nights === 1 ? "night" : "nights"} total</p>}
+            </div>
           </div>
-          <div className="border-t border-slate-200 pt-2">
-            <p className="font-semibold text-slate-900">Total</p>
-            <p className="text-lg font-semibold text-slate-900">{currency} {total.toFixed(2)}</p>
-            {nights > 0 && <p className="text-xs text-slate-600">{nights} {nights === 1 ? "night" : "nights"} total</p>}
+        ) : (
+          <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
+            Fill Start date and End date to expand price breakdown.
           </div>
-        </div>
+        )}
 
         {hasUnavailableInRange && <p className="mt-2 text-xs text-red-600">Selected range includes unavailable dates. Please adjust dates.</p>}
         {availabilityHint && <p className="mt-1 text-xs text-slate-600">{availabilityHint}</p>}
 
-        <a
-          role="button"
-          className="mt-3 inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white whitespace-nowrap"
-          href={`${actionUrl}?resource_id=${resourceId}&mode=reserve&planyo_lang=EN`}
-        >
-          Make reservation
-        </a>
+        {checkIn && checkOut && (
+          <a
+            role="button"
+            className="mt-3 inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white whitespace-nowrap"
+            href={`${actionUrl}?resource_id=${resourceId}&mode=reserve&planyo_lang=EN`}
+          >
+            Make reservation
+          </a>
+        )}
       </div>
     </section>
   );
