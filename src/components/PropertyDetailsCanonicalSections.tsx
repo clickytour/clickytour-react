@@ -63,7 +63,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         </aside>
       </section>
 
-      <section className="mt-6 grid gap-6 lg:grid-cols-2">
+      <section className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_1fr]">
         <article className="rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">Short Description</h2>
           <p className="mt-3 text-sm leading-7 text-slate-700">{property.shortDescription}</p>
