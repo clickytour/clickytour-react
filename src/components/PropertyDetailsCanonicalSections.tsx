@@ -17,8 +17,10 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
 
   const seasonAfterHigh =
     highSeasonIndex >= 0 && highSeasonIndex < sortedSeasons.length - 1
-      ? sortedSeasons.slice(highSeasonIndex + 1).find((s) => s.nightly < highestPrice) ?? null
-      : null;
+      ? sortedSeasons.slice(highSeasonIndex + 1).find((s) => s.nightly < highestPrice) ??
+        sortedSeasons.find((s) => s.nightly < highestPrice) ??
+        null
+      : sortedSeasons.find((s) => s.nightly < highestPrice) ?? null;
 
   return (
     <div className="mx-auto max-w-[1320px] px-4 py-8">
