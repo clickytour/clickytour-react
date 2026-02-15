@@ -50,6 +50,10 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             calendarId={property.planyo.calendarId}
             resourceId={property.planyo.resourceId}
             actionUrl={property.planyo.actionUrl}
+            currency={property.pricing.currency}
+            basicFrom={property.pricing.basicFrom}
+            seasonalRates={property.pricing.seasonalRates}
+            unavailableDates={property.pricing.unavailableDates}
           />
         </aside>
       </section>

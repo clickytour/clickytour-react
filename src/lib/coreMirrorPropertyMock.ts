@@ -24,6 +24,8 @@ export type CoreMirrorProperty = {
     seasonalFrom: number;
     seasonName: string;
     minStayNights: number;
+    seasonalRates: { label: string; from: string; to: string; nightly: number }[];
+    unavailableDates: string[];
   };
   amenities: string[];
   policies: {
@@ -79,6 +81,12 @@ const properties: CoreMirrorProperty[] = [
       seasonalFrom: 700,
       seasonName: "High Season",
       minStayNights: 5,
+      seasonalRates: [
+        { label: "Low", from: "2026-04-01", to: "2026-05-31", nightly: 550 },
+        { label: "Mid", from: "2026-06-01", to: "2026-06-30", nightly: 620 },
+        { label: "High", from: "2026-07-01", to: "2026-08-31", nightly: 700 },
+      ],
+      unavailableDates: ["2026-07-14", "2026-07-15", "2026-07-16", "2026-08-22"],
     },
     amenities: [
       "Air Conditioning",
