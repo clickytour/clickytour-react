@@ -58,17 +58,17 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             <p className="text-xl font-semibold text-blue-900">
               From {property.pricing.basicFrom} {property.pricing.currency} / night
             </p>
-            <p className="text-xs text-blue-800">
-              High Season: {highSeasonMin} - {highSeasonMax} {property.pricing.currency} · min stay {property.pricing.minStayNights} nights
-            </p>
             {seasonBeforeHigh && (
               <p className="mt-1 text-[11px] text-blue-700">
-                Before High ({seasonBeforeHigh.label}): {seasonBeforeHigh.nightly} {property.pricing.currency}
+                Before Season ({seasonBeforeHigh.label}): {seasonBeforeHigh.nightly} {property.pricing.currency}
               </p>
             )}
+            <p className="text-xs text-blue-800">
+              High Season ({property.pricing.seasonName}): {highSeasonMin} - {highSeasonMax} {property.pricing.currency} · min stay {property.pricing.minStayNights} nights
+            </p>
             {seasonAfterHigh && (
               <p className="text-[11px] text-blue-700">
-                After High ({seasonAfterHigh.label}): {seasonAfterHigh.nightly} {property.pricing.currency}
+                After Season ({seasonAfterHigh.label}): {seasonAfterHigh.nightly} {property.pricing.currency}
               </p>
             )}
           </div>
