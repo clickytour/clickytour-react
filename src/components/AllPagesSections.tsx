@@ -33,6 +33,7 @@ const groups = [
   {
     title: "Complexes / Template Instances (QA)",
     links: [
+      ["/complex-template", "Complex Template (Base)"],
       ["/luxury-suites-elsa", "Luxury Suites Elsa"],
       ["/galini-beachfront-masonettes-complex", "Galini Beachfront Masonettes"],
       ["/olea-suites-apartments-complex", "Olea Suites Apartments"],
