@@ -60,6 +60,7 @@ export function PlanyoAvailabilitySection({
     return diff > 0 ? diff : 0;
   }, [checkIn, checkOut]);
 
+  const minStay = Math.max(1, minStayNights || 1);
   const cleaningFee = 100;
   const subtotal = nights * nightly;
   const total = subtotal + cleaningFee;
@@ -73,7 +74,6 @@ export function PlanyoAvailabilitySection({
 
   useEffect(() => {
     if (!checkIn) return;
-    const minStay = Math.max(1, minStayNights || 1);
     const start = toDate(checkIn);
     const suggested = new Date(start);
     suggested.setDate(suggested.getDate() + minStay);
@@ -136,6 +136,7 @@ export function PlanyoAvailabilitySection({
             <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />
           </label>
         </div>
+        <p className="mt-2 text-xs text-slate-600">Minimum stay: {minStay} {minStay === 1 ? "night" : "nights"}.</p>
 
         <div className="mt-3 space-y-2 text-sm text-slate-700">
           <p className="font-semibold text-slate-900">{propertyTitle || "Selected Property"}</p>
