@@ -165,9 +165,9 @@ export function GuestRequestInlineForm(props: Props) {
 
           <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
             <img
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
               alt="Booking agent"
-              className="h-44 w-full object-cover"
+              className="h-56 w-full object-cover object-top"
             />
             <div className="p-3">
               <p className="text-base font-semibold text-slate-900">Elena Papadopoulou</p>
