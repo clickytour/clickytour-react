@@ -110,51 +110,82 @@ export function GuestRequestInlineForm(props: Props) {
 
   return (
     <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
-      <h2 className="text-xl font-semibold text-slate-900">Guest Request</h2>
-      <p className="mt-1 text-sm text-slate-600">
-        {props.contextType === "property" ? "Ask for availability and booking details." : "Ask for service availability and details."}
-      </p>
+      <div className="grid gap-6 lg:grid-cols-[1.45fr_0.85fr]">
+        <div>
+          <h2 className="text-xl font-semibold text-slate-900">Guest Request</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            {props.contextType === "property" ? "Ask for availability and booking details." : "Ask for service availability and details."}
+          </p>
 
-      <div className="mt-3 grid gap-3 md:grid-cols-2">
-        <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="First name *" value={form.firstName} onChange={(e)=>setForm({...form, firstName:e.target.value})} />
-        <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Last name *" value={form.lastName} onChange={(e)=>setForm({...form, lastName:e.target.value})} />
-        <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Email *" value={form.email} onChange={(e)=>setForm({...form, email:e.target.value})} />
-        <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Phone *" value={form.phone} onChange={(e)=>setForm({...form, phone:e.target.value})} />
-        <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm md:col-span-2" placeholder="Country *" value={form.country} onChange={(e)=>setForm({...form, country:e.target.value})} />
-      </div>
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="First name *" value={form.firstName} onChange={(e)=>setForm({...form, firstName:e.target.value})} />
+            <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Last name *" value={form.lastName} onChange={(e)=>setForm({...form, lastName:e.target.value})} />
+            <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Email *" value={form.email} onChange={(e)=>setForm({...form, email:e.target.value})} />
+            <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Phone *" value={form.phone} onChange={(e)=>setForm({...form, phone:e.target.value})} />
+            <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm md:col-span-2" placeholder="Country *" value={form.country} onChange={(e)=>setForm({...form, country:e.target.value})} />
+          </div>
 
-      {props.contextType === "property" ? (
-        <div className="mt-3 grid gap-3 md:grid-cols-2">
-          <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkIn} onChange={(e)=>setForm({...form, checkIn:e.target.value})} />
-          <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkOut} onChange={(e)=>setForm({...form, checkOut:e.target.value})} />
-          <input type="number" min={1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Adults" value={form.adults} onChange={(e)=>setForm({...form, adults:e.target.value})} />
-          <input type="number" min={0} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Children" value={form.children} onChange={(e)=>setForm({...form, children:e.target.value})} />
+          {props.contextType === "property" ? (
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
+              <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkIn} onChange={(e)=>setForm({...form, checkIn:e.target.value})} />
+              <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkOut} onChange={(e)=>setForm({...form, checkOut:e.target.value})} />
+              <input type="number" min={1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Adults" value={form.adults} onChange={(e)=>setForm({...form, adults:e.target.value})} />
+              <input type="number" min={0} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Children" value={form.children} onChange={(e)=>setForm({...form, children:e.target.value})} />
+            </div>
+          ) : (
+            <div className="mt-3 grid gap-3 md:grid-cols-3">
+              <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.preferredDate} onChange={(e)=>setForm({...form, preferredDate:e.target.value})} />
+              <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Preferred time" value={form.preferredTime} onChange={(e)=>setForm({...form, preferredTime:e.target.value})} />
+              <input type="number" min={1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Participants" value={form.participants} onChange={(e)=>setForm({...form, participants:e.target.value})} />
+            </div>
+          )}
+
+          <textarea className="mt-3 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" rows={3} placeholder="Message / request details" value={form.note} onChange={(e)=>setForm({...form, note:e.target.value})} />
+          <input className="hidden" value={form.hp} onChange={(e)=>setForm({...form, hp:e.target.value})} tabIndex={-1} autoComplete="off" />
+
+          <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">Turnstile placeholder (to activate with site key + server verify).</div>
+
+          <label className="mt-3 flex items-start gap-2 text-sm text-slate-700">
+            <input type="checkbox" checked={form.terms} onChange={(e)=>setForm({...form, terms:e.target.checked})} />
+            I agree to be contacted regarding this request.
+          </label>
+
+          <div className="mt-3">
+            <button onClick={submit} disabled={sending} className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
+              {sending ? "Sending..." : "Send request"}
+            </button>
+          </div>
+
+          {msg && <p className="mt-2 text-sm text-slate-700">{msg}</p>}
         </div>
-      ) : (
-        <div className="mt-3 grid gap-3 md:grid-cols-3">
-          <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.preferredDate} onChange={(e)=>setForm({...form, preferredDate:e.target.value})} />
-          <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Preferred time" value={form.preferredTime} onChange={(e)=>setForm({...form, preferredTime:e.target.value})} />
-          <input type="number" min={1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Participants" value={form.participants} onChange={(e)=>setForm({...form, participants:e.target.value})} />
-        </div>
-      )}
 
-      <textarea className="mt-3 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" rows={3} placeholder="Message / request details" value={form.note} onChange={(e)=>setForm({...form, note:e.target.value})} />
-      <input className="hidden" value={form.hp} onChange={(e)=>setForm({...form, hp:e.target.value})} tabIndex={-1} autoComplete="off" />
+        <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <h3 className="text-base font-semibold text-slate-900">Your Booking Agent</h3>
+          <p className="mt-1 text-xs text-slate-600">Demo card (will be dynamic from Core/Mirror DB later)</p>
 
-      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">Turnstile placeholder (to activate with site key + server verify).</div>
+          <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
+            <img
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop"
+              alt="Booking agent"
+              className="h-44 w-full object-cover"
+            />
+            <div className="p-3">
+              <p className="text-base font-semibold text-slate-900">Elena Papadopoulou</p>
+              <p className="text-sm text-slate-600">Senior Guest Relations Agent</p>
 
-      <label className="mt-3 flex items-start gap-2 text-sm text-slate-700">
-        <input type="checkbox" checked={form.terms} onChange={(e)=>setForm({...form, terms:e.target.checked})} />
-        I agree to be contacted regarding this request.
-      </label>
+              <div className="mt-3 space-y-2 text-sm text-slate-700">
+                <p>📞 +30 210 123 4567</p>
+                <p>✉️ elena@villa4you.gr</p>
+                <p>💬 WhatsApp: +30 694 123 4567</p>
+              </div>
 
-      <div className="mt-3">
-        <button onClick={submit} disabled={sending} className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
-          {sending ? "Sending..." : "Send request"}
-        </button>
+              <div className="mt-3 rounded-lg border border-cyan-200 bg-cyan-50 p-2 text-xs text-cyan-800">
+                Usually replies within 15–30 minutes.
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
-
-      {msg && <p className="mt-2 text-sm text-slate-700">{msg}</p>}
     </section>
   );
 }
