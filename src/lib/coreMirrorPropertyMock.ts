@@ -33,6 +33,9 @@ export type CoreMirrorProperty = {
     tourismLicense: string;
   };
   nearby: { label: string; value: string }[];
+  badges: string[];
+  faqs: { q: string; a: string }[];
+  related: { title: string; href: string; from: number; image: string }[];
 };
 
 const properties: CoreMirrorProperty[] = [
@@ -82,6 +85,8 @@ const properties: CoreMirrorProperty[] = [
       "Free Parking",
       "Furnished Terrace",
       "BBQ",
+      "Baby bed",
+      "Sea view",
     ],
     policies: {
       smokingAllowed: true,
@@ -94,6 +99,33 @@ const properties: CoreMirrorProperty[] = [
       { label: "Airport", value: "95 km" },
       { label: "Restaurant", value: "700 m" },
       { label: "Supermarket", value: "800 m" },
+    ],
+    badges: ["Sea View", "Family Friendly", "Private Pool", "Near Beach"],
+    faqs: [
+      {
+        q: "How does pricing work when no seasonal rate is set?",
+        a: "Seasonal rate is preferred. If no season matches selected dates, the system falls back to the Basic nightly rate.",
+      },
+      {
+        q: "Is this page already Core-integrated?",
+        a: "This version is bound to a local Core-mirror mock model and is ready to map to final Core payload contracts.",
+      },
+    ],
+    related: [
+      {
+        title: "Villa Edema",
+        href: "/listing/vacation/5780/",
+        from: 700,
+        image:
+          "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1200&auto=format&fit=crop",
+      },
+      {
+        title: "Luxury Suite Irakleia 1",
+        href: "/listing/real-estate/5760/",
+        from: 100,
+        image:
+          "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1200&auto=format&fit=crop",
+      },
     ],
   },
 ];
