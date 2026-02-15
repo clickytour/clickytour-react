@@ -118,6 +118,7 @@ const properties: CoreMirrorProperty[] = [
     nearby: [
       { label: "Airport", value: "95 km" },
       { label: "Infrastructure", value: "1.2 km" },
+      { label: "Restaurants", value: "900 m" },
       { label: "Supermarket", value: "800 m" },
       { label: "Marina", value: "3.4 km" },
       { label: "Police Office", value: "4.1 km" },
