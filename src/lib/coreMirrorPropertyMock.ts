@@ -38,7 +38,7 @@ export type CoreMirrorProperty = {
   related: { title: string; href: string; from: number; image: string }[];
   videoUrl: string;
   nearbyServices: { name: string; detail: string }[];
-  blogPosts: { title: string; href: string; date: string; excerpt: string }[];
+  blogPosts: { title: string; href: string; date: string; excerpt: string; image: string }[];
 };
 
 const properties: CoreMirrorProperty[] = [
@@ -143,18 +143,21 @@ const properties: CoreMirrorProperty[] = [
         href: "/blog/best-coastal-towns-halkidiki",
         date: "2026-02-10",
         excerpt: "A practical guide to choosing the right coastal base for your holiday.",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
       },
       {
         title: "Family-Friendly Seaside Vacation Planning Checklist",
         href: "/blog/family-seaside-vacation-checklist",
         date: "2026-02-08",
         excerpt: "Everything families should plan before booking a sea-view villa.",
+        image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop",
       },
       {
         title: "How Seasonal Rates Work for Vacation Rentals",
         href: "/blog/seasonal-rates-explained",
         date: "2026-02-05",
         excerpt: "Understand high/low season pricing and basic-rate fallback logic.",
+        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop",
       },
     ],
   },

@@ -115,13 +115,16 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
 
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
         <h2 className="text-xl font-semibold text-slate-900">Related Blog Posts</h2>
-        <div className="mt-3 grid gap-3 md:grid-cols-3">
+        <div className="mt-3 grid gap-4 md:grid-cols-3">
           {property.blogPosts.map((post) => (
-            <article key={post.title} className="rounded-lg border border-slate-200 p-3">
-              <p className="text-xs text-slate-500">{post.date}</p>
-              <h3 className="mt-1 text-sm font-semibold text-slate-900">{post.title}</h3>
-              <p className="mt-1 text-sm text-slate-600">{post.excerpt}</p>
-              <a href={post.href} className="mt-2 inline-flex text-sm font-medium text-blue-700 hover:underline">Read article</a>
+            <article key={post.title} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+              <img src={post.image} alt={post.title} className="h-32 w-full object-cover" />
+              <div className="p-3">
+                <p className="text-xs text-slate-500">{post.date}</p>
+                <h3 className="mt-1 text-base font-semibold leading-tight text-slate-900">{post.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{post.excerpt}</p>
+                <a href={post.href} className="mt-3 inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white">Read</a>
+              </div>
             </article>
           ))}
         </div>
