@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://villa4you-react.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr";
 
+// Sitemap policy:
+// - Include canonical marketing + conversion routes
+// - Exclude template-instance/demo routes (property-instance previews) to avoid SEO noise
 const routes = [
   "/",
   "/for-guests",
@@ -10,12 +13,14 @@ const routes = [
   "/about",
   "/vacation-property-management",
   "/search-results-page-for-guests",
+  "/destinations",
+  "/explore-map",
   "/partner-pmc",
   "/pmc-apply",
   "/partner-service-providers",
+  "/service-apply",
   "/agents",
   "/agents-apply",
-  "/service-apply",
   "/free-evaluation",
   "/support",
   "/plans-offers",

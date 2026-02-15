@@ -23,7 +23,7 @@ import { AgentsSections } from "@/components/AgentsSections";
 import { AgentsApplySections } from "@/components/AgentsApplySections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
-const baseUrl = "https://villa4you-react.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr";
 
 const seoBySlug: Record<string, { title: string; description: string }> = {
   agents: {

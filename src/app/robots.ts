@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -8,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://villa4you-react.vercel.app/sitemap.xml",
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
