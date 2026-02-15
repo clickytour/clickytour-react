@@ -71,8 +71,6 @@ export function PlanyoAvailabilitySection({
           role="button"
           className="mt-3 inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white"
           href={`${actionUrl}?resource_id=${resourceId}&mode=reserve&planyo_lang=EN`}
-          target="_blank"
-          rel="noreferrer"
         >
           Make reservation
         </a>

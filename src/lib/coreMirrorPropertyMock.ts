@@ -142,7 +142,7 @@ const properties: CoreMirrorProperty[] = [
     planyo: {
       calendarId: "63884",
       resourceId: "229670",
-      actionUrl: "https://villa4you.gr/my-reservations/",
+      actionUrl: "/my-reservations",
     },
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     nearbyServices: [

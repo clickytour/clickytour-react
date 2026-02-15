@@ -15,6 +15,7 @@ const staticRoutes: QARoute[] = [
   { href: "/blog/best-coastal-towns-halkidiki", label: "Blog Post (Sample)", group: "Company & Utility", status: "Pending QA" },
   { href: "/services", label: "Services", group: "Company & Utility", status: "Pending QA" },
   { href: "/services/airport-transfer-halkidiki", label: "Service Post (Sample)", group: "Company & Utility", status: "Pending QA" },
+  { href: "/my-reservations", label: "My Reservations", group: "Company & Utility", status: "Pending QA" },
   { href: "/all-pages", label: "All Pages (QA)", group: "Company & Utility", status: "Pending QA" },
 
   { href: "/pmc-apply", label: "PMC Apply", group: "Collaborate", status: "Pending QA" },
