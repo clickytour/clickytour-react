@@ -9,6 +9,12 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
     <div className="mx-auto max-w-[1320px] px-4 py-8">
       <div className="mb-4 text-sm text-slate-500">For Guests / Property Details / {property.title}</div>
 
+      <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-6">
+        <h1 className="text-4xl font-semibold leading-tight text-slate-900">{property.title}</h1>
+        <h2 className="mt-2 text-2xl font-semibold text-slate-800">{property.headline}</h2>
+        <p className="mt-2 max-w-4xl text-base text-slate-600">{property.shortDescription}</p>
+      </section>
+
       <section className="grid gap-6 xl:grid-cols-[1.55fr_1fr]">
         <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <img src={property.gallery[0]} alt={property.title} className="h-[500px] w-full object-cover" />
@@ -21,9 +27,6 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
 
         <aside className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{property.location.region}</p>
-          <h1 className="mt-1 text-4xl font-semibold leading-tight text-slate-900">{property.title}</h1>
-          <h2 className="mt-2 text-xl font-semibold text-slate-800">{property.headline}</h2>
-          <p className="mt-1 text-sm text-slate-600">{property.shortDescription}</p>
 
           <div className="mt-3 flex flex-wrap gap-2">
             {property.badges.map((b) => (
@@ -64,9 +67,14 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         </aside>
       </section>
 
-      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
-        <h2 className="text-2xl font-semibold text-slate-900">Detail Description</h2>
-        <p className="mt-2 text-sm leading-7 text-slate-700">{property.detailDescription}</p>
+      <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+        <details className="group">
+          <summary className="flex cursor-pointer list-none items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-900">
+            <span>Detail description</span>
+            <span className="text-slate-500 group-open:rotate-180">⌄</span>
+          </summary>
+          <p className="px-2 pb-2 pt-3 text-sm leading-7 text-slate-700">{property.detailDescription}</p>
+        </details>
       </section>
 
       <section className="mt-6 grid gap-6 lg:grid-cols-2">
