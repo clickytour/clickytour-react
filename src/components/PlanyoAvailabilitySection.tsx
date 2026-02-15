@@ -87,6 +87,16 @@ export function PlanyoAvailabilitySection({
     return toIsoLocal(d);
   }
 
+  function normalizeStartDate(iso: string) {
+    let candidate = iso;
+    let guard = 0;
+    while (unavailableSet.has(candidate) && guard < 60) {
+      candidate = addDaysIso(candidate, 1);
+      guard += 1;
+    }
+    return candidate;
+  }
+
   function isRangeBlocked(startIso: string, endIso: string) {
     const start = toDate(startIso).getTime();
     const end = toDate(endIso).getTime();
@@ -133,6 +143,13 @@ export function PlanyoAvailabilitySection({
   useEffect(() => {
     if (!checkIn || !minCheckoutDate) return;
 
+    const normalizedStart = normalizeStartDate(checkIn);
+    if (normalizedStart !== checkIn) {
+      setCheckIn(normalizedStart);
+      setMinStayNotice(`Selected start date was unavailable. Moved to next available date: ${normalizedStart}.`);
+      return;
+    }
+
     if (!checkOut || toDate(checkOut).getTime() < toDate(minCheckoutDate).getTime()) {
       setCheckOut(minCheckoutDate);
     }
@@ -178,7 +195,20 @@ export function PlanyoAvailabilitySection({
         <div className="grid gap-2 md:grid-cols-2">
           <label className="text-[11px] text-slate-600">
             Start date *
-            <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />
+            <input type="date" value={checkIn} onChange={(e) => {
+              const next = e.target.value;
+              if (!next) {
+                setCheckIn("");
+                return;
+              }
+              const normalized = normalizeStartDate(next);
+              setCheckIn(normalized);
+              if (normalized !== next) {
+                setMinStayNotice(`Selected start date was unavailable. Moved to next available date: ${normalized}.`);
+              } else {
+                setMinStayNotice("");
+              }
+            }} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />
           </label>
           <label className="text-[11px] text-slate-600">
             End date *
