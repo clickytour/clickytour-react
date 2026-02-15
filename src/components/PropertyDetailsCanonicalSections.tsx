@@ -28,7 +28,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
           <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">{property.location.region}</p>
           <h1 className="mt-2 text-3xl font-semibold leading-tight text-slate-900">{property.title}</h1>
 
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-auto pt-3 flex flex-nowrap gap-2">
             {property.badges.map((b) => (
               <span key={b} className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] text-slate-700">
                 {b}
@@ -164,11 +164,11 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold text-slate-900">Services Nearby</h2>
-          <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">Explore all services</a>
+          <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">Explore all services</a>
         </div>
         <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {property.nearbyServices.slice(0, 3).map((service, idx) => (
-            <article key={service.name} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+            <article key={service.name} className="overflow-hidden rounded-xl border border-slate-300 bg-white flex h-full flex-col">
               <img
                 src={
                   idx % 2 === 0
@@ -178,19 +178,19 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
                 alt={service.name}
                 className="h-28 w-full object-cover"
               />
-              <div className="p-3">
+              <div className="p-3 flex h-full flex-col">
                 <h3 className="text-sm font-semibold text-slate-900">{service.name}</h3>
                 <p className="mt-1 text-sm text-slate-600">{service.detail}</p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <a href={service.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">
+                <div className="mt-auto pt-2 flex flex-nowrap gap-2">
+                  <a href={service.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white whitespace-nowrap">
                     View service
                   </a>
                   {service.blogHref && (
-                    <a href={service.blogHref} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900">
+                    <a href={service.blogHref} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900 whitespace-nowrap">
                       Related post
                     </a>
                   )}
-                  <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900">
+                  <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900 whitespace-nowrap">
                     Related property
                   </a>
                 </div>
@@ -206,7 +206,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             </summary>
             <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {property.nearbyServices.slice(3).map((service, idx) => (
-                <article key={`${service.name}-more`} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+                <article key={`${service.name}-more`} className="overflow-hidden rounded-xl border border-slate-300 bg-white flex h-full flex-col">
                   <img
                     src={
                       idx % 2 === 0
@@ -216,19 +216,19 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
                     alt={service.name}
                     className="h-28 w-full object-cover"
                   />
-                  <div className="p-3">
+                  <div className="p-3 flex h-full flex-col">
                     <h3 className="text-sm font-semibold text-slate-900">{service.name}</h3>
                     <p className="mt-1 text-sm text-slate-600">{service.detail}</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      <a href={service.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">
+                    <div className="mt-auto pt-2 flex flex-nowrap gap-2">
+                      <a href={service.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-white whitespace-nowrap">
                         View service
                       </a>
                       {service.blogHref && (
-                        <a href={service.blogHref} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900">
+                        <a href={service.blogHref} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900 whitespace-nowrap">
                           Related post
                         </a>
                       )}
-                      <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900">
+                      <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-900 whitespace-nowrap">
                         Related property
                       </a>
                     </div>
@@ -243,24 +243,24 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold text-slate-900">Related Blog Posts</h2>
-          <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">Explore all posts</a>
+          <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">Explore all posts</a>
         </div>
         <div className="mt-3 grid gap-4 md:grid-cols-3">
           {property.blogPosts.slice(0, 3).map((post) => (
-            <article key={post.title} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+            <article key={post.title} className="overflow-hidden rounded-xl border border-slate-300 bg-white flex h-full flex-col">
               <img src={post.image} alt={post.title} className="h-36 w-full object-cover" />
-              <div className="p-3">
+              <div className="p-3 flex h-full flex-col">
                 <p className="text-xs text-slate-500">{post.date}</p>
                 <h3 className="mt-1 text-base font-semibold leading-tight text-slate-900">{post.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{post.excerpt}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <a href={post.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white">
+                <div className="mt-auto pt-3 flex flex-nowrap gap-2">
+                  <a href={post.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white whitespace-nowrap">
                     Read
                   </a>
-                  <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                  <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                     Related property
                   </a>
-                  <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                  <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                     Related services
                   </a>
                 </div>
@@ -276,20 +276,20 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             </summary>
             <div className="mt-3 grid gap-4 md:grid-cols-3">
               {property.blogPosts.slice(3).map((post) => (
-                <article key={`${post.title}-more`} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
+                <article key={`${post.title}-more`} className="overflow-hidden rounded-xl border border-slate-300 bg-white flex h-full flex-col">
                   <img src={post.image} alt={post.title} className="h-36 w-full object-cover" />
-                  <div className="p-3">
+                  <div className="p-3 flex h-full flex-col">
                     <p className="text-xs text-slate-500">{post.date}</p>
                     <h3 className="mt-1 text-base font-semibold leading-tight text-slate-900">{post.title}</h3>
                     <p className="mt-2 text-sm text-slate-600">{post.excerpt}</p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <a href={post.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white">
+                    <div className="mt-auto pt-3 flex flex-nowrap gap-2">
+                      <a href={post.href} className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white whitespace-nowrap">
                         Read
                       </a>
-                      <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                      <a href={`/property/${property.slug}`} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                         Related property
                       </a>
-                      <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                      <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                         Related services
                       </a>
                     </div>
@@ -340,13 +340,13 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       <section className="mt-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl font-semibold text-slate-900">Similar places nearby</h2>
-          <a href="/for-guests" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">Explore more properties</a>
+          <a href="/for-guests" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">Explore more properties</a>
         </div>
         <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {property.related.slice(0, 3).map((item) => (
-            <article key={item.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+            <article key={item.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white flex h-full flex-col">
               <img src={item.image} alt={item.title} className="h-44 w-full object-cover" />
-              <div className="p-4">
+              <div className="p-4 flex h-full flex-col">
                 <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
                 <p className="mt-1 text-sm text-slate-600">From {item.from} EUR / night</p>
                 <p className="mt-1 text-xs text-slate-500">Santorini · 6 guests · 3 bd / 3 ba · ★ 4.7</p>
@@ -355,14 +355,14 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
                     <span key={`${item.title}-${tag}`} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600">{tag}</span>
                   ))}
                 </div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <a href={item.href} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                <div className="mt-auto pt-3 flex flex-nowrap gap-2">
+                  <a href={item.href} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                     View
                   </a>
-                  <a href="/services" className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white">
+                  <a href="/services" className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white whitespace-nowrap">
                     Related services
                   </a>
-                  <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                  <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                     Related blog posts
                   </a>
                 </div>
@@ -378,9 +378,9 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             </summary>
             <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {property.related.slice(3).map((item) => (
-                <article key={`${item.title}-more`} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                <article key={`${item.title}-more`} className="overflow-hidden rounded-xl border border-slate-200 bg-white flex h-full flex-col">
                   <img src={item.image} alt={item.title} className="h-44 w-full object-cover" />
-                  <div className="p-4">
+                  <div className="p-4 flex h-full flex-col">
                     <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
                     <p className="mt-1 text-sm text-slate-600">From {item.from} EUR / night</p>
                     <p className="mt-1 text-xs text-slate-500">Santorini · 6 guests · 3 bd / 3 ba · ★ 4.7</p>
@@ -389,14 +389,14 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
                         <span key={`${item.title}-more-${tag}`} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600">{tag}</span>
                       ))}
                     </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <a href={item.href} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                    <div className="mt-auto pt-3 flex flex-nowrap gap-2">
+                      <a href={item.href} className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                         View
                       </a>
-                      <a href="/services" className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white">
+                      <a href="/services" className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-medium text-white whitespace-nowrap">
                         Related services
                       </a>
-                      <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">
+                      <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap">
                         Related blog posts
                       </a>
                     </div>
