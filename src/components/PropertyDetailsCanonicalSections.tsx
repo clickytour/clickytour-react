@@ -158,6 +158,16 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
               allowFullScreen
             />
           </div>
+          {property.tour3dUrl && (
+            <a
+              href={property.tour3dUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900 whitespace-nowrap"
+            >
+              Open 3D Property Tour
+            </a>
+          )}
         </article>
       </section>
 
