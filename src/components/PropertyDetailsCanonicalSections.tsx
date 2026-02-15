@@ -159,7 +159,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
 
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
         <h2 className="text-2xl font-semibold text-slate-900">Services Nearby</h2>
-        <div className="mt-3 grid gap-4 md:grid-cols-2">
+        <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {property.nearbyServices.map((service, idx) => (
             <article key={service.name} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
               <img
