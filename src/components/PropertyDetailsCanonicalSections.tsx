@@ -51,13 +51,6 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             </p>
           </div>
 
-          <a
-            href="/for-guests"
-            className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white"
-          >
-            Check availability
-          </a>
-
           <PlanyoAvailabilitySection
             calendarId={property.planyo.calendarId}
             resourceId={property.planyo.resourceId}

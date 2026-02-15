@@ -116,10 +116,13 @@ const properties: CoreMirrorProperty[] = [
       tourismLicense: "9999999",
     },
     nearby: [
-      { label: "Beach", value: "600 m" },
       { label: "Airport", value: "95 km" },
-      { label: "Restaurant", value: "700 m" },
+      { label: "Infrastructure", value: "1.2 km" },
       { label: "Supermarket", value: "800 m" },
+      { label: "Marina", value: "3.4 km" },
+      { label: "Police Office", value: "4.1 km" },
+      { label: "Medical Office", value: "2.8 km" },
+      { label: "Entertainment Facilities", value: "1.6 km" },
     ],
     badges: ["Sea View", "Family Friendly", "Private Pool", "Near Beach"],
     faqs: [
