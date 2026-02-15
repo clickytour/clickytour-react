@@ -91,20 +91,20 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
         <article className="rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">Amenities</h2>
           <div className="mt-3 grid grid-cols-2 gap-2 text-sm text-slate-700">
-            {property.amenities.slice(0, 10).map((a) => (
+            {property.amenities.slice(0, 6).map((a) => (
               <div key={a} className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5">
                 {a}
               </div>
             ))}
           </div>
 
-          {property.amenities.length > 10 && (
+          {property.amenities.length > 6 && (
             <details className="group mt-4">
               <summary className="cursor-pointer list-none text-sm font-semibold text-slate-900">
-                View more amenities ({property.amenities.length - 10})
+                View more amenities ({property.amenities.length - 6})
               </summary>
               <div className="mt-3 grid grid-cols-2 gap-2 text-sm text-slate-700">
-                {property.amenities.slice(10).map((a) => (
+                {property.amenities.slice(6).map((a) => (
                   <div key={a} className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5">
                     {a}
                   </div>
