@@ -158,7 +158,10 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       </section>
 
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
-        <h2 className="text-2xl font-semibold text-slate-900">Services Nearby</h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-2xl font-semibold text-slate-900">Services Nearby</h2>
+          <a href="/services" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">Explore all services</a>
+        </div>
         <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {property.nearbyServices.slice(0, 3).map((service, idx) => (
             <article key={service.name} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
@@ -228,7 +231,10 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       </section>
 
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
-        <h2 className="text-2xl font-semibold text-slate-900">Related Blog Posts</h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-2xl font-semibold text-slate-900">Related Blog Posts</h2>
+          <a href="/blog" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">Explore all posts</a>
+        </div>
         <div className="mt-3 grid gap-4 md:grid-cols-3">
           {property.blogPosts.slice(0, 3).map((post) => (
             <article key={post.title} className="overflow-hidden rounded-xl border border-slate-300 bg-white">
@@ -306,7 +312,10 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
       </section>
 
       <section className="mt-6">
-        <h2 className="text-2xl font-semibold text-slate-900">Similar places nearby</h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-2xl font-semibold text-slate-900">Similar places nearby</h2>
+          <a href="/for-guests" className="inline-flex rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-900">Explore more properties</a>
+        </div>
         <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {property.related.slice(0, 3).map((item) => (
             <article key={item.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
