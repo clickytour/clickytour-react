@@ -56,8 +56,8 @@ export function SiteHeader() {
             <a href="/all-pages" className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700">
               All Pages (QA)
             </a>
-            <a href="/service-apply" className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white">
-              List Your Service
+            <a href="/free-evaluation" className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white">
+              List Your Property
             </a>
           </div>
         </div>
