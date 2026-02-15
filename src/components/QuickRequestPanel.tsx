@@ -503,7 +503,7 @@ export function QuickRequestPanel() {
 
       <p className="mt-2 text-[11px] font-semibold text-slate-600">Step {normalizedStep} of 2</p>
 
-      {!(normalizedStep === 2 && form.guestRole === "travel-rentals") && (
+      {normalizedStep === 1 && (
         <label className="mt-2 block text-[11px] font-semibold text-slate-700">
           I&apos;m a...
           <select className={inputClass} value={form.guestRole} onChange={(e) => setField("guestRole", e.target.value as GuestRole)}>
@@ -840,17 +840,7 @@ export function QuickRequestPanel() {
               <input className={inputClass} value={form.lastName} onChange={(e) => setField("lastName", e.target.value)} />
               {errors.lastName && <span className="text-[10px] text-red-600">{errors.lastName}</span>}
             </label>
-            {form.guestRole !== "travel-rentals" && (
-              <>
-                <label className="text-[10px] font-semibold text-slate-700">Email*
-                  <input type="email" className={inputClass} value={form.email} onChange={(e) => setField("email", e.target.value)} />
-                  {errors.email && <span className="text-[10px] text-red-600">{errors.email}</span>}
-                </label>
-                <label className="text-[10px] font-semibold text-slate-700">Phone (optional)
-                  <input className={inputClass} value={form.phone} onChange={(e) => setField("phone", e.target.value)} />
-                </label>
-              </>
-            )}
+            {/* email/phone are captured in step 1 for all roles */}
             <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Country {form.guestRole === "travel-rentals" ? "*" : "(optional)"}
               <input className={inputClass} placeholder="e.g., Greece" value={form.country} onChange={(e) => setField("country", e.target.value)} />
               {errors.country && <span className="text-[10px] text-red-600">{errors.country}</span>}
