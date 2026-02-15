@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-type Step = 1 | 2;
+type Step = 1 | 2 | 3;
 type GuestRole = "travel-rentals" | "tours-activities" | "real-estate";
 
 type FormState = {
@@ -317,8 +317,13 @@ const featureOptions = ["Sea View", "Pool", "Parking", "Garden", "New Build", "R
 
 export function QuickRequestPanel() {
   const [step, setStep] = useState<Step>(1);
-  const normalizedStep: Step = step === 1 ? 1 : 2;
   const [form, setForm] = useState<FormState>(initial);
+  const maxStep: Step = form.guestRole === "travel-rentals" ? 2 : 3;
+  const currentStep: Step = maxStep === 2 ? (step === 1 ? 1 : 2) : step;
+
+  useEffect(() => {
+    if (maxStep === 2 && step === 3) setStep(2);
+  }, [maxStep, step]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState("");
@@ -434,11 +439,10 @@ export function QuickRequestPanel() {
     if (target === 2) {
       if (form.websiteHp.trim()) next.websiteHp = "Spam check failed.";
 
-      if (!form.firstName.trim()) next.firstName = "Required";
-      if (!form.lastName.trim()) next.lastName = "Required";
-      if (!form.country.trim()) next.country = "Required";
-
       if (form.guestRole === "travel-rentals") {
+        if (!form.firstName.trim()) next.firstName = "Required";
+        if (!form.lastName.trim()) next.lastName = "Required";
+        if (!form.country.trim()) next.country = "Required";
         if (!form.bedrooms.trim()) next.bedrooms = "Required";
         if (!form.distanceToBeach.trim()) next.distanceToBeach = "Required";
         if (!form.distanceToInfrastructure.trim()) next.distanceToInfrastructure = "Required";
@@ -446,6 +450,8 @@ export function QuickRequestPanel() {
         const to = Number(form.budgetTo || 0);
         if (!form.budgetFrom.trim() || Number.isNaN(from) || from < 100) next.budgetFrom = "Min 100";
         if (!form.budgetTo.trim() || Number.isNaN(to) || to < from + 50) next.budgetTo = "Must be at least +50 from Budget From";
+        if (!form.email.trim()) next.email = "Required";
+        if (!form.consentData) next.consentData = "Consent is required.";
       }
 
       if (form.guestRole === "tours-activities") {
@@ -455,9 +461,15 @@ export function QuickRequestPanel() {
       if (form.guestRole === "real-estate") {
         if (form.propertyTypesMulti.length === 0) next.propertyTypesMulti = "Select at least one";
       }
+    }
 
+    if (target === 3) {
+      if (!form.firstName.trim()) next.firstName = "Required";
+      if (!form.lastName.trim()) next.lastName = "Required";
+      if (!form.country.trim()) next.country = "Required";
       if (!form.email.trim()) next.email = "Required";
       if (!form.consentData) next.consentData = "Consent is required.";
+      if (form.websiteHp.trim()) next.websiteHp = "Spam check failed.";
 
       if (form.guestRole === "tours-activities" && form.budgetTotal && Number(form.budgetTotal) < 0) {
         next.budgetTotal = "Invalid budget.";
@@ -475,7 +487,7 @@ export function QuickRequestPanel() {
   }
 
   async function submit() {
-    if (!validateStep(2)) return;
+    if (!validateStep(maxStep)) return;
     setSubmitting(true);
     setMsg("");
     try {
@@ -502,9 +514,9 @@ export function QuickRequestPanel() {
       <h2 className="text-[18px] font-semibold leading-none text-slate-900">{meta.title}</h2>
       <p className="mt-1 text-[11px] text-slate-600">{meta.subtitle}</p>
 
-      <p className="mt-2 text-[11px] font-semibold text-slate-600">Step {normalizedStep} of 2</p>
+      <p className="mt-2 text-[11px] font-semibold text-slate-600">Step {currentStep} of {maxStep}</p>
 
-      {normalizedStep === 1 && (
+      {currentStep === 1 && (
         <label className="mt-2 block text-[11px] font-semibold text-slate-700">
           I&apos;m a...
           <select className={inputClass} value={form.guestRole} onChange={(e) => setField("guestRole", e.target.value as GuestRole)}>
@@ -515,7 +527,7 @@ export function QuickRequestPanel() {
         </label>
       )}
 
-      {normalizedStep === 1 && (
+      {currentStep === 1 && (
         <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {form.guestRole === "travel-rentals" && (
             <>
@@ -617,7 +629,7 @@ export function QuickRequestPanel() {
         </div>
       )}
 
-      {normalizedStep === 2 && (
+      {currentStep === 2 && (
         <div className="mt-2 space-y-2">
           {form.guestRole === "travel-rentals" && (
             <div className="grid gap-2 sm:grid-cols-2">
@@ -661,9 +673,6 @@ export function QuickRequestPanel() {
 
           {form.guestRole === "tours-activities" && (
             <div className="grid gap-2 sm:grid-cols-2">
-              <label className="text-[10px] font-semibold text-slate-700">Destination / Region*
-                <input className={inputClass} value={form.destination} onChange={(e) => setField("destination", e.target.value)} />
-              </label>
               <label className="text-[10px] font-semibold text-slate-700">Service Category*
                 <select
                   className={inputClass}
@@ -766,7 +775,7 @@ export function QuickRequestPanel() {
         </div>
       )}
 
-      {normalizedStep === 2 && (
+      {currentStep === maxStep && (
         <div className="mt-2 space-y-2">
           {form.guestRole === "travel-rentals" && (
             <div className="grid gap-2 sm:grid-cols-2">
@@ -870,10 +879,10 @@ export function QuickRequestPanel() {
       {errors.websiteHp && <p className="mt-1 text-[10px] text-red-600">{errors.websiteHp}</p>}
 
       <div className="mt-3 flex items-center justify-end gap-2">
-        {normalizedStep > 1 && (
+        {currentStep > 1 && (
           <button type="button" onClick={() => setStep(1)} className="h-9 min-w-[86px] whitespace-nowrap rounded-md border border-slate-300 bg-white px-3 text-[13px] font-semibold text-slate-700">← Back</button>
         )}
-        {normalizedStep === 1 ? (
+        {currentStep < maxStep ? (
           <button type="button" onClick={() => validateStep(1) && setStep(2)} className="h-9 w-full rounded-md bg-[#1c2f66] px-3 text-[13px] font-semibold text-white">Next</button>
         ) : (
           <button type="button" onClick={submit} disabled={submitting} className="h-9 w-full rounded-md bg-[#1c2f66] px-3 text-[13px] font-semibold text-white disabled:opacity-60">{submitting ? "Sending..." : "Submit request"}</button>
