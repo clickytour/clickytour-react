@@ -93,7 +93,7 @@ const initial: FormState = {
 
   budgetTotal: "",
   budgetFrom: "",
-  budgetTo: "",
+  budgetTo: "150",
   firstName: "",
   lastName: "",
   country: "",
@@ -437,6 +437,9 @@ export function QuickRequestPanel() {
         if (!form.bedrooms.trim()) next.bedrooms = "Required";
         if (!form.distanceToBeach.trim()) next.distanceToBeach = "Required";
         if (!form.distanceToInfrastructure.trim()) next.distanceToInfrastructure = "Required";
+        if (!form.firstName.trim()) next.firstName = "Required";
+        if (!form.lastName.trim()) next.lastName = "Required";
+        if (!form.country.trim()) next.country = "Required";
         const from = Number(form.budgetFrom || 0);
         const to = Number(form.budgetTo || 0);
         if (!form.budgetFrom.trim() || Number.isNaN(from) || from < 100) next.budgetFrom = "Min 100";
@@ -499,14 +502,16 @@ export function QuickRequestPanel() {
 
       <p className="mt-2 text-[11px] font-semibold text-slate-600">Step {normalizedStep} of 2</p>
 
-      <label className="mt-2 block text-[11px] font-semibold text-slate-700">
-        I&apos;m a...
-        <select className={inputClass} value={form.guestRole} onChange={(e) => setField("guestRole", e.target.value as GuestRole)}>
-          <option value="travel-rentals">Guest (Travel & Rentals)</option>
-          <option value="tours-activities">Guest (Tours & Activities)</option>
-          <option value="real-estate">Guest (Real Estate Buyer / Renter)</option>
-        </select>
-      </label>
+      {!(normalizedStep === 2 && form.guestRole === "travel-rentals") && (
+        <label className="mt-2 block text-[11px] font-semibold text-slate-700">
+          I&apos;m a...
+          <select className={inputClass} value={form.guestRole} onChange={(e) => setField("guestRole", e.target.value as GuestRole)}>
+            <option value="travel-rentals">Guest (Travel & Rentals)</option>
+            <option value="tours-activities">Guest (Tours & Activities)</option>
+            <option value="real-estate">Guest (Real Estate Buyer / Renter)</option>
+          </select>
+        </label>
+      )}
 
       {normalizedStep === 1 && (
         <div className="mt-2 grid gap-2 sm:grid-cols-2">
@@ -793,21 +798,28 @@ export function QuickRequestPanel() {
           )}
 
           <div className="grid gap-2 sm:grid-cols-2">
-            <label className="text-[10px] font-semibold text-slate-700">First Name
+            <label className="text-[10px] font-semibold text-slate-700">First Name{form.guestRole === "travel-rentals" ? "*" : ""}
               <input className={inputClass} value={form.firstName} onChange={(e) => setField("firstName", e.target.value)} />
+              {errors.firstName && <span className="text-[10px] text-red-600">{errors.firstName}</span>}
             </label>
-            <label className="text-[10px] font-semibold text-slate-700">Last Name
+            <label className="text-[10px] font-semibold text-slate-700">Last Name{form.guestRole === "travel-rentals" ? "*" : ""}
               <input className={inputClass} value={form.lastName} onChange={(e) => setField("lastName", e.target.value)} />
+              {errors.lastName && <span className="text-[10px] text-red-600">{errors.lastName}</span>}
             </label>
-            <label className="text-[10px] font-semibold text-slate-700">Email*
-              <input type="email" className={inputClass} value={form.email} onChange={(e) => setField("email", e.target.value)} />
-              {errors.email && <span className="text-[10px] text-red-600">{errors.email}</span>}
-            </label>
-            <label className="text-[10px] font-semibold text-slate-700">Phone (optional)
-              <input className={inputClass} value={form.phone} onChange={(e) => setField("phone", e.target.value)} />
-            </label>
-            <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Country (optional)
+            {form.guestRole !== "travel-rentals" && (
+              <>
+                <label className="text-[10px] font-semibold text-slate-700">Email*
+                  <input type="email" className={inputClass} value={form.email} onChange={(e) => setField("email", e.target.value)} />
+                  {errors.email && <span className="text-[10px] text-red-600">{errors.email}</span>}
+                </label>
+                <label className="text-[10px] font-semibold text-slate-700">Phone (optional)
+                  <input className={inputClass} value={form.phone} onChange={(e) => setField("phone", e.target.value)} />
+                </label>
+              </>
+            )}
+            <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Country {form.guestRole === "travel-rentals" ? "*" : "(optional)"}
               <input className={inputClass} placeholder="e.g., Greece" value={form.country} onChange={(e) => setField("country", e.target.value)} />
+              {errors.country && <span className="text-[10px] text-red-600">{errors.country}</span>}
             </label>
             <label className="text-[10px] font-semibold text-slate-700 sm:col-span-2">Notes (optional)
               <textarea className="mt-1 w-full rounded-md border border-slate-300 bg-[#eef8f8] px-2.5 py-2 text-[12px] text-slate-800" rows={3} value={form.notes} onChange={(e) => setField("notes", e.target.value)} />
@@ -834,7 +846,7 @@ export function QuickRequestPanel() {
 
       <div className="mt-3 flex items-center justify-end gap-2">
         {normalizedStep > 1 && (
-          <button type="button" onClick={() => setStep(1)} className="h-9 rounded-md border border-slate-300 bg-white px-3 text-[13px] font-semibold text-slate-700">← Back</button>
+          <button type="button" onClick={() => setStep(1)} className="h-9 min-w-[86px] whitespace-nowrap rounded-md border border-slate-300 bg-white px-3 text-[13px] font-semibold text-slate-700">← Back</button>
         )}
         {normalizedStep === 1 ? (
           <button type="button" onClick={() => validateStep(1) && setStep(2)} className="h-9 w-full rounded-md bg-[#1c2f66] px-3 text-[13px] font-semibold text-white">Next</button>
