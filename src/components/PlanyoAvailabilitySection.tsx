@@ -18,6 +18,7 @@ export function PlanyoAvailabilitySection({
   seasonalRates,
   unavailableDates,
   propertyTitle,
+  minStayNights,
 }: {
   calendarId: string;
   resourceId: string;
@@ -27,6 +28,7 @@ export function PlanyoAvailabilitySection({
   seasonalRates: SeasonalRate[];
   unavailableDates: string[];
   propertyTitle?: string;
+  minStayNights?: number;
 }) {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -68,6 +70,25 @@ export function PlanyoAvailabilitySection({
       .then(() => setApiStatus("ok"))
       .catch(() => setApiStatus("error"));
   }, []);
+
+  useEffect(() => {
+    if (!checkIn) return;
+    const minStay = Math.max(1, minStayNights || 1);
+    const start = toDate(checkIn);
+    const suggested = new Date(start);
+    suggested.setDate(suggested.getDate() + minStay);
+    const suggestedIso = suggested.toISOString().slice(0, 10);
+
+    if (!checkOut || toDate(checkOut).getTime() <= start.getTime()) {
+      setCheckOut(suggestedIso);
+      return;
+    }
+
+    const currentNights = Math.ceil((toDate(checkOut).getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    if (currentNights < minStay) {
+      setCheckOut(suggestedIso);
+    }
+  }, [checkIn, checkOut, minStayNights]);
 
   useEffect(() => {
     if (!checkIn || !checkOut) {
