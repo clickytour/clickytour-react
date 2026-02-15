@@ -1,7 +1,8 @@
 export type CoreMirrorService = {
   slug: string;
   name: string;
-  category: string;
+  categoryId: string;
+  subcategoryId: string;
   location: string;
   excerpt: string;
   description: string[];
@@ -14,7 +15,8 @@ export const coreMirrorServices: CoreMirrorService[] = [
   {
     slug: "airport-transfer-halkidiki",
     name: "Airport Transfer Halkidiki",
-    category: "Transport",
+    categoryId: "transfersTransport",
+    subcategoryId: "airportTransfer",
     location: "Pefkohori / Kassandra",
     excerpt: "Door-to-door transfers from SKG to your villa with fixed pricing.",
     description: [
@@ -29,7 +31,8 @@ export const coreMirrorServices: CoreMirrorService[] = [
   {
     slug: "private-chef-villa-service",
     name: "Private Chef Villa Service",
-    category: "Food & Dining",
+    categoryId: "cafesRestaurantsNightlife",
+    subcategoryId: "localCuisineExperience",
     location: "Halkidiki",
     excerpt: "In-villa breakfast and curated Mediterranean dinner menus.",
     description: [
