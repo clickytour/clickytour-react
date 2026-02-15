@@ -26,8 +26,8 @@ export function GuestRequestInlineForm(props: Props) {
     country: "",
     checkIn: "",
     checkOut: "",
-    adults: "2",
-    children: "0",
+    adults: "",
+    children: "",
     preferredDate: "",
     preferredTime: "",
     participants: "2",
@@ -127,16 +127,37 @@ export function GuestRequestInlineForm(props: Props) {
 
           {props.contextType === "property" ? (
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkIn} onChange={(e)=>setForm({...form, checkIn:e.target.value})} />
-              <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkOut} onChange={(e)=>setForm({...form, checkOut:e.target.value})} />
-              <input type="number" min={1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Adults" value={form.adults} onChange={(e)=>setForm({...form, adults:e.target.value})} />
-              <input type="number" min={0} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Children" value={form.children} onChange={(e)=>setForm({...form, children:e.target.value})} />
+              <label className="text-xs font-medium text-slate-600">
+                Check-in date *
+                <input type="date" className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkIn} onChange={(e)=>setForm({...form, checkIn:e.target.value})} />
+              </label>
+              <label className="text-xs font-medium text-slate-600">
+                Check-out date *
+                <input type="date" className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.checkOut} onChange={(e)=>setForm({...form, checkOut:e.target.value})} />
+              </label>
+              <label className="text-xs font-medium text-slate-600">
+                Adults
+                <input type="number" min={1} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Number of adults" value={form.adults} onChange={(e)=>setForm({...form, adults:e.target.value})} />
+              </label>
+              <label className="text-xs font-medium text-slate-600">
+                Children
+                <input type="number" min={0} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Number of children" value={form.children} onChange={(e)=>setForm({...form, children:e.target.value})} />
+              </label>
             </div>
           ) : (
             <div className="mt-3 grid gap-3 md:grid-cols-3">
-              <input type="date" className="rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.preferredDate} onChange={(e)=>setForm({...form, preferredDate:e.target.value})} />
-              <input className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Preferred time" value={form.preferredTime} onChange={(e)=>setForm({...form, preferredTime:e.target.value})} />
-              <input type="number" min={1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Participants" value={form.participants} onChange={(e)=>setForm({...form, participants:e.target.value})} />
+              <label className="text-xs font-medium text-slate-600">
+                Preferred date *
+                <input type="date" className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" value={form.preferredDate} onChange={(e)=>setForm({...form, preferredDate:e.target.value})} />
+              </label>
+              <label className="text-xs font-medium text-slate-600">
+                Preferred time
+                <input className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="e.g. 10:00 - 12:00" value={form.preferredTime} onChange={(e)=>setForm({...form, preferredTime:e.target.value})} />
+              </label>
+              <label className="text-xs font-medium text-slate-600">
+                Participants
+                <input type="number" min={1} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Number of participants" value={form.participants} onChange={(e)=>setForm({...form, participants:e.target.value})} />
+              </label>
             </div>
           )}
 
