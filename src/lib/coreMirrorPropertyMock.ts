@@ -36,7 +36,7 @@ export type CoreMirrorProperty = {
   badges: string[];
   faqs: { q: string; a: string }[];
   related: { title: string; href: string; from: number; image: string }[];
-  planyo: { calendarId: string; actionUrl: string };
+  planyo: { calendarId: string; resourceId: string; actionUrl: string };
   videoUrl: string;
   nearbyServices: { name: string; detail: string; href: string; blogHref?: string }[];
   blogPosts: { title: string; href: string; date: string; excerpt: string; image: string }[];
@@ -133,6 +133,7 @@ const properties: CoreMirrorProperty[] = [
     ],
     planyo: {
       calendarId: "63884",
+      resourceId: "229670",
       actionUrl: "https://villa4you.gr/my-reservations/",
     },
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",

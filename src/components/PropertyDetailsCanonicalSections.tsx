@@ -46,7 +46,11 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             Check availability
           </a>
 
-          <PlanyoAvailabilitySection calendarId={property.planyo.calendarId} actionUrl={property.planyo.actionUrl} />
+          <PlanyoAvailabilitySection
+            calendarId={property.planyo.calendarId}
+            resourceId={property.planyo.resourceId}
+            actionUrl={property.planyo.actionUrl}
+          />
         </aside>
       </section>
 
