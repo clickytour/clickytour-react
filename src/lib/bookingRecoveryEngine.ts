@@ -36,8 +36,8 @@ export function getRequestedNightsIntent(
 ) {
   if (!requestedCheckIn || !requestedCheckOut) return minStay;
   const requestedRangeNights = calculateNights(requestedCheckIn, requestedCheckOut);
-  // Exact-date intent: keep the full requested range length for proposals.
-  return Math.max(minStay, requestedRangeNights > 0 ? requestedRangeNights : minStay);
+  // Business recovery intent: use previous agreed target length (example 08/03 -> 21/03 => 12 nights).
+  return Math.max(minStay, requestedRangeNights > 0 ? requestedRangeNights - 1 : minStay);
 }
 
 export function isRangeBlocked(startIso: string, endIso: string, blockedNightsSet: Set<string>) {

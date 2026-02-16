@@ -146,8 +146,8 @@ export function PlanyoAvailabilitySection({
     return getNearestOptions(requestedNights + 1, BOOKING_RECOVERY_CONFIG.ALT_OPTIONS_LIMIT);
   }, [shouldComputeSuggestions, checkIn, requestedNights, blockedNightsSet]);
 
-  const bestExactShift = exactOptions.length ? exactOptions[0].shiftDays : null;
-  const largeShift = (bestExactShift ?? 0) > BOOKING_RECOVERY_CONFIG.LARGE_SHIFT_DAYS;
+  const selectedExactOption = exactOptions[0] ?? null;
+  const requestedEndIso = checkIn ? addDaysIso(checkIn, requestedNights) : "";
 
   const splitStaySuggestions = useMemo(() => {
     if (
@@ -170,12 +170,13 @@ export function PlanyoAvailabilitySection({
     const nearbyNights = preferredNearbyGapNights.find((n) => n > 0 && n < requestedNights) ?? Math.floor(requestedNights / 2);
     const selectedNights = requestedNights - nearbyNights;
     const splitDate = addDaysIso(checkIn, selectedNights);
+    const requestedEnd = addDaysIso(checkIn, requestedNights);
 
     return [
       { property: candidates[0], start: checkIn, end: splitDate, nights: selectedNights },
-      { property: candidates[1], start: splitDate, end: checkOut, nights: nearbyNights },
+      { property: candidates[1], start: splitDate, end: requestedEnd, nights: nearbyNights },
     ];
-  }, [shouldComputeSuggestions, checkIn, checkOut, requestedNights, relatedOptions]);
+  }, [shouldComputeSuggestions, checkIn, requestedNights, relatedOptions]);
 
   const cleaningFee = 100;
   const subtotal = nights * nightly;
@@ -330,16 +331,33 @@ export function PlanyoAvailabilitySection({
             {showOptions && (
               <div className="mt-3 space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-2">
                 <p className="text-xs text-slate-600">
-                  Requested exact stay: <strong>{toDisplayDate(checkIn)} → {toDisplayDate(checkOut)}</strong> ({calculateNights(checkIn, checkOut)} nights).
+                  Requested stay target: <strong>{toDisplayDate(checkIn)} → {toDisplayDate(requestedEndIso)}</strong> ({requestedNights} nights).
                 </p>
 
                 <div className="space-y-2">
-                  <p className="text-xs font-semibold text-slate-700">Selected property (exact dates)</p>
-                  <div className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700">
-                    <p className="font-semibold text-slate-900">{propertyTitle || "Selected Property"}</p>
-                    <p>{toDisplayDate(checkIn)} → {toDisplayDate(checkOut)} ({calculateNights(checkIn, checkOut)} nights)</p>
-                    <p className="mt-1 text-[11px] text-slate-500">Not directly reservable online — operator confirmation required.</p>
-                  </div>
+                  <p className="text-xs font-semibold text-slate-700">Selected property exact match</p>
+                  {selectedExactOption ? (
+                    <div className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700">
+                      <p className="font-semibold text-slate-900">{propertyTitle || "Selected Property"}</p>
+                      <p>{toDisplayDate(selectedExactOption.start)} → {toDisplayDate(selectedExactOption.end)} ({selectedExactOption.nights} nights)</p>
+                      <p className="mt-1 text-[11px] text-slate-500">Price updates automatically after selecting these dates.</p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCheckIn(selectedExactOption.start);
+                          setCheckOut(selectedExactOption.end);
+                          setShowOptions(false);
+                        }}
+                        className="mt-1 inline-flex rounded-md bg-slate-900 px-2 py-1 text-[11px] font-semibold text-white whitespace-nowrap"
+                      >
+                        Select exact match
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700">
+                      No exact {requestedNights}-night match found for selected property in nearest range.
+                    </div>
+                  )}
                 </div>
 
                 {!!relatedOptions?.length && (
@@ -348,7 +366,7 @@ export function PlanyoAvailabilitySection({
                     {relatedOptions.slice(0, 3).map((item) => (
                       <a key={item.title} href={item.href} className="flex items-center justify-between rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700 hover:bg-slate-50">
                         <span>{item.title}</span>
-                        <span>{calculateNights(checkIn, checkOut)} nights · From {item.from} EUR / night</span>
+                        <span>{requestedNights} nights · From {item.from} EUR / night</span>
                       </a>
                     ))}
                   </div>
