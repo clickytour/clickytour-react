@@ -375,11 +375,11 @@ export function PlanyoAvailabilitySection({
             {showOptions && (
               <div className="mt-3 space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-2">
                 <p className="text-xs text-slate-600">
-                  Requested stay target: <strong>{toDisplayDate(checkIn)} → {toDisplayDate(requestedEndIso)}</strong> ({requestedNights} nights).
+                  Requested stay target: <strong>{toDisplayDate(checkIn)} → {toDisplayDate(checkOut)}</strong> ({requestedRangeNights} nights).
                 </p>
 
                 <div className="space-y-2">
-                  <p className="text-xs font-semibold text-slate-700">Selected property exact match</p>
+                  <p className="text-xs font-semibold text-slate-700">Selected property closest match</p>
                   {selectedPropertyOption ? (
                     <div className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700">
                       <p className="font-semibold text-slate-900">{propertyTitle || "Selected Property"}</p>
