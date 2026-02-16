@@ -39,6 +39,7 @@ export function PropertyDetailsCanonicalSections({ property, activeMode }: { pro
   const isVacationMode = currentMode === "short_term_rent";
   const isSaleMode = currentMode === "sale";
   const isMonthlyMode = currentMode === "monthly_rent";
+  const isRealEstate = property.type === "real-estate";
   const modeQuery = (mode: DealMode) => (property.type === "real-estate" ? `?mode=${mode}` : "");
 
   return (
@@ -89,35 +90,40 @@ export function PropertyDetailsCanonicalSections({ property, activeMode }: { pro
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-2 text-sm text-slate-700">
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">👥 {property.metrics.guests} guests</div>
+            {!isRealEstate && <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">👥 {property.metrics.guests} guests</div>}
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">🛏 {property.metrics.bedrooms} bedrooms</div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">🛁 {property.metrics.bathrooms} bathrooms</div>
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">📐 {property.metrics.areaSqm} m²</div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">🏖 {property.location.beachDistanceM} m to beach</div>
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">🏊 Pool: {property.amenities.includes("Private Swimming Pool") ? "Yes" : "No"}</div>
+            {isSaleMode && <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">💹 ROI: {property.realEstateMeta?.roiPercent ?? "N/A"}%</div>}
+            {isMonthlyMode && <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">📅 Monthly contract mode</div>}
+            {!isRealEstate && <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">🏊 Pool: {property.amenities.includes("Private Swimming Pool") ? "Yes" : "No"}</div>}
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-2">🐾 Pets: {property.policies.petsAllowed ? "Yes" : "No"}</div>
           </div>
 
-          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-3">
-            <p className="text-xs text-blue-700">Pricing (Planyo-linked property)</p>
-            <p className="text-xl font-semibold text-blue-900">
-              From {property.pricing.basicFrom} {property.pricing.currency} / night
-            </p>
-            {seasonBeforeHigh && (
-              <p className="mt-1 text-[11px] text-blue-700">
-                Medium Season ({normalizeSeasonLabel(seasonBeforeHigh.label)}): {seasonBeforeHigh.nightly} {property.pricing.currency}
+          {(!isRealEstate || isVacationMode) && (
+            <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-3">
+              <p className="text-xs text-blue-700">Pricing (Planyo-linked property)</p>
+              <p className="text-xl font-semibold text-blue-900">
+                From {property.pricing.basicFrom} {property.pricing.currency} / night
               </p>
-            )}
-            {highSeason && (
-              <p className="text-xs text-blue-800">
-                High Season ({normalizeSeasonLabel(highSeason.label)}): {highSeason.nightly} {property.pricing.currency} · min stay {property.pricing.minStayNights} nights
-              </p>
-            )}
-            {seasonAfterHigh && (
-              <p className="text-[11px] text-blue-700">
-                Medium Season ({normalizeSeasonLabel(seasonAfterHigh.label)}): {seasonAfterHigh.nightly} {property.pricing.currency}
-              </p>
-            )}
-          </div>
+              {seasonBeforeHigh && (
+                <p className="mt-1 text-[11px] text-blue-700">
+                  Medium Season ({normalizeSeasonLabel(seasonBeforeHigh.label)}): {seasonBeforeHigh.nightly} {property.pricing.currency}
+                </p>
+              )}
+              {highSeason && (
+                <p className="text-xs text-blue-800">
+                  High Season ({normalizeSeasonLabel(highSeason.label)}): {highSeason.nightly} {property.pricing.currency} · min stay {property.pricing.minStayNights} nights
+                </p>
+              )}
+              {seasonAfterHigh && (
+                <p className="text-[11px] text-blue-700">
+                  Medium Season ({normalizeSeasonLabel(seasonAfterHigh.label)}): {seasonAfterHigh.nightly} {property.pricing.currency}
+                </p>
+              )}
+            </div>
+          )}
 
           {isVacationMode && (
             <PlanyoAvailabilitySection
@@ -175,7 +181,14 @@ export function PropertyDetailsCanonicalSections({ property, activeMode }: { pro
         <article className="rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">Overview & Highlights</h2>
           <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
-            {property.highlights.map((h) => (
+            {(isRealEstate
+              ? isSaleMode
+                ? property.realEstateMeta?.saleHighlights ?? []
+                : isMonthlyMode
+                ? property.realEstateMeta?.monthlyHighlights ?? []
+                : property.realEstateMeta?.vacationHighlights ?? []
+              : property.highlights
+            ).map((h) => (
               <li key={h}>• {h}</li>
             ))}
           </ul>
@@ -412,6 +425,17 @@ export function PropertyDetailsCanonicalSections({ property, activeMode }: { pro
           </details>
         )}
       </section>
+
+      {isRealEstate && !isVacationMode && (
+        <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">{isSaleMode ? "Request investment details" : "Request monthly rent details"}</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            {isSaleMode
+              ? "Share your budget, timeline and preferred contact channel. Our team will respond with full sale dossier and viewing availability."
+              : "Share your preferred move-in date, contract period and tenant profile. Our team will send the monthly offer details."}
+          </p>
+        </section>
+      )}
 
       <GuestRequestInlineForm contextType="property" contextId={property.id} contextSlug={property.slug} contextTitle={property.title} />
 

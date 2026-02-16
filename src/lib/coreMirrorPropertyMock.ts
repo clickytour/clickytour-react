@@ -55,6 +55,9 @@ export type CoreMirrorProperty = {
     monthlyRentEur?: number;
     roiPercent?: number;
     floorPlans?: string[];
+    saleHighlights?: string[];
+    monthlyHighlights?: string[];
+    vacationHighlights?: string[];
   };
   blogPosts: { title: string; href: string; date: string; excerpt: string; image: string }[];
 };

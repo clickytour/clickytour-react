@@ -21,10 +21,7 @@ export function getRealEstatePropertyForCanonicalPage(slug: string): CoreMirrorP
       lat: 40.0,
       lng: 23.5,
     },
-    highlights: [
-      "Real-estate canonical presentation",
-      ...source.dealType.map((d) => d.replaceAll("_", " ")),
-    ],
+    highlights: [],
     metrics: {
       guests: 0,
       bedrooms: source.metrics.bedrooms,
@@ -87,7 +84,10 @@ export function getRealEstatePropertyForCanonicalPage(slug: string): CoreMirrorP
       salePriceEur: source.prices.saleEur,
       monthlyRentEur: source.prices.monthlyEur,
       roiPercent: source.prices.roiPercent,
-      floorPlans: ["Floor plan available in Core record"],
+      floorPlans: ["Main floor plan", "Site layout plan"],
+      saleHighlights: ["Sale price", "Price per m²", "ROI", "Floor plans", "Investment use"],
+      monthlyHighlights: ["Monthly rent", "Monthly €/m²", "Contract terms", "Deposit", "Included services"],
+      vacationHighlights: ["Nightly pricing", "Availability calendar", "Min stay", "Check-in/out rules"],
     },
     blogPosts: [
       {
