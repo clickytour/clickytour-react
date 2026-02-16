@@ -123,6 +123,15 @@ export function PlanyoAvailabilitySection({
     });
   }
 
+  function isRangeAvailable(startIso: string, nightsCount: number) {
+    if (!startIso || nightsCount <= 0) return false;
+    for (let i = 0; i < nightsCount; i += 1) {
+      const d = addDaysIso(startIso, i);
+      if (blockedNightsSet.has(d)) return false;
+    }
+    return true;
+  }
+
   const needsManualApproval = hasUnavailableInRange || availabilityHint.toLowerCase().includes("may be unavailable");
   const shouldComputeSuggestions = !!checkIn && !!checkOut && needsManualApproval && showOptions;
 
@@ -151,7 +160,7 @@ export function PlanyoAvailabilitySection({
   const requestedRangeNights = checkIn && checkOut ? calculateNights(checkIn, checkOut) : 0;
 
   const selectedPropertyOption = useMemo(() => {
-    if (!shouldComputeSuggestions || !requestedRangeNights) return null as SuggestedOption | null;
+    if (!shouldComputeSuggestions || !requestedRangeNights || !checkIn) return null as SuggestedOption | null;
 
     // For selected villa, prefer closest dates around the requested range with ±1/±2/±3 nights tolerance.
     const candidateNights = [
@@ -163,6 +172,18 @@ export function PlanyoAvailabilitySection({
       requestedRangeNights - 3,
       requestedRangeNights + 3,
     ].filter((n, idx, arr) => n >= minStay && arr.indexOf(n) === idx);
+
+    // First, prefer same start date if any tolerated-night option fits (example: request 14 -> offer 13 at same start).
+    for (const n of candidateNights) {
+      if (isRangeAvailable(checkIn, n)) {
+        return {
+          start: checkIn,
+          end: addDaysIso(checkIn, n),
+          nights: n,
+          shiftDays: 0,
+        } as SuggestedOption;
+      }
+    }
 
     const candidates = candidateNights
       .map((targetNights) => {
