@@ -96,6 +96,7 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             unavailableDates={property.pricing.unavailableDates}
             propertyTitle={property.title}
             minStayNights={property.pricing.minStayNights}
+            relatedOptions={property.related}
           />
         </aside>
       </section>

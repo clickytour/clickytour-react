@@ -4,6 +4,14 @@ import Script from "next/script";
 import { useEffect, useMemo, useState } from "react";
 
 type SeasonalRate = { label: string; from: string; to: string; nightly: number };
+type RelatedPropertyOption = { title: string; href: string; from: number };
+
+type SuggestedOption = {
+  start: string;
+  end: string;
+  nights: number;
+  shiftDays: number;
+};
 
 function toDate(v: string) {
   return new Date(`${v}T00:00:00`);
@@ -32,6 +40,7 @@ export function PlanyoAvailabilitySection({
   unavailableDates,
   propertyTitle,
   minStayNights,
+  relatedOptions,
 }: {
   calendarId: string;
   resourceId: string;
@@ -42,6 +51,7 @@ export function PlanyoAvailabilitySection({
   unavailableDates: string[];
   propertyTitle?: string;
   minStayNights?: number;
+  relatedOptions?: RelatedPropertyOption[];
 }) {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -124,25 +134,63 @@ export function PlanyoAvailabilitySection({
     });
   }
 
-  const nearestOptions = useMemo(() => {
-    if (!checkIn) return [] as { start: string; end: string; nights: number }[];
-    const options: { start: string; end: string; nights: number; distance: number }[] = [];
+  function buildNearestOptions(targetNights: number, maxDaysAround = 30, limit = 5) {
+    if (!checkIn) return [] as SuggestedOption[];
+    const options: SuggestedOption[] = [];
 
-    for (let offset = -21; offset <= 21; offset++) {
+    for (let offset = -maxDaysAround; offset <= maxDaysAround; offset++) {
       const start = addDaysIso(checkIn, offset);
-      const end = addDaysIso(start, requestedNights);
-      const validLength = requestedNights >= minStay;
+      const end = addDaysIso(start, targetNights);
       const blocked = isRangeBlocked(start, end);
-      if (validLength && !blocked) {
-        options.push({ start, end, nights: requestedNights, distance: Math.abs(offset) });
+      if (!blocked) {
+        options.push({ start, end, nights: targetNights, shiftDays: Math.abs(offset) });
       }
     }
 
     return options
-      .sort((a, b) => a.distance - b.distance)
-      .slice(0, 5)
-      .map(({ start, end, nights }) => ({ start, end, nights }));
-  }, [checkIn, requestedNights, minStay, blockedNightsSet]);
+      .sort((a, b) => a.shiftDays - b.shiftDays)
+      .slice(0, limit);
+  }
+
+  const exactOptions = useMemo(() => buildNearestOptions(requestedNights), [checkIn, requestedNights, blockedNightsSet]);
+
+  const shorterTargetNights = useMemo(() => {
+    if (requestedNights <= minStay) return null;
+    return Math.max(minStay, requestedNights - 1);
+  }, [requestedNights, minStay]);
+
+  const shorterOptions = useMemo(() => {
+    if (!shorterTargetNights) return [] as SuggestedOption[];
+    return buildNearestOptions(shorterTargetNights, 30, 3);
+  }, [checkIn, shorterTargetNights, blockedNightsSet]);
+
+  const longerOptions = useMemo(() => {
+    return buildNearestOptions(requestedNights + 1, 30, 3);
+  }, [checkIn, requestedNights, blockedNightsSet]);
+
+  const bestExactShift = exactOptions.length ? exactOptions[0].shiftDays : null;
+  const largeShift = (bestExactShift ?? 0) > 7;
+
+  const splitStaySuggestions = useMemo(() => {
+    if (!checkIn || !checkOut || requestedNights < 11 || !largeShift) return [] as Array<{
+      property: RelatedPropertyOption;
+      start: string;
+      end: string;
+      nights: number;
+    }>;
+
+    const firstNights = Math.floor(requestedNights / 2);
+    const secondNights = requestedNights - firstNights;
+    const splitDate = addDaysIso(checkIn, firstNights);
+
+    const candidates = (relatedOptions || []).slice(0, 2);
+    if (candidates.length < 2) return [];
+
+    return [
+      { property: candidates[0], start: checkIn, end: splitDate, nights: firstNights },
+      { property: candidates[1], start: splitDate, end: checkOut, nights: secondNights },
+    ];
+  }, [checkIn, checkOut, requestedNights, largeShift, relatedOptions]);
 
   const needsManualApproval = hasUnavailableInRange || availabilityHint.toLowerCase().includes("may be unavailable");
 
@@ -291,27 +339,112 @@ export function PlanyoAvailabilitySection({
             </div>
 
             {showOptions && (
-              <div className="mt-3 space-y-2 rounded-lg border border-slate-200 bg-slate-50 p-2">
-                {nearestOptions.length ? (
-                  nearestOptions.map((opt) => (
-                    <div key={`${opt.start}-${opt.end}`} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs">
-                      <span>
-                        {toDisplayDate(opt.start)} → {toDisplayDate(opt.end)} ({opt.nights} {opt.nights === 1 ? "night" : "nights"})
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setCheckIn(opt.start);
-                          setCheckOut(opt.end);
-                          setShowOptions(false);
-                        }}
-                        className="inline-flex rounded-md bg-slate-900 px-2 py-1 text-[11px] font-semibold text-white whitespace-nowrap"
-                      >
-                        Use these dates
-                      </button>
-                    </div>
-                  ))
-                ) : (
+              <div className="mt-3 space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-2">
+                {bestExactShift !== null && (
+                  <p className="text-xs text-slate-600">
+                    Requested stay: <strong>{requestedNights}</strong> {requestedNights === 1 ? "night" : "nights"}
+                    {bestExactShift > 0 ? ` · Closest exact match starts in ${bestExactShift} days` : " · Exact match available"}.
+                  </p>
+                )}
+
+                {!!exactOptions.length && (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-slate-700">Closest exact-length options</p>
+                    {exactOptions.map((opt) => (
+                      <div key={`exact-${opt.start}-${opt.end}`} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs">
+                        <span>
+                          {toDisplayDate(opt.start)} → {toDisplayDate(opt.end)} ({opt.nights} {opt.nights === 1 ? "night" : "nights"})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCheckIn(opt.start);
+                            setCheckOut(opt.end);
+                            setShowOptions(false);
+                          }}
+                          className="inline-flex rounded-md bg-slate-900 px-2 py-1 text-[11px] font-semibold text-white whitespace-nowrap"
+                        >
+                          Use these dates
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {largeShift && !!shorterOptions.length && (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-slate-700">Shorter alternatives (closer to your requested period)</p>
+                    {shorterOptions.map((opt) => (
+                      <div key={`short-${opt.start}-${opt.end}`} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs">
+                        <span>
+                          {toDisplayDate(opt.start)} → {toDisplayDate(opt.end)} ({opt.nights} {opt.nights === 1 ? "night" : "nights"})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCheckIn(opt.start);
+                            setCheckOut(opt.end);
+                            setShowOptions(false);
+                          }}
+                          className="inline-flex rounded-md bg-slate-900 px-2 py-1 text-[11px] font-semibold text-white whitespace-nowrap"
+                        >
+                          Use these dates
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {largeShift && !!longerOptions.length && (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-slate-700">Longer alternatives</p>
+                    {longerOptions.map((opt) => (
+                      <div key={`long-${opt.start}-${opt.end}`} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs">
+                        <span>
+                          {toDisplayDate(opt.start)} → {toDisplayDate(opt.end)} ({opt.nights} {opt.nights === 1 ? "night" : "nights"})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCheckIn(opt.start);
+                            setCheckOut(opt.end);
+                            setShowOptions(false);
+                          }}
+                          className="inline-flex rounded-md bg-slate-900 px-2 py-1 text-[11px] font-semibold text-white whitespace-nowrap"
+                        >
+                          Use these dates
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {largeShift && !!relatedOptions?.length && (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-slate-700">Similar properties for your dates</p>
+                    {relatedOptions.slice(0, 2).map((item) => (
+                      <a key={item.title} href={item.href} className="flex items-center justify-between rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700 hover:bg-slate-50">
+                        <span>{item.title}</span>
+                        <span>From {item.from} EUR / night</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {!!splitStaySuggestions.length && (
+                  <div className="space-y-2 rounded-md border border-blue-200 bg-white p-2">
+                    <p className="text-xs font-semibold text-blue-800">Split stay suggestion for long trip ({requestedNights} nights)</p>
+                    {splitStaySuggestions.map((s, idx) => (
+                      <div key={`${s.property.title}-${idx}`} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-700">
+                        <p className="font-semibold text-slate-900">{s.property.title}</p>
+                        <p>{toDisplayDate(s.start)} → {toDisplayDate(s.end)} ({s.nights} {s.nights === 1 ? "night" : "nights"})</p>
+                        <a href={s.property.href} className="mt-1 inline-flex rounded-md border border-slate-300 px-2 py-0.5 text-[11px] font-medium text-slate-900">View property</a>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {!exactOptions.length && !shorterOptions.length && !longerOptions.length && (
                   <p className="text-xs text-slate-600">No nearby options found in current range window. Send priority request for operator review.</p>
                 )}
               </div>
