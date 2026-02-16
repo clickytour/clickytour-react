@@ -45,6 +45,10 @@ const staticRoutes: QARoute[] = [
   { href: "/property/real-estate/kassandra-investment-villa", label: "Canonical Real Estate Property", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
   { href: "/property/hotel/aegean-boutique-hotel", label: "Canonical Hotel Property", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
   { href: "/property/hotel-room/aegean-deluxe-suite", label: "Canonical Hotel Room", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa", label: "Real Estate Mode Previews (Index)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa/vacation", label: "Real Estate Mode Preview: Vacation", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa/sale", label: "Real Estate Mode Preview: Sale", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa/monthly", label: "Real Estate Mode Preview: Monthly", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
 ];
 
 const heroDerived: QARoute[] = heroPages
