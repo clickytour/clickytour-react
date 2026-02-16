@@ -1,8 +1,16 @@
-import type { CoreMirrorProperty } from "@/lib/coreMirrorPropertyMock";
+import type { CoreMirrorProperty, DealMode } from "@/lib/coreMirrorPropertyMock";
 import { GuestRequestInlineForm } from "@/components/GuestRequestInlineForm";
 import { PlanyoAvailabilitySection } from "@/components/PlanyoAvailabilitySection";
 
-export function PropertyDetailsCanonicalSections({ property }: { property: CoreMirrorProperty }) {
+const ALL_MODES: DealMode[] = ["short_term_rent", "sale", "monthly_rent"];
+
+function modeLabel(mode: DealMode) {
+  if (mode === "short_term_rent") return "Vacation";
+  if (mode === "sale") return "Sale";
+  return "Monthly rent";
+}
+
+export function PropertyDetailsCanonicalSections({ property, activeMode }: { property: CoreMirrorProperty; activeMode?: DealMode }) {
   const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${property.location.lng - 0.02}%2C${property.location.lat - 0.01}%2C${property.location.lng + 0.02}%2C${property.location.lat + 0.01}&layer=mapnik&marker=${property.location.lat}%2C${property.location.lng}`;
 
   const sortedSeasons = [...property.pricing.seasonalRates].sort((a, b) => a.from.localeCompare(b.from));
@@ -24,9 +32,34 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
 
   const normalizeSeasonLabel = (label: string) => label.replace(/low/gi, "Mid");
 
+  const availableModes = ((property.dealType && property.dealType.length ? property.dealType : ["short_term_rent"]) as DealMode[]).filter((m) =>
+    ALL_MODES.includes(m)
+  );
+  const currentMode = activeMode && availableModes.includes(activeMode) ? activeMode : availableModes[0];
+  const isVacationMode = currentMode === "short_term_rent";
+  const isSaleMode = currentMode === "sale";
+  const isMonthlyMode = currentMode === "monthly_rent";
+  const modeQuery = (mode: DealMode) => (property.type === "real-estate" ? `?mode=${mode}` : "");
+
   return (
     <div className="mx-auto max-w-[1320px] px-4 py-8">
       <div className="mb-4 text-sm text-slate-500">For Guests / Property Details / {property.title}</div>
+
+      {property.type === "real-estate" && availableModes.length > 1 && (
+        <section className="mb-4 rounded-2xl border border-slate-200 bg-white p-3">
+          <div className="flex flex-wrap gap-2">
+            {availableModes.map((mode) => (
+              <a
+                key={mode}
+                href={`/property/real-estate/${property.slug}${modeQuery(mode)}`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-medium ${currentMode === mode ? "border-slate-900 bg-slate-900 text-white" : "border-slate-300 bg-white text-slate-800"}`}
+              >
+                {modeLabel(mode)}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="grid gap-6 xl:grid-cols-[1.75fr_0.95fr]">
         <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
@@ -86,18 +119,42 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
             )}
           </div>
 
-          <PlanyoAvailabilitySection
-            calendarId={property.planyo.calendarId}
-            resourceId={property.planyo.resourceId}
-            actionUrl={property.planyo.actionUrl}
-            currency={property.pricing.currency}
-            basicFrom={property.pricing.basicFrom}
-            seasonalRates={property.pricing.seasonalRates}
-            unavailableDates={property.pricing.unavailableDates}
-            propertyTitle={property.title}
-            minStayNights={property.pricing.minStayNights}
-            relatedOptions={property.related}
-          />
+          {isVacationMode && (
+            <PlanyoAvailabilitySection
+              calendarId={property.planyo.calendarId}
+              resourceId={property.planyo.resourceId}
+              actionUrl={property.planyo.actionUrl}
+              currency={property.pricing.currency}
+              basicFrom={property.pricing.basicFrom}
+              seasonalRates={property.pricing.seasonalRates}
+              unavailableDates={property.pricing.unavailableDates}
+              propertyTitle={property.title}
+              minStayNights={property.pricing.minStayNights}
+              relatedOptions={property.related}
+            />
+          )}
+
+          {!isVacationMode && (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3">
+              <p className="text-xs text-emerald-700">Mode specific offer</p>
+              {isSaleMode && (
+                <>
+                  <p className="text-xl font-semibold text-emerald-900">
+                    Sale price: {property.realEstateMeta?.salePriceEur ?? property.pricing.seasonalFrom} {property.pricing.currency}
+                  </p>
+                  <p className="mt-1 text-xs text-emerald-800">ROI: {property.realEstateMeta?.roiPercent ?? "N/A"}%</p>
+                </>
+              )}
+              {isMonthlyMode && (
+                <p className="text-xl font-semibold text-emerald-900">
+                  Monthly rent: {property.realEstateMeta?.monthlyRentEur ?? property.pricing.basicFrom} {property.pricing.currency}
+                </p>
+              )}
+              <a href="#guest-request-form" className="mt-2 inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-semibold text-white">
+                {isSaleMode ? "Request sale details" : "Request monthly offer"}
+              </a>
+            </div>
+          )}
         </aside>
       </section>
 
@@ -204,6 +261,17 @@ export function PropertyDetailsCanonicalSections({ property }: { property: CoreM
           )}
         </article>
       </section>
+
+      {isSaleMode && property.realEstateMeta?.floorPlans?.length ? (
+        <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Floor plans</h2>
+          <ul className="mt-3 list-disc pl-5 text-sm text-slate-700">
+            {property.realEstateMeta.floorPlans.map((plan) => (
+              <li key={plan}>{plan}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">

@@ -1,3 +1,5 @@
+export type DealMode = "short_term_rent" | "monthly_rent" | "sale";
+
 export type CoreMirrorProperty = {
   id: string;
   slug: string;
@@ -6,6 +8,7 @@ export type CoreMirrorProperty = {
   shortDescription: string;
   detailDescription: string;
   type: "vacation" | "real-estate";
+  dealType?: DealMode[];
   location: {
     area: string;
     region: string;
@@ -47,6 +50,12 @@ export type CoreMirrorProperty = {
   videoUrl: string;
   tour3dUrl?: string;
   nearbyServices: { name: string; detail: string; href: string; blogHref?: string }[];
+  realEstateMeta?: {
+    salePriceEur?: number;
+    monthlyRentEur?: number;
+    roiPercent?: number;
+    floorPlans?: string[];
+  };
   blogPosts: { title: string; href: string; date: string; excerpt: string; image: string }[];
 };
 

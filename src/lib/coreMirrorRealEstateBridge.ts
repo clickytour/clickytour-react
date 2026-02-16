@@ -32,6 +32,7 @@ export function getRealEstatePropertyForCanonicalPage(slug: string): CoreMirrorP
       areaSqm: source.metrics.areaSqm,
     },
     gallery: [source.media.primaryImage, ...source.media.galleryImages],
+    dealType: source.dealType,
     pricing: {
       currency: "EUR",
       basicFrom: source.prices.monthlyEur,
@@ -82,6 +83,12 @@ export function getRealEstatePropertyForCanonicalPage(slug: string): CoreMirrorP
       { name: "Legal Due Diligence", detail: "Document and ownership review", href: "/services" },
       { name: "Valuation Support", detail: "Comparative market analysis", href: "/services" },
     ],
+    realEstateMeta: {
+      salePriceEur: source.prices.saleEur,
+      monthlyRentEur: source.prices.monthlyEur,
+      roiPercent: source.prices.roiPercent,
+      floorPlans: ["Floor plan available in Core record"],
+    },
     blogPosts: [
       {
         title: "How to evaluate ROI for coastal real estate",
