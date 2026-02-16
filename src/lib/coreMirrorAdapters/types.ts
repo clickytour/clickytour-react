@@ -22,6 +22,17 @@ export type CanonicalDetailsViewModel = {
     title: string;
     items: Array<{ title: string; subtitle?: string; href: string }>;
   };
+  bookingWidget?: {
+    calendarId: string;
+    resourceId: string;
+    actionUrl: string;
+    currency: string;
+    basicFrom: number;
+    seasonalRates: Array<{ label: string; from: string; to: string; nightly: number }>;
+    unavailableDates: string[];
+    minStayNights: number;
+    relatedOptions: Array<{ title: string; href: string; from: number; image: string }>;
+  };
   parentLink?: { label: string; href: string };
   cta: {
     primary: string;

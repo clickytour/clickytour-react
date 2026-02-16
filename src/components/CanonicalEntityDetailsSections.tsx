@@ -1,5 +1,6 @@
 import type { CanonicalDetailsViewModel } from "@/lib/coreMirrorAdapters";
 import { GuestRequestInlineForm } from "@/components/GuestRequestInlineForm";
+import { PlanyoAvailabilitySection } from "@/components/PlanyoAvailabilitySection";
 
 export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsViewModel }) {
   return (
@@ -68,8 +69,39 @@ export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsVie
               <a href={vm.parentLink.href} className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900">{vm.parentLink.label}</a>
             )}
           </div>
+
+          {vm.bookingWidget && (
+            <div className="mt-4">
+              <PlanyoAvailabilitySection
+                calendarId={vm.bookingWidget.calendarId}
+                resourceId={vm.bookingWidget.resourceId}
+                actionUrl={vm.bookingWidget.actionUrl}
+                currency={vm.bookingWidget.currency}
+                basicFrom={vm.bookingWidget.basicFrom}
+                seasonalRates={vm.bookingWidget.seasonalRates}
+                unavailableDates={vm.bookingWidget.unavailableDates}
+                propertyTitle={vm.title}
+                minStayNights={vm.bookingWidget.minStayNights}
+                relatedOptions={vm.bookingWidget.relatedOptions}
+              />
+            </div>
+          )}
         </aside>
       </section>
+
+      {vm.entityType === "hotel" && vm.sectionCards && vm.sectionCards.items.length > 0 && (
+        <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">{vm.sectionCards.title}</h2>
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            {vm.sectionCards.items.map((item) => (
+              <a key={item.href} href={item.href} className="rounded-xl border border-slate-200 bg-slate-50 p-3 hover:bg-white">
+                <p className="text-sm font-semibold text-slate-900">{item.title}</p>
+                {item.subtitle && <p className="text-xs text-slate-600 mt-1">{item.subtitle}</p>}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {vm.description && (
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
@@ -98,7 +130,7 @@ export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsVie
         </article>
       </section>
 
-      {vm.sectionCards && vm.sectionCards.items.length > 0 && (
+      {vm.entityType !== "hotel" && vm.sectionCards && vm.sectionCards.items.length > 0 && (
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">{vm.sectionCards.title}</h2>
           <div className="mt-3 grid gap-3 md:grid-cols-2">

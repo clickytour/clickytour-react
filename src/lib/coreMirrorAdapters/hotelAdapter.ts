@@ -44,13 +44,36 @@ export function toHotelDetailsVM(hotel: CoreMirrorHotel, activeMode?: DealType):
       active: m === mode,
     })),
     sectionCards: {
-      title: "Room inventory",
+      title: "Choose your room type",
       items: getCoreMirrorHotelRoomsByHotelSlug(hotel.slug).map((r) => ({
         title: r.title,
-        subtitle: `${r.roomType} · up to ${r.maxGuests} guests`,
-        href: `/property/hotel-room/${r.slug}/${modeSlug(mode)}`, 
+        subtitle: `${r.roomType} · up to ${r.maxGuests} guests · from ${r.rates.nightlyEur} EUR/night`,
+        href: `/property/hotel-room/${r.slug}/${modeSlug(mode)}`,
       })),
     },
+    bookingWidget:
+      mode === "short_term_rent"
+        ? {
+            calendarId: "63884",
+            resourceId: "221043",
+            actionUrl: "/my-reservations",
+            currency: "EUR",
+            basicFrom: hotel.prices.fromNightlyEur,
+            seasonalRates: [
+              { label: "Mid", from: "2026-05-01", to: "2026-06-30", nightly: hotel.prices.fromNightlyEur },
+              { label: "High", from: "2026-07-01", to: "2026-08-31", nightly: Math.round(hotel.prices.fromNightlyEur * 1.35) },
+              { label: "Mid", from: "2026-09-01", to: "2026-09-30", nightly: Math.round(hotel.prices.fromNightlyEur * 1.1) },
+            ],
+            unavailableDates: [],
+            minStayNights: 2,
+            relatedOptions: getCoreMirrorHotelRoomsByHotelSlug(hotel.slug).map((r) => ({
+              title: r.title,
+              href: `/property/hotel-room/${r.slug}/vacation`,
+              from: r.rates.nightlyEur,
+              image: r.media.primaryImage,
+            })),
+          }
+        : undefined,
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "Open room inventory",
