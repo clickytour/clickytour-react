@@ -278,11 +278,16 @@ export function PropertyDetailsCanonicalSections({ property, activeMode }: { pro
       {isSaleMode && property.realEstateMeta?.floorPlans?.length ? (
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">Floor plans</h2>
-          <ul className="mt-3 list-disc pl-5 text-sm text-slate-700">
+          <div className="mt-3 grid gap-4 md:grid-cols-2">
             {property.realEstateMeta.floorPlans.map((plan) => (
-              <li key={plan}>{plan}</li>
+              <article key={plan.title} className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                <img src={plan.imageUrl} alt={plan.title} className="h-44 w-full object-cover" />
+                <div className="p-3">
+                  <p className="text-sm font-semibold text-slate-900">{plan.title}</p>
+                </div>
+              </article>
             ))}
-          </ul>
+          </div>
         </section>
       ) : null}
 

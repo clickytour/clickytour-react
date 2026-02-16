@@ -84,7 +84,16 @@ export function getRealEstatePropertyForCanonicalPage(slug: string): CoreMirrorP
       salePriceEur: source.prices.saleEur,
       monthlyRentEur: source.prices.monthlyEur,
       roiPercent: source.prices.roiPercent,
-      floorPlans: ["Main floor plan", "Site layout plan"],
+      floorPlans: [
+        {
+          title: "Main floor plan",
+          imageUrl: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1400&auto=format&fit=crop",
+        },
+        {
+          title: "Site layout plan",
+          imageUrl: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1400&auto=format&fit=crop",
+        },
+      ],
       saleHighlights: ["Sale price", "Price per m²", "ROI", "Floor plans", "Investment use"],
       monthlyHighlights: ["Monthly rent", "Monthly €/m²", "Contract terms", "Deposit", "Included services"],
       vacationHighlights: ["Nightly pricing", "Availability calendar", "Min stay", "Check-in/out rules"],

@@ -54,7 +54,7 @@ export type CoreMirrorProperty = {
     salePriceEur?: number;
     monthlyRentEur?: number;
     roiPercent?: number;
-    floorPlans?: string[];
+    floorPlans?: { title: string; imageUrl: string }[];
     saleHighlights?: string[];
     monthlyHighlights?: string[];
     vacationHighlights?: string[];
