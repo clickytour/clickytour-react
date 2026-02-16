@@ -41,6 +41,10 @@ const staticRoutes: QARoute[] = [
   { href: "/complexes-sani-club-private-villas", label: "Sani Club Private Villas", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
 
   { href: "/property/villa-glarokavos-sea-view", label: "Canonical Property Details (Core Mirror)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/property/vacation/villa-glarokavos-sea-view", label: "Canonical Vacation Property (Type Route)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/property/real-estate/kassandra-investment-villa", label: "Canonical Real Estate Property", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/property/hotel/aegean-boutique-hotel", label: "Canonical Hotel Property", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/property/hotel-room/aegean-deluxe-suite", label: "Canonical Hotel Room", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
 ];
 
 const heroDerived: QARoute[] = heroPages
