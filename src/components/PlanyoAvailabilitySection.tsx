@@ -16,6 +16,12 @@ function toIsoLocal(d: Date) {
   return `${y}-${m}-${day}`;
 }
 
+function toDisplayDate(iso: string) {
+  const [y, m, d] = iso.split("-");
+  if (!y || !m || !d) return iso;
+  return `${d}-${m}-${y}`;
+}
+
 export function PlanyoAvailabilitySection({
   calendarId,
   resourceId,
@@ -290,7 +296,7 @@ export function PlanyoAvailabilitySection({
                   nearestOptions.map((opt) => (
                     <div key={`${opt.start}-${opt.end}`} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs">
                       <span>
-                        {opt.start} → {opt.end} ({opt.nights} {opt.nights === 1 ? "night" : "nights"})
+                        {toDisplayDate(opt.start)} → {toDisplayDate(opt.end)} ({opt.nights} {opt.nights === 1 ? "night" : "nights"})
                       </span>
                       <button
                         type="button"
