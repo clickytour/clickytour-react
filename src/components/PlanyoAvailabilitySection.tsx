@@ -319,7 +319,12 @@ export function PlanyoAvailabilitySection({
         <div className="grid gap-2 md:grid-cols-2">
           <label className="text-[11px] text-slate-600">
             Start date *
-            <input type="date" value={checkIn} min={todayIso} onFocus={() => {
+            <input type="date" value={checkIn} min={todayIso} onMouseDown={() => {
+              if (checkIn) {
+                setRequestedCheckIn("");
+                setCheckIn("");
+              }
+            }} onFocus={() => {
               if (checkIn) {
                 setRequestedCheckIn("");
                 setCheckIn("");
@@ -353,7 +358,12 @@ export function PlanyoAvailabilitySection({
           </label>
           <label className="text-[11px] text-slate-600">
             End date *
-            <input type="date" value={checkOut} min={minCheckoutDate || undefined} onFocus={() => {
+            <input type="date" value={checkOut} min={minCheckoutDate || undefined} onMouseDown={() => {
+              if (checkOut) {
+                setRequestedCheckOut("");
+                setCheckOut("");
+              }
+            }} onFocus={() => {
               if (checkOut) {
                 setRequestedCheckOut("");
                 setCheckOut("");
