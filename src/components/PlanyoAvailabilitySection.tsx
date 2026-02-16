@@ -53,6 +53,10 @@ function SimpleDatePicker({
   }, [open, value, min]);
 
   useEffect(() => {
+    if (value) setOpen(false);
+  }, [value]);
+
+  useEffect(() => {
     if (!open) return;
     function onDocClick(e: MouseEvent) {
       if (!wrapRef.current) return;
