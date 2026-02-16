@@ -2,27 +2,19 @@
 
 import Script from "next/script";
 import { useEffect, useMemo, useState } from "react";
+import { BOOKING_RECOVERY_CONFIG } from "@/lib/bookingRecoveryConfig";
+import {
+  addDaysIso,
+  buildNearestOptions,
+  calculateNights,
+  getRequestedNightsIntent,
+  toDate,
+  toIsoLocal,
+  type SuggestedOption,
+} from "@/lib/bookingRecoveryEngine";
 
 type SeasonalRate = { label: string; from: string; to: string; nightly: number };
 type RelatedPropertyOption = { title: string; href: string; from: number };
-
-type SuggestedOption = {
-  start: string;
-  end: string;
-  nights: number;
-  shiftDays: number;
-};
-
-function toDate(v: string) {
-  return new Date(`${v}T00:00:00`);
-}
-
-function toIsoLocal(d: Date) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
-}
 
 function toDisplayDate(iso: string) {
   const [y, m, d] = iso.split("-");
@@ -71,10 +63,7 @@ export function PlanyoAvailabilitySection({
 
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
-    const start = toDate(checkIn).getTime();
-    const end = toDate(checkOut).getTime();
-    const diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-    return diff > 0 ? diff : 0;
+    return calculateNights(checkIn, checkOut);
   }, [checkIn, checkOut]);
 
   const minStay = Math.max(1, minStayNights || 1);
@@ -87,22 +76,10 @@ export function PlanyoAvailabilitySection({
 
   const unavailableSet = useMemo(() => new Set(unavailableDates), [unavailableDates]);
 
-  const requestedRangeNights = useMemo(() => {
-    if (!requestedCheckIn || !requestedCheckOut) return 0;
-    const start = toDate(requestedCheckIn).getTime();
-    const end = toDate(requestedCheckOut).getTime();
-    const diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-    return diff > 0 ? diff : 0;
-  }, [requestedCheckIn, requestedCheckOut]);
-
-  // Recovery suggestions follow business expectation: 08/03→21/03 should target 12 nights (intent-based).
-  const requestedNights = Math.max(minStay, requestedRangeNights > 0 ? requestedRangeNights - 1 : minStay);
-
-  function addDaysIso(iso: string, days: number) {
-    const d = toDate(iso);
-    d.setDate(d.getDate() + days);
-    return toIsoLocal(d);
-  }
+  const requestedNights = useMemo(
+    () => getRequestedNightsIntent(requestedCheckIn, requestedCheckOut, minStay),
+    [requestedCheckIn, requestedCheckOut, minStay],
+  );
 
   const blockedNightsSet = useMemo(() => {
     // Same-day checkout/check-in allowed: treat last date of each unavailable block as checkout boundary (allowed start)
@@ -136,32 +113,14 @@ export function PlanyoAvailabilitySection({
     return candidate;
   }
 
-  function isRangeBlocked(startIso: string, endIso: string) {
-    const start = toDate(startIso).getTime();
-    const end = toDate(endIso).getTime();
-    return [...blockedNightsSet].some((d) => {
-      const t = toDate(d).getTime();
-      // end date is checkout boundary (exclusive)
-      return t >= start && t < end;
+  function getNearestOptions(targetNights: number, limit: number) {
+    return buildNearestOptions({
+      anchorStart: checkIn,
+      targetNights,
+      blockedNightsSet,
+      maxDaysAround: BOOKING_RECOVERY_CONFIG.SEARCH_WINDOW_DAYS,
+      limit,
     });
-  }
-
-  function buildNearestOptions(targetNights: number, maxDaysAround = 30, limit = 5) {
-    if (!checkIn) return [] as SuggestedOption[];
-    const options: SuggestedOption[] = [];
-
-    for (let offset = -maxDaysAround; offset <= maxDaysAround; offset++) {
-      const start = addDaysIso(checkIn, offset);
-      const end = addDaysIso(start, targetNights);
-      const blocked = isRangeBlocked(start, end);
-      if (!blocked) {
-        options.push({ start, end, nights: targetNights, shiftDays: Math.abs(offset) });
-      }
-    }
-
-    return options
-      .sort((a, b) => a.shiftDays - b.shiftDays)
-      .slice(0, limit);
   }
 
   const needsManualApproval = hasUnavailableInRange || availabilityHint.toLowerCase().includes("may be unavailable");
@@ -169,7 +128,7 @@ export function PlanyoAvailabilitySection({
 
   const exactOptions = useMemo(() => {
     if (!shouldComputeSuggestions) return [] as SuggestedOption[];
-    return buildNearestOptions(requestedNights);
+    return getNearestOptions(requestedNights, BOOKING_RECOVERY_CONFIG.EXACT_OPTIONS_LIMIT);
   }, [shouldComputeSuggestions, checkIn, requestedNights, blockedNightsSet]);
 
   const shorterTargetNights = useMemo(() => {
@@ -178,19 +137,26 @@ export function PlanyoAvailabilitySection({
   }, [requestedNights, minStay]);
 
   const shorterOptions = useMemo(() => {
-    if (!shorterTargetNights) return [] as SuggestedOption[];
-    return buildNearestOptions(shorterTargetNights, 30, 3);
-  }, [checkIn, shorterTargetNights, blockedNightsSet]);
+    if (!shouldComputeSuggestions || !shorterTargetNights) return [] as SuggestedOption[];
+    return getNearestOptions(shorterTargetNights, BOOKING_RECOVERY_CONFIG.ALT_OPTIONS_LIMIT);
+  }, [shouldComputeSuggestions, checkIn, shorterTargetNights, blockedNightsSet]);
 
   const longerOptions = useMemo(() => {
-    return buildNearestOptions(requestedNights + 1, 30, 3);
-  }, [checkIn, requestedNights, blockedNightsSet]);
+    if (!shouldComputeSuggestions) return [] as SuggestedOption[];
+    return getNearestOptions(requestedNights + 1, BOOKING_RECOVERY_CONFIG.ALT_OPTIONS_LIMIT);
+  }, [shouldComputeSuggestions, checkIn, requestedNights, blockedNightsSet]);
 
   const bestExactShift = exactOptions.length ? exactOptions[0].shiftDays : null;
-  const largeShift = (bestExactShift ?? 0) > 7;
+  const largeShift = (bestExactShift ?? 0) > BOOKING_RECOVERY_CONFIG.LARGE_SHIFT_DAYS;
 
   const splitStaySuggestions = useMemo(() => {
-    if (!checkIn || !checkOut || requestedNights < 11 || !largeShift) return [] as Array<{
+    if (
+      !shouldComputeSuggestions
+      || !checkIn
+      || !checkOut
+      || requestedNights < BOOKING_RECOVERY_CONFIG.LONG_STAY_NIGHTS
+      || !largeShift
+    ) return [] as Array<{
       property: RelatedPropertyOption;
       start: string;
       end: string;
@@ -201,14 +167,14 @@ export function PlanyoAvailabilitySection({
     const secondNights = requestedNights - firstNights;
     const splitDate = addDaysIso(checkIn, firstNights);
 
-    const candidates = (relatedOptions || []).slice(0, 2);
+    const candidates = (relatedOptions || []).slice(0, BOOKING_RECOVERY_CONFIG.MAX_SPLIT_PROPERTIES);
     if (candidates.length < 2) return [];
 
     return [
       { property: candidates[0], start: checkIn, end: splitDate, nights: firstNights },
       { property: candidates[1], start: splitDate, end: checkOut, nights: secondNights },
     ];
-  }, [checkIn, checkOut, requestedNights, largeShift, relatedOptions]);
+  }, [shouldComputeSuggestions, checkIn, checkOut, requestedNights, largeShift, relatedOptions]);
 
   const cleaningFee = 100;
   const subtotal = nights * nightly;
