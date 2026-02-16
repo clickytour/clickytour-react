@@ -51,17 +51,6 @@ export function PlanyoAvailabilitySection({
     return season?.nightly ?? basicFrom;
   }, [checkIn, seasonalRates, basicFrom]);
 
-  const hasUnavailableInRange = useMemo(() => {
-    if (!checkIn || !checkOut) return false;
-    const start = toDate(checkIn).getTime();
-    const end = toDate(checkOut).getTime();
-    return unavailableDates.some((d) => {
-      const t = toDate(d).getTime();
-      // end date is treated as checkout boundary (exclusive), so same-day turnover is allowed
-      return t >= start && t < end;
-    });
-  }, [checkIn, checkOut, unavailableDates]);
-
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
     const start = toDate(checkIn).getTime();
@@ -87,10 +76,32 @@ export function PlanyoAvailabilitySection({
     return toIsoLocal(d);
   }
 
+  const blockedNightsSet = useMemo(() => {
+    // Same-day checkout/check-in allowed: treat last date of each unavailable block as checkout boundary (allowed start)
+    const out = new Set<string>();
+    unavailableDates.forEach((d) => {
+      const next = addDaysIso(d, 1);
+      const isBlockEnd = !unavailableSet.has(next);
+      if (!isBlockEnd) out.add(d);
+    });
+    return out;
+  }, [unavailableDates, unavailableSet]);
+
+  const hasUnavailableInRange = useMemo(() => {
+    if (!checkIn || !checkOut) return false;
+    const start = toDate(checkIn).getTime();
+    const end = toDate(checkOut).getTime();
+    return [...blockedNightsSet].some((d) => {
+      const t = toDate(d).getTime();
+      // end date is checkout boundary (exclusive)
+      return t >= start && t < end;
+    });
+  }, [checkIn, checkOut, blockedNightsSet]);
+
   function normalizeStartDate(iso: string) {
     let candidate = iso;
     let guard = 0;
-    while (unavailableSet.has(candidate) && guard < 60) {
+    while (blockedNightsSet.has(candidate) && guard < 60) {
       candidate = addDaysIso(candidate, 1);
       guard += 1;
     }
@@ -100,7 +111,7 @@ export function PlanyoAvailabilitySection({
   function isRangeBlocked(startIso: string, endIso: string) {
     const start = toDate(startIso).getTime();
     const end = toDate(endIso).getTime();
-    return unavailableDates.some((d) => {
+    return [...blockedNightsSet].some((d) => {
       const t = toDate(d).getTime();
       // end date is checkout boundary (exclusive)
       return t >= start && t < end;
@@ -125,7 +136,7 @@ export function PlanyoAvailabilitySection({
       .sort((a, b) => a.distance - b.distance)
       .slice(0, 5)
       .map(({ start, end, nights }) => ({ start, end, nights }));
-  }, [checkIn, requestedNights, minStay, unavailableSet]);
+  }, [checkIn, requestedNights, minStay, blockedNightsSet]);
 
   const needsManualApproval = hasUnavailableInRange || availabilityHint.toLowerCase().includes("may be unavailable");
 
