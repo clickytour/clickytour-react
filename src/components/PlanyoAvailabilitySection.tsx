@@ -177,10 +177,16 @@ export function PlanyoAvailabilitySection({
     const candidates = relatedDisplayOptions.slice(0, BOOKING_RECOVERY_CONFIG.MAX_SPLIT_PROPERTIES);
     if (candidates.length < 2) return [];
 
-    // Selected-property-first split strategy: prioritize filling 3-5 night nearby gaps.
-    const preferredNearbyGapNights = [5, 4, 3, 6];
-    const nearbyNights = preferredNearbyGapNights.find((n) => n > 0 && n < requestedRangeNights) ?? Math.floor(requestedRangeNights / 2);
-    const selectedNights = requestedRangeNights - nearbyNights;
+    // Combined-stay constraints:
+    // - avoid creating weak selected-property gaps (prefer 6 or 7 selected nights first)
+    // - keep second property at >=7 nights when possible
+    const minOtherPropertyNights = 7;
+    const preferredSelectedNights = [6, 7, 5, 8, 4, 9];
+    const selectedNights = preferredSelectedNights.find((n) => {
+      const otherNights = requestedRangeNights - n;
+      return n > 0 && otherNights >= minOtherPropertyNights;
+    }) ?? Math.max(1, requestedRangeNights - minOtherPropertyNights);
+    const nearbyNights = requestedRangeNights - selectedNights;
     const splitDate = addDaysIso(checkIn, selectedNights);
     const requestedEnd = addDaysIso(checkIn, requestedRangeNights);
 
@@ -378,7 +384,7 @@ export function PlanyoAvailabilitySection({
                     {relatedDisplayOptions.slice(0, 3).map((item) => (
                       <a key={item.title} href={item.href} className="flex items-center justify-between rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700 hover:bg-slate-50">
                         <span>{item.title}</span>
-                        <span>{requestedRangeNights} nights · Final price for selected dates shown on property page</span>
+                        <span>{requestedRangeNights} nights · Estimated total: {currency} {(item.from * requestedRangeNights).toFixed(0)}</span>
                       </a>
                     ))}
                     <p className="text-[11px] text-slate-500">
@@ -393,7 +399,7 @@ export function PlanyoAvailabilitySection({
                   <div className="space-y-2 rounded-md border border-blue-200 bg-white p-2">
                     <p className="text-xs font-semibold text-blue-800">Combined 2-property proposal (same area)</p>
                     <p className="text-xs text-slate-600">For this combination, our operator will create the reservation manually for you.</p>
-                    <p className="text-[11px] text-slate-500">Total combined stay: {requestedRangeNights} nights (matching your requested dates).</p>
+                    <p className="text-[11px] text-slate-500">Total combined stay: {requestedRangeNights} nights (matching your requested dates). Other-property segment target: minimum 7 nights.</p>
                     {splitStaySuggestions.map((s, idx) => (
                       <div key={`${s.property.title}-${idx}`} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-700">
                         <p className="font-semibold text-slate-900">{idx === 0 ? `${propertyTitle || "Selected Property"} (selected)` : s.property.title}</p>
