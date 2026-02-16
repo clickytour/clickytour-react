@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PropertyDetailsCanonicalSections } from "@/components/PropertyDetailsCanonicalSections";
-import { getCoreMirrorPropertyBySlug } from "@/lib/coreMirrorPropertyMock";
+import { getVacationPropertyForCanonicalPage } from "@/lib/coreMirrorVacationBridge";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const property = getCoreMirrorPropertyBySlug(slug);
+  const property = getVacationPropertyForCanonicalPage(slug);
 
   if (!property) {
     return {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PropertyDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const property = getCoreMirrorPropertyBySlug(slug);
+  const property = getVacationPropertyForCanonicalPage(slug);
 
   if (!property) notFound();
 
