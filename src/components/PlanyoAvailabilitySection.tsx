@@ -187,6 +187,7 @@ export function PlanyoAvailabilitySection({
 
     return selectedExactOption;
   }, [shouldComputeSuggestions, checkIn, requestedRangeNights, minStay, blockedNightsSet, selectedExactOption]);
+  const selectedSeasonMultiplier = basicFrom > 0 ? (nightly / basicFrom) : 1;
   const relatedPriceMin = nightly * 0.8;
   const relatedPriceMax = nightly * 1.2;
   const rankedRelatedOptions = useMemo(() => {
@@ -198,6 +199,14 @@ export function PlanyoAvailabilitySection({
     return rankedRelatedOptions.filter((item) => item.from >= relatedPriceMin && item.from <= relatedPriceMax);
   }, [rankedRelatedOptions, relatedPriceMin, relatedPriceMax]);
   const relatedDisplayOptions = filteredRelatedOptions.length ? filteredRelatedOptions : rankedRelatedOptions.slice(0, 3);
+
+  function getSeasonAdjustedNightlyForRelated(item: RelatedPropertyOption) {
+    return item.from * selectedSeasonMultiplier;
+  }
+
+  function getSeasonAdjustedTotalForRelated(item: RelatedPropertyOption, nightsCount: number) {
+    return getSeasonAdjustedNightlyForRelated(item) * nightsCount;
+  }
 
   const splitStaySuggestions = useMemo(() => {
     if (
@@ -233,6 +242,14 @@ export function PlanyoAvailabilitySection({
       { property: candidates[1], start: splitDate, end: requestedEnd, nights: nearbyNights },
     ];
   }, [shouldComputeSuggestions, checkIn, checkOut, requestedRangeNights, relatedDisplayOptions]);
+
+  const combinedSeasonAdjustedTotal = useMemo(() => {
+    if (!splitStaySuggestions.length) return 0;
+    return splitStaySuggestions.reduce((sum, s, idx) => {
+      const segment = idx === 0 ? (nightly * s.nights) : getSeasonAdjustedTotalForRelated(s.property, s.nights);
+      return sum + segment;
+    }, 0);
+  }, [splitStaySuggestions, nightly]);
 
   const cleaningFee = 100;
   const subtotal = nights * nightly;
@@ -422,7 +439,7 @@ export function PlanyoAvailabilitySection({
                     {relatedDisplayOptions.slice(0, 3).map((item) => (
                       <a key={item.title} href={item.href} className="flex items-center justify-between rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700 hover:bg-slate-50">
                         <span>{item.title}</span>
-                        <span>{requestedRangeNights} nights · Estimated total: {currency} {(item.from * requestedRangeNights).toFixed(0)}</span>
+                        <span>{requestedRangeNights} nights · Season-adjusted total: {currency} {getSeasonAdjustedTotalForRelated(item, requestedRangeNights).toFixed(0)}</span>
                       </a>
                     ))}
                     <p className="text-[11px] text-slate-500">
@@ -438,10 +455,14 @@ export function PlanyoAvailabilitySection({
                     <p className="text-xs font-semibold text-blue-800">Combined 2-property proposal (same area)</p>
                     <p className="text-xs text-slate-600">For this combination, our operator will create the reservation manually for you.</p>
                     <p className="text-[11px] text-slate-500">Total combined stay: {requestedRangeNights} nights (matching your requested dates). Other-property segment target: minimum 7 nights.</p>
+                    <p className="text-[11px] text-slate-500">Season-adjusted combined total: {currency} {combinedSeasonAdjustedTotal.toFixed(0)}</p>
                     {splitStaySuggestions.map((s, idx) => (
                       <div key={`${s.property.title}-${idx}`} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-700">
                         <p className="font-semibold text-slate-900">{idx === 0 ? `${propertyTitle || "Selected Property"} (selected)` : s.property.title}</p>
                         <p>{toDisplayDate(s.start)} → {toDisplayDate(s.end)} ({s.nights} {s.nights === 1 ? "night" : "nights"})</p>
+                        <p className="text-[11px] text-slate-600">
+                          Segment total: {currency} {(idx === 0 ? (nightly * s.nights) : getSeasonAdjustedTotalForRelated(s.property, s.nights)).toFixed(0)}
+                        </p>
                         {idx > 0 && <a href={s.property.href} className="mt-1 inline-flex rounded-md border border-slate-300 px-2 py-0.5 text-[11px] font-medium text-slate-900">View property</a>}
                       </div>
                     ))}

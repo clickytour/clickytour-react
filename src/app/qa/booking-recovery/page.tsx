@@ -15,6 +15,7 @@ const doneChecklist = [
   "Fallback logic added: if no options in ±20% band, show closest-price options instead of hiding blocks.",
   "Combined proposal now preserves requested total-night range.",
   "Selected-property baseline approved: for 08/03→22/03 request, selected suggestion returns 08/03→20/03 (12 nights).",
+  "Replaced generic estimated totals with season-adjusted totals for related and combined proposals.",
 ];
 
 export default function BookingRecoveryQaPage() {
