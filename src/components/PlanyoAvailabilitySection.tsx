@@ -67,6 +67,7 @@ export function PlanyoAvailabilitySection({
   }, [checkIn, checkOut]);
 
   const minStay = Math.max(1, minStayNights || 1);
+  const todayIso = useMemo(() => toIsoLocal(new Date()), []);
   const minCheckoutDate = useMemo(() => {
     if (!checkIn) return "";
     const d = toDate(checkIn);
@@ -272,7 +273,7 @@ export function PlanyoAvailabilitySection({
       return;
     }
 
-    if (!checkOut || toDate(checkOut).getTime() < toDate(minCheckoutDate).getTime()) {
+    if (checkOut && toDate(checkOut).getTime() < toDate(minCheckoutDate).getTime()) {
       setCheckOut(minCheckoutDate);
     }
   }, [checkIn, checkOut, minCheckoutDate]);
@@ -318,7 +319,7 @@ export function PlanyoAvailabilitySection({
         <div className="grid gap-2 md:grid-cols-2">
           <label className="text-[11px] text-slate-600">
             Start date *
-            <input type="date" value={checkIn} onChange={(e) => {
+            <input type="date" value={checkIn} min={todayIso} onChange={(e) => {
               const next = e.target.value;
               if (!next) {
                 setRequestedCheckIn("");
