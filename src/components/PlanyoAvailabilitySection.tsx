@@ -422,6 +422,7 @@ export function PlanyoAvailabilitySection({
                 {!!splitStaySuggestions.length && (
                   <div className="space-y-2 rounded-md border border-blue-200 bg-white p-2">
                     <p className="text-xs font-semibold text-blue-800">Split stay suggestion for long trip ({requestedNights} nights)</p>
+                    <p className="text-xs text-slate-600">For this combination, our operator will create the reservation manually for you.</p>
                     {splitStaySuggestions.map((s, idx) => (
                       <div key={`${s.property.title}-${idx}`} className="rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-700">
                         <p className="font-semibold text-slate-900">{s.property.title}</p>
@@ -429,6 +430,14 @@ export function PlanyoAvailabilitySection({
                         <a href={s.property.href} className="mt-1 inline-flex rounded-md border border-slate-300 px-2 py-0.5 text-[11px] font-medium text-slate-900">View property</a>
                       </div>
                     ))}
+                    <a
+                      role="button"
+                      className="inline-flex rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white whitespace-nowrap"
+                      href="#guest-request-form"
+                    >
+                      Request this combination
+                    </a>
+                    <p className="text-[11px] text-slate-500">No need to restart search — we’ll coordinate both properties in one booking flow.</p>
                   </div>
                 )}
 
