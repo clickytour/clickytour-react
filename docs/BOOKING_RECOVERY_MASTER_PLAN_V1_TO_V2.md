@@ -73,7 +73,32 @@ For split-stay candidates add penalty/reward:
 ### V2.4 Dynamic geo fallback tiers
 - Tier 1: same micro-area (e.g. <=3km)
 - Tier 2: local region (<=10km)
-- Tier 3: broader destination cluster
+- Tier 3: broader destination cluster (only if explicitly enabled)
+
+### V2.5 Locked business constraints (Drcris)
+- KPI priority order:
+  1) booking conversion, 2) lead capture, 3) average booking value, 4) occupancy.
+- Split stay:
+  - always allowed for requests >=11 nights,
+  - maximum 2 properties,
+  - same area required.
+- Geo tolerance default: 10km.
+- Price tolerance ceiling: +20%.
+- Similarity priority order: capacity -> pool -> sea view -> family-friendly -> rating.
+- Inventory optimization:
+  - prioritize properties with fewer reservations,
+  - prefer filling 3-5 night gaps via combination proposals.
+- Seasonal discount logic:
+  - low/mid season: allow 15-20% discounts (especially >14 guests / 2-4 families),
+  - high season: prefer no-discount sales, use combination logic mainly for gap management.
+
+### V2.6 Channel communication policy
+- Tone: strictly factual + friendly.
+- FB/Instagram: short and friendly.
+- Email: official tone + optional discount note when applicable.
+
+### V2.7 Operational response goal
+- Preserve fast-response behavior (1-10 minutes) through automation-ready recommendation logic.
 
 ### V2.5 UX copy upgrade
 - Explain *why* option is shown:
