@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BOOKING_RECOVERY_CONFIG } from "@/lib/bookingRecoveryConfig";
 import {
   addDaysIso,
@@ -20,6 +20,107 @@ function toDisplayDate(iso: string) {
   const [y, m, d] = iso.split("-");
   if (!y || !m || !d) return iso;
   return `${d}-${m}-${y}`;
+}
+
+function toInputDisplayDate(iso: string) {
+  if (!iso) return "dd/mm/yyyy";
+  const [y, m, d] = iso.split("-");
+  if (!y || !m || !d) return iso;
+  return `${d}/${m}/${y}`;
+}
+
+function SimpleDatePicker({
+  value,
+  onChange,
+  min,
+}: {
+  value: string;
+  onChange: (iso: string) => void;
+  min?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const minDate = useMemo(() => (min ? toDate(min) : null), [min]);
+  const [viewMonth, setViewMonth] = useState<Date>(() => {
+    const base = value ? toDate(value) : (min ? toDate(min) : new Date());
+    return new Date(base.getFullYear(), base.getMonth(), 1);
+  });
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const base = value ? toDate(value) : (min ? toDate(min) : new Date());
+    setViewMonth(new Date(base.getFullYear(), base.getMonth(), 1));
+  }, [open, value, min]);
+
+  useEffect(() => {
+    if (!open) return;
+    function onDocClick(e: MouseEvent) {
+      if (!wrapRef.current) return;
+      if (!wrapRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [open]);
+
+  const year = viewMonth.getFullYear();
+  const month = viewMonth.getMonth();
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const cells: Array<{ iso: string; day: number; disabled: boolean } | null> = [];
+  for (let i = 0; i < firstWeekday; i += 1) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d += 1) {
+    const dt = new Date(year, month, d);
+    const iso = toIsoLocal(dt);
+    const disabled = !!minDate && dt.getTime() < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()).getTime();
+    cells.push({ iso, day: d, disabled });
+  }
+
+  return (
+    <div ref={wrapRef} className="relative mt-1">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full rounded-lg border border-slate-300 px-3 py-2 text-left text-sm text-slate-900"
+      >
+        {toInputDisplayDate(value)}
+      </button>
+
+      {open && (
+        <div className="absolute z-20 mt-1 w-72 rounded-lg border border-slate-200 bg-white p-2 shadow-xl">
+          <div className="mb-2 flex items-center justify-between text-sm">
+            <button type="button" onClick={() => setViewMonth(new Date(year, month - 1, 1))} className="rounded border px-2 py-0.5">←</button>
+            <span className="font-semibold">{viewMonth.toLocaleString("en-US", { month: "long", year: "numeric" })}</span>
+            <button type="button" onClick={() => setViewMonth(new Date(year, month + 1, 1))} className="rounded border px-2 py-0.5">→</button>
+          </div>
+
+          <div className="mb-1 grid grid-cols-7 text-center text-[11px] text-slate-500">
+            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d) => <span key={d}>{d}</span>)}
+          </div>
+          <div className="grid grid-cols-7 gap-1">
+            {cells.map((c, idx) => {
+              if (!c) return <span key={`blank-${idx}`} className="h-8" />;
+              const isSelected = value === c.iso;
+              return (
+                <button
+                  key={c.iso}
+                  type="button"
+                  disabled={c.disabled}
+                  onClick={() => {
+                    onChange(c.iso);
+                    setOpen(false);
+                  }}
+                  className={`h-8 rounded text-sm ${isSelected ? "bg-blue-600 text-white" : "bg-white text-slate-900"} ${c.disabled ? "cursor-not-allowed opacity-30" : "hover:bg-slate-100"}`}
+                >
+                  {c.day}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function PlanyoAvailabilitySection({
@@ -319,67 +420,52 @@ export function PlanyoAvailabilitySection({
         <div className="grid gap-2 md:grid-cols-2">
           <label className="text-[11px] text-slate-600">
             Start date *
-            <input type="date" value={checkIn} min={todayIso} onMouseDown={() => {
-              if (checkIn) {
-                setRequestedCheckIn("");
-                setCheckIn("");
-              }
-            }} onFocus={() => {
-              if (checkIn) {
-                setRequestedCheckIn("");
-                setCheckIn("");
-              }
-            }} onChange={(e) => {
-              const next = e.target.value;
-              if (!next) {
-                setRequestedCheckIn("");
-                setCheckIn("");
-                return;
-              }
-              const normalized = normalizeStartDate(next);
-              // Keep intent aligned with the effective visible date (prevents off-by-one drift in recovery suggestions).
-              setRequestedCheckIn(normalized);
-              setCheckIn(normalized);
+            <SimpleDatePicker
+              value={checkIn}
+              min={todayIso}
+              onChange={(next) => {
+                if (!next) {
+                  setRequestedCheckIn("");
+                  setCheckIn("");
+                  return;
+                }
+                const normalized = normalizeStartDate(next);
+                setRequestedCheckIn(normalized);
+                setCheckIn(normalized);
 
-              const d = toDate(normalized);
-              d.setDate(d.getDate() + minStay);
-              const autoCheckout = toIsoLocal(d);
-              if (!checkOut) {
-                setRequestedCheckOut(autoCheckout);
-                setCheckOut(autoCheckout);
-              }
+                const d = toDate(normalized);
+                d.setDate(d.getDate() + minStay);
+                const autoCheckout = toIsoLocal(d);
+                if (!checkOut) {
+                  setRequestedCheckOut(autoCheckout);
+                  setCheckOut(autoCheckout);
+                }
 
-              if (normalized !== next) {
-                setMinStayNotice(`Selected start date was unavailable. Moved to next available date: ${normalized}.`);
-              } else {
-                setMinStayNotice("");
-              }
-            }} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />
+                if (normalized !== next) {
+                  setMinStayNotice(`Selected start date was unavailable. Moved to next available date: ${normalized}.`);
+                } else {
+                  setMinStayNotice("");
+                }
+              }}
+            />
           </label>
           <label className="text-[11px] text-slate-600">
             End date *
-            <input type="date" value={checkOut} min={minCheckoutDate || undefined} onMouseDown={() => {
-              if (checkOut) {
-                setRequestedCheckOut("");
-                setCheckOut("");
-              }
-            }} onFocus={() => {
-              if (checkOut) {
-                setRequestedCheckOut("");
-                setCheckOut("");
-              }
-            }} onChange={(e) => {
-              const next = e.target.value;
-              if (checkIn && minCheckoutDate && next && toDate(next).getTime() < toDate(minCheckoutDate).getTime()) {
-                setRequestedCheckOut(minCheckoutDate);
-                setCheckOut(minCheckoutDate);
-                setMinStayNotice(`Minimum stay is ${minStay} ${minStay === 1 ? "night" : "nights"}. End date was adjusted.`);
-              } else {
-                setRequestedCheckOut(next);
-                setCheckOut(next);
-                setMinStayNotice("");
-              }
-            }} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />
+            <SimpleDatePicker
+              value={checkOut}
+              min={minCheckoutDate || undefined}
+              onChange={(next) => {
+                if (checkIn && minCheckoutDate && next && toDate(next).getTime() < toDate(minCheckoutDate).getTime()) {
+                  setRequestedCheckOut(minCheckoutDate);
+                  setCheckOut(minCheckoutDate);
+                  setMinStayNotice(`Minimum stay is ${minStay} ${minStay === 1 ? "night" : "nights"}. End date was adjusted.`);
+                } else {
+                  setRequestedCheckOut(next);
+                  setCheckOut(next);
+                  setMinStayNotice("");
+                }
+              }}
+            />
           </label>
         </div>
         <p className="mt-2 text-xs text-slate-600">Minimum stay: {minStay} {minStay === 1 ? "night" : "nights"}.</p>
