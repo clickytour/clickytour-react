@@ -10,6 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${property.title} Vacation Rental | Villa4You`,
     description: `Vacation-rental mode for ${property.title}. Check availability and short-stay details.`,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr"}/property/real-estate/${slug}/vacation`,
+    },
   };
 }
 

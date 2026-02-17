@@ -10,6 +10,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${property.title} For Sale | Villa4You`,
     description: `Sale mode for ${property.title}. View pricing, floor plans, and investment details.`,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr"}/property/real-estate/${slug}/sale`,
+    },
   };
 }
 

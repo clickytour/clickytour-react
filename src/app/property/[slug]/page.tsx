@@ -17,6 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${property.title} | Villa4You`,
     description: `${property.shortDescription} From ${property.pricing.seasonalFrom} ${property.pricing.currency} per night.`,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr"}/property/${slug}`,
+    },
     openGraph: {
       title: `${property.title} | Villa4You`,
       description: property.shortDescription,
