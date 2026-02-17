@@ -1,12 +1,16 @@
 import type { CanonicalDetailsViewModel } from "@/lib/coreMirrorAdapters";
 import { GuestRequestInlineForm } from "@/components/GuestRequestInlineForm";
 import { PlanyoAvailabilitySection } from "@/components/PlanyoAvailabilitySection";
+import { isHttpsUrl, normalizeContentUrls, normalizeVideoForRender } from "@/lib/mediaPresentation";
 
 export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsViewModel }) {
   const mode = vm.dealType[0];
   const isVacation = mode === "short_term_rent";
   const isSale = mode === "sale";
   const isMonthly = mode === "monthly_rent";
+  const videoRender = normalizeVideoForRender(vm.media?.videoUrl);
+  const mediaLinks = normalizeContentUrls(vm.media?.contentUrls);
+  const hasTour = isHttpsUrl(vm.media?.tour3dUrl);
 
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-8">
@@ -122,14 +126,26 @@ export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsVie
         </section>
       )}
 
-      {(vm.media?.videoUrl || vm.media?.tour3dUrl || (vm.media?.contentUrls && vm.media.contentUrls.length > 0)) && (
+      {(videoRender || hasTour || mediaLinks.length > 0) && (
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">Media presentation</h2>
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            {vm.media?.videoUrl && (
+            {videoRender && (
               <article className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
-                <div className="aspect-video w-full">
-                  <iframe src={vm.media.videoUrl} title={`${vm.title} video`} className="h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                <div className="aspect-video w-full bg-black/5">
+                  {videoRender.kind === "iframe" && (
+                    <iframe src={videoRender.src} title={`${vm.title} video`} className="h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                  )}
+                  {videoRender.kind === "video" && (
+                    <video className="h-full w-full" controls preload="metadata">
+                      <source src={videoRender.src} type="video/mp4" />
+                    </video>
+                  )}
+                  {videoRender.kind === "link" && (
+                    <div className="flex h-full items-center justify-center p-4 text-center">
+                      <a href={videoRender.href} target="_blank" rel="noreferrer" className="text-slate-900 underline underline-offset-2">{videoRender.title}</a>
+                    </div>
+                  )}
                 </div>
                 <div className="border-t border-slate-200 px-3 py-2 text-sm text-slate-700">Video presentation</div>
               </article>
@@ -137,10 +153,10 @@ export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsVie
             <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <h3 className="text-sm font-semibold text-slate-900">Additional media links</h3>
               <div className="mt-3 flex flex-col gap-2 text-sm">
-                {vm.media?.tour3dUrl && (
-                  <a href={vm.media.tour3dUrl} target="_blank" rel="noreferrer" className="text-slate-900 underline underline-offset-2">Open 3D tour</a>
+                {hasTour && (
+                  <a href={vm.media?.tour3dUrl} target="_blank" rel="noreferrer" className="text-slate-900 underline underline-offset-2">Open 3D tour</a>
                 )}
-                {vm.media?.contentUrls?.map((entry) => (
+                {mediaLinks.map((entry) => (
                   <a key={`${entry.site}-${entry.url}`} href={entry.url} target="_blank" rel="noreferrer" className="text-slate-900 underline underline-offset-2">{entry.site}: {entry.url}</a>
                 ))}
               </div>
