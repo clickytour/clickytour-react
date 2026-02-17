@@ -1,4 +1,7 @@
 export type ServicePriceModel = "package" | "per_hour" | "per_person" | "per_service" | "quote";
+export type ServiceBookingType = "external_booking_link" | "instant_booking" | "request_to_book";
+export type ServiceSubscriptionPlan = "free" | "standard" | "premium";
+export type ServiceAudienceTarget = "guests" | "agents" | "property_owners";
 
 export type CoreMirrorService = {
   slug: string;
@@ -42,7 +45,9 @@ export type CoreMirrorService = {
   };
 
   pricingBooking: {
-    bookingType?: string;
+    bookingType?: ServiceBookingType;
+    externalBookingLink?: string;
+    pricingDescription?: string;
     priceList: Array<{
       title: string;
       priceModel: ServicePriceModel;
@@ -54,13 +59,15 @@ export type CoreMirrorService = {
   };
 
   platformSubscription: {
-    subscriptionPlan?: string;
-    audienceTarget: Array<"guests" | "agents" | "property_owners">;
+    subscriptionPlan?: ServiceSubscriptionPlan;
+    audienceTarget: Array<ServiceAudienceTarget>;
   };
 
   synchronization?: {
     status?: string;
     externalRefs?: string[];
+    sitesAvailable?: number;
+    note?: string;
   };
 
   relatedPropertySlug?: string;
@@ -108,7 +115,9 @@ export const coreMirrorServices: CoreMirrorService[] = [
       logo: "https://images.unsplash.com/photo-1612831455544-6d9a36e20c77?q=80&w=400&auto=format&fit=crop",
     },
     pricingBooking: {
-      bookingType: "Instant booking",
+      bookingType: "external_booking_link",
+      externalBookingLink: "https://villa4you.gr",
+      pricingDescription: "Custom pricing note by provider depending on route/time and additional requests.",
       priceList: [
         {
           title: "SKG -> Kassandra",
@@ -126,12 +135,14 @@ export const coreMirrorServices: CoreMirrorService[] = [
       ],
     },
     platformSubscription: {
-      subscriptionPlan: "Pro",
-      audienceTarget: ["guests", "agents"],
+      subscriptionPlan: "premium",
+      audienceTarget: ["agents", "property_owners"],
     },
     synchronization: {
       status: "active",
       externalRefs: ["core:svc-1001"],
+      sitesAvailable: 0,
+      note: "No sites are available for Service.",
     },
     relatedPropertySlug: "villa-glarokavos-sea-view",
     relatedBlogSlug: "family-seaside-vacation-checklist",
@@ -170,7 +181,8 @@ export const coreMirrorServices: CoreMirrorService[] = [
       promoVideoUrl: "https://vimeo.com/76979871",
     },
     pricingBooking: {
-      bookingType: "Request",
+      bookingType: "request_to_book",
+      pricingDescription: "Menu and final price can be adjusted per group size, dietary preferences, and event format.",
       priceList: [
         {
           title: "Chef dinner package",
@@ -187,7 +199,7 @@ export const coreMirrorServices: CoreMirrorService[] = [
       ],
     },
     platformSubscription: {
-      subscriptionPlan: "Starter",
+      subscriptionPlan: "standard",
       audienceTarget: ["guests", "property_owners"],
     },
     relatedPropertySlug: "villa-glarokavos-sea-view",

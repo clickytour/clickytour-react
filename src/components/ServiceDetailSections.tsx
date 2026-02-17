@@ -31,7 +31,17 @@ export function ServiceDetailSections({ service }: { service: CoreMirrorService 
               </div>
             )}
             <p className="text-sm text-slate-600">Coverage: {service.locationServiceArea.serviceAreaCoverageKm ?? "N/A"} km · City: {service.locationServiceArea.city}</p>
-            <p className="text-sm text-slate-600">Booking type: {service.pricingBooking.bookingType ?? "Request"} · Prices: {service.pricingBooking.priceList.length} item(s)</p>
+            <p className="text-sm text-slate-600">Booking type: {service.pricingBooking.bookingType ?? "request_to_book"} · Prices: {service.pricingBooking.priceList.length} item(s)</p>
+            {service.pricingBooking.externalBookingLink && (
+              <p className="text-sm text-slate-600">External booking link: {service.pricingBooking.externalBookingLink}</p>
+            )}
+            {service.pricingBooking.pricingDescription && (
+              <p className="text-sm text-slate-700">Pricing description: {service.pricingBooking.pricingDescription}</p>
+            )}
+            {service.synchronization?.note && (
+              <p className="text-sm text-slate-600">Synchronization: {service.synchronization.note}</p>
+            )}
+            <p className="text-sm text-slate-600">Subscription: {service.platformSubscription.subscriptionPlan ?? "free"} · Audience: {service.platformSubscription.audienceTarget.join(", ")}</p>
 
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {service.relatedPropertySlug && (

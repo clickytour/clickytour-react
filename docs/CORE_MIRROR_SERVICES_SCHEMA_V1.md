@@ -62,7 +62,9 @@ This document mirrors Core `Create Services` screens into a typed mock schema un
 - `logo`
 
 ### pricingBooking
-- `bookingType`
+- `bookingType` (`external_booking_link | instant_booking | request_to_book`)
+- `externalBookingLink`
+- `pricingDescription` (provider-entered free description for custom pricing specifics)
 - `priceList[]` items:
   - `title`
   - `priceModel` (`package | per_hour | per_person | per_service | quote`)
@@ -72,7 +74,7 @@ This document mirrors Core `Create Services` screens into a typed mock schema un
   - `photo`
 
 ### platformSubscription
-- `subscriptionPlan`
+- `subscriptionPlan` (`free | standard | premium`)
 - `audienceTarget[]` (`guests | agents | property_owners`)
 
 ## Current UI usage
@@ -93,6 +95,7 @@ This document mirrors Core `Create Services` screens into a typed mock schema un
 ## Pending for final Core contract
 
 - Replace mock structure with exact API payload key names once Core canonical contract is approved.
+- Confirm if `pricingDescription` is global per service (current mirror) or per-price-row in final Core payload.
 - Add full UI rendering for:
   - detailed price list table
   - audience badges
