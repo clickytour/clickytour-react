@@ -6,7 +6,13 @@ export type CoreMirrorHotel = {
   description: string;
   hotelType: string;
   dealType: Array<"short_term_rent" | "monthly_rent" | "sale">;
-  media: { primaryImage: string; galleryImages: string[] };
+  media: {
+    primaryImage: string;
+    galleryImages: string[];
+    videoUrl?: string;
+    tour3dUrl?: string;
+    contentUrls?: Array<{ site: string; url: string }>;
+  };
   location: { city: string; region: string; country: string };
   prices: { fromNightlyEur: number; monthlyEur: number; saleEur: number };
   amenities: string[];
@@ -27,6 +33,12 @@ const hotels: CoreMirrorHotel[] = [
       galleryImages: [
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=1200&auto=format&fit=crop",
+      ],
+      videoUrl: "https://www.youtube.com/embed/2QF8xM0LxMI",
+      tour3dUrl: "https://my.matterport.com/show/?m=SxQL3iGyoDo",
+      contentUrls: [
+        { site: "YouTube", url: "https://www.youtube.com/watch?v=2QF8xM0LxMI" },
+        { site: "Booking", url: "https://www.booking.com" },
       ],
     },
     location: { city: "Pefkohori", region: "Halkidiki", country: "Greece" },

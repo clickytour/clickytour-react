@@ -7,7 +7,13 @@ export type CoreMirrorHotelRoom = {
   quantity: number;
   shortSummary: string;
   dealType: Array<"short_term_rent" | "monthly_rent" | "sale">;
-  media: { primaryImage: string; galleryImages: string[] };
+  media: {
+    primaryImage: string;
+    galleryImages: string[];
+    videoUrl?: string;
+    tour3dUrl?: string;
+    contentUrls?: Array<{ site: string; url: string }>;
+  };
   rates: { nightlyEur: number; monthlyEur: number };
   maxGuests: number;
   amenities: string[];
@@ -28,6 +34,9 @@ export const coreMirrorHotelRooms: CoreMirrorHotelRoom[] = [
       galleryImages: [
         "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop",
       ],
+      videoUrl: "https://www.youtube.com/embed/Scxs7L0vhZ4",
+      tour3dUrl: "https://my.matterport.com/show/?m=8gW2J1r5gV9",
+      contentUrls: [{ site: "Airbnb", url: "https://www.airbnb.com" }],
     },
     rates: { nightlyEur: 180, monthlyEur: 3900 },
     maxGuests: 3,

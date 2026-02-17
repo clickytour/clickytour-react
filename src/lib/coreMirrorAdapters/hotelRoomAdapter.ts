@@ -49,6 +49,11 @@ export function toHotelRoomDetailsVM(room: CoreMirrorHotelRoom, activeMode?: Dea
       label: "Back to parent hotel",
       href: `/property/hotel/${room.hotelSlug}/${modeSlug(mode)}`,
     },
+    media: {
+      videoUrl: room.media.videoUrl,
+      tour3dUrl: room.media.tour3dUrl,
+      contentUrls: room.media.contentUrls,
+    },
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "View parent hotel",

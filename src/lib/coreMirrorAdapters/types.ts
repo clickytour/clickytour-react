@@ -41,6 +41,11 @@ export type CanonicalDetailsViewModel = {
     minStayNights: number;
     relatedOptions: Array<{ title: string; href: string; from: number; image: string }>;
   };
+  media?: {
+    videoUrl?: string;
+    tour3dUrl?: string;
+    contentUrls?: Array<{ site: string; url: string }>;
+  };
   parentLink?: { label: string; href: string };
   cta: {
     primary: string;

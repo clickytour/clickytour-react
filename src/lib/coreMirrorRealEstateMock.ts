@@ -5,7 +5,13 @@ export type CoreMirrorRealEstateProperty = {
   shortSummary: string;
   description: string;
   dealType: Array<"short_term_rent" | "monthly_rent" | "sale">;
-  media: { primaryImage: string; galleryImages: string[] };
+  media: {
+    primaryImage: string;
+    galleryImages: string[];
+    videoUrl?: string;
+    tour3dUrl?: string;
+    contentUrls?: Array<{ site: string; url: string }>;
+  };
   location: { city: string; region: string; country: string };
   metrics: { bedrooms: number; bathrooms: number; areaSqm: number };
   prices: { saleEur: number; monthlyEur: number; perSqmEur: number; roiPercent: number };
@@ -27,6 +33,9 @@ const realEstateProperties: CoreMirrorRealEstateProperty[] = [
         "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1200&auto=format&fit=crop",
       ],
+      videoUrl: "https://www.youtube.com/embed/6zGQSWib32E",
+      tour3dUrl: "https://my.matterport.com/show/?m=JfA1P8x5GmW",
+      contentUrls: [{ site: "VRBO", url: "https://www.vrbo.com" }],
     },
     location: { city: "Kassandra", region: "Halkidiki", country: "Greece" },
     metrics: { bedrooms: 4, bathrooms: 3, areaSqm: 210 },

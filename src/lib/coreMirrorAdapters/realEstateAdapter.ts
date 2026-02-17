@@ -26,6 +26,11 @@ export function toRealEstateDetailsVM(property: CoreMirrorRealEstateProperty): C
     amenities: property.amenities,
     distances: property.distances,
     locationLabel: `${property.location.city}, ${property.location.region}, ${property.location.country}`,
+    media: {
+      videoUrl: property.media.videoUrl,
+      tour3dUrl: property.media.tour3dUrl,
+      contentUrls: property.media.contentUrls,
+    },
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "Schedule viewing",

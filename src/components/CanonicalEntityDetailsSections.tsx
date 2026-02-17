@@ -122,6 +122,33 @@ export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsVie
         </section>
       )}
 
+      {(vm.media?.videoUrl || vm.media?.tour3dUrl || (vm.media?.contentUrls && vm.media.contentUrls.length > 0)) && (
+        <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Media presentation</h2>
+          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+            {vm.media?.videoUrl && (
+              <article className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <div className="aspect-video w-full">
+                  <iframe src={vm.media.videoUrl} title={`${vm.title} video`} className="h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                </div>
+                <div className="border-t border-slate-200 px-3 py-2 text-sm text-slate-700">Video presentation</div>
+              </article>
+            )}
+            <article className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h3 className="text-sm font-semibold text-slate-900">Additional media links</h3>
+              <div className="mt-3 flex flex-col gap-2 text-sm">
+                {vm.media?.tour3dUrl && (
+                  <a href={vm.media.tour3dUrl} target="_blank" rel="noreferrer" className="text-slate-900 underline underline-offset-2">Open 3D tour</a>
+                )}
+                {vm.media?.contentUrls?.map((entry) => (
+                  <a key={`${entry.site}-${entry.url}`} href={entry.url} target="_blank" rel="noreferrer" className="text-slate-900 underline underline-offset-2">{entry.site}: {entry.url}</a>
+                ))}
+              </div>
+            </article>
+          </div>
+        </section>
+      )}
+
       {vm.description && (
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
           <h2 className="text-2xl font-semibold text-slate-900">{isVacation ? "Property Description" : isSale ? "Investment Description" : "Long-Stay Description"}</h2>

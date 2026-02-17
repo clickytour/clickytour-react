@@ -24,6 +24,10 @@ export function toVacationDetailsVM(property: CoreMirrorProperty): CanonicalDeta
     amenities: property.amenities,
     distances: property.nearby,
     locationLabel: `${property.location.area}, ${property.location.region}, ${property.location.country}`,
+    media: {
+      videoUrl: property.videoUrl,
+      tour3dUrl: property.tour3dUrl,
+    },
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "Send priority request",
