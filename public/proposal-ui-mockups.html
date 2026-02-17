@@ -47,10 +47,16 @@
 
     .stack { display:grid; gap:10px; }
     .card { border:1px solid var(--line); border-radius:12px; background:var(--card); padding:12px; }
+    .feedback-row { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; }
+    .feedback-row .label { font-size:12px; color:var(--muted); }
+    .feedback-actions { display:flex; gap:8px; }
+
+    .preview { border:1px solid var(--line); border-radius:10px; padding:10px; background:#fcfdff; }
     .head { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; }
     .head h4 { margin:0; font-size:16px; }
     .price { font-weight:700; }
-    .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+
+    .cta-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
     .btn { border:1px solid var(--line); background:#fff; border-radius:10px; padding:7px 10px; font-size:13px; }
     .btn.primary { background:#111827; color:#fff; border-color:#111827; }
 
@@ -95,7 +101,7 @@
         <section class="stack" id="stack"></section>
 
         <div class="dock">
-          <span class="muted" id="dockText">Events: collection_view • card_impression • feedback_selected • cta_book</span>
+          <span class="muted" id="dockText">Events: collection_view • card_impression • feedback_selected(like|dislike) • cta_selected(callback|book)</span>
           <button class="btn primary">Continue with preferred option</button>
         </div>
       </div>
@@ -152,14 +158,23 @@
         const el = document.createElement('article');
         el.className = 'card';
         el.innerHTML = `
-          <div class="head">
-            <h4>${card.label} <span class="muted">• ${card.unit}</span></h4>
-            <div class="price">${card.price}</div>
+          <div class="feedback-row">
+            <span class="label">Feedback (independent from booking):</span>
+            <div class="feedback-actions">
+              <button class="btn">👍 Like</button>
+              <button class="btn">👎 Dislike</button>
+            </div>
           </div>
-          <div class="muted">Offer ref: ${card.offer} • ${card.meta}</div>
-          <div class="actions">
-            <button class="btn">👍 Like</button>
-            <button class="btn">👎 Dislike</button>
+
+          <div class="preview">
+            <div class="head">
+              <h4>${card.label} <span class="muted">• ${card.unit}</span></h4>
+              <div class="price">${card.price}</div>
+            </div>
+            <div class="muted">Offer ref: ${card.offer} • ${card.meta}</div>
+          </div>
+
+          <div class="cta-row">
             <button class="btn">📞 Call me back</button>
             <button class="btn primary">✅ Book</button>
           </div>
@@ -181,7 +196,7 @@
         <span class="pill">ID-only refs (proposal / unit / offer)</span>
       `;
 
-      dockText.textContent = `Events: collection_view(${c.collectionRef}) • card_impression • feedback_selected(like|dislike|callback|book)`;
+      dockText.textContent = `Events: collection_view(${c.collectionRef}) • card_impression • feedback_selected(like|dislike) • cta_selected(callback|book)`;
       renderCards(c.cards);
 
       if (variantSel.value === 'wl') {
