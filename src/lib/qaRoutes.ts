@@ -3,7 +3,7 @@ import { heroPages } from "@/lib/landingHeroes";
 export type QARoute = {
   href: string;
   label: string;
-  group: "For Guests" | "For Owners" | "Collaborate" | "Complexes / Template Instances (QA)" | "Single Complexis" | "Company & Utility";
+  group: "For Guests" | "For Owners" | "Collaborate" | "Templates" | "Single Complexis" | "Company & Utility";
   status: "Pending QA" | "QA Passed";
 };
 
@@ -37,7 +37,7 @@ const staticRoutes: QARoute[] = [
 
   { href: "/free-evaluation", label: "Free Evaluation", group: "For Owners", status: "Pending QA" },
 
-  { href: "/complex-template", label: "Complex Template (Base)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/complex-template", label: "Complex Template (Base)", group: "Templates", status: "Pending QA" },
   { href: "/luxury-suites-elsa", label: "Luxury Suites Elsa", group: "Single Complexis", status: "Pending QA" },
   { href: "/galini-beachfront-masonettes-complex", label: "Galini Beachfront Masonettes", group: "Single Complexis", status: "Pending QA" },
   { href: "/olea-suites-apartments-complex", label: "Olea Suites Apartments", group: "Single Complexis", status: "Pending QA" },
@@ -48,21 +48,21 @@ const staticRoutes: QARoute[] = [
   { href: "/afitos-kassandra-halkidiki", label: "Afitos Kassandra Halkidiki", group: "Single Complexis", status: "Pending QA" },
   { href: "/complexes-sani-club-private-villas", label: "Sani Club Private Villas", group: "Single Complexis", status: "Pending QA" },
 
-  { href: "/property/villa-glarokavos-sea-view", label: "Canonical Property Details (Core Mirror)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/vacation/villa-glarokavos-sea-view", label: "Canonical Vacation Property (Type Route)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/real-estate/kassandra-investment-villa", label: "Canonical Real Estate Property", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel/aegean-boutique-hotel", label: "Canonical Hotel Property", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel/aegean-boutique-hotel/vacation", label: "Canonical Hotel Vacation Mode", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel/aegean-boutique-hotel/sale", label: "Canonical Hotel Sale Mode", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel/aegean-boutique-hotel/monthly", label: "Canonical Hotel Monthly Mode", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel-room/aegean-deluxe-suite", label: "Canonical Hotel Room", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel-room/aegean-deluxe-suite/vacation", label: "Canonical Hotel Room Vacation Mode", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel-room/aegean-deluxe-suite/sale", label: "Canonical Hotel Room Sale Mode", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/property/hotel-room/aegean-deluxe-suite/monthly", label: "Canonical Hotel Room Monthly Mode", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/qa/real-estate-modes/kassandra-investment-villa", label: "Real Estate Mode Previews (Index)", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/qa/real-estate-modes/kassandra-investment-villa/vacation", label: "Real Estate Mode Preview: Vacation", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/qa/real-estate-modes/kassandra-investment-villa/sale", label: "Real Estate Mode Preview: Sale", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
-  { href: "/qa/real-estate-modes/kassandra-investment-villa/monthly", label: "Real Estate Mode Preview: Monthly", group: "Complexes / Template Instances (QA)", status: "Pending QA" },
+  { href: "/property/villa-glarokavos-sea-view", label: "Canonical Property Details (Core Mirror)", group: "Templates", status: "Pending QA" },
+  { href: "/property/vacation/villa-glarokavos-sea-view", label: "Canonical Vacation Property (Type Route)", group: "Templates", status: "Pending QA" },
+  { href: "/property/real-estate/kassandra-investment-villa", label: "Canonical Real Estate Property", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel/aegean-boutique-hotel", label: "Canonical Hotel Property", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel/aegean-boutique-hotel/vacation", label: "Canonical Hotel Vacation Mode", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel/aegean-boutique-hotel/sale", label: "Canonical Hotel Sale Mode", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel/aegean-boutique-hotel/monthly", label: "Canonical Hotel Monthly Mode", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel-room/aegean-deluxe-suite", label: "Canonical Hotel Room", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel-room/aegean-deluxe-suite/vacation", label: "Canonical Hotel Room Vacation Mode", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel-room/aegean-deluxe-suite/sale", label: "Canonical Hotel Room Sale Mode", group: "Templates", status: "Pending QA" },
+  { href: "/property/hotel-room/aegean-deluxe-suite/monthly", label: "Canonical Hotel Room Monthly Mode", group: "Templates", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa", label: "Real Estate Mode Previews (Index)", group: "Templates", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa/vacation", label: "Real Estate Mode Preview: Vacation", group: "Templates", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa/sale", label: "Real Estate Mode Preview: Sale", group: "Templates", status: "Pending QA" },
+  { href: "/qa/real-estate-modes/kassandra-investment-villa/monthly", label: "Real Estate Mode Preview: Monthly", group: "Templates", status: "Pending QA" },
 ];
 
 const heroDerived: QARoute[] = heroPages
@@ -83,3 +83,4 @@ const heroDerived: QARoute[] = heroPages
 export const qaRoutes: QARoute[] = Array.from(
   new Map([...heroDerived, ...staticRoutes].map((r) => [r.href, r])).values()
 );
+

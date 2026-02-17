@@ -4,7 +4,7 @@ const groups = [
   "For Guests",
   "For Owners",
   "Collaborate",
-  "Complexes / Template Instances (QA)",
+  "Templates",
   "Single Complexis",
   "Company & Utility",
 ] as const;
