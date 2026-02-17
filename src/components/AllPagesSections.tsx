@@ -5,6 +5,7 @@ const groups = [
   "For Owners",
   "Collaborate",
   "Complexes / Template Instances (QA)",
+  "Single Complexis",
   "Company & Utility",
 ] as const;
 
