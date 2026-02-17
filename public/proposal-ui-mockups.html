@@ -120,9 +120,9 @@
         collectionRef: 'COL-8N2K',
         guestRequestRef: 'GR-441',
         cards: [
-          {label:'Option A', unit:'UNIT-93QX', offer:'OFR-7K2M', price:'€1,940', meta:'7 nights • 8 guests • Pool • 4.6 guest score', image:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1200&auto=format&fit=crop', kind:'Villa', region:'Pefkohori, Halkidiki'},
-          {label:'Option B', unit:'UNIT-7MPL', offer:'OFR-3R1D', price:'€2,120', meta:'7 nights • 8 guests • Sea view • Flexible check-in', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop', kind:'Maisonette', region:'Hanioti, Halkidiki'},
-          {label:'Option C', unit:'UNIT-X11D', offer:'OFR-9L4P', price:'€2,060', meta:'7 nights • 8 guests • Family layout • Strong value', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop', kind:'Apartment', region:'Kallithea, Halkidiki'}
+          {label:'Option A', unit:'UNIT-93QX', offer:'OFR-7K2M', price:'€1,940', meta:'7 nights • 8 guests • Pool • 4.6 guest score', image:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1200&auto=format&fit=crop', kind:'Villa', region:'Pefkohori, Halkidiki', bedrooms:4, bathrooms:3},
+          {label:'Option B', unit:'UNIT-7MPL', offer:'OFR-3R1D', price:'€2,120', meta:'7 nights • 8 guests • Sea view • Flexible check-in', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop', kind:'Maisonette', region:'Hanioti, Halkidiki', bedrooms:5, bathrooms:4},
+          {label:'Option C', unit:'UNIT-X11D', offer:'OFR-9L4P', price:'€2,060', meta:'7 nights • 8 guests • Family layout • Strong value', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop', kind:'Apartment', region:'Kallithea, Halkidiki', bedrooms:3, bathrooms:2}
         ]
       },
       {
@@ -131,8 +131,8 @@
         collectionRef: 'COL-2T9V',
         guestRequestRef: 'GR-602',
         cards: [
-          {label:'Option A', unit:'UNIT-K2A1', offer:'OFR-1N8H', price:'€2,680', meta:'10 nights • 6 guests • Quiet area • 4.8 guest score', image:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop', kind:'Villa', region:'Chania, Crete'},
-          {label:'Option B', unit:'UNIT-M8Q4', offer:'OFR-5U3C', price:'€2,740', meta:'10 nights • 6 guests • Sunset terrace • Late checkout', image:'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=1200&auto=format&fit=crop', kind:'Suite', region:'Rethymno, Crete'}
+          {label:'Option A', unit:'UNIT-K2A1', offer:'OFR-1N8H', price:'€2,680', meta:'10 nights • 6 guests • Quiet area • 4.8 guest score', image:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop', kind:'Villa', region:'Chania, Crete', bedrooms:4, bathrooms:3},
+          {label:'Option B', unit:'UNIT-M8Q4', offer:'OFR-5U3C', price:'€2,740', meta:'10 nights • 6 guests • Sunset terrace • Late checkout', image:'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=1200&auto=format&fit=crop', kind:'Suite', region:'Rethymno, Crete', bedrooms:3, bathrooms:2}
         ]
       }
     ];
@@ -140,6 +140,9 @@
     const collectionSel = document.getElementById('collectionSel');
     const variantSel = document.getElementById('variantSel');
     const shell = document.getElementById('shell');
+    const params = new URLSearchParams(window.location.search);
+    const forcedVariant = params.get('variant');
+    const lockControls = params.get('lock') === '1';
 
     const collectionTitle = document.getElementById('collectionTitle');
     const collectionMeta = document.getElementById('collectionMeta');
@@ -155,6 +158,20 @@
       o.textContent = c.link;
       collectionSel.appendChild(o);
     });
+
+    if (forcedVariant === 'brand' || forcedVariant === 'wl') {
+      variantSel.value = forcedVariant;
+    }
+
+    const forcedCollection = Number(params.get('col'));
+    if (!Number.isNaN(forcedCollection) && forcedCollection >= 0 && forcedCollection < collections.length) {
+      collectionSel.value = String(forcedCollection);
+    }
+
+    if (lockControls) {
+      variantSel.disabled = true;
+      collectionSel.disabled = true;
+    }
 
     function renderCards(cards) {
       stack.innerHTML = '';
@@ -180,6 +197,7 @@
             </div>
             <div class="muted">Unit ref: ${card.unit} • Offer ref: ${card.offer}</div>
             <div class="muted" style="margin-top:6px">${card.meta}</div>
+            <div class="muted" style="margin-top:6px">${card.bedrooms} bedrooms • ${card.bathrooms} bathrooms</div>
           </div>
 
           <div class="cta-row">
