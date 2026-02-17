@@ -49,18 +49,18 @@
       {
         link:'/p/PR-26A7/c/COL-8N2K', proposalRef:'PR-26A7', collectionRef:'COL-8N2K',
         bundle:{ title:'Combination package (large group)', totalPrice:'€2,420', items:[
-          { type:'Property', ref:'UNIT-93QX', label:'Stay option', propertyName:'Villa Glarokavos Sea View', shortText:'Sea-view villa ideal for families and groups.', detail:'Pefkohori, Halkidiki', price:'€1,940' },
-          { type:'Transfer', ref:'TRF-102', label:'Airport transfer', detail:'SKG ⇄ Property', price:'€180' },
-          { type:'Boat Rental', ref:'BRT-77', label:'Half-day boat', detail:'8 guests capacity', price:'€300' }
+          { type:'Property', ref:'UNIT-93QX', offer:'OFR-7K2M', label:'Stay option', propertyName:'Villa Glarokavos Sea View', shortText:'Sea-view villa ideal for families and groups.', detail:'Pefkohori, Halkidiki', meta:'7 nights • 8 guests • Pool • 4.6 guest score', bedrooms:4, bathrooms:3, price:'€1,940' },
+          { type:'Transfer', ref:'TRF-102', label:'Airport transfer', detail:'SKG ⇄ Property', meta:'Private transfer • up to 8 guests', price:'€180' },
+          { type:'Boat Rental', ref:'BRT-77', label:'Half-day boat', detail:'8 guests capacity', meta:'4-hour charter • fuel included', price:'€300' }
         ] }
       },
       {
         link:'/p/PR-51D3/c/COL-2T9V', proposalRef:'PR-51D3', collectionRef:'COL-2T9V',
         bundle:{ title:'Large-group bundle (2–4 properties)', totalPrice:'€9,420', items:[
-          { type:'Property', ref:'UNIT-K2A1', label:'Property 1', propertyName:'Chania Hillside Villa', shortText:'Private hillside villa with quiet surroundings.', detail:'Chania, Crete', price:'€2,680' },
-          { type:'Property', ref:'UNIT-M8Q4', label:'Property 2', propertyName:'Rethymno Sunset Suite', shortText:'Premium suite with sunset terrace views.', detail:'Rethymno, Crete', price:'€2,740' },
-          { type:'Property', ref:'UNIT-P4L7', label:'Property 3', propertyName:'Heraklion Urban Villa', shortText:'Modern villa with easy city + beach access.', detail:'Heraklion, Crete', price:'€2,100' },
-          { type:'Property', ref:'UNIT-Z9B2', label:'Property 4', propertyName:'Agios Nikolaos Bay House', shortText:'Relaxed stay near the bay, ideal for groups.', detail:'Agios Nikolaos, Crete', price:'€1,900' }
+          { type:'Property', ref:'UNIT-K2A1', offer:'OFR-1N8H', label:'Property 1', propertyName:'Chania Hillside Villa', shortText:'Private hillside villa with quiet surroundings.', detail:'Chania, Crete', meta:'10 nights • 6 guests • Quiet area • 4.8 guest score', bedrooms:4, bathrooms:3, price:'€2,680' },
+          { type:'Property', ref:'UNIT-M8Q4', offer:'OFR-5U3C', label:'Property 2', propertyName:'Rethymno Sunset Suite', shortText:'Premium suite with sunset terrace views.', detail:'Rethymno, Crete', meta:'10 nights • 6 guests • Sunset terrace • Late checkout', bedrooms:3, bathrooms:2, price:'€2,740' },
+          { type:'Property', ref:'UNIT-P4L7', offer:'OFR-2T6R', label:'Property 3', propertyName:'Heraklion Urban Villa', shortText:'Modern villa with easy city + beach access.', detail:'Heraklion, Crete', meta:'10 nights • 6 guests • City+beach access • Great value', bedrooms:3, bathrooms:2, price:'€2,100' },
+          { type:'Property', ref:'UNIT-Z9B2', offer:'OFR-6B4Q', label:'Property 4', propertyName:'Agios Nikolaos Bay House', shortText:'Relaxed stay near the bay, ideal for groups.', detail:'Agios Nikolaos, Crete', meta:'10 nights • 6 guests • Bay area • Flexible check-in', bedrooms:3, bathrooms:2, price:'€1,900' }
         ] }
       }
     ];
@@ -85,8 +85,10 @@
         <div>
           <div class="kicker">${i.type}</div>
           <div style="font-weight:600">${variant === 'brand' && i.type === 'Property' && i.propertyName ? i.propertyName : i.label}</div>
-          ${variant === 'brand' && i.type === 'Property' && i.shortText ? `<div class="muted" style="margin-top:4px">${i.shortText}</div>` : ''}
-          <div class="muted">${i.ref} • ${i.detail}</div>
+          ${i.shortText ? `<div class="muted" style="margin-top:4px">${i.shortText}</div>` : ''}
+          <div class="muted">${i.ref}${i.offer ? ` • Offer ref: ${i.offer}` : ''} • ${i.detail}</div>
+          ${i.meta ? `<div class="muted" style="margin-top:4px">${i.meta}</div>` : ''}
+          ${i.bedrooms ? `<div class="muted" style="margin-top:4px">${i.bedrooms} bedrooms • ${i.bathrooms} bathrooms</div>` : ''}
         </div>
         <div style="font-weight:700">${i.price}</div>
       </div>
