@@ -1,7 +1,7 @@
 export const serviceTaxonomy = [
   {
     id: "cafesRestaurantsNightlife",
-    name: "Cafes, Restaurantrs, Nightlife",
+    name: "Cafes, Restaurants, Nightlife",
     subcategories: [
       { id: "restaurant", name: "Restaurant" },
       { id: "cafe", name: "Café" },
