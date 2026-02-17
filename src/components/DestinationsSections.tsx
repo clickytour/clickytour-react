@@ -157,7 +157,7 @@ export function DestinationsSections() {
             className="h-12 w-full rounded-xl border border-white/20 bg-white px-4 text-base text-slate-900 placeholder:text-slate-400 sm:flex-1"
             placeholder="Search regions, towns, complexes, beaches..."
           />
-          <button className="h-12 rounded-xl bg-emerald-500 px-7 text-base font-semibold text-slate-900 hover:bg-emerald-400">Search</button>
+          <a href="/search?vertical=stays&mode=vacation" className="inline-flex h-12 items-center rounded-xl bg-emerald-500 px-7 text-base font-semibold text-slate-900 hover:bg-emerald-400">Search</a>
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
@@ -314,7 +314,7 @@ export function DestinationsSections() {
             <h2 className="text-[42px] font-semibold leading-none text-slate-900">Prefer to explore on a map?</h2>
             <p className="mt-2 text-[21px] leading-none text-slate-600">See every villa, hotel and complex by location, with filters for beach distance, pool and more.</p>
           </div>
-          <button className="rounded-xl bg-sky-500 px-6 py-3 text-base font-semibold text-white hover:bg-sky-600">Open Map Search</button>
+          <a href="/search?vertical=stays&mode=vacation" className="inline-flex items-center rounded-xl bg-sky-500 px-6 py-3 text-base font-semibold text-white hover:bg-sky-600">Open Map Search</a>
         </div>
       </section>
     </section>

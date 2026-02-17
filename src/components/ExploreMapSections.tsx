@@ -76,7 +76,7 @@ export function ExploreMapSections() {
 
         <div className="mx-auto mt-6 flex w-full max-w-[840px] flex-col gap-3 rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur sm:flex-row">
           <input className="h-12 w-full rounded-xl border border-white/20 bg-white px-4 text-slate-900 placeholder:text-slate-400 sm:flex-1" placeholder="Search area, beach, landmark..." />
-          <button className="h-12 rounded-xl bg-emerald-500 px-6 text-base font-semibold text-slate-900 hover:bg-emerald-400">Search on map</button>
+          <a href="/search?vertical=stays&mode=vacation" className="inline-flex h-12 items-center rounded-xl bg-emerald-500 px-6 text-base font-semibold text-slate-900 hover:bg-emerald-400">Search on map</a>
         </div>
       </div>
 
@@ -161,7 +161,7 @@ export function ExploreMapSections() {
       <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-5 md:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-[42px] font-semibold leading-none text-slate-900">Map Results</h2>
-          <button className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white">Open full map experience</button>
+          <a href="/search?vertical=stays&mode=vacation" className="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white">Open full map experience</a>
         </div>
 
         <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">

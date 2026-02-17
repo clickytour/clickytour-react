@@ -316,6 +316,7 @@ export function QuickRequestPanel() {
     <>
       <h2 className="text-[18px] font-semibold leading-none text-slate-900">{meta.title}</h2>
       <p className="mt-1 text-[11px] text-slate-600">{meta.subtitle}</p>
+      <a href="/search?vertical=all" className="mt-1 inline-flex text-[11px] font-medium text-slate-900 underline underline-offset-2">Open global search</a>
 
       <p className="mt-2 text-[11px] font-semibold text-slate-600">Step {currentStep} of {maxStep}</p>
 

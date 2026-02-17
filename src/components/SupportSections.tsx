@@ -26,7 +26,7 @@ export function SupportSections() {
               placeholder="Search (e.g., cancellation, check-in, deposits)..."
             />
           </div>
-          <button className="rounded-xl bg-slate-900 px-6 py-3 text-base font-medium text-white">Contact support</button>
+          <a href="/search?vertical=all" className="inline-flex items-center rounded-xl bg-slate-900 px-6 py-3 text-base font-medium text-white">Open global search</a>
         </div>
 
         <div className="mt-5 grid gap-3 md:grid-cols-3">
@@ -76,8 +76,8 @@ export function SupportSections() {
           ))}
 
           <div className="flex flex-wrap gap-3 pt-1">
-            <button className="rounded-xl bg-slate-900 px-5 py-2.5 text-base font-medium text-white">View Policies</button>
-            <button className="rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-base font-medium text-slate-900">Contact Support</button>
+            <a href="/search?vertical=all" className="inline-flex items-center rounded-xl bg-slate-900 px-5 py-2.5 text-base font-medium text-white">Open global search</a>
+            <a href="/support" className="inline-flex items-center rounded-xl border border-slate-800 bg-white px-5 py-2.5 text-base font-medium text-slate-900">Contact Support</a>
           </div>
         </div>
       </div>

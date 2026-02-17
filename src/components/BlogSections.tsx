@@ -77,6 +77,10 @@ export function BlogSections() {
           </div>
         </div>
 
+        <div className="mt-3">
+          <a href="/search?vertical=blog" className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900">Open in global search</a>
+        </div>
+
         <div className="mt-6 grid gap-4 lg:grid-cols-[3fr_1.15fr]">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {demoPosts.map((post) => (
