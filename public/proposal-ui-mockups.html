@@ -120,9 +120,9 @@
         collectionRef: 'COL-8N2K',
         guestRequestRef: 'GR-441',
         cards: [
-          {label:'Option A', unit:'UNIT-93QX', offer:'OFR-7K2M', price:'€1,940', meta:'7 nights • 8 guests • Pool • 4.6 guest score', image:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1200&auto=format&fit=crop', kind:'stays • vacation'},
-          {label:'Option B', unit:'UNIT-7MPL', offer:'OFR-3R1D', price:'€2,120', meta:'7 nights • 8 guests • Sea view • Flexible check-in', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop', kind:'stays • vacation'},
-          {label:'Option C', unit:'UNIT-X11D', offer:'OFR-9L4P', price:'€2,060', meta:'7 nights • 8 guests • Family layout • Strong value', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop', kind:'stays • vacation'}
+          {label:'Option A', unit:'UNIT-93QX', offer:'OFR-7K2M', price:'€1,940', meta:'7 nights • 8 guests • Pool • 4.6 guest score', image:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1200&auto=format&fit=crop', kind:'Villa', region:'Pefkohori, Halkidiki'},
+          {label:'Option B', unit:'UNIT-7MPL', offer:'OFR-3R1D', price:'€2,120', meta:'7 nights • 8 guests • Sea view • Flexible check-in', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop', kind:'Maisonette', region:'Hanioti, Halkidiki'},
+          {label:'Option C', unit:'UNIT-X11D', offer:'OFR-9L4P', price:'€2,060', meta:'7 nights • 8 guests • Family layout • Strong value', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=1200&auto=format&fit=crop', kind:'Apartment', region:'Kallithea, Halkidiki'}
         ]
       },
       {
@@ -131,8 +131,8 @@
         collectionRef: 'COL-2T9V',
         guestRequestRef: 'GR-602',
         cards: [
-          {label:'Option A', unit:'UNIT-K2A1', offer:'OFR-1N8H', price:'€2,680', meta:'10 nights • 6 guests • Quiet area • 4.8 guest score', image:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop', kind:'stays • vacation'},
-          {label:'Option B', unit:'UNIT-M8Q4', offer:'OFR-5U3C', price:'€2,740', meta:'10 nights • 6 guests • Sunset terrace • Late checkout', image:'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=1200&auto=format&fit=crop', kind:'stays • vacation'}
+          {label:'Option A', unit:'UNIT-K2A1', offer:'OFR-1N8H', price:'€2,680', meta:'10 nights • 6 guests • Quiet area • 4.8 guest score', image:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop', kind:'Villa', region:'Chania, Crete'},
+          {label:'Option B', unit:'UNIT-M8Q4', offer:'OFR-5U3C', price:'€2,740', meta:'10 nights • 6 guests • Sunset terrace • Late checkout', image:'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=1200&auto=format&fit=crop', kind:'Suite', region:'Rethymno, Crete'}
         ]
       }
     ];
@@ -173,12 +173,12 @@
           <img class="cover" src="${card.image}" alt="${card.label}" />
 
           <div class="preview">
-            <div class="kicker">${card.kind} • ${card.unit}</div>
+            <div class="kicker">Type: ${card.kind} • Region: ${card.region}</div>
             <div class="head">
               <h4>${card.label}</h4>
               <div class="price">${card.price}</div>
             </div>
-            <div class="muted">Offer ref: ${card.offer}</div>
+            <div class="muted">Unit ref: ${card.unit} • Offer ref: ${card.offer}</div>
             <div class="muted" style="margin-top:6px">${card.meta}</div>
           </div>
 
