@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposal Package Details Mockup</title>
+  <style>
+    :root { --bg:#f6f7fb; --card:#fff; --text:#1f2430; --muted:#6f7787; --line:#e6e8ef; --brand:#ff6b2c; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:Inter, Segoe UI, Arial, sans-serif; background:var(--bg); color:var(--text); }
+    .wrap{ max-width:960px; margin:18px auto; padding:0 14px 24px; }
+    .top{ border:1px solid var(--line); border-radius:14px; background:#fff; padding:12px 14px; display:flex; justify-content:space-between; gap:8px; align-items:center; }
+    .logo{ font-weight:800; } .logo span{ color:var(--brand); } .wl .logo{ display:none; }
+    .hero{ border:1px solid var(--line); border-radius:14px; background:#fff; margin-top:12px; padding:12px 14px; }
+    .muted{ color:var(--muted); font-size:13px; }
+    .row{ border:1px solid var(--line); border-radius:12px; background:#fcfdff; padding:10px; margin-top:8px; display:grid; grid-template-columns:1fr auto; gap:8px; }
+    .kicker{ font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:.04em; }
+    .btn{ border:1px solid var(--line); background:#fff; border-radius:10px; padding:7px 10px; font-size:13px; text-decoration:none; color:inherit; display:inline-block; }
+    .btn.primary{ background:#111827; color:#fff; border-color:#111827; }
+    .actions{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+  <div id="shell" class="wrap">
+    <div class="top">
+      <div>
+        <div class="logo">Villa<span>4</span>you</div>
+        <div class="muted" id="sub"></div>
+      </div>
+      <a id="backLink" class="btn" href="#">← Back to collection</a>
+    </div>
+
+    <section class="hero">
+      <h2 id="title" style="margin:0 0 6px">Package details</h2>
+      <div class="muted" id="meta"></div>
+      <div id="rows"></div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between">
+        <strong>Bundle total</strong><strong id="total"></strong>
+      </div>
+      <div class="actions">
+        <a id="continueLink" class="btn primary" href="#">Proceed with this package</a>
+        <a id="callbackLink" class="btn" href="#">Request callback</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const collections = [
+      {
+        link:'/p/PR-26A7/c/COL-8N2K', proposalRef:'PR-26A7', collectionRef:'COL-8N2K',
+        bundle:{ title:'Combination package (large group)', totalPrice:'€2,420', items:[
+          { type:'Property', ref:'UNIT-93QX', label:'Stay option', propertyName:'Villa Glarokavos Sea View', shortText:'Sea-view villa ideal for families and groups.', detail:'Pefkohori, Halkidiki', price:'€1,940' },
+          { type:'Transfer', ref:'TRF-102', label:'Airport transfer', detail:'SKG ⇄ Property', price:'€180' },
+          { type:'Boat Rental', ref:'BRT-77', label:'Half-day boat', detail:'8 guests capacity', price:'€300' }
+        ] }
+      },
+      {
+        link:'/p/PR-51D3/c/COL-2T9V', proposalRef:'PR-51D3', collectionRef:'COL-2T9V',
+        bundle:{ title:'Large-group bundle (2–4 properties)', totalPrice:'€9,420', items:[
+          { type:'Property', ref:'UNIT-K2A1', label:'Property 1', propertyName:'Chania Hillside Villa', shortText:'Private hillside villa with quiet surroundings.', detail:'Chania, Crete', price:'€2,680' },
+          { type:'Property', ref:'UNIT-M8Q4', label:'Property 2', propertyName:'Rethymno Sunset Suite', shortText:'Premium suite with sunset terrace views.', detail:'Rethymno, Crete', price:'€2,740' },
+          { type:'Property', ref:'UNIT-P4L7', label:'Property 3', propertyName:'Heraklion Urban Villa', shortText:'Modern villa with easy city + beach access.', detail:'Heraklion, Crete', price:'€2,100' },
+          { type:'Property', ref:'UNIT-Z9B2', label:'Property 4', propertyName:'Agios Nikolaos Bay House', shortText:'Relaxed stay near the bay, ideal for groups.', detail:'Agios Nikolaos, Crete', price:'€1,900' }
+        ] }
+      }
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const variant = params.get('variant') === 'wl' ? 'wl' : 'brand';
+    const col = Number(params.get('col'));
+    const lock = params.get('lock') === '1' ? '1' : '0';
+    const c = collections[Number.isNaN(col) ? 0 : Math.max(0, Math.min(col, collections.length - 1))];
+
+    const shell = document.getElementById('shell');
+    if (variant === 'wl') shell.classList.add('wl');
+
+    document.getElementById('sub').textContent = `Proposal ${c.proposalRef} • Collection ${c.collectionRef} • ${variant === 'wl' ? 'No-logo mode' : 'Branded mode'}`;
+    document.getElementById('title').textContent = c.bundle.title;
+    document.getElementById('meta').textContent = `Shared link: ${c.link}`;
+    document.getElementById('total').textContent = c.bundle.totalPrice;
+
+    const rows = document.getElementById('rows');
+    rows.innerHTML = c.bundle.items.map(i => `
+      <div class="row">
+        <div>
+          <div class="kicker">${i.type}</div>
+          <div style="font-weight:600">${variant === 'brand' && i.type === 'Property' && i.propertyName ? i.propertyName : i.label}</div>
+          ${variant === 'brand' && i.type === 'Property' && i.shortText ? `<div class="muted" style="margin-top:4px">${i.shortText}</div>` : ''}
+          <div class="muted">${i.ref} • ${i.detail}</div>
+        </div>
+        <div style="font-weight:700">${i.price}</div>
+      </div>
+    `).join('');
+
+    const backHref = `/proposal-ui-mockups.html?variant=${variant}&col=${Number.isNaN(col)?0:col}&lock=${lock}`;
+    document.getElementById('backLink').href = backHref;
+    document.getElementById('continueLink').href = backHref;
+    document.getElementById('callbackLink').href = backHref;
+  </script>
+</body>
+</html>
