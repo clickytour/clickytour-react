@@ -11,7 +11,8 @@ const primaryNav: NavItem[] = [
     label: "For Guests",
     submenu: [
       { href: "/for-guests", label: "For Guests Hub" },
-      { href: "/search-results-page-for-guests", label: "Search Results" },
+      { href: "/search", label: "Search" },
+      { href: "/search-results-page-for-guests", label: "Guest Search Results" },
       { href: "/destinations", label: "Destinations" },
       { href: "/explore-map", label: "Explore Map" },
       { href: "/guest-help-faq", label: "Guest Help FAQ" },

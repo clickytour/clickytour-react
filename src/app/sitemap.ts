@@ -12,6 +12,7 @@ const routes = [
   "/collaborate",
   "/about",
   "/vacation-property-management",
+  "/search",
   "/search-results-page-for-guests",
   "/destinations",
   "/explore-map",

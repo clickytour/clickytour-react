@@ -17,11 +17,21 @@ const modeOptions: Array<{ id: SearchMode; label: string }> = [
   { id: "monthly", label: "Monthly" },
 ];
 
-export function SearchResultsGuestSections() {
-  const [q, setQ] = useState("Halkidiki");
-  const [vertical, setVertical] = useState<SearchVertical>("all");
-  const [mode, setMode] = useState<SearchMode>("all");
-  const [location, setLocation] = useState("");
+export function SearchResultsGuestSections({
+  initialQ = "Halkidiki",
+  initialVertical = "all",
+  initialMode = "all",
+  initialLocation = "",
+}: {
+  initialQ?: string;
+  initialVertical?: SearchVertical;
+  initialMode?: SearchMode;
+  initialLocation?: string;
+} = {}) {
+  const [q, setQ] = useState(initialQ);
+  const [vertical, setVertical] = useState<SearchVertical>(initialVertical);
+  const [mode, setMode] = useState<SearchMode>(initialMode);
+  const [location, setLocation] = useState(initialLocation);
 
   const records = useMemo(() => getSearchSimulationRecords(), []);
   const filtered = useMemo(
