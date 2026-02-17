@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposal UI Mockups</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2430;
+      --muted: #6f7787;
+      --line: #e6e8ef;
+      --brand: #ff6b2c;
+      --ok: #117a3d;
+      --warn: #9a6700;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, Segoe UI, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    .toolbar {
+      position: sticky; top:0; z-index: 10; background:#10131a; color:#fff; padding:12px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+    }
+    .toolbar select { padding:6px 8px; border-radius:8px; border:1px solid #2b3040; background:#171c27; color:#fff; }
+    .app { max-width: 1150px; margin: 20px auto; padding: 0 16px 24px; }
+    .shell { border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff; }
+    .top {
+      display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid var(--line); background: linear-gradient(180deg,#fff,#fbfcff);
+    }
+    .brand .logo { font-weight:800; letter-spacing:.3px; }
+    .brand .logo span { color: var(--brand); }
+    .wl .logo { display:none; }
+    .muted { color: var(--muted); font-size:13px; }
+    .locked-note { font-size:12px; color:#8a2c00; background:#fff1ea; border:1px solid #ffd5c2; padding:4px 8px; border-radius:999px; }
+    .content { padding: 16px; }
+    .concept { display:none; }
+    .concept.active { display:block; }
+
+    /* Concept 1 */
+    .stack { display:grid; gap:12px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; }
+    .card h4 { margin:0 0 8px; }
+    .grid2 { display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .btn { border:1px solid var(--line); background:#fff; padding:7px 10px; border-radius:10px; font-size:13px; }
+    .btn.primary { background:#111827; color:#fff; border-color:#111827; }
+
+    /* Concept 2 */
+    .split { display:grid; grid-template-columns: 260px 1fr; gap:14px; }
+    .rail, .pane { border:1px solid var(--line); border-radius:12px; background:#fff; padding:12px; }
+    .compare { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+    /* Concept 3 */
+    .stepper { display:flex; gap:8px; margin-bottom:12px; }
+    .step { padding:7px 10px; border-radius:999px; border:1px solid var(--line); font-size:12px; }
+    .step.on { background:#111827; color:#fff; border-color:#111827; }
+
+    .footer-dock { position: sticky; bottom: 10px; margin-top: 14px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; display:flex; justify-content:space-between; align-items:center; }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <label>Concept:
+      <select id="conceptSel">
+        <option value="c1">1 - Card Stack Focus</option>
+        <option value="c2">2 - Split Compare Workspace</option>
+        <option value="c3">3 - Guided Stepper Journey</option>
+      </select>
+    </label>
+    <label>Variant:
+      <select id="variantSel">
+        <option value="brand">Branded Villa4you</option>
+        <option value="wl">White-label (Locked Nav)</option>
+      </select>
+    </label>
+    <span class="muted">No listing names shown. URL-safe refs only.</span>
+  </div>
+
+  <div class="app">
+    <div id="shell" class="shell brand">
+      <div class="top">
+        <div class="brand">
+          <div class="logo">Villa<span>4</span>you</div>
+          <div class="muted">Your tailored proposal • Ref PR-26A7</div>
+        </div>
+        <div id="lock" class="muted">Secure proposal session</div>
+      </div>
+
+      <div class="content">
+        <!-- Concept 1 -->
+        <section id="c1" class="concept active">
+          <h3>Card Stack Focus</h3>
+          <p class="muted">Fast decision flow with direct feedback actions.</p>
+          <div class="stack">
+            <div class="card">
+              <div class="grid2"><h4>Option A <span class="muted">• UNIT-93QX</span></h4><strong>€1,940</strong></div>
+              <div class="muted">7 nights • 8 guests • Pool • 4.6 guest score</div>
+              <div class="actions">
+                <button class="btn">👍 Like</button><button class="btn">👎 Dislike</button><button class="btn">📞 Call me back</button><button class="btn primary">✅ Book</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="grid2"><h4>Option B <span class="muted">• UNIT-7MPL</span></h4><strong>€2,120</strong></div>
+              <div class="muted">7 nights • 8 guests • Sea view • Flexible check-in</div>
+              <div class="actions">
+                <button class="btn">👍 Like</button><button class="btn">👎 Dislike</button><button class="btn">📞 Call me back</button><button class="btn primary">✅ Book</button>
+              </div>
+            </div>
+          </div>
+          <div class="footer-dock"><span>Tracked events: impression • feedback • CTA</span><button class="btn primary">Continue with preferred option</button></div>
+        </section>
+
+        <!-- Concept 2 -->
+        <section id="c2" class="concept">
+          <h3>Split Compare Workspace</h3>
+          <p class="muted">Filter + side-by-side comparison for analytical users.</p>
+          <div class="split">
+            <div class="rail">
+              <strong>Result set</strong>
+              <div class="muted">PR-26A7 / 3 options</div>
+              <hr />
+              <div>• Option A (UNIT-93QX)</div>
+              <div>• Option B (UNIT-7MPL)</div>
+              <div>• Option C (UNIT-X11D)</div>
+              <hr />
+              <div class="muted">Filters: budget / amenities / distance</div>
+            </div>
+            <div class="pane">
+              <div class="compare">
+                <div class="card"><h4>Option A</h4><div class="muted">€1,940 • Pool • 4.6 score</div><div class="actions"><button class="btn">👍</button><button class="btn">👎</button><button class="btn">📞</button><button class="btn primary">✅</button></div></div>
+                <div class="card"><h4>Option B</h4><div class="muted">€2,120 • Sea view • 4.7 score</div><div class="actions"><button class="btn">👍</button><button class="btn">👎</button><button class="btn">📞</button><button class="btn primary">✅</button></div></div>
+              </div>
+              <div class="footer-dock"><span>Decision dock</span><button class="btn primary">Book selected option</button></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Concept 3 -->
+        <section id="c3" class="concept">
+          <h3>Guided Stepper Journey</h3>
+          <p class="muted">Structured flow for measurable conversion stages.</p>
+          <div class="stepper">
+            <div class="step on">1. Review options</div>
+            <div class="step">2. Give feedback</div>
+            <div class="step">3. Confirm next action</div>
+          </div>
+          <div class="card">
+            <h4>Option A <span class="muted">• UNIT-93QX</span></h4>
+            <div class="muted">Recommended for your dates and guest count</div>
+            <div class="actions"><button class="btn">👍 Like this</button><button class="btn">👎 Not for me</button><button class="btn">📞 Call me back</button><button class="btn primary">✅ Book now</button></div>
+          </div>
+          <div class="footer-dock"><span>Step analytics: completion + drop-off</span><button class="btn primary">Next step</button></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const conceptSel = document.getElementById('conceptSel');
+    const variantSel = document.getElementById('variantSel');
+    const shell = document.getElementById('shell');
+    const lock = document.getElementById('lock');
+
+    function render() {
+      document.querySelectorAll('.concept').forEach(el => el.classList.remove('active'));
+      document.getElementById(conceptSel.value).classList.add('active');
+
+      if (variantSel.value === 'wl') {
+        shell.classList.add('wl');
+        shell.classList.remove('brand');
+        lock.innerHTML = '<span class="locked-note">Navigation locked (white-label mode)</span>';
+      } else {
+        shell.classList.add('brand');
+        shell.classList.remove('wl');
+        lock.textContent = 'Secure proposal session';
+      }
+    }
+    conceptSel.addEventListener('change', render);
+    variantSel.addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>
