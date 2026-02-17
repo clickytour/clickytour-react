@@ -31,6 +31,8 @@ export function toRealEstateDetailsVM(property: CoreMirrorRealEstateProperty): C
       tour3dUrl: property.media.tour3dUrl,
       contentUrls: property.media.contentUrls,
     },
+    relatedServices: property.nearbyServices,
+    relatedBlogPosts: property.blogPosts,
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "Schedule viewing",

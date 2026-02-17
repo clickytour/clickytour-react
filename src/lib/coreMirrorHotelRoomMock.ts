@@ -17,6 +17,8 @@ export type CoreMirrorHotelRoom = {
   rates: { nightlyEur: number; monthlyEur: number };
   maxGuests: number;
   amenities: string[];
+  nearbyServices?: Array<{ name: string; detail: string; href: string; coverageKm?: number }>;
+  blogPosts?: Array<{ title: string; href: string; date?: string; excerpt?: string; image?: string }>;
 };
 
 export const coreMirrorHotelRooms: CoreMirrorHotelRoom[] = [
@@ -41,6 +43,14 @@ export const coreMirrorHotelRooms: CoreMirrorHotelRoom[] = [
     rates: { nightlyEur: 180, monthlyEur: 3900 },
     maxGuests: 3,
     amenities: ["Wi-Fi", "AC", "Espresso machine", "Balcony"],
+    nearbyServices: [
+      { name: "Laundry & Press", detail: "Same-day service", href: "/services/private-chef-villa-service", coverageKm: 15 },
+      { name: "Private Transfer", detail: "Airport and marina transfer", href: "/services/airport-transfer-halkidiki", coverageKm: 120 },
+    ],
+    blogPosts: [
+      { title: "Suite booking tips for peak season", href: "/blog/family-seaside-vacation-checklist", date: "2026-02-08" },
+      { title: "How to choose room add-on services", href: "/blog/seasonal-rates-explained", date: "2026-02-05" },
+    ],
   },
 ];
 

@@ -17,6 +17,8 @@ export type CoreMirrorHotel = {
   prices: { fromNightlyEur: number; monthlyEur: number; saleEur: number };
   amenities: string[];
   distances: Array<{ label: string; value: string }>;
+  nearbyServices?: Array<{ name: string; detail: string; href: string; coverageKm?: number }>;
+  blogPosts?: Array<{ title: string; href: string; date?: string; excerpt?: string; image?: string }>;
 };
 
 const hotels: CoreMirrorHotel[] = [
@@ -48,6 +50,14 @@ const hotels: CoreMirrorHotel[] = [
       { label: "Beach", value: "220 m" },
       { label: "Airport", value: "98 km" },
       { label: "Marina", value: "2.1 km" },
+    ],
+    nearbyServices: [
+      { name: "Airport Transfer", detail: "Direct transfer from SKG", href: "/services/airport-transfer-halkidiki", coverageKm: 120 },
+      { name: "Private Chef", detail: "In-room dining experiences", href: "/services/private-chef-villa-service", coverageKm: 35 },
+    ],
+    blogPosts: [
+      { title: "Top hotel services guests request in Halkidiki", href: "/blog/best-coastal-towns-halkidiki", date: "2026-02-10" },
+      { title: "How service coverage improves stay conversion", href: "/blog/seasonal-rates-explained", date: "2026-02-05" },
     ],
   },
 ];

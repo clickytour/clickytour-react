@@ -17,6 +17,8 @@ export type CoreMirrorRealEstateProperty = {
   prices: { saleEur: number; monthlyEur: number; perSqmEur: number; roiPercent: number };
   amenities: string[];
   distances: Array<{ label: string; value: string }>;
+  nearbyServices?: Array<{ name: string; detail: string; href: string; coverageKm?: number }>;
+  blogPosts?: Array<{ title: string; href: string; date?: string; excerpt?: string; image?: string }>;
 };
 
 const realEstateProperties: CoreMirrorRealEstateProperty[] = [
@@ -45,6 +47,14 @@ const realEstateProperties: CoreMirrorRealEstateProperty[] = [
       { label: "Beach", value: "650 m" },
       { label: "Airport", value: "92 km" },
       { label: "Supermarket", value: "1.3 km" },
+    ],
+    nearbyServices: [
+      { name: "Property Management", detail: "Operational support for rentals", href: "/services/private-chef-villa-service", coverageKm: 50 },
+      { name: "Legal & Notary Support", detail: "Transaction process assistance", href: "/services/airport-transfer-halkidiki", coverageKm: 80 },
+    ],
+    blogPosts: [
+      { title: "Real-estate due diligence checklist", href: "/blog/seasonal-rates-explained", date: "2026-02-05" },
+      { title: "How to evaluate ROI in vacation markets", href: "/blog/best-coastal-towns-halkidiki", date: "2026-02-10" },
     ],
   },
 ];

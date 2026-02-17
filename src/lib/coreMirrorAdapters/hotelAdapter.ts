@@ -92,6 +92,8 @@ export function toHotelDetailsVM(hotel: CoreMirrorHotel, activeMode?: DealType):
       tour3dUrl: hotel.media.tour3dUrl,
       contentUrls: hotel.media.contentUrls,
     },
+    relatedServices: hotel.nearbyServices,
+    relatedBlogPosts: hotel.blogPosts,
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "Open room inventory",

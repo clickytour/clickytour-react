@@ -77,6 +77,8 @@ export function toHotelRoomDetailsVM(room: CoreMirrorHotelRoom, activeMode?: Dea
             })),
           }
         : undefined,
+    relatedServices: room.nearbyServices,
+    relatedBlogPosts: room.blogPosts,
     cta: {
       primary: pickPrimaryCta(dealType),
       secondary: "View parent hotel",

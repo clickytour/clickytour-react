@@ -47,6 +47,8 @@ export type CanonicalDetailsViewModel = {
     contentUrls?: Array<{ site: string; url: string }>;
   };
   parentLink?: { label: string; href: string };
+  relatedServices?: Array<{ name: string; detail: string; href: string; coverageKm?: number }>;
+  relatedBlogPosts?: Array<{ title: string; href: string; date?: string; excerpt?: string; image?: string }>;
   cta: {
     primary: string;
     secondary?: string;

@@ -209,6 +209,38 @@ export function CanonicalEntityDetailsSections({ vm }: { vm: CanonicalDetailsVie
         </section>
       )}
 
+      {vm.relatedServices && vm.relatedServices.length > 0 && (
+        <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Services nearby</h2>
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            {vm.relatedServices.map((service) => (
+              <a key={`${service.name}-${service.href}`} href={service.href} className="rounded-xl border border-slate-200 bg-slate-50 p-3 hover:bg-white">
+                <p className="text-sm font-semibold text-slate-900">{service.name}</p>
+                <p className="mt-1 text-xs text-slate-600">{service.detail}</p>
+                {typeof service.coverageKm === "number" && (
+                  <p className="mt-1 text-xs text-slate-700">Service area coverage: {service.coverageKm} km</p>
+                )}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {vm.relatedBlogPosts && vm.relatedBlogPosts.length > 0 && (
+        <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="text-2xl font-semibold text-slate-900">Related blog posts</h2>
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            {vm.relatedBlogPosts.map((post) => (
+              <a key={post.href} href={post.href} className="rounded-xl border border-slate-200 bg-slate-50 p-3 hover:bg-white">
+                <p className="text-sm font-semibold text-slate-900">{post.title}</p>
+                {post.date && <p className="mt-1 text-xs text-slate-600">{post.date}</p>}
+                {post.excerpt && <p className="mt-1 text-xs text-slate-600">{post.excerpt}</p>}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
       <GuestRequestInlineForm
         contextType="property"
         contextId={vm.id}
