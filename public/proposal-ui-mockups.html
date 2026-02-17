@@ -41,6 +41,7 @@
     .collection-hero {
       border:1px solid var(--line); border-radius:12px; background:#fbfcff; padding:12px; margin-bottom:12px;
     }
+    .trust-strip { border:1px solid var(--line); border-radius:12px; background:#fff; padding:10px; margin-bottom:12px; display:flex; flex-wrap:wrap; gap:8px; }
     .bundle {
       border:1px solid var(--line); border-radius:12px; background:#fff; padding:12px; margin-bottom:12px;
     }
@@ -109,6 +110,7 @@
           <div class="pill-row" id="pillRow"></div>
         </section>
 
+        <section class="trust-strip" id="trustStrip"></section>
         <section class="bundle" id="bundle"></section>
         <section class="proposal-feedback" id="proposalFeedback"></section>
         <section class="stack" id="stack"></section>
@@ -176,6 +178,7 @@
     const collectionMeta = document.getElementById('collectionMeta');
     const pillRow = document.getElementById('pillRow');
     const stack = document.getElementById('stack');
+    const trustStrip = document.getElementById('trustStrip');
     const bundle = document.getElementById('bundle');
     const proposalFeedback = document.getElementById('proposalFeedback');
     const subtitle = document.getElementById('subtitle');
@@ -201,6 +204,15 @@
     if (lockControls) {
       variantSel.disabled = true;
       collectionSel.disabled = true;
+    }
+
+    function renderTrustStrip() {
+      trustStrip.innerHTML = `
+        <span class="pill">✅ Verified proposal session</span>
+        <span class="pill">⚡ Agent reply in ~10 min</span>
+        <span class="pill">🔒 Secure booking handoff</span>
+        <span class="pill">🛟 Flexible cancellation by option</span>
+      `;
     }
 
     function renderBundle(bundleData) {
@@ -273,6 +285,7 @@
       `;
 
       dockText.textContent = `Events: collection_view(${c.collectionRef}) • proposal_feedback_selected(like|dislike|callback) • bundle_feedback_selected • card_impression • cta_selected(view_details|reserve|book)`;
+      renderTrustStrip();
       renderBundle(c.bundle);
       renderProposalFeedback(c.collectionRef);
       renderCards(c.cards);
