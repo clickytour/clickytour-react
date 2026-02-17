@@ -75,6 +75,7 @@
       border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px;
       display:flex; justify-content:space-between; gap:8px; align-items:center;
     }
+    .summary { border:1px solid var(--line); border-radius:12px; background:#fff; padding:10px; margin-bottom:12px; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }
     @media (max-width: 960px){ .stack{ grid-template-columns:repeat(2,minmax(0,1fr)); } .bundle-grid{grid-template-columns:1fr;} }
     @media (max-width: 640px){ .stack{ grid-template-columns:1fr; } }
   </style>
@@ -111,6 +112,7 @@
         </section>
 
         <section class="trust-strip" id="trustStrip"></section>
+        <section class="summary" id="summary"></section>
         <section class="bundle" id="bundle"></section>
         <section class="proposal-feedback" id="proposalFeedback"></section>
         <section class="stack" id="stack"></section>
@@ -180,6 +182,7 @@
     const stack = document.getElementById('stack');
     const trustStrip = document.getElementById('trustStrip');
     const bundle = document.getElementById('bundle');
+    const summary = document.getElementById('summary');
     const proposalFeedback = document.getElementById('proposalFeedback');
     const subtitle = document.getElementById('subtitle');
     const navState = document.getElementById('navState');
@@ -212,6 +215,19 @@
         <span class="pill">⚡ Agent reply in ~10 min</span>
         <span class="pill">🔒 Secure booking handoff</span>
         <span class="pill">🛟 Flexible cancellation by option</span>
+      `;
+    }
+
+    function renderSummary(c) {
+      summary.innerHTML = `
+        <div>
+          <div style="font-weight:700">Best matched to your request</div>
+          <div class="muted">${c.cards.length} curated options • Proposal ${c.proposalRef} • Collection ${c.collectionRef}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn">📞 Request callback</button>
+          <button class="btn primary">✅ Proceed with selected option</button>
+        </div>
       `;
     }
 
@@ -286,6 +302,7 @@
 
       dockText.textContent = `Events: collection_view(${c.collectionRef}) • proposal_feedback_selected(like|dislike|callback) • bundle_feedback_selected • card_impression • cta_selected(view_details|reserve|book)`;
       renderTrustStrip();
+      renderSummary(c);
       renderBundle(c.bundle);
       renderProposalFeedback(c.collectionRef);
       renderCards(c.cards);
