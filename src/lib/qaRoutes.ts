@@ -3,7 +3,7 @@ import { heroPages } from "@/lib/landingHeroes";
 export type QARoute = {
   href: string;
   label: string;
-  group: "For Guests" | "For Owners" | "Collaborate" | "Templates (QA)" | "Complexes (QA)" | "Company & Utility";
+  group: "For Guests" | "For Owners" | "Collaborate" | "Templates (QA)" | "Complexes (QA)" | "Single Complexis" | "Company & Utility";
   status: "Pending QA" | "QA Passed";
 };
 
@@ -38,15 +38,15 @@ const staticRoutes: QARoute[] = [
   { href: "/free-evaluation", label: "Free Evaluation", group: "For Owners", status: "Pending QA" },
 
   { href: "/complex-template", label: "Complex Template (Base)", group: "Templates (QA)", status: "Pending QA" },
-  { href: "/luxury-suites-elsa", label: "Luxury Suites Elsa", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/galini-beachfront-masonettes-complex", label: "Galini Beachfront Masonettes", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/olea-suites-apartments-complex", label: "Olea Suites Apartments", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/deluxe-suites-bomo", label: "Deluxe Suites Bomo", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/simonitiko-beachfront-villas-complex", label: "Simonitiko Beachfront Villas", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/tripotsmos-beachfront-complex-a", label: "Tripotsmos Beachfront Complex A", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/tripotamos-beachfront-villas-complex-b", label: "Tripotamos Beachfront Villas B", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/afitos-kassandra-halkidiki", label: "Afitos Kassandra Halkidiki", group: "Complexes (QA)", status: "Pending QA" },
-  { href: "/complexes-sani-club-private-villas", label: "Sani Club Private Villas", group: "Complexes (QA)", status: "Pending QA" },
+  { href: "/luxury-suites-elsa", label: "Luxury Suites Elsa", group: "Single Complexis", status: "Pending QA" },
+  { href: "/galini-beachfront-masonettes-complex", label: "Galini Beachfront Masonettes", group: "Single Complexis", status: "Pending QA" },
+  { href: "/olea-suites-apartments-complex", label: "Olea Suites Apartments", group: "Single Complexis", status: "Pending QA" },
+  { href: "/deluxe-suites-bomo", label: "Deluxe Suites Bomo", group: "Single Complexis", status: "Pending QA" },
+  { href: "/simonitiko-beachfront-villas-complex", label: "Simonitiko Beachfront Villas", group: "Single Complexis", status: "Pending QA" },
+  { href: "/tripotsmos-beachfront-complex-a", label: "Tripotsmos Beachfront Complex A", group: "Single Complexis", status: "Pending QA" },
+  { href: "/tripotamos-beachfront-villas-complex-b", label: "Tripotamos Beachfront Villas B", group: "Single Complexis", status: "Pending QA" },
+  { href: "/afitos-kassandra-halkidiki", label: "Afitos Kassandra Halkidiki", group: "Single Complexis", status: "Pending QA" },
+  { href: "/complexes-sani-club-private-villas", label: "Sani Club Private Villas", group: "Single Complexis", status: "Pending QA" },
 
   { href: "/property/villa-glarokavos-sea-view", label: "Canonical Property Details (Core Mirror)", group: "Templates (QA)", status: "Pending QA" },
   { href: "/property/vacation/villa-glarokavos-sea-view", label: "Canonical Vacation Property (Type Route)", group: "Templates (QA)", status: "Pending QA" },
