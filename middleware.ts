@@ -6,12 +6,18 @@ export function middleware(request: NextRequest) {
     hostname.includes('pickedfor.com') ||
     hostname.includes('pickedfor.localhost');
 
-  // On pickedfor.com, only allow proposal/pickedfor/r/ paths and static assets
+  // On pickedfor.com, only allow specific proposal/detail links — NOT indexes
   if (isPF) {
     const { pathname } = request.nextUrl;
+
+    // Allow: /proposal/[id] (specific proposals, must have an ID after /proposal/)
+    // Allow: /pickedfor/detail/[slug] (specific detail pages)
+    // Allow: /r/ (legacy demo routes)
+    // Allow: static assets
+    // BLOCK: /proposal (index), /pickedfor/detail (index), /search, everything else
     const allowed =
-      pathname.startsWith('/proposal') ||
-      pathname.startsWith('/pickedfor') ||
+      (pathname.startsWith('/proposal/') && pathname !== '/proposal/') ||
+      (pathname.startsWith('/pickedfor/detail/') && pathname !== '/pickedfor/detail/') ||
       pathname.startsWith('/r/') ||
       pathname.startsWith('/_next') ||
       pathname.startsWith('/favicon') ||
@@ -20,9 +26,8 @@ export function middleware(request: NextRequest) {
       pathname === '/sitemap.xml';
 
     if (!allowed) {
-      const url = request.nextUrl.clone();
-      url.pathname = '/proposal';
-      return NextResponse.redirect(url);
+      // Return 404 for blocked pages — don't reveal what exists
+      return new NextResponse('Not Found', { status: 404 });
     }
   }
 
