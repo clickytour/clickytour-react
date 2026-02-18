@@ -12,7 +12,9 @@ export default function ListingDetail() {
   const searchParams = useSearchParams();
   const id = params.id as string;
   const slug = params['listing-slug'] as string;
-  const branded = searchParams.get('branded') === 'true';
+  const brandedParam = searchParams.get('branded');
+  const modeParam = searchParams.get('mode');
+  const branded = brandedParam === 'true' || (brandedParam === null && modeParam === 'brand');
   const listing = getListingBySlug(slug);
 
   const [liked, setLiked] = useState(false);
@@ -29,6 +31,8 @@ export default function ListingDetail() {
   const partner = samplePartner;
   const accent = branded ? partner.accentColor : '#1e3a5f';
   const isUnavailable = listing.availability === 'unavailable';
+  const brandQuery = modeParam ? `?mode=${modeParam}` : brandedParam === 'true' ? '?branded=true' : '';
+  const backHref = id.startsWith('demo-') ? `/r/${id}${brandQuery}` : `/proposal/${id}${brandQuery}`;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -36,7 +40,7 @@ export default function ListingDetail() {
 
       <div className="mx-auto max-w-5xl px-6 py-8">
         {/* Back */}
-        <Link href={`/r/${id}`} className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700">
+        <Link href={backHref} className="mb-6 inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700">
           ← Back to proposal
         </Link>
 

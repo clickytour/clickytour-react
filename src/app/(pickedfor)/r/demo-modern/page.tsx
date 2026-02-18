@@ -12,10 +12,10 @@ import {
 export default async function DemoModern({
   searchParams,
 }: {
-  searchParams: Promise<{ branded?: string }>;
+  searchParams: Promise<{ branded?: string; mode?: 'brand' | 'nologo' }>;
 }) {
   const params = await searchParams;
-  const branded = params.branded === 'true';
+  const branded = params.branded === 'true' || (params.branded == null && params.mode === 'brand');
   const { partner, listings, criteria } = sampleProposal;
 
   return (

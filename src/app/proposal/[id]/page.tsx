@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getProposalById } from "@/lib/proposalMockData";
 import { getVilla4youProposalById } from "@/lib/villa4youProposalBridge";
 import { ModernTemplate } from "@/components/pickedfor/templates/ModernTemplate";
@@ -15,6 +15,13 @@ function ProposalContent() {
 
   // Try villa4you proposals first (Core Mirror data), then fall back to pickedfor demos
   const proposal = getVilla4youProposalById(id) ?? getProposalById(id);
+  const [fallbackHref, setFallbackHref] = useState("/proposal");
+
+  useEffect(() => {
+    if (window.location.hostname.includes("pickedfor")) {
+      setFallbackHref("/");
+    }
+  }, []);
 
   if (!proposal) {
     return (
@@ -22,7 +29,7 @@ function ProposalContent() {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-400 mb-2">404</h1>
           <p className="text-gray-500">Proposal not found.</p>
-          <a href="/proposal" className="mt-4 inline-block text-blue-600 hover:underline text-sm">← Back to proposals</a>
+          <a href={fallbackHref} className="mt-4 inline-block text-blue-600 hover:underline text-sm">← Back</a>
         </div>
       </div>
     );
