@@ -55,9 +55,6 @@ export function SiteHeader() {
           </a>
 
           <div className="hidden items-center gap-2 md:flex">
-            <a href="/all-pages" className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700">
-              All Pages (QA)
-            </a>
             <details className="group relative">
               <summary className="list-none cursor-pointer rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white">
                 Evaluate Your Property ▾
@@ -77,8 +74,6 @@ export function SiteHeader() {
             </summary>
             <div className="absolute right-0 top-[110%] z-50 w-[92vw] max-w-[360px] rounded-2xl border border-slate-200 bg-white p-3 shadow-xl">
               <div className="space-y-2">
-                <a href="/all-pages" className="block rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700">All Pages (QA)</a>
-
                 <details className="group/sub rounded-lg border border-slate-200">
                   <summary className="list-none cursor-pointer px-3 py-2 text-sm font-medium text-slate-900">Evaluate Your Property ▾</summary>
                   <div className="space-y-1 px-2 pb-2">
