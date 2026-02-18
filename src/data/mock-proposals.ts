@@ -3,12 +3,13 @@
 export interface ListingFeature {
   label: string;
   value: string;
+  icon?: string;
 }
 
 export interface Listing {
   id: string;
   slug: string;
-  type: 'vacation' | 'transfer' | 'boat';
+  type: 'vacation' | 'transfer' | 'boat' | 'real-estate';
   title: string;
   description: string;
   photos: string[];
@@ -16,6 +17,10 @@ export interface Listing {
   price: string;
   priceNote?: string;
   location?: string;
+  availability: 'available' | 'unavailable' | 'new-match';
+  rating: number;
+  reviewCount: number;
+  originalMatch: boolean;
 }
 
 export interface Partner {
@@ -29,10 +34,20 @@ export interface Partner {
   website?: string;
 }
 
+export interface ProposalCriteria {
+  type: string;
+  location: string;
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+  bedrooms: number;
+}
+
 export interface Proposal {
   id: string;
   partner: Partner;
   listings: Listing[];
+  criteria: ProposalCriteria;
   greeting: string;
   status: 'active' | 'booked' | 'archived';
   createdAt: string;
@@ -73,6 +88,10 @@ export const listings: Listing[] = [
     price: '€450',
     priceNote: 'per night',
     location: 'Oia, Santorini',
+    availability: 'available',
+    rating: 4.9,
+    reviewCount: 127,
+    originalMatch: true,
   },
   {
     id: 'villa-oceana',
@@ -97,6 +116,10 @@ export const listings: Listing[] = [
     price: '€380',
     priceNote: 'per night',
     location: 'Elia Beach, Mykonos',
+    availability: 'available',
+    rating: 4.8,
+    reviewCount: 89,
+    originalMatch: true,
   },
   {
     id: 'transfer-athens',
@@ -120,6 +143,10 @@ export const listings: Listing[] = [
     price: '€65',
     priceNote: 'one way',
     location: 'Athens, Greece',
+    availability: 'available',
+    rating: 4.7,
+    reviewCount: 312,
+    originalMatch: true,
   },
   {
     id: 'boat-poseidon',
@@ -143,6 +170,65 @@ export const listings: Listing[] = [
     price: '€180',
     priceNote: 'per person',
     location: 'Paros / Naxos',
+    availability: 'available',
+    rating: 4.9,
+    reviewCount: 56,
+    originalMatch: true,
+  },
+  {
+    id: 'villa-sunset',
+    slug: 'villa-sunset-santorini',
+    type: 'vacation',
+    title: 'Villa Sunset — Fira Cliffside Retreat',
+    description:
+      'Once one of the most sought-after properties in Fira, Villa Sunset featured 3 bedrooms with panoramic caldera views, a heated plunge pool, and authentic stone-carved interiors. This listing has been booked by another guest for your requested dates.',
+    photos: [
+      'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=500&fit=crop',
+    ],
+    features: [
+      { label: 'Bedrooms', value: '3' },
+      { label: 'Guests', value: 'Up to 6' },
+      { label: 'Pool', value: 'Plunge pool' },
+      { label: 'View', value: 'Caldera' },
+      { label: 'WiFi', value: 'High-speed' },
+      { label: 'Style', value: 'Cave house' },
+    ],
+    price: '€410',
+    priceNote: 'per night',
+    location: 'Fira, Santorini',
+    availability: 'unavailable',
+    rating: 4.8,
+    reviewCount: 203,
+    originalMatch: true,
+  },
+  {
+    id: 'villa-azure',
+    slug: 'villa-azure-santorini',
+    type: 'vacation',
+    title: 'Villa Azure — New Listing in Imerovigli',
+    description:
+      'Just listed! A stunning new addition to our portfolio, Villa Azure sits at the highest point of Imerovigli with unobstructed 270° views of the caldera and volcano. Four beautifully appointed bedrooms, a private infinity pool, chef\'s kitchen, and direct access to the famous Skaros Rock trail. An exceptional find for discerning travelers.',
+    photos: [
+      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=800&h=500&fit=crop',
+    ],
+    features: [
+      { label: 'Bedrooms', value: '4' },
+      { label: 'Guests', value: 'Up to 8' },
+      { label: 'Pool', value: 'Infinity' },
+      { label: 'View', value: '270° Caldera' },
+      { label: 'Kitchen', value: "Chef's" },
+      { label: 'Trail Access', value: 'Skaros Rock' },
+    ],
+    price: '€520',
+    priceNote: 'per night',
+    location: 'Imerovigli, Santorini',
+    availability: 'new-match',
+    rating: 5.0,
+    reviewCount: 3,
+    originalMatch: false,
   },
 ];
 
@@ -150,6 +236,14 @@ export const sampleProposal: Proposal = {
   id: 'demo-proposal',
   partner: samplePartner,
   listings,
+  criteria: {
+    type: 'vacation',
+    location: 'Santorini & Cyclades',
+    checkIn: '2026-07-15',
+    checkOut: '2026-07-22',
+    guests: 4,
+    bedrooms: 3,
+  },
   greeting: "Here's what we picked for you",
   status: 'active',
   createdAt: '2026-02-18T15:00:00Z',

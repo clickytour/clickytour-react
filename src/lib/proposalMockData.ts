@@ -4,6 +4,7 @@ export interface ProposalItem {
   name: string;
   description?: string;
   image: string;
+  images?: string[];
   region: string;
   listingType: string;
   bedrooms?: number;
@@ -12,7 +13,14 @@ export interface ProposalItem {
   pricePerNight?: number;
   totalPrice?: number;
   rating?: number;
+  reviewCount?: number;
   detailsUrl: string;
+  videoUrl?: string;
+  videoUrlGeneric?: string;
+  tour3dUrl?: string;
+  tour3dUrlGeneric?: string;
+  availability?: 'available' | 'unavailable' | 'new-match';
+  originalMatch?: boolean;
 }
 
 export interface BundleItem {
@@ -63,10 +71,11 @@ export const proposals: Proposal[] = [
     createdAt: "2026-02-15T10:00:00Z",
     expiresAt: "2026-03-15T23:59:59Z",
     items: [
-      { name: "Villa Sapphire", description: "Stunning seafront villa with infinity pool and panoramic Ionian views.", image: IMG, region: "Lefkada, Greece", listingType: "Villa", bedrooms: 4, bathrooms: 3, maxGuests: 8, pricePerNight: 320, totalPrice: 2240, rating: 4.9, detailsUrl: "/property/villa-sapphire" },
-      { name: "Casa Azzurra", description: "Modern hilltop retreat surrounded by olive groves.", image: IMG2, region: "Lefkada, Greece", listingType: "Villa", bedrooms: 3, bathrooms: 2, maxGuests: 6, pricePerNight: 250, totalPrice: 1750, rating: 4.7, detailsUrl: "/property/casa-azzurra" },
-      { name: "Olive Stone House", description: "Traditional stone house with private garden and BBQ area.", image: IMG3, region: "Lefkada, Greece", listingType: "House", bedrooms: 2, bathrooms: 1, maxGuests: 4, pricePerNight: 150, totalPrice: 1050, rating: 4.5, detailsUrl: "/property/olive-stone" },
-      { name: "Porto Blu Apartment", description: "Beachfront apartment steps from Nidri marina.", image: IMG4, region: "Lefkada, Greece", listingType: "Apartment", bedrooms: 1, bathrooms: 1, maxGuests: 2, pricePerNight: 95, totalPrice: 665, rating: 4.3, detailsUrl: "/property/porto-blu" },
+      { name: "Villa Sapphire", description: "Stunning seafront villa with infinity pool and panoramic Ionian views.", image: IMG, images: [IMG, IMG2, IMG3], region: "Lefkada, Greece", listingType: "Villa", bedrooms: 4, bathrooms: 3, maxGuests: 8, pricePerNight: 320, totalPrice: 2240, rating: 4.9, reviewCount: 127, detailsUrl: "/property/villa-sapphire", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", videoUrlGeneric: "https://www.youtube.com/watch?v=generic1", tour3dUrl: "https://my.matterport.com/show/?m=example", tour3dUrlGeneric: "https://my.matterport.com/show/?m=generic1", availability: "available", originalMatch: true },
+      { name: "Casa Azzurra", description: "Modern hilltop retreat surrounded by olive groves.", image: IMG2, images: [IMG2, IMG4], region: "Lefkada, Greece", listingType: "Villa", bedrooms: 3, bathrooms: 2, maxGuests: 6, pricePerNight: 250, totalPrice: 1750, rating: 4.7, reviewCount: 89, detailsUrl: "/property/casa-azzurra", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", videoUrlGeneric: "https://www.youtube.com/watch?v=generic2", availability: "available", originalMatch: true },
+      { name: "Olive Stone House", description: "Traditional stone house with private garden and BBQ area.", image: IMG3, images: [IMG3, IMG], region: "Lefkada, Greece", listingType: "House", bedrooms: 2, bathrooms: 1, maxGuests: 4, pricePerNight: 150, totalPrice: 1050, rating: 4.5, reviewCount: 56, detailsUrl: "/property/olive-stone", availability: "available", originalMatch: true },
+      { name: "Porto Blu Apartment", description: "Beachfront apartment steps from Nidri marina. This listing has been booked by another guest for your requested dates.", image: IMG4, images: [IMG4], region: "Lefkada, Greece", listingType: "Apartment", bedrooms: 1, bathrooms: 1, maxGuests: 2, pricePerNight: 95, totalPrice: 665, rating: 4.3, reviewCount: 34, detailsUrl: "/property/porto-blu", availability: "unavailable", originalMatch: true },
+      { name: "Villa Emerald", description: "Just listed! Brand new luxury villa with rooftop terrace and private dock access. Stunning sunset views over the Ionian Sea.", image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop", images: ["https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop", IMG], region: "Lefkada, Greece", listingType: "Villa", bedrooms: 3, bathrooms: 2, maxGuests: 6, pricePerNight: 290, totalPrice: 2030, rating: 5.0, reviewCount: 3, detailsUrl: "/property/villa-emerald", tour3dUrl: "https://my.matterport.com/show/?m=example2", tour3dUrlGeneric: "https://my.matterport.com/show/?m=generic3", availability: "new-match", originalMatch: false },
     ],
   },
   {
