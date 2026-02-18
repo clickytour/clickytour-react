@@ -48,6 +48,17 @@ const staticRoutes: QARoute[] = [
   { href: "/afitos-kassandra-halkidiki", label: "Afitos Kassandra Halkidiki", group: "Single Complexis", status: "Pending QA" },
   { href: "/complexes-sani-club-private-villas", label: "Sani Club Private Villas", group: "Single Complexis", status: "Pending QA" },
 
+  { href: "/proposal", label: "Proposal Demos Index", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-individual", label: "Proposal: Branded Individual", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-largegroup", label: "Proposal: Branded Large-Group", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-combo", label: "Proposal: Branded Combination", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-nologo-individual", label: "Proposal: No-logo Individual", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-nologo-largegroup", label: "Proposal: No-logo Large-Group", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-nologo-combo", label: "Proposal: No-logo Combination", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-hotel", label: "Proposal: Branded Hotel Rooms", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-realestate", label: "Proposal: Branded Real Estate", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-service", label: "Proposal: Branded Services", group: "Templates", status: "Pending QA" },
+
   { href: "/property/villa-glarokavos-sea-view", label: "Canonical Property Details (Core Mirror)", group: "Templates", status: "Pending QA" },
   { href: "/property/vacation/villa-glarokavos-sea-view", label: "Canonical Vacation Property (Type Route)", group: "Templates", status: "Pending QA" },
   { href: "/property/real-estate/kassandra-investment-villa", label: "Canonical Real Estate Property", group: "Templates", status: "Pending QA" },
