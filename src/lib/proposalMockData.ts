@@ -57,7 +57,7 @@ const IMG4 = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600
 const IMG_HOTEL = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop";
 const IMG_BOAT = "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop";
 const IMG_TRANSFER = "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop";
-const IMG_SERVICE = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop";
+const IMG_SERVICE = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=400&fit=crop";
 const IMG_RE = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop";
 
 export const proposals: Proposal[] = [
