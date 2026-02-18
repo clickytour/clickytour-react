@@ -1,23 +1,14 @@
 'use client';
 
 import { Proposal, ProposalItem, BundleItem } from '@/lib/proposalMockData';
-import { AvailabilityBadge, StarRating, PhotoCarousel, ActionButtons, ListingSummary, MediaIcons, groupItems } from './shared';
+import { AvailabilityBadge, StarRating, PhotoCarousel, ActionButtons, ListingSummary, MediaIcons, groupItems, toPickedForUrl } from './shared';
 
 interface Props {
   proposal: Proposal;
   mode: 'brand' | 'nologo';
 }
 
-const PICKEDFOR_BASE_URL = 'https://pickedfor.com';
-
-function toPickedForUrl(pathOrUrl: string) {
-  if (!pathOrUrl) return PICKEDFOR_BASE_URL;
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  if (pathOrUrl.startsWith('/pickedfor/detail/')) return `${PICKEDFOR_BASE_URL}${pathOrUrl}`;
-  const slug = pathOrUrl.split('/').filter(Boolean).pop();
-  return slug ? `${PICKEDFOR_BASE_URL}/pickedfor/detail/${slug}` : PICKEDFOR_BASE_URL;
-}
-
+// use shared toPickedForUrl helper
 function ItemRow({ item, index, isBrand, entityType, accent }: { item: ProposalItem; index: number; isBrand: boolean; entityType: string; accent: string }) {
   const label = isBrand ? item.name : `${item.listingType} ${String.fromCharCode(65 + index)}`;
   const isRealEstate = entityType === 'real_estate';

@@ -18,7 +18,6 @@ export function middleware(request: NextRequest) {
     const allowed =
       (pathname.startsWith('/proposal/') && pathname !== '/proposal/') ||
       (pathname.startsWith('/pickedfor/detail/') && pathname !== '/pickedfor/detail/') ||
-      (pathname.startsWith('/property/') && pathname !== '/property/') ||
       pathname.startsWith('/r/') ||
       pathname.startsWith('/_next') ||
       pathname.startsWith('/favicon') ||

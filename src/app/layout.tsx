@@ -26,7 +26,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const hdrs = await headers();
-  const isPF = hdrs.get("x-pickedfor") === "1";
+  const host = hdrs.get('host') || '';
+  const isPF = host.includes('pickedfor.com') || hdrs.get('x-pickedfor') === '1';
 
   return (
     <html lang="en">

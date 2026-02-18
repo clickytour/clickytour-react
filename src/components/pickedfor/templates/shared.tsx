@@ -3,6 +3,16 @@
 import { useState } from 'react';
 import { ProposalItem } from '@/lib/proposalMockData';
 
+const PICKEDFOR_BASE_URL = 'https://pickedfor.com';
+
+export function toPickedForUrl(pathOrUrl: string) {
+  if (!pathOrUrl) return PICKEDFOR_BASE_URL;
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+  if (pathOrUrl.startsWith('/pickedfor/detail/')) return `${PICKEDFOR_BASE_URL}${pathOrUrl}`;
+  const slug = pathOrUrl.split('/').filter(Boolean).pop();
+  return slug ? `${PICKEDFOR_BASE_URL}/pickedfor/detail/${slug}` : PICKEDFOR_BASE_URL;
+}
+
 // ─── Availability Badge ───
 export function AvailabilityBadge({ status }: { status?: ProposalItem['availability'] }) {
   if (!status || status === 'available') {
