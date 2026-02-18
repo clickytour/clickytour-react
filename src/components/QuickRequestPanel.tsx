@@ -57,7 +57,7 @@ type FormState = {
   websiteHp: string;
 };
 
-const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/14582531/ueuzwpy/";
+const GUEST_REQUEST_API_URL = "/api/guest-request";
 const inputClass = "mt-1 h-9 w-full rounded-md border border-slate-300 bg-[#eef8f8] px-2.5 text-[12px] text-slate-800";
 
 const initial: FormState = {
@@ -295,7 +295,7 @@ export function QuickRequestPanel() {
     setSubmitting(true);
     setMsg("");
     try {
-      const res = await fetch(WEBHOOK_URL, {
+      const res = await fetch(GUEST_REQUEST_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -640,7 +640,8 @@ export function QuickRequestPanel() {
             </label>
           </div>
 
-          <div className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-[11px] text-slate-700">Quick verification · Cloudflare Turnstile placeholder</div>
+          {/* Configure NEXT_PUBLIC_TURNSTILE_SITEKEY in env to enable real Turnstile widget */}
+          <div id="cf-turnstile" className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY || "placeholder"}></div>
 
           <label className="flex items-center gap-2 rounded-md border border-slate-300 bg-white px-2.5 py-2 text-[11px] text-slate-700">
             <input type="checkbox" checked={form.consentData} onChange={(e) => setField("consentData", e.target.checked)} /> {meta.consentText}

@@ -31,7 +31,7 @@ type FormState = {
   websiteHp: string;
 };
 
-const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/14582531/ueuzwpy/";
+const GUEST_REQUEST_API_URL = "/api/guest-request";
 const inputClass = "mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none transition focus:border-slate-600";
 const labelClass = "text-sm font-medium text-slate-700";
 
@@ -191,7 +191,7 @@ export function AgentsApplySections() {
     setMessage("");
 
     try {
-      const res = await fetch(WEBHOOK_URL, {
+      const res = await fetch(GUEST_REQUEST_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -455,9 +455,8 @@ export function AgentsApplySections() {
                   </label>
                   {errors.consentAccuracy && <p className="mt-1 text-xs text-red-600">{errors.consentAccuracy}</p>}
 
-                  <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
-                    Captcha: Cloudflare Turnstile placeholder (to be activated with site key + server verification).
-                  </div>
+                  {/* Configure NEXT_PUBLIC_TURNSTILE_SITEKEY in env to enable real Turnstile widget */}
+                  <div id="cf-turnstile" className="cf-turnstile mt-3" data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY || "placeholder"}></div>
 
                   <input
                     type="text"

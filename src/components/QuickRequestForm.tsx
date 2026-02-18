@@ -14,7 +14,7 @@ type FormState = {
   websiteHp: string;
 };
 
-const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/14582531/ueuzwpy/";
+const GUEST_REQUEST_API_URL = "/api/guest-request";
 
 const inputClass = "h-10 rounded-lg border border-slate-300 bg-white px-3 text-[13px] text-slate-800 placeholder:text-slate-500";
 
@@ -81,7 +81,7 @@ export function QuickRequestForm() {
     setSubmitting(true);
     setMsg("");
     try {
-      const res = await fetch(WEBHOOK_URL, {
+      const res = await fetch(GUEST_REQUEST_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -131,9 +131,8 @@ export function QuickRequestForm() {
         <input className={`${inputClass} w-full`} placeholder="Distance to infrastructures" value={form.distanceToInfrastructure} onChange={(e) => setField("distanceToInfrastructure", e.target.value)} />
       </div>
 
-      <div className="mt-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
-        Captcha: Cloudflare Turnstile placeholder (to be activated with site key + server verification).
-      </div>
+      {/* Configure NEXT_PUBLIC_TURNSTILE_SITEKEY in env to enable real Turnstile widget */}
+      <div id="cf-turnstile" className="cf-turnstile mt-2" data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY || "placeholder"}></div>
 
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" value={form.websiteHp} onChange={(e) => setField("websiteHp", e.target.value)} />
       {errors.websiteHp && <p className="mt-1 text-[11px] text-red-600">{errors.websiteHp}</p>}

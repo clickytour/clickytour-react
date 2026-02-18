@@ -16,7 +16,7 @@ type Props = {
   subcategoryName?: string;
 };
 
-const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/14582531/ueuzwpy/";
+const GUEST_REQUEST_API_URL = "/api/guest-request";
 
 export function GuestRequestInlineForm(props: Props) {
   const searchParams = useSearchParams();
@@ -149,7 +149,7 @@ export function GuestRequestInlineForm(props: Props) {
         consent: { termsAccepted: form.terms },
       };
 
-      const r = await fetch(WEBHOOK_URL, {
+      const r = await fetch(GUEST_REQUEST_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -272,7 +272,8 @@ export function GuestRequestInlineForm(props: Props) {
           <textarea className="mt-3 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" rows={3} placeholder="Message / request details" value={form.note} onChange={(e)=>setForm({...form, note:e.target.value})} />
           <input className="hidden" value={form.hp} onChange={(e)=>setForm({...form, hp:e.target.value})} tabIndex={-1} autoComplete="off" />
 
-          <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">Turnstile placeholder (to activate with site key + server verify).</div>
+          {/* Configure NEXT_PUBLIC_TURNSTILE_SITEKEY in env to enable real Turnstile widget */}
+          <div id="cf-turnstile" className="cf-turnstile mt-3" data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY || "placeholder"}></div>
 
           <label className="mt-3 flex items-start gap-2 text-sm text-slate-700">
             <input type="checkbox" checked={form.terms} onChange={(e)=>setForm({...form, terms:e.target.checked})} />
