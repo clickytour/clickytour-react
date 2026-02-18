@@ -4,6 +4,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { filterSearchSimulationRecords, getSearchSimulationRecords, type SearchMode, type SearchVertical } from "@/lib/searchSimulation";
 import { trackSearchPageView, trackSearchResultClick } from "@/lib/searchAnalytics";
 
+/** Map search result slugs to villa4you proposal IDs */
+const proposalMap: Record<string, string> = {
+  "villa-glarokavos-sea-view": "v4y-vacation-halkidiki",
+  "aegean-boutique-hotel": "v4y-hotel-pefkohori",
+  "kassandra-investment-villa": "v4y-investment-kassandra",
+};
+
 const verticalOptions: Array<{ id: SearchVertical; label: string }> = [
   { id: "all", label: "All" },
   { id: "stays", label: "Stays" },
@@ -167,7 +174,7 @@ export function SearchResultsGuestSections({
                   ))}
                 </div>
               </div>
-              <div className="border-t border-slate-300 p-3">
+              <div className="border-t border-slate-300 p-3 flex gap-2">
                 <a
                   href={item.href}
                   onClick={() =>
@@ -189,6 +196,20 @@ export function SearchResultsGuestSections({
                 >
                   Open result
                 </a>
+                {item.kind === "property" && (() => {
+                  const slug = item.href.split("/").filter(Boolean).pop()?.replace(/\/(vacation|sale|monthly)$/, "") || "";
+                  const cleanSlug = item.href.replace(/\/(vacation|sale|monthly)$/, "").split("/").filter(Boolean).pop() || "";
+                  const proposalId = proposalMap[cleanSlug];
+                  if (!proposalId) return null;
+                  return (
+                    <a
+                      href={`/proposal/${proposalId}`}
+                      className="inline-flex rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100"
+                    >
+                      📋 View Proposal
+                    </a>
+                  );
+                })()}
               </div>
             </article>
           ))}
