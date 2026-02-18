@@ -37,6 +37,12 @@ const staticRoutes: QARoute[] = [
   { href: "/destinations", label: "Destinations", group: "For Guests", status: "Pending QA" },
   { href: "/explore-map", label: "Explore Map", group: "For Guests", status: "Pending QA" },
 
+  { href: "/contact", label: "Contact Us", group: "Company & Utility", status: "Pending QA" },
+  { href: "/terms", label: "Terms & Conditions", group: "Company & Utility", status: "Pending QA" },
+  { href: "/privacy", label: "Privacy Policy", group: "Company & Utility", status: "Pending QA" },
+  { href: "/cookies", label: "Cookie Policy", group: "Company & Utility", status: "Pending QA" },
+  { href: "/testimonials", label: "Testimonials / Reviews", group: "For Guests", status: "Pending QA" },
+
   { href: "/free-evaluation", label: "Free Evaluation", group: "For Owners", status: "Pending QA" },
 
   { href: "/complex-template", label: "Complex Template (Base)", group: "Templates", status: "Pending QA" },

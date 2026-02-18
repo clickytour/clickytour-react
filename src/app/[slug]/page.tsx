@@ -21,6 +21,11 @@ import { PartnerServiceProvidersSections } from "@/components/PartnerServiceProv
 import { ServisApplySections } from "@/components/ServisApplySections";
 import { AgentsSections } from "@/components/AgentsSections";
 import { AgentsApplySections } from "@/components/AgentsApplySections";
+import { ContactSections } from "@/components/ContactSections";
+import { TermsSections } from "@/components/TermsSections";
+import { PrivacySections } from "@/components/PrivacySections";
+import { CookiesSections } from "@/components/CookiesSections";
+import { TestimonialsSections } from "@/components/TestimonialsSections";
 import { heroPagesBySlug } from "@/lib/landingHeroes";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr";
@@ -29,6 +34,26 @@ const seoBySlug: Record<string, { title: string; description: string }> = {
   agents: {
     title: "For Agents | ClickyTour Partner Ecosystem",
     description: "Join as an agent or tour operator. Access rentals, services, white-label offers, and net pricing tools.",
+  },
+  contact: {
+    title: "Contact Us | Villa4you",
+    description: "Get in touch with Villa4you. Send us a message, call us, or visit our office in Halkidiki, Greece.",
+  },
+  terms: {
+    title: "Terms & Conditions | Villa4you",
+    description: "Read the Terms & Conditions for Villa4you vacation rental and property management services in Greece.",
+  },
+  privacy: {
+    title: "Privacy Policy | Villa4you",
+    description: "Villa4you GDPR-compliant Privacy Policy. Learn how we collect, use, and protect your personal data.",
+  },
+  cookies: {
+    title: "Cookie Policy | Villa4you",
+    description: "Learn about the cookies used on villa4you.gr, their purpose, and how to manage your preferences.",
+  },
+  testimonials: {
+    title: "Guest Reviews & Testimonials | Villa4you",
+    description: "Read what guests say about their Villa4you vacation experience in Halkidiki, Greece.",
   },
   "agents-apply": {
     title: "Agents Apply | ClickyTour",
@@ -225,6 +250,46 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
     return (
       <div className="min-h-screen bg-[#f3f5f8]">
         <ComplexTemplateSections variant="complexes-sani-club-private-villas" />
+      </div>
+    );
+  }
+
+  if (slug === "contact") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <ContactSections />
+      </div>
+    );
+  }
+
+  if (slug === "terms") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <TermsSections />
+      </div>
+    );
+  }
+
+  if (slug === "privacy") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <PrivacySections />
+      </div>
+    );
+  }
+
+  if (slug === "cookies") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <CookiesSections />
+      </div>
+    );
+  }
+
+  if (slug === "testimonials") {
+    return (
+      <div className="min-h-screen bg-[#f3f5f8]">
+        <TestimonialsSections />
       </div>
     );
   }
