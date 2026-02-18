@@ -32,8 +32,17 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Set a header so layouts can detect which domain
-  const res = NextResponse.next();
+  // Set a REQUEST header so server components/layouts can detect the domain
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pickedfor', isPF ? '1' : '0');
+
+  const res = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+
+  // Optional response header for debugging at the edge
   res.headers.set('x-pickedfor', isPF ? '1' : '0');
   return res;
 }
