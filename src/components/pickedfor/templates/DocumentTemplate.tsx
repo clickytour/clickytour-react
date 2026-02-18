@@ -9,7 +9,7 @@ interface Props {
 }
 
 // use shared toPickedForUrl helper
-function ItemRow({ item, index, isBrand, entityType, accent }: { item: ProposalItem; index: number; isBrand: boolean; entityType: string; accent: string }) {
+function ItemRow({ item, index, isBrand, mode, entityType, accent }: { item: ProposalItem; index: number; isBrand: boolean; mode: 'brand' | 'nologo'; entityType: string; accent: string }) {
   const label = isBrand ? item.name : `${item.listingType} ${String.fromCharCode(65 + index)}`;
   const isRealEstate = entityType === 'real_estate';
   const isUnavailable = item.availability === 'unavailable';
@@ -58,7 +58,7 @@ function ItemRow({ item, index, isBrand, entityType, accent }: { item: ProposalI
               <a href="https://pickedfor.com/contact" className="rounded px-3 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>Find Similar</a>
             ) : (
               <div className="flex gap-2">
-                <a href={toPickedForUrl(item.detailsUrl)} className="rounded border px-3 py-1.5 text-sm font-medium hover:bg-gray-50" style={{ borderColor: accent, color: accent }}>View Details</a>
+                <a href={toPickedForUrl(item.detailsUrl, mode)} className="rounded border px-3 py-1.5 text-sm font-medium hover:bg-gray-50" style={{ borderColor: accent, color: accent }}>View Details</a>
                 <a href="https://pickedfor.com/contact" className="rounded px-3 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>Book Now</a>
               </div>
             )}
@@ -71,6 +71,22 @@ function ItemRow({ item, index, isBrand, entityType, accent }: { item: ProposalI
 
 function BundleTable({ items, isBrand, accent }: { items: BundleItem[]; isBrand: boolean; accent: string }) {
   const total = items.reduce((s, b) => s + b.priceEur, 0);
+  const fallbackLabelByType = (type: BundleItem['type']) => (
+    type === 'property'
+      ? 'Property stay'
+      : type === 'transfer'
+        ? 'Private transfer'
+        : type === 'boat_rental'
+          ? 'Boat rental experience'
+          : 'Service experience'
+  );
+  const resolveBundleLabel = (item: BundleItem) => {
+    const name = item.name?.trim();
+    if (!name) return fallbackLabelByType(item.type);
+    if (/^item\s+\d+$/i.test(name)) return fallbackLabelByType(item.type);
+    return isBrand ? name : fallbackLabelByType(item.type);
+  };
+
   return (
     <div className="mb-8 overflow-hidden rounded border border-gray-300 bg-white">
       <div className="border-b-2 border-gray-300 bg-gray-50 px-6 py-3"><h2 className="font-serif text-lg font-bold">Package Summary</h2></div>
@@ -80,7 +96,7 @@ function BundleTable({ items, isBrand, accent }: { items: BundleItem[]; isBrand:
           {items.map((b, i) => (
             <tr key={i}>
               <td className="px-6 py-3 text-gray-400">{i + 1}</td>
-              <td className="px-6 py-3"><p className="font-medium">{isBrand ? b.name : (b.type === 'property' ? 'Property stay' : b.type === 'transfer' ? 'Private transfer' : b.type === 'boat_rental' ? 'Boat rental experience' : 'Service experience')}</p><p className="text-xs text-gray-400">{b.type.replace('_', ' ')}</p></td>
+              <td className="px-6 py-3"><p className="font-medium">{resolveBundleLabel(b)}</p><p className="text-xs text-gray-400">{b.type.replace('_', ' ')}</p></td>
               <td className="px-6 py-3 text-xs text-gray-500">{b.nights != null && <span>{b.nights} nights · </span>}{b.guests != null && <span>{b.guests} guests · </span>}{b.meta && <span>{b.meta}</span>}</td>
               <td className="px-6 py-3 text-right font-semibold">€{b.priceEur.toLocaleString()}</td>
             </tr>
@@ -92,22 +108,22 @@ function BundleTable({ items, isBrand, accent }: { items: BundleItem[]; isBrand:
   );
 }
 
-function GroupedRows({ items, isBrand, entityType, accent }: { items: ProposalItem[]; isBrand: boolean; entityType: string; accent: string }) {
+function GroupedRows({ items, isBrand, mode, entityType, accent }: { items: ProposalItem[]; isBrand: boolean; mode: 'brand' | 'nologo'; entityType: string; accent: string }) {
   const { available, unavailable, newMatches } = groupItems(items);
   let globalIdx = 0;
   return (
     <>
       {available.length > 0 && (
         <><h2 className="mb-4 mt-8 font-serif text-lg font-semibold text-gray-700">✨ Your Selected Options</h2>
-        <div className="flex flex-col gap-6">{available.map((item) => { const i = globalIdx++; return <ItemRow key={i} item={item} index={i} isBrand={isBrand} entityType={entityType} accent={accent} />; })}</div></>
+        <div className="flex flex-col gap-6">{available.map((item) => { const i = globalIdx++; return <ItemRow key={i} item={item} index={i} isBrand={isBrand} mode={mode} entityType={entityType} accent={accent} />; })}</div></>
       )}
       {unavailable.length > 0 && (
         <><h2 className="mb-4 mt-10 font-serif text-lg font-semibold text-gray-700">⏳ No Longer Available</h2>
-        <div className="flex flex-col gap-6">{unavailable.map((item) => { const i = globalIdx++; return <ItemRow key={i} item={item} index={i} isBrand={isBrand} entityType={entityType} accent={accent} />; })}</div></>
+        <div className="flex flex-col gap-6">{unavailable.map((item) => { const i = globalIdx++; return <ItemRow key={i} item={item} index={i} isBrand={isBrand} mode={mode} entityType={entityType} accent={accent} />; })}</div></>
       )}
       {newMatches.length > 0 && (
         <><h2 className="mb-4 mt-10 font-serif text-lg font-semibold text-gray-700">🆕 New Matches We Found</h2>
-        <div className="flex flex-col gap-6">{newMatches.map((item) => { const i = globalIdx++; return <ItemRow key={i} item={item} index={i} isBrand={isBrand} entityType={entityType} accent={accent} />; })}</div></>
+        <div className="flex flex-col gap-6">{newMatches.map((item) => { const i = globalIdx++; return <ItemRow key={i} item={item} index={i} isBrand={isBrand} mode={mode} entityType={entityType} accent={accent} />; })}</div></>
       )}
     </>
   );
@@ -169,8 +185,8 @@ export function DocumentTemplate({ proposal, mode }: Props) {
 
         {proposal.items.length > 0 && (
           hasAvailabilityData
-            ? <GroupedRows items={proposal.items} isBrand={isBrand} entityType={proposal.entityType} accent={accent} />
-            : <div className="flex flex-col gap-6">{proposal.items.map((item, i) => <ItemRow key={i} item={item} index={i} isBrand={isBrand} entityType={proposal.entityType} accent={accent} />)}</div>
+            ? <GroupedRows items={proposal.items} isBrand={isBrand} mode={mode} entityType={proposal.entityType} accent={accent} />
+            : <div className="flex flex-col gap-6">{proposal.items.map((item, i) => <ItemRow key={i} item={item} index={i} isBrand={isBrand} mode={mode} entityType={proposal.entityType} accent={accent} />)}</div>
         )}
 
         <FeedbackSection accent={accent} />

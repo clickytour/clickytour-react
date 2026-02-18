@@ -64,16 +64,32 @@ function ItemCard({ item, index, isBrand, entityType, accent }: { item: Proposal
 function BundleSection({ items, isBrand, accent }: { items: BundleItem[]; isBrand: boolean; accent: string }) {
   const total = items.reduce((s, b) => s + b.priceEur, 0);
   const typeIcons: Record<string, string> = { property: '🏠', transfer: '🚗', boat_rental: '⛵', service: '✨' };
+  const fallbackLabelByType = (type: BundleItem['type']) => (
+    type === 'property'
+      ? 'Property stay'
+      : type === 'transfer'
+        ? 'Private transfer'
+        : type === 'boat_rental'
+          ? 'Boat rental experience'
+          : 'Service experience'
+  );
+  const resolveBundleLabel = (item: BundleItem) => {
+    const name = item.name?.trim();
+    if (!name) return fallbackLabelByType(item.type);
+    if (/^item\s+\d+$/i.test(name)) return fallbackLabelByType(item.type);
+    return isBrand ? name : fallbackLabelByType(item.type);
+  };
+
   return (
     <div className="mb-10 overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
       <div className="border-b border-white/10 px-6 py-4"><h2 className="text-lg font-bold text-white">📦 Package Summary</h2></div>
       <div className="divide-y divide-white/10">
         {items.map((b, i) => (
           <div key={i} className="flex items-center gap-4 p-4">
-            <div className="h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg"><img src={b.image} alt={isBrand ? b.name : `Item ${i + 1}`} className="h-full w-full object-cover" /></div>
+            <div className="h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg"><img src={b.image} alt={resolveBundleLabel(b)} className="h-full w-full object-cover" /></div>
             <div className="min-w-0 flex-1">
               <p className="text-xs uppercase text-white/40">{typeIcons[b.type] ?? ''} {b.type.replace('_', ' ')}</p>
-              <p className="truncate font-medium text-white">{isBrand ? b.name : (b.type === 'property' ? 'Property stay' : b.type === 'transfer' ? 'Private transfer' : b.type === 'boat_rental' ? 'Boat rental experience' : 'Service experience')}</p>
+              <p className="truncate font-medium text-white">{resolveBundleLabel(b)}</p>
               {b.description && <p className="truncate text-xs text-white/50">{b.description}</p>}
               <div className="mt-0.5 flex gap-3 text-xs text-white/40">{b.nights != null && <span>{b.nights} nights</span>}{b.guests != null && <span>{b.guests} guests</span>}{b.meta && <span>{b.meta}</span>}</div>
             </div>

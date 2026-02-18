@@ -5,12 +5,26 @@ import { ProposalItem } from '@/lib/proposalMockData';
 
 const PICKEDFOR_BASE_URL = 'https://pickedfor.com';
 
-export function toPickedForUrl(pathOrUrl: string) {
+export function toPickedForUrl(pathOrUrl: string, mode?: 'brand' | 'nologo') {
   if (!pathOrUrl) return PICKEDFOR_BASE_URL;
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  if (pathOrUrl.startsWith('/pickedfor/detail/')) return `${PICKEDFOR_BASE_URL}${pathOrUrl}`;
-  const slug = pathOrUrl.split('/').filter(Boolean).pop();
-  return slug ? `${PICKEDFOR_BASE_URL}/pickedfor/detail/${slug}` : PICKEDFOR_BASE_URL;
+
+  let url: URL;
+
+  if (/^https?:\/\//i.test(pathOrUrl)) {
+    url = new URL(pathOrUrl);
+  } else if (pathOrUrl.startsWith('/pickedfor/detail/')) {
+    url = new URL(`${PICKEDFOR_BASE_URL}${pathOrUrl}`);
+  } else {
+    const slug = pathOrUrl.split('/').filter(Boolean).pop();
+    if (!slug) return PICKEDFOR_BASE_URL;
+    url = new URL(`${PICKEDFOR_BASE_URL}/pickedfor/detail/${slug}`);
+  }
+
+  if (mode === 'nologo' && url.pathname.startsWith('/pickedfor/detail/')) {
+    url.searchParams.set('mode', 'nologo');
+  }
+
+  return url.toString();
 }
 
 // ─── Availability Badge ───
