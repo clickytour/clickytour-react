@@ -119,6 +119,7 @@ export function SearchHub() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [basket, setBasket] = useState<BasketItem[]>([]);
   const [basketOpen, setBasketOpen] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   // Load basket from localStorage
   useEffect(() => { setBasket(loadBasket()); }, []);
@@ -263,10 +264,27 @@ export function SearchHub() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col lg:flex-row gap-6">
+          <div className="lg:hidden mb-2">
+            <button
+              onClick={() => setMobileFiltersOpen(true)}
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm"
+            >
+              ⚙ Filters
+            </button>
+          </div>
+
           {/* ── Filter Sidebar ─────────────────────────── */}
-          <aside className="lg:w-72 flex-shrink-0">
+          {mobileFiltersOpen && (
+            <div className="fixed inset-0 z-40 bg-black/40 lg:hidden" onClick={() => setMobileFiltersOpen(false)} />
+          )}
+          <aside
+            className={`flex-shrink-0 lg:w-72 ${mobileFiltersOpen ? "fixed inset-y-0 left-0 z-50 w-[90%] max-w-sm overflow-y-auto bg-white p-4 shadow-2xl" : "hidden lg:block"}`}
+          >
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 space-y-5">
-              <h2 className="font-semibold text-slate-800 text-sm uppercase tracking-wide">Filters</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="font-semibold text-slate-800 text-sm uppercase tracking-wide">Filters</h2>
+                <button onClick={() => setMobileFiltersOpen(false)} className="text-sm text-slate-500 hover:text-slate-700 lg:hidden">✕</button>
+              </div>
 
               {/* Search */}
               <div>
@@ -598,6 +616,13 @@ export function SearchHub() {
         </div>
       </div>
 
+      {/* ── Empty Basket CTA ──────────────────────────── */}
+      {basket.length === 0 && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-slate-100/95 px-4 py-3 text-center text-sm text-slate-500 backdrop-blur">
+          Start adding items to build your proposal
+        </div>
+      )}
+
       {/* ── Request Basket ────────────────────────────── */}
       {basket.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 z-50">
@@ -760,10 +785,12 @@ function factsRow(item: SearchResultItem) {
   const baths = item.bathrooms ?? Number(item.facts.find((f) => /bath/i.test(f.label))?.value || 0);
   const guests = item.guests ?? Number(item.facts.find((f) => /guest/i.test(f.label))?.value || 0);
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-gray-600">
-      <span>🛏 {beds || "-"} beds</span><span className="text-gray-300">·</span>
-      <span>🚿 {baths || "-"} baths</span><span className="text-gray-300">·</span>
-      <span>👥 {guests || "-"} guests</span>
+    <div className="mt-3 flex flex-wrap items-center gap-1 text-sm text-gray-600">
+      <span>Beds: {beds || "-"}</span>
+      <span className="text-gray-300">·</span>
+      <span>Baths: {baths || "-"}</span>
+      <span className="text-gray-300">·</span>
+      <span>Guests: {guests || "-"}</span>
     </div>
   );
 }
@@ -774,16 +801,17 @@ function PriceBlock({ item }: { item: SearchResultItem }) {
   return (
     <div>
       <p className="text-sm font-medium text-slate-600">{night}</p>
-      {total ? <p className="text-xl font-bold text-slate-900">{total}</p> : null}
+      {total ? <p className="text-xl font-bold text-blue-700">{total}</p> : null}
     </div>
   );
 }
 
 function ResultCard({ item, isInBasket, onAdd, onRemove }: { item: SearchResultItem; isInBasket: boolean; onAdd: () => void; onRemove: () => void }) {
   const images = Array.from(new Set([...(item.images || []), ...(item.image ? [item.image] : [])]));
+  const unavailable = item.availability === "unavailable";
 
   return (
-    <div className="overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md">
+    <div className={`overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md ${unavailable ? "opacity-60" : ""}`}>
       <div className="relative h-52">
         {images.length > 0 ? <SearchPhotoCarousel photos={images} alt={item.title} className="h-full" /> : <div className="h-full w-full bg-slate-200 flex items-center justify-center text-slate-400 text-4xl">📷</div>}
         <div className="absolute left-3 top-3 flex items-center gap-2 z-10">
@@ -794,23 +822,29 @@ function ResultCard({ item, isInBasket, onAdd, onRemove }: { item: SearchResultI
       </div>
 
       <div className="p-5">
-        <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">{item.title}</h3>
-        {item.location && <p className="mt-0.5 text-sm text-gray-500">{item.location}</p>}
-        <div className="mt-2 flex items-center justify-between gap-2">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className={`text-lg font-semibold text-gray-900 line-clamp-1 ${unavailable ? "line-through decoration-red-400" : ""}`}>{item.title}</h3>
           <SearchStarRating rating={item.rating} reviewCount={item.reviewCount} />
-          <div className="flex items-center gap-1.5">
-            {item.videoUrl ? <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">▶ Video</span> : null}
-            {item.tour3dUrl ? <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">◎ 3D Tour</span> : null}
-          </div>
+        </div>
+        {item.location && <p className="mt-0.5 text-sm text-gray-500">{item.location}</p>}
+        <div className="mt-2 flex items-center gap-1.5">
+          {item.videoUrl ? <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">▶ Video</span> : null}
+          {item.tour3dUrl ? <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">◎ 3D Tour</span> : null}
         </div>
         <p className="mt-2 line-clamp-2 text-sm text-gray-600">{item.description}</p>
         {factsRow(item)}
         <div className="mt-4 flex items-end justify-between border-t border-gray-100 pt-4">
           <PriceBlock item={item} />
           <div className="flex gap-2">
-            <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">View Details</a>
-            <a href="#inquire" className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700">Book Now</a>
-            <button onClick={isInBasket ? onRemove : onAdd} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}>{isInBasket ? "✓ Added" : "➕ Add"}</button>
+            {unavailable ? (
+              <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">Find Similar</a>
+            ) : (
+              <>
+                <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">View Details</a>
+                <a href="#inquire" className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700">Book Now</a>
+                <button onClick={isInBasket ? onRemove : onAdd} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}>{isInBasket ? "✓ Added" : "➕ Add"}</button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -820,9 +854,10 @@ function ResultCard({ item, isInBasket, onAdd, onRemove }: { item: SearchResultI
 
 function ResultListRow({ item, isInBasket, onAdd, onRemove }: { item: SearchResultItem; isInBasket: boolean; onAdd: () => void; onRemove: () => void }) {
   const images = Array.from(new Set([...(item.images || []), ...(item.image ? [item.image] : [])]));
+  const unavailable = item.availability === "unavailable";
 
   return (
-    <div className="overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md">
+    <div className={`overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md ${unavailable ? "opacity-60" : ""}`}>
       <div className="flex flex-col sm:flex-row">
         <div className="relative h-52 flex-shrink-0 sm:h-auto sm:w-64">
           {images.length > 0 ? <SearchPhotoCarousel photos={images} alt={item.title} className="h-full" /> : <div className="h-full w-full bg-slate-200 flex items-center justify-center text-slate-400 text-4xl min-h-[12rem]">📷</div>}
@@ -833,7 +868,7 @@ function ResultListRow({ item, isInBasket, onAdd, onRemove }: { item: SearchResu
           <div className="absolute right-3 top-3 z-10"><SearchActionButtons /></div>
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+          <h3 className={`text-lg font-semibold text-gray-900 ${unavailable ? "line-through decoration-red-400" : ""}`}>{item.title}</h3>
           {item.location && <p className="mt-0.5 text-sm text-gray-500">{item.location}</p>}
           <div className="mt-2 flex items-center gap-2">
             <SearchStarRating rating={item.rating} reviewCount={item.reviewCount} />
@@ -845,9 +880,15 @@ function ResultListRow({ item, isInBasket, onAdd, onRemove }: { item: SearchResu
           <div className="mt-auto flex items-end justify-between pt-4">
             <PriceBlock item={item} />
             <div className="flex gap-2">
-              <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">View Details</a>
-              <a href="#inquire" className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700">Book Now</a>
-              <button onClick={isInBasket ? onRemove : onAdd} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}>{isInBasket ? "✓ Added" : "➕ Add"}</button>
+              {unavailable ? (
+                <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">Find Similar</a>
+              ) : (
+                <>
+                  <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">View Details</a>
+                  <a href="#inquire" className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700">Book Now</a>
+                  <button onClick={isInBasket ? onRemove : onAdd} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}>{isInBasket ? "✓ Added" : "➕ Add"}</button>
+                </>
+              )}
             </div>
           </div>
         </div>
