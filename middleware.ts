@@ -1,15 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+function isPickedforRoute(pathname: string) {
+  return (
+    pathname.startsWith('/proposal/') ||
+    pathname.startsWith('/pickedfor/') ||
+    pathname.startsWith('/r/')
+  );
+}
+
 export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
-  const isPF =
+  const { pathname } = request.nextUrl;
+
+  const isPickedforHost =
     hostname.includes('pickedfor.com') ||
     hostname.includes('pickedfor.localhost');
 
-  // On pickedfor.com, only allow specific proposal/detail links — NOT indexes
-  if (isPF) {
-    const { pathname } = request.nextUrl;
+  const isPF = isPickedforHost || isPickedforRoute(pathname);
 
+  // On pickedfor.com, only allow specific proposal/detail links — NOT indexes
+  if (isPickedforHost) {
     // Allow: /proposal/[id] (specific proposals, must have an ID after /proposal/)
     // Allow: /pickedfor/detail/[slug] (specific detail pages)
     // Allow: /r/ (legacy demo routes)
@@ -32,7 +42,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Set a REQUEST header so server components/layouts can detect the domain
+  // Set a REQUEST header so server components/layouts can detect pickedfor context
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-pickedfor', isPF ? '1' : '0');
 

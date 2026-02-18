@@ -27,7 +27,9 @@ export default async function RootLayout({
 }>) {
   const hdrs = await headers();
   const host = hdrs.get('host') || '';
-  const isPF = host.includes('pickedfor.com') || hdrs.get('x-pickedfor') === '1';
+  const isPickedforHost =
+    host.includes('pickedfor.com') || host.includes('pickedfor.localhost');
+  const isPF = isPickedforHost || hdrs.get('x-pickedfor') === '1';
 
   return (
     <html lang="en">
