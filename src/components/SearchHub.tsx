@@ -665,86 +665,252 @@ export function SearchHub() {
   );
 }
 
-/* ── Result Card (Grid) ─────────────────────────────────── */
+/* ── Photo Carousel (matches ListingCard style) ─────────── */
+
+function SearchPhotoCarousel({ photos, alt, className }: { photos: string[]; alt: string; className?: string }) {
+  const [idx, setIdx] = useState(0);
+  const imgs = photos.length > 0 ? photos : [];
+  if (imgs.length === 0) return null;
+  const prev = () => setIdx((i) => (i === 0 ? imgs.length - 1 : i - 1));
+  const next = () => setIdx((i) => (i === imgs.length - 1 ? 0 : i + 1));
+
+  return (
+    <div className={`group/carousel relative overflow-hidden ${className ?? ''}`}>
+      <img src={imgs[idx]} alt={alt} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+      {imgs.length > 1 && (
+        <>
+          <button
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); prev(); }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-1.5 opacity-0 shadow-md transition-opacity group-hover/carousel:opacity-100"
+            aria-label="Previous photo"
+          >
+            <svg className="h-4 w-4 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); next(); }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-1.5 opacity-0 shadow-md transition-opacity group-hover/carousel:opacity-100"
+            aria-label="Next photo"
+          >
+            <svg className="h-4 w-4 text-gray-700" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </button>
+          <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5">
+            {imgs.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIdx(i); }}
+                className={`h-1.5 rounded-full transition-all ${i === idx ? 'w-4 bg-white' : 'w-1.5 bg-white/60'}`}
+                aria-label={`Photo ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ── Star Rating (matches ListingCard style) ────────────── */
+
+function SearchStarRating({ rating }: { rating?: number }) {
+  if (!rating) return null;
+  return (
+    <span className="inline-flex items-center gap-1 text-sm">
+      <svg className="h-4 w-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+      <span className="font-semibold">{rating}</span>
+    </span>
+  );
+}
+
+/* ── Action Buttons (Like / Dislike / Share) ─────────────── */
+
+function SearchActionButtons({ light }: { light?: boolean }) {
+  const [liked, setLiked] = useState(false);
+  return (
+    <div className="flex items-center gap-1">
+      <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setLiked(!liked); }} className={`rounded-full p-1.5 transition-colors ${light ? 'hover:bg-white/20' : 'hover:bg-gray-100'}`} aria-label="Like">
+        <svg className={`h-5 w-5 ${liked ? 'text-red-500' : 'text-gray-400'}`} fill={liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+        </svg>
+      </button>
+      <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} className={`rounded-full p-1.5 transition-colors ${light ? 'hover:bg-white/20' : 'hover:bg-gray-100'}`} aria-label="Share">
+        <svg className={`h-4 w-4 ${light ? 'text-white/70' : 'text-gray-400'}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+/* ── Result Card (Grid) — matches ListingCard modern style ── */
 
 function ResultCard({ item, isInBasket, onAdd, onRemove }: { item: SearchResultItem; isInBasket: boolean; onAdd: () => void; onRemove: () => void }) {
+  const images = item.image ? [item.image] : [];
+  // Extract extra images if available
+  if ((item as any).images) {
+    images.push(...(item as any).images);
+  }
+
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow group">
-      {item.image && (
-        <div className="relative h-48 overflow-hidden">
-          <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-          <span className={`absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${INTENT_COLORS[item.intent]}`}>
+    <div className="overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md group">
+      {/* Photo area */}
+      <div className="relative h-52">
+        {images.length > 0 ? (
+          <SearchPhotoCarousel photos={images} alt={item.title} className="h-full" />
+        ) : (
+          <div className="h-full w-full bg-slate-200 flex items-center justify-center text-slate-400 text-4xl">📷</div>
+        )}
+        {/* Top-left: intent badge + media pills */}
+        <div className="absolute left-3 top-3 flex items-center gap-2 z-10 pointer-events-none">
+          <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide shadow-sm ${INTENT_COLORS[item.intent]}`}>
             {item.intent}
           </span>
+          {(item as any).hasVideo && (
+            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium text-slate-700 shadow-sm">🎬 Video</span>
+          )}
+          {(item as any).has3DTour && (
+            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium text-slate-700 shadow-sm">🧊 3D Tour</span>
+          )}
         </div>
-      )}
-      <div className="p-4">
-        <h3 className="font-semibold text-slate-800 text-sm mb-1 line-clamp-1">{item.title}</h3>
-        <p className="text-slate-500 text-xs line-clamp-2 mb-3">{item.description}</p>
-        {item.priceLabel && (
-          <div className="text-blue-700 font-semibold text-sm mb-2">{item.priceLabel}</div>
+        {/* Top-right: action buttons */}
+        <div className="absolute right-3 top-3 z-10">
+          <SearchActionButtons />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-5">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">{item.title}</h3>
+          <SearchStarRating rating={(item as any).rating} />
+        </div>
+        {(item as any).location && (
+          <p className="mt-0.5 text-sm text-gray-500">{(item as any).location}</p>
         )}
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {item.facts.slice(0, 3).map((f) => (
-            <span key={f.label} className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">
+        <p className="mt-2 line-clamp-2 text-sm text-gray-600">{item.description}</p>
+
+        {/* Facts as pills */}
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {item.facts.slice(0, 4).map((f) => (
+            <span key={f.label} className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
               {f.label}: {f.value}
             </span>
           ))}
         </div>
-        <div className="flex gap-2">
-          <a href={item.href} className="flex-1 text-center px-3 py-2 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700 transition-colors">
-            View Details
-          </a>
-          <button
-            onClick={isInBasket ? onRemove : onAdd}
-            className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-              isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-600"
-            }`}
-          >
-            {isInBasket ? "✓ Added" : "➕ Add"}
-          </button>
+
+        {/* Price + CTA */}
+        <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">
+          {item.priceLabel && (
+            <p className="text-xl font-bold text-blue-700">
+              {item.priceLabel}
+            </p>
+          )}
+          <div className="flex gap-2">
+            <a
+              href={item.href}
+              className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50"
+            >
+              View Details
+            </a>
+            <button
+              onClick={isInBasket ? onRemove : onAdd}
+              className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                isInBasket
+                  ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              {isInBasket ? "✓ Added" : "➕ Add to Request"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-/* ── Result Row (List) ──────────────────────────────────── */
+/* ── Result Row (List) — matches ListingCard document style ── */
 
 function ResultListRow({ item, isInBasket, onAdd, onRemove }: { item: SearchResultItem; isInBasket: boolean; onAdd: () => void; onRemove: () => void }) {
+  const images = item.image ? [item.image] : [];
+  if ((item as any).images) images.push(...(item as any).images);
+
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex gap-4 hover:shadow-md transition-shadow">
-      {item.image && (
-        <img src={item.image} alt={item.title} className="w-32 h-24 rounded-lg object-cover flex-shrink-0" />
-      )}
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${INTENT_COLORS[item.intent]}`}>
-            {item.intent}
-          </span>
-          <h3 className="font-semibold text-slate-800 text-sm truncate">{item.title}</h3>
+    <div className="overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md">
+      <div className="flex flex-col sm:flex-row">
+        {/* Photo */}
+        <div className="relative h-48 flex-shrink-0 sm:h-auto sm:w-56">
+          {images.length > 0 ? (
+            <SearchPhotoCarousel photos={images} alt={item.title} className="h-full" />
+          ) : (
+            <div className="h-full w-full bg-slate-200 flex items-center justify-center text-slate-400 text-4xl min-h-[12rem]">📷</div>
+          )}
+          {/* Media pills */}
+          <div className="absolute left-2 top-2 flex gap-1 z-10 pointer-events-none">
+            {(item as any).hasVideo && (
+              <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium text-slate-700 shadow-sm">🎬</span>
+            )}
+            {(item as any).has3DTour && (
+              <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium text-slate-700 shadow-sm">🧊</span>
+            )}
+          </div>
         </div>
-        <p className="text-slate-500 text-xs line-clamp-1 mb-2">{item.description}</p>
-        <div className="flex flex-wrap gap-1.5">
-          {item.facts.slice(0, 4).map((f) => (
-            <span key={f.label} className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">
-              {f.label}: {f.value}
-            </span>
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col items-end justify-between flex-shrink-0">
-        {item.priceLabel && <div className="text-blue-700 font-semibold text-sm whitespace-nowrap">{item.priceLabel}</div>}
-        <div className="flex gap-2">
-          <a href={item.href} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700">
-            Details
-          </a>
-          <button
-            onClick={isInBasket ? onRemove : onAdd}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium ${isInBasket ? "bg-green-100 text-green-700" : "bg-slate-100 text-slate-600 hover:bg-blue-50"}`}
-          >
-            {isInBasket ? "✓" : "➕"}
-          </button>
+
+        {/* Content */}
+        <div className="flex flex-1 flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <span className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${INTENT_COLORS[item.intent]}`}>
+                {item.intent}
+              </span>
+              <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+            </div>
+            <SearchActionButtons />
+          </div>
+          {(item as any).location && (
+            <p className="mt-0.5 text-sm text-gray-500">{(item as any).location}</p>
+          )}
+          <div className="mt-1.5 flex items-center gap-3">
+            <SearchStarRating rating={(item as any).rating} />
+          </div>
+          <p className="mt-2 line-clamp-2 text-sm text-gray-600">{item.description}</p>
+
+          {/* Facts as pills */}
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {item.facts.slice(0, 5).map((f) => (
+              <span key={f.label} className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
+                {f.label}: {f.value}
+              </span>
+            ))}
+          </div>
+
+          {/* Price + CTA */}
+          <div className="mt-auto flex items-center justify-between pt-4">
+            {item.priceLabel && (
+              <p className="text-xl font-bold text-blue-700">
+                {item.priceLabel}
+              </p>
+            )}
+            <div className="flex gap-2">
+              <a
+                href={item.href}
+                className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50"
+              >
+                View Details
+              </a>
+              <button
+                onClick={isInBasket ? onRemove : onAdd}
+                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                  isInBasket
+                    ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+                }`}
+              >
+                {isInBasket ? "✓ Added" : "➕ Add to Request"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
