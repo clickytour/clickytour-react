@@ -232,32 +232,39 @@ function parseDistanceM(val?: string): number | undefined {
 
 /* Also add hotel rooms as vacation items */
 function hotelRoomVacationItems(): SearchResultItem[] {
-  return coreMirrorHotelRooms.map((r, idx) => ({
-    id: `room-${r.slug}`,
-    intent: "vacation" as SearchIntent,
-    title: r.title,
-    description: r.shortSummary,
-    image: r.media.primaryImage,
-    images: [r.media.primaryImage, ...r.media.galleryImages],
-    href: `/property/hotel-room/${r.slug}`,
-    price: r.rates.nightlyEur,
-    totalPrice: r.rates.nightlyEur * 7,
-    priceLabel: `From €${r.rates.nightlyEur}/night`,
-    location: r.hotelSlug,
-    badges: r.amenities.slice(0, 3),
-    rating: 4.7,
-    reviewCount: 73,
-    videoUrl: r.media.videoUrl,
-    tour3dUrl: r.media.tour3dUrl,
-    availability: idx % 2 === 0 ? "available" : "new",
-    facts: [
-      { label: "Max Guests", value: String(r.maxGuests) },
-      { label: "Type", value: r.roomType },
-    ],
-    guests: r.maxGuests,
-    amenities: r.amenities,
-    dealTypes: r.dealType,
-  }));
+  return coreMirrorHotelRooms.map((r, idx) => {
+    const hotel = hotels.find((h) => h.slug === r.hotelSlug);
+    const location = hotel?.location.city || hotel?.location.region || undefined;
+    const region = hotel?.location.region || undefined;
+
+    return {
+      id: `room-${r.slug}`,
+      intent: "vacation" as SearchIntent,
+      title: r.title,
+      description: r.shortSummary,
+      image: r.media.primaryImage,
+      images: [r.media.primaryImage, ...r.media.galleryImages],
+      href: `/property/hotel-room/${r.slug}`,
+      price: r.rates.nightlyEur,
+      totalPrice: r.rates.nightlyEur * 7,
+      priceLabel: `From €${r.rates.nightlyEur}/night`,
+      location,
+      region,
+      badges: r.amenities.slice(0, 3),
+      rating: 4.7,
+      reviewCount: 73,
+      videoUrl: r.media.videoUrl,
+      tour3dUrl: r.media.tour3dUrl,
+      availability: idx % 2 === 0 ? "available" : "new",
+      facts: [
+        { label: "Max Guests", value: String(r.maxGuests) },
+        { label: "Type", value: r.roomType },
+      ],
+      guests: r.maxGuests,
+      amenities: r.amenities,
+      dealTypes: r.dealType,
+    };
+  });
 }
 
 export function getAllSearchItems(): SearchResultItem[] {

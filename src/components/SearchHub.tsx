@@ -772,6 +772,27 @@ function SearchActionButtons() {
   );
 }
 
+function BasketIconButton({ isInBasket, onToggle }: { isInBasket: boolean; onToggle: () => void }) {
+  return (
+    <button
+      onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
+      className={`rounded-full p-1.5 shadow-sm transition-colors ${isInBasket ? "bg-emerald-100 text-emerald-700 hover:bg-red-100 hover:text-red-600" : "bg-white/90 text-slate-700 hover:bg-white"}`}
+      aria-label={isInBasket ? "Remove from basket" : "Add to basket"}
+      title={isInBasket ? "Added" : "Add"}
+    >
+      {isInBasket ? (
+        <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fillRule="evenodd" d="M16.704 5.29a1 1 0 010 1.42l-7.2 7.2a1 1 0 01-1.415 0l-3-3a1 1 0 111.414-1.414L8.8 11.793l6.493-6.503a1 1 0 011.411 0z" clipRule="evenodd" />
+        </svg>
+      ) : (
+        <svg className="h-4 w-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+          <path strokeLinecap="round" d="M10 4v12M4 10h12" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 function typeLabel(intent: SearchIntent) {
   if (intent === "vacation") return "VILLA";
   if (intent === "hotels") return "HOTEL";
@@ -784,13 +805,28 @@ function factsRow(item: SearchResultItem) {
   const beds = item.bedrooms ?? Number(item.facts.find((f) => /bed/i.test(f.label))?.value || 0);
   const baths = item.bathrooms ?? Number(item.facts.find((f) => /bath/i.test(f.label))?.value || 0);
   const guests = item.guests ?? Number(item.facts.find((f) => /guest/i.test(f.label))?.value || 0);
+
+  const facts: Array<{ label: string; value: number | string | null | undefined }> = [
+    { label: "Beds", value: beds },
+    { label: "Baths", value: baths },
+    { label: "Guests", value: guests },
+  ].filter((fact) => {
+    const value = fact.value;
+    if (value === 0 || value === null || value === undefined) return false;
+    if (String(value).trim() === "-") return false;
+    return true;
+  });
+
+  if (facts.length === 0) return null;
+
   return (
     <div className="mt-3 flex flex-wrap items-center gap-1 text-sm text-gray-600">
-      <span>Beds: {beds || "-"}</span>
-      <span className="text-gray-300">·</span>
-      <span>Baths: {baths || "-"}</span>
-      <span className="text-gray-300">·</span>
-      <span>Guests: {guests || "-"}</span>
+      {facts.map((fact, idx) => (
+        <div key={fact.label} className="contents">
+          {idx > 0 && <span className="text-gray-300">·</span>}
+          <span>{fact.label}: {fact.value}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -819,6 +855,11 @@ function ResultCard({ item, isInBasket, onAdd, onRemove }: { item: SearchResultI
           {availabilityBadge(item.availability)}
         </div>
         <div className="absolute right-3 top-3 z-10"><SearchActionButtons /></div>
+        {!unavailable && (
+          <div className="absolute bottom-3 right-3 z-10">
+            <BasketIconButton isInBasket={isInBasket} onToggle={isInBasket ? onRemove : onAdd} />
+          </div>
+        )}
       </div>
 
       <div className="p-5">
@@ -842,7 +883,6 @@ function ResultCard({ item, isInBasket, onAdd, onRemove }: { item: SearchResultI
               <>
                 <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">View Details</a>
                 <a href="#inquire" className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700">Book Now</a>
-                <button onClick={isInBasket ? onRemove : onAdd} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}>{isInBasket ? "✓ Added" : "➕ Add"}</button>
               </>
             )}
           </div>
@@ -866,6 +906,11 @@ function ResultListRow({ item, isInBasket, onAdd, onRemove }: { item: SearchResu
             {availabilityBadge(item.availability)}
           </div>
           <div className="absolute right-3 top-3 z-10"><SearchActionButtons /></div>
+          {!unavailable && (
+            <div className="absolute bottom-3 right-3 z-10">
+              <BasketIconButton isInBasket={isInBasket} onToggle={isInBasket ? onRemove : onAdd} />
+            </div>
+          )}
         </div>
         <div className="flex flex-1 flex-col p-5">
           <h3 className={`text-lg font-semibold text-gray-900 ${unavailable ? "line-through decoration-red-400" : ""}`}>{item.title}</h3>
@@ -886,7 +931,6 @@ function ResultListRow({ item, isInBasket, onAdd, onRemove }: { item: SearchResu
                 <>
                   <a href={item.href} className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-600 transition-colors hover:bg-blue-50">View Details</a>
                   <a href="#inquire" className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700">Book Now</a>
-                  <button onClick={isInBasket ? onRemove : onAdd} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${isInBasket ? "bg-green-100 text-green-700 hover:bg-red-100 hover:text-red-600" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}>{isInBasket ? "✓ Added" : "➕ Add"}</button>
                 </>
               )}
             </div>
