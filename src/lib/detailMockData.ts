@@ -532,11 +532,14 @@ export const detailListings: ListingDetail[] = [
     name: 'Yoga & Wellness Session',
     description: 'Morning yoga on your terrace with a certified instructor.',
     images: [
-      IMG('1544367567-0f2fcb009e0b'),
+      'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=800&h=500&fit=crop',
     ],
     region: 'Lefkada, Greece',
     listingType: 'Service',
     rating: 4.7,
+    reviewCount: 83,
     servicePrice: 90,
     features: [
       { label: 'Type', value: 'Yoga & wellness' },
@@ -574,8 +577,9 @@ export const detailListings: ListingDetail[] = [
     description: 'In-villa dinner prepared by a local chef — 4-course Greek menu with wine pairing.',
     longDescription: 'Treat yourself to an unforgettable culinary experience without leaving your villa. Our award-winning local chef will arrive with fresh, locally sourced ingredients and prepare a 4-course Greek dinner right in your kitchen.\n\nThe menu includes traditional dishes with a modern twist: seafood meze, handmade pasta with local herbs, grilled catch of the day, and a dessert featuring Lefkada honey and citrus. Each course is paired with selected wines from Greek vineyards.\n\nThe chef handles everything — shopping, cooking, serving, and cleanup. You just sit back and enjoy. Available for groups of 2-12 guests.',
     images: [
-      IMG('1540555700478-4be289fbec6d'),
-      IMG('1544367567-0f2fcb009e0b'),
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=500&fit=crop',
+      'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&h=500&fit=crop',
     ],
     region: 'Lefkada, Greece',
     listingType: 'Service',

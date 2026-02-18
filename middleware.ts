@@ -14,10 +14,11 @@ export function middleware(request: NextRequest) {
     // Allow: /pickedfor/detail/[slug] (specific detail pages)
     // Allow: /r/ (legacy demo routes)
     // Allow: static assets
-    // BLOCK: /proposal (index), /pickedfor/detail (index), /search, everything else
+    // BLOCK: /proposal (index), /pickedfor/detail (index), everything else
     const allowed =
       (pathname.startsWith('/proposal/') && pathname !== '/proposal/') ||
       (pathname.startsWith('/pickedfor/detail/') && pathname !== '/pickedfor/detail/') ||
+      pathname.startsWith('/search') ||
       pathname.startsWith('/r/') ||
       pathname.startsWith('/_next') ||
       pathname.startsWith('/favicon') ||

@@ -34,7 +34,7 @@ function ItemCard({ item, index, isBrand, entityType }: { item: ProposalItem; in
         </div>
         <p className="mt-0.5 text-sm text-gray-500">{item.region}</p>
         {(item.videoUrl || item.videoUrlGeneric || item.tour3dUrl || item.tour3dUrlGeneric) && <div className="mt-2"><MediaIcons videoUrl={item.videoUrl} videoUrlGeneric={item.videoUrlGeneric} tour3dUrl={item.tour3dUrl} tour3dUrlGeneric={item.tour3dUrlGeneric} isBrand={isBrand} /></div>}
-        {isBrand && item.description && <p className="mt-2 line-clamp-2 text-sm text-gray-600">{item.description}</p>}
+        {item.description && <p className="mt-2 line-clamp-2 text-sm text-gray-600">{item.description}</p>}
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600">
           {item.bedrooms != null && <span>🛏 {item.bedrooms} bed{item.bedrooms > 1 ? 's' : ''}</span>}
           {item.bathrooms != null && <span>🚿 {item.bathrooms} bath{item.bathrooms > 1 ? 's' : ''}</span>}
@@ -75,8 +75,8 @@ function BundleSection({ items, isBrand }: { items: BundleItem[]; isBrand: boole
             <div className="h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200"><img src={b.image} alt={isBrand ? b.name : `Item ${i + 1}`} className="h-full w-full object-cover" /></div>
             <div className="min-w-0 flex-1">
               <p className="text-xs uppercase text-gray-400">{typeIcons[b.type] ?? ''} {b.type.replace('_', ' ')}</p>
-              <p className="truncate font-medium">{isBrand ? b.name : `Item ${i + 1}`}</p>
-              {isBrand && b.description && <p className="truncate text-xs text-gray-500">{b.description}</p>}
+              <p className="truncate font-medium">{isBrand ? b.name : (b.type === 'property' ? 'Property stay' : b.type === 'transfer' ? 'Private transfer' : b.type === 'boat_rental' ? 'Boat rental experience' : 'Service experience')}</p>
+              {b.description && <p className="truncate text-xs text-gray-500">{b.description}</p>}
               <div className="mt-0.5 flex gap-3 text-xs text-gray-400">
                 {b.nights != null && <span>{b.nights} nights</span>}
                 {b.guests != null && <span>{b.guests} guests</span>}
@@ -155,7 +155,7 @@ export function ModernTemplate({ proposal, mode }: Props) {
   const hasAvailabilityData = proposal.items.some((i) => i.availability);
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50 pb-36">
       <header className="w-full border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           {isBrand ? (
@@ -219,8 +219,8 @@ export function ModernTemplate({ proposal, mode }: Props) {
 
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <p className="text-sm font-medium text-gray-700">{isBrand ? 'Ready to book? Contact PickedFor' : 'Ready to book? Get in touch'}</p>
-          <a href="https://pickedfor.com/contact" className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:opacity-90">{isBrand ? '✉️ Contact Us' : '✉️ Inquire'}</a>
+          <p className="text-sm font-medium text-gray-700">{isBrand ? 'Ready to book? Contact PickedFor' : 'Ready to book? Contact your travel advisor'}</p>
+          <a href="https://pickedfor.com/contact" className="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:opacity-90">✉️ Contact Us</a>
         </div>
       </div>
     </div>

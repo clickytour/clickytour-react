@@ -37,7 +37,7 @@ function ItemRow({ item, index, isBrand, entityType, accent }: { item: ProposalI
             </div>
           </div>
           {(item.videoUrl || item.videoUrlGeneric || item.tour3dUrl || item.tour3dUrlGeneric) && <div className="mt-2"><MediaIcons videoUrl={item.videoUrl} videoUrlGeneric={item.videoUrlGeneric} tour3dUrl={item.tour3dUrl} tour3dUrlGeneric={item.tour3dUrlGeneric} isBrand={isBrand} /></div>}
-          {isBrand && item.description && <p className="mt-2 text-sm text-gray-600">{item.description}</p>}
+          {item.description && <p className="mt-2 text-sm text-gray-600">{item.description}</p>}
           <table className="mt-3 w-full text-sm">
             <tbody>
               {item.bedrooms != null && <tr className="border-b border-gray-100"><td className="py-1 pr-3 font-medium text-gray-600">Bedrooms</td><td className="py-1 text-gray-800">{item.bedrooms}</td></tr>}
@@ -59,7 +59,7 @@ function ItemRow({ item, index, isBrand, entityType, accent }: { item: ProposalI
             ) : (
               <div className="flex gap-2">
                 <a href={toPickedForUrl(item.detailsUrl)} className="rounded border px-3 py-1.5 text-sm font-medium hover:bg-gray-50" style={{ borderColor: accent, color: accent }}>View Details</a>
-                <a href="https://pickedfor.com/contact" className="rounded px-3 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>Inquire</a>
+                <a href="https://pickedfor.com/contact" className="rounded px-3 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>Book Now</a>
               </div>
             )}
           </div>
@@ -80,7 +80,7 @@ function BundleTable({ items, isBrand, accent }: { items: BundleItem[]; isBrand:
           {items.map((b, i) => (
             <tr key={i}>
               <td className="px-6 py-3 text-gray-400">{i + 1}</td>
-              <td className="px-6 py-3"><p className="font-medium">{isBrand ? b.name : `Item ${i + 1}`}</p><p className="text-xs text-gray-400">{b.type.replace('_', ' ')}</p></td>
+              <td className="px-6 py-3"><p className="font-medium">{isBrand ? b.name : (b.type === 'property' ? 'Property stay' : b.type === 'transfer' ? 'Private transfer' : b.type === 'boat_rental' ? 'Boat rental experience' : 'Service experience')}</p><p className="text-xs text-gray-400">{b.type.replace('_', ' ')}</p></td>
               <td className="px-6 py-3 text-xs text-gray-500">{b.nights != null && <span>{b.nights} nights · </span>}{b.guests != null && <span>{b.guests} guests · </span>}{b.meta && <span>{b.meta}</span>}</td>
               <td className="px-6 py-3 text-right font-semibold">€{b.priceEur.toLocaleString()}</td>
             </tr>
@@ -123,7 +123,7 @@ function FeedbackSection({ accent }: { accent: string }) {
       </div>
       <div className="mx-auto max-w-md">
         <textarea placeholder="Any comments or preferences? (optional)" className="h-24 w-full resize-none rounded border border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400" />
-        <button className="mt-2 w-full rounded py-2 text-sm font-medium text-white" style={{ backgroundColor: accent }}>Submit Feedback</button>
+        <button className="mt-2 w-full rounded py-2 text-sm font-medium text-white" style={{ backgroundColor: accent }}>Send Feedback</button>
       </div>
     </div>
   );
@@ -136,7 +136,7 @@ export function DocumentTemplate({ proposal, mode }: Props) {
   const hasAvailabilityData = proposal.items.some((i) => i.availability);
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] pb-20">
+    <div className="min-h-screen bg-[#faf8f5] pb-36">
       <header className="w-full border-b border-gray-300 bg-white">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           {isBrand ? (
@@ -183,8 +183,8 @@ export function DocumentTemplate({ proposal, mode }: Props) {
 
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-300 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
-          <p className="text-sm font-medium text-gray-700">{isBrand ? 'Ready to proceed? Contact PickedFor' : 'Interested? Get in touch'}</p>
-          <a href="https://pickedfor.com/contact" className="rounded px-4 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>✉️ Contact</a>
+          <p className="text-sm font-medium text-gray-700">{isBrand ? 'Ready to book? Contact PickedFor' : 'Ready to book? Contact your travel advisor'}</p>
+          <a href="https://pickedfor.com/contact" className="rounded px-4 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>✉️ Contact Us</a>
         </div>
       </div>
     </div>

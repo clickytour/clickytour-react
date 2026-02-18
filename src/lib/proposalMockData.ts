@@ -57,7 +57,7 @@ const IMG4 = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600
 const IMG_HOTEL = "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop";
 const IMG_BOAT = "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop";
 const IMG_TRANSFER = "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop";
-const IMG_SERVICE = "https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=600&h=400&fit=crop";
+const IMG_SERVICE = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop";
 const IMG_RE = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop";
 
 export const proposals: Proposal[] = [
@@ -87,9 +87,9 @@ export const proposals: Proposal[] = [
     subtitle: "Accommodates 24 guests across 3 properties",
     createdAt: "2026-02-14T08:00:00Z",
     items: [
-      { name: "Villa Odysseus", description: "Grand 6-bedroom estate with tennis court.", image: IMG, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 6, bathrooms: 5, maxGuests: 12, pricePerNight: 580, totalPrice: 4060, rating: 4.8, detailsUrl: "https://pickedfor.com/pickedfor/detail/villa-odysseus" },
-      { name: "Seaside Retreat", description: "Family-friendly villa on the beach.", image: IMG2, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 4, bathrooms: 3, maxGuests: 8, pricePerNight: 350, totalPrice: 2450, rating: 4.6, detailsUrl: "https://pickedfor.com/pickedfor/detail/seaside-retreat" },
-      { name: "Sunset Cottage", description: "Cozy cottage perfect for a small family.", image: IMG3, region: "Kefalonia, Greece", listingType: "Cottage", bedrooms: 2, bathrooms: 1, maxGuests: 4, pricePerNight: 140, totalPrice: 980, rating: 4.4, detailsUrl: "https://pickedfor.com/pickedfor/detail/sunset-cottage" },
+      { name: "Villa Odysseus", description: "Grand 6-bedroom estate with tennis court.", image: IMG, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 6, bathrooms: 5, maxGuests: 12, pricePerNight: 580, totalPrice: 4060, rating: 4.8, detailsUrl: "https://pickedfor.com/pickedfor/detail/villa-odysseus", availability: "available", originalMatch: true },
+      { name: "Seaside Retreat", description: "Family-friendly villa on the beach.", image: IMG2, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 4, bathrooms: 3, maxGuests: 8, pricePerNight: 350, totalPrice: 2450, rating: 4.6, detailsUrl: "https://pickedfor.com/pickedfor/detail/seaside-retreat", availability: "available", originalMatch: true },
+      { name: "Sunset Cottage", description: "Cozy cottage perfect for a small family.", image: IMG3, region: "Kefalonia, Greece", listingType: "Cottage", bedrooms: 2, bathrooms: 1, maxGuests: 4, pricePerNight: 140, totalPrice: 980, rating: 4.4, detailsUrl: "https://pickedfor.com/pickedfor/detail/sunset-cottage", availability: "available", originalMatch: true },
     ],
   },
   {
@@ -131,9 +131,9 @@ export const proposals: Proposal[] = [
     subtitle: "Accommodates 24 guests across 3 properties",
     createdAt: "2026-02-14T08:00:00Z",
     items: [
-      { name: "Villa Odysseus", description: "Grand estate.", image: IMG, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 6, bathrooms: 5, maxGuests: 12, pricePerNight: 580, totalPrice: 4060, rating: 4.8, detailsUrl: "https://pickedfor.com/pickedfor/detail/villa-odysseus" },
-      { name: "Seaside Retreat", description: "Beach villa.", image: IMG2, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 4, bathrooms: 3, maxGuests: 8, pricePerNight: 350, totalPrice: 2450, rating: 4.6, detailsUrl: "https://pickedfor.com/pickedfor/detail/seaside-retreat" },
-      { name: "Sunset Cottage", description: "Cozy cottage.", image: IMG3, region: "Kefalonia, Greece", listingType: "Cottage", bedrooms: 2, bathrooms: 1, maxGuests: 4, pricePerNight: 140, totalPrice: 980, rating: 4.4, detailsUrl: "https://pickedfor.com/pickedfor/detail/sunset-cottage" },
+      { name: "Villa Odysseus", description: "Grand estate.", image: IMG, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 6, bathrooms: 5, maxGuests: 12, pricePerNight: 580, totalPrice: 4060, rating: 4.8, detailsUrl: "https://pickedfor.com/pickedfor/detail/villa-odysseus", availability: "available", originalMatch: true },
+      { name: "Seaside Retreat", description: "Beach villa.", image: IMG2, region: "Kefalonia, Greece", listingType: "Villa", bedrooms: 4, bathrooms: 3, maxGuests: 8, pricePerNight: 350, totalPrice: 2450, rating: 4.6, detailsUrl: "https://pickedfor.com/pickedfor/detail/seaside-retreat", availability: "available", originalMatch: true },
+      { name: "Sunset Cottage", description: "Cozy cottage.", image: IMG3, region: "Kefalonia, Greece", listingType: "Cottage", bedrooms: 2, bathrooms: 1, maxGuests: 4, pricePerNight: 140, totalPrice: 980, rating: 4.4, detailsUrl: "https://pickedfor.com/pickedfor/detail/sunset-cottage", availability: "available", originalMatch: true },
     ],
   },
   {

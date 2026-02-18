@@ -31,10 +31,10 @@ function ItemCard({ item, index, isBrand, entityType, accent }: { item: Proposal
           <h3 className={`text-2xl font-bold leading-tight ${isUnavailable ? 'line-through decoration-red-400' : ''}`}>{label}</h3>
           <p className="mt-1 text-sm text-white/80">{item.region}</p>
           {(item.videoUrl || item.videoUrlGeneric || item.tour3dUrl || item.tour3dUrlGeneric) && <div className="mt-2"><MediaIcons videoUrl={item.videoUrl} videoUrlGeneric={item.videoUrlGeneric} tour3dUrl={item.tour3dUrl} tour3dUrlGeneric={item.tour3dUrlGeneric} isBrand={isBrand} light /></div>}
-          {isBrand && item.description && <p className="mt-2 line-clamp-2 text-sm text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{item.description}</p>}
+          {item.description && <p className="mt-2 line-clamp-2 text-sm text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{item.description}</p>}
           <div className="mt-3 flex flex-wrap gap-3 text-sm text-white/90">
-            {item.bedrooms != null && <span>🛏 {item.bedrooms} beds</span>}
-            {item.bathrooms != null && <span>🚿 {item.bathrooms} baths</span>}
+            {item.bedrooms != null && <span>🛏 {item.bedrooms} bed{item.bedrooms === 1 ? '' : 's'}</span>}
+            {item.bathrooms != null && <span>🚿 {item.bathrooms} bath{item.bathrooms === 1 ? '' : 's'}</span>}
             {item.maxGuests != null && <span>👥 {item.maxGuests}</span>}
           </div>
           <div className="mt-4 flex items-center justify-between">
@@ -73,8 +73,8 @@ function BundleSection({ items, isBrand, accent }: { items: BundleItem[]; isBran
             <div className="h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg"><img src={b.image} alt={isBrand ? b.name : `Item ${i + 1}`} className="h-full w-full object-cover" /></div>
             <div className="min-w-0 flex-1">
               <p className="text-xs uppercase text-white/40">{typeIcons[b.type] ?? ''} {b.type.replace('_', ' ')}</p>
-              <p className="truncate font-medium text-white">{isBrand ? b.name : `Item ${i + 1}`}</p>
-              {isBrand && b.description && <p className="truncate text-xs text-white/50">{b.description}</p>}
+              <p className="truncate font-medium text-white">{isBrand ? b.name : (b.type === 'property' ? 'Property stay' : b.type === 'transfer' ? 'Private transfer' : b.type === 'boat_rental' ? 'Boat rental experience' : 'Service experience')}</p>
+              {b.description && <p className="truncate text-xs text-white/50">{b.description}</p>}
               <div className="mt-0.5 flex gap-3 text-xs text-white/40">{b.nights != null && <span>{b.nights} nights</span>}{b.guests != null && <span>{b.guests} guests</span>}{b.meta && <span>{b.meta}</span>}</div>
             </div>
             <p className="flex-shrink-0 font-semibold text-white">€{b.priceEur.toLocaleString()}</p>
@@ -137,7 +137,7 @@ export function MagazineTemplate({ proposal, mode }: Props) {
   const hasAvailabilityData = proposal.items.some((i) => i.availability);
 
   return (
-    <div className="min-h-screen bg-black pb-20 text-white">
+    <div className="min-h-screen bg-black pb-36 text-white">
       <header className="w-full border-b border-white/10">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           {isBrand ? <span className="text-lg font-semibold">PickedFor</span> : <span className="text-lg font-light uppercase tracking-[0.3em] text-white/50">Curated</span>}
@@ -183,8 +183,8 @@ export function MagazineTemplate({ proposal, mode }: Props) {
 
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-black/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-          <p className="text-sm font-medium text-white/70">{isBrand ? 'Ready to book? Contact PickedFor' : 'Interested? Get in touch'}</p>
-          <a href="https://pickedfor.com/contact" className="rounded-full px-4 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>✉️ Contact</a>
+          <p className="text-sm font-medium text-white/70">{isBrand ? 'Ready to book? Contact PickedFor' : 'Ready to book? Contact your travel advisor'}</p>
+          <a href="https://pickedfor.com/contact" className="rounded-full px-4 py-1.5 text-sm font-medium text-white" style={{ backgroundColor: accent }}>✉️ Contact Us</a>
         </div>
       </div>
     </div>
