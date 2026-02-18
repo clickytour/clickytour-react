@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CookieConsent } from "@/components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Villa4you React Pilot",
-  description: "Homepage pilot migration from WordPress to Next.js",
+  title: "Villa4you",
+  description: "Villa4you offers curated vacation rentals, hotels, real estate, and services across Greece.",
+  openGraph: {
+    title: "Villa4you",
+    description: "Discover curated vacation rentals, hotels, real estate, and local services with Villa4you.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Villa4you",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Villa4you",
+    description: "Discover curated vacation rentals, hotels, real estate, and local services with Villa4you.",
+  },
 };
 
 export default async function RootLayout({
@@ -38,6 +51,7 @@ export default async function RootLayout({
           {!isPF && <SiteHeader />}
           <main>{children}</main>
           {!isPF && <SiteFooter />}
+          {!isPF && <CookieConsent />}
         </div>
       </body>
     </html>
