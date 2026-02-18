@@ -102,11 +102,6 @@ const HeartIcon = ({ filled }: { filled: boolean }) => (
   </svg>
 );
 
-const XIcon = () => (
-  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-  </svg>
-);
 
 const ShareIcon = () => (
   <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -121,36 +116,13 @@ export function ListingCard({
   variant = 'modern',
 }: Props) {
   const [liked, setLiked] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
   const href = `https://pickedfor.com/pickedfor/detail/${listing.slug}`;
   const isUnavailable = listing.availability === 'unavailable';
 
-  // Dismissed overlay
-  if (dismissed) {
-    return (
-      <div className="relative flex items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 py-16 text-center">
-        <div>
-          <p className="text-lg font-medium text-gray-400">Removed from your list</p>
-          <p className="mt-1 text-sm text-gray-400">{listing.title}</p>
-          <button
-            onClick={() => setDismissed(false)}
-            className="mt-3 rounded-lg border border-gray-300 px-4 py-1.5 text-sm font-medium text-gray-600 transition-colors hover:bg-white"
-          >
-            Undo
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Action buttons (like / dislike / share)
   const ActionButtons = ({ light }: { light?: boolean }) => (
     <div className="flex items-center gap-1">
       <button onClick={(e) => { e.preventDefault(); setLiked(!liked); }} className={`rounded-full p-1.5 transition-colors ${light ? 'hover:bg-white/20' : 'hover:bg-gray-100'}`} aria-label="Like">
         <HeartIcon filled={liked} />
-      </button>
-      <button onClick={(e) => { e.preventDefault(); setDismissed(true); }} className={`rounded-full p-1.5 transition-colors ${light ? 'hover:bg-white/20' : 'hover:bg-gray-100'}`} aria-label="Remove">
-        <XIcon />
       </button>
       <button onClick={(e) => { e.preventDefault(); }} className={`rounded-full p-1.5 transition-colors ${light ? 'hover:bg-white/20 text-white/70' : 'hover:bg-gray-100 text-gray-400'}`} aria-label="Share">
         <ShareIcon />
