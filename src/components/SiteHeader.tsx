@@ -138,7 +138,7 @@ export function SiteHeader() {
 
           <div className="hidden items-center gap-2 md:flex">
             {showQaPages && (
-              <a href="/proposal?qa=1" className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900 hover:border-amber-400">
+              <a href="/all-pages" className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900 hover:border-amber-400">
                 All Pages (QA)
               </a>
             )}
@@ -163,7 +163,7 @@ export function SiteHeader() {
             <div className="absolute right-0 top-[110%] z-50 w-[92vw] max-w-[360px] rounded-2xl border border-slate-200 bg-white p-3 shadow-xl">
               <div className="space-y-2">
                 {showQaPages && (
-                  <a href="/proposal?qa=1" className="block rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900">
+                  <a href="/all-pages" className="block rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-900">
                     All Pages (QA)
                   </a>
                 )}
