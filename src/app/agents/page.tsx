@@ -62,7 +62,7 @@ export default function AgentsPage() {
                     <span key={tag} className="pill">{tag}</span>
                   ))}
                 </div>
-                <Link href="/agents/tools/" className="inline-block mt-4 text-cyan-700 font-semibold text-sm">Open →</Link>
+                <Link href="/agents-tools/" className="inline-block mt-4 text-cyan-700 font-semibold text-sm">Open →</Link>
               </article>
             ))}
           </div>
