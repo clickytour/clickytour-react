@@ -3,7 +3,7 @@ import { PageShell } from '@/components/site';
 
 const roles = [
   { title: 'Find Your Role – Quiz', desc: 'Not sure where you fit? Take our quick quiz to discover the best way to work with ClickyTour.', href: '/work-with-us-quiz/', icon: '🎯' },
-  { title: 'Job Opportunities', desc: 'Explore open positions and join the ClickyTour team. We're always looking for passionate people.', href: '/work-with-us-jobs/', icon: '💼' },
+  { title: 'Job Opportunities', desc: 'Explore open positions and join the ClickyTour team. We are always looking for passionate people.', href: '/work-with-us-jobs/', icon: '💼' },
   { title: 'Affiliate Program', desc: 'Earn commissions by referring guests, owners, or service providers to ClickyTour.', href: '/work-with-us-affiliate/', icon: '🤝' },
   { title: 'Compare Partner Roles', desc: 'See side-by-side how each partner role works — from agents and owners to service providers and PMCs.', href: '/work-with-us-quiz/', icon: '📊' },
 ];
