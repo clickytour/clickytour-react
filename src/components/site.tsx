@@ -24,10 +24,10 @@ const navItems: NavItem[] = [
   },
 ];
 
-/* ── V logo from original transparent PNG ── */
+/* ── V logo – clean mark without circle ── */
 function VLogo({ className = 'w-7 h-7' }: { className?: string }) {
   return (
-    <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="" width={120} height={120} className={className} />
+    <Image src="/assets/v-logo-clean.png" alt="" width={120} height={120} className={className} />
   );
 }
 
