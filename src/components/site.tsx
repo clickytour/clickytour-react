@@ -21,7 +21,7 @@ const menu: NavItem[] = [
     label: 'Work With Us',
     children: [
       { href: '/work-with-us-quiz/', label: 'Find Your Role - Quiz' },
-      { href: '/find-staff-contractors-job-seekers/', label: 'Job Opportunities' },
+      { href: '/work-with-us-jobs/', label: 'Job Opportunities' },
       { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
     ],
   },
@@ -30,7 +30,10 @@ const menu: NavItem[] = [
   { href: '/contact/', label: 'Contact Us' },
 ];
 
-const footerRoleLinks = [
+const primaryMenu = menu.slice(0, 6);
+const moreMenu = menu.slice(6);
+
+const footerExploreLinks = [
   { href: '/guests/', label: 'For Guests' },
   { href: '/owners/', label: 'For Owners' },
   { href: '/service-providers/', label: 'For Service Providers' },
@@ -42,16 +45,37 @@ function NavLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="relative overflow-hidden rounded-sm px-3 py-2 text-[13px] font-semibold text-cyan-50/95 transition-colors hover:text-white before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-0 before:bg-cyan-500/20 before:transition-all before:duration-300 hover:before:w-full"
+      className="relative overflow-hidden rounded-sm px-2.5 py-2 text-[12.5px] xl:px-3 xl:text-[13px] font-semibold text-cyan-50/95 transition-colors hover:text-white before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-0 before:bg-cyan-500/20 before:transition-all before:duration-300 hover:before:w-full"
     >
       {label}
     </Link>
   );
 }
 
+function DesktopDropdown({ item }: { item: NavItem }) {
+  if (!item.children) return <NavLink href={item.href} label={item.label} />;
+
+  return (
+    <div className="relative group">
+      <NavLink href={item.href} label={item.label} />
+      <div className="invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-full mt-2 min-w-[260px] rounded-xl border border-cyan-800/60 bg-[#0c2339] p-2 shadow-2xl">
+        {item.children.map((sub) => (
+          <Link
+            key={sub.href}
+            href={sub.href}
+            className="block rounded-lg px-3 py-2 text-sm text-cyan-100/95 hover:bg-cyan-500/15 hover:text-white transition-colors"
+          >
+            {sub.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
+  const [mobileOpenKey, setMobileOpenKey] = useState<string | null>(null);
 
   return (
     <header className="sticky top-0 z-40 bg-[#0F2B46] text-white border-b border-cyan-900/40">
@@ -64,27 +88,27 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
-          {menu.map((item) =>
-            item.children ? (
-              <div key={item.href} className="relative group">
-                <NavLink href={item.href} label={item.label} />
-                <div className="invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-full mt-2 min-w-[260px] rounded-xl border border-cyan-800/60 bg-[#0c2339] p-2 shadow-2xl">
-                  {item.children.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      className="block rounded-lg px-3 py-2 text-sm text-cyan-100/95 hover:bg-cyan-500/15 hover:text-white transition-colors"
-                    >
-                      {sub.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <NavLink key={item.href} href={item.href} label={item.label} />
-            ),
-          )}
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+          {primaryMenu.map((item) => (
+            <DesktopDropdown key={item.href} item={item} />
+          ))}
+
+          <div className="relative group">
+            <span className="relative overflow-hidden rounded-sm px-2.5 py-2 text-[12.5px] xl:px-3 xl:text-[13px] font-semibold text-cyan-50/95 transition-colors hover:text-white before:absolute before:left-0 before:top-0 before:-z-10 before:h-full before:w-0 before:bg-cyan-500/20 before:transition-all before:duration-300 hover:before:w-full cursor-default">
+              More
+            </span>
+            <div className="invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 absolute right-0 top-full mt-2 min-w-[180px] rounded-xl border border-cyan-800/60 bg-[#0c2339] p-2 shadow-2xl">
+              {moreMenu.map((sub) => (
+                <Link
+                  key={sub.href}
+                  href={sub.href}
+                  className="block rounded-lg px-3 py-2 text-sm text-cyan-100/95 hover:bg-cyan-500/15 hover:text-white transition-colors"
+                >
+                  {sub.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </nav>
 
         <div className="hidden lg:block">
@@ -108,16 +132,13 @@ export function Header() {
                 <div key={item.href} className="rounded-lg border border-cyan-900/60 overflow-hidden">
                   <button
                     className="w-full flex items-center justify-between px-3 py-2.5 text-left text-cyan-100 font-semibold"
-                    onClick={() => setMobileWorkOpen((v) => !v)}
+                    onClick={() => setMobileOpenKey((v) => (v === item.href ? null : item.href))}
                   >
                     <span>{item.label}</span>
-                    <span>{mobileWorkOpen ? '−' : '+'}</span>
+                    <span>{mobileOpenKey === item.href ? '−' : '+'}</span>
                   </button>
-                  {mobileWorkOpen && (
+                  {mobileOpenKey === item.href && (
                     <div className="bg-[#0c2339] p-1.5">
-                      <Link href={item.href} className="block rounded-md px-3 py-2 text-sm text-cyan-100/90 hover:bg-cyan-500/15" onClick={() => setMobileOpen(false)}>
-                        Overview
-                      </Link>
                       {item.children.map((sub) => (
                         <Link key={sub.href} href={sub.href} className="block rounded-md px-3 py-2 text-sm text-cyan-100/90 hover:bg-cyan-500/15" onClick={() => setMobileOpen(false)}>
                           {sub.label}
@@ -150,50 +171,29 @@ export function Header() {
 export function Footer() {
   const cols = [
     {
-      t: 'Partner With Us',
-      l: footerRoleLinks,
+      t: 'Explore',
+      l: footerExploreLinks,
     },
     {
-      t: 'Resources & Help',
+      t: 'Work With Us',
       l: [
-        { href: '/help-center/', label: 'Help Center' },
-        { href: '/faq/', label: 'FAQ' },
-        { href: '/support-tickets/', label: 'Support Tickets' },
-        { href: '/affiliate-faq/', label: 'Affiliate FAQ' },
-        { href: '/blog-updates/', label: 'Blog & Updates' },
+        { href: '/work-with-us-quiz/', label: 'Find Your Role - Quiz' },
+        { href: '/work-with-us-jobs/', label: 'Job Opportunities' },
+        { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
       ],
     },
     {
-      t: 'Company & Legal',
+      t: 'Company',
       l: [
-        { href: '/about-clickytour/', label: 'About ClickyTour' },
-        { href: '/privacy-policy/', label: 'Privacy Policy' },
-        { href: '/terms-conditions/', label: 'Terms & Conditions' },
-        { href: '/cookie-policy/', label: 'Cookie Policy' },
-        { href: '/contact/', label: 'Contact' },
+        { href: '/about/', label: 'About Us' },
+        { href: '/blog/', label: 'Blog' },
+        { href: '/contact/', label: 'Contact Us' },
       ],
     },
   ];
 
   return (
     <footer className="bg-[#0F2B46] text-white mt-14">
-      <div className="section border-b border-cyan-900/40">
-        <div className="container grid lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <p className="text-cyan-300 text-sm uppercase tracking-[0.12em]">Explore Our Platform</p>
-            <h3 className="text-[30px] md:text-[36px] leading-tight font-extrabold mt-2 max-w-2xl">One ecosystem where travelers, hosts, and partners grow together.</h3>
-            <p className="text-cyan-100/80 mt-3 text-[15px]">Built for guests, owners, providers, agents, and property managers.</p>
-          </div>
-          <div className="flex flex-wrap gap-2.5 justify-start lg:justify-end">
-            {footerRoleLinks.map((m) => (
-              <Link key={m.href} href={m.href} className="rounded-full border border-cyan-700 bg-cyan-900/35 px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-800/55 transition-colors">
-                {m.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <div className="container py-11 grid sm:grid-cols-2 lg:grid-cols-4 gap-9">
         <div>
           <div className="flex items-center gap-3">
@@ -205,9 +205,10 @@ export function Footer() {
           </div>
           <p className="mt-4 text-cyan-100/90 text-sm">Where Travelers, Hosts & Partners Connect</p>
           <div className="mt-4 flex items-center gap-3">
-            <Link href="/language/" aria-label="Language" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">🌐</Link>
-            <Link href="https://www.facebook.com/" aria-label="Social" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">f</Link>
-            <Link href="https://www.youtube.com/" aria-label="YouTube" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">▶</Link>
+            <Link href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">f</Link>
+            <Link href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">◎</Link>
+            <Link href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">in</Link>
+            <Link href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">▶</Link>
           </div>
         </div>
 
