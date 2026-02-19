@@ -29,6 +29,7 @@ const primaryNav: NavItem[] = [
       { href: "/explore-map", label: "Explore Map" },
       { href: "/guest-help-faq", label: "Guest Help FAQ" },
       { href: "/plans-offers", label: "Plans & Offers" },
+      { href: "/testimonials", label: "Testimonials" },
     ],
   },
   {
@@ -73,7 +74,15 @@ const primaryNav: NavItem[] = [
       { href: "/agents-apply", label: "Agents Apply", draft: true },
     ],
   },
-  { href: "/support", label: "Support" },
+  {
+    href: "/support",
+    label: "Support",
+    submenu: [
+      { href: "/support", label: "Support Hub" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
 ];
 
