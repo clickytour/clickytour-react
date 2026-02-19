@@ -16,7 +16,7 @@ export function Header() {
     <header className="bg-[#0F2B46] text-white border-b border-cyan-900/40">
       <div className="container py-3.5 flex items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-2.5">
-          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={44} height={44} />
+          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={100} height={100} className="w-11 h-11" />
           <div className="leading-tight">
             <p className="font-extrabold text-[17px]">ClickyTour</p>
             <p className="text-[11px] text-cyan-100/80">Travel • Real Estate • Services</p>
@@ -61,7 +61,7 @@ export function Footer() {
       </div>
       <div className="container py-11 grid md:grid-cols-4 gap-8">
         <div>
-          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={68} height={68} />
+          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={136} height={136} className="w-[68px] h-[68px]" />
           <p className="mt-3 text-cyan-100/90 text-sm">Where Travelers, Hosts, and Partners Connect.</p>
         </div>
         {cols.map((c) => (
