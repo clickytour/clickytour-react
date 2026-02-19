@@ -1,58 +1,65 @@
-import { FAQ, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
-const hiringGroups = [
+const jobCategories = [
   {
-    title: 'Property Management Companies',
-    desc: 'Need staff for guest services, maintenance, and admin operations.',
-    icon: '🏢',
+    title: 'Cleaning & Housekeeping',
+    desc: 'Villa and apartment cleaning, linen turnaround, deep cleaning and quality checks.',
+    icon: '🧽',
   },
   {
-    title: 'Vacation Property Owners',
-    desc: 'Often hiring cleaners, check-in assistants, and support staff.',
-    icon: '🏡',
+    title: 'Maintenance & Repairs',
+    desc: 'General maintenance, plumbing, electrical support, pool and garden care.',
+    icon: '🛠️',
   },
   {
-    title: 'Real Estate Agencies',
-    desc: 'Looking for sales agents, listing assistants, and office support.',
-    icon: '🏘️',
-  },
-  {
-    title: 'Service Businesses',
-    desc: 'Opportunities for drivers, chefs, guides, and wellness experts.',
+    title: 'Guest Services',
+    desc: 'Check-in support, concierge services, guest communication, and local recommendations.',
     icon: '🛎️',
   },
   {
-    title: 'Agents & Affiliates',
-    desc: 'Openings for resellers, coordinators, and growth assistants.',
+    title: 'Property Management',
+    desc: 'Operations coordinators, portfolio assistants, and account managers for growing inventories.',
+    icon: '🏢',
+  },
+  {
+    title: 'Sales & Partnerships',
+    desc: 'Business development, affiliate growth, and local partner acquisition.',
     icon: '🤝',
   },
   {
-    title: 'Tour Guide Partners',
-    desc: 'Regional guide roles for local destination experiences.',
-    icon: '🧭',
+    title: 'Marketing & Content',
+    desc: 'Content creators, social media specialists, and listing optimization support.',
+    icon: '📣',
   },
 ];
 
-const openRoles = [
-  { title: 'Property Manager Coordinator', desc: 'Coordinate daily operations and owner communication.', icon: '📋' },
-  { title: 'Partnership Manager', desc: 'Build B2B relationships in real estate and services.', icon: '🌐' },
-  { title: 'Affiliate Marketing Specialist', desc: 'Grow referral partnerships and performance campaigns.', icon: '📈' },
-  { title: 'Front-End Web Developer', desc: 'Support React and Elementor-based web experiences.', icon: '💻' },
-  { title: 'Content Creator', desc: 'Create travel and real-estate focused media content.', icon: '🎬' },
+const applySteps = [
+  'Choose a category that matches your skills and experience',
+  'Send your profile (CV, portfolio, and preferred location/role)',
+  'Complete a short screening call with our team or partner',
+  'Receive role matching and onboarding instructions',
 ];
 
-const faq = [
+const benefits = [
   {
-    q: 'How do I apply?',
-    a: 'Choose a role, prepare your CV/portfolio, and submit through the application flow. This page currently uses mock actions.',
+    title: 'Flexible Work Models',
+    desc: 'Find full-time, part-time, freelance, and seasonal opportunities.',
+    icon: '⏱️',
   },
   {
-    q: 'Can I send an open application?',
-    a: 'Yes. If your role is not listed, you can still submit an open application for future matching.',
+    title: 'Growing Industry Network',
+    desc: 'Work with owners, agencies, and PM companies in high-demand destinations.',
+    icon: '🌍',
   },
   {
-    q: 'Is this connected to a live ATS?',
-    a: 'No. This implementation is static/mock and does not connect to external job systems yet.',
+    title: 'Skill Development',
+    desc: 'Gain hospitality, operations, and digital platform experience.',
+    icon: '📚',
+  },
+  {
+    title: 'Reliable Pipeline',
+    desc: 'Access recurring opportunities from verified partners and projects.',
+    icon: '📈',
   },
 ];
 
@@ -60,34 +67,41 @@ export default function WorkWithUsJobsPage() {
   return (
     <PageShell>
       <Hero
-        title="Find Your Next Role in Vacation Rentals, Real Estate & Tourism"
-        subtitle="Jobs posted by ClickyTour and trusted partners across our network."
-        ctaA="Browse Vacancies"
-        ctaB="Send CV for Matching"
+        title="Job Opportunities Across Tourism, Rentals & Real Estate"
+        subtitle="Discover roles with ClickyTour and our partner network in cleaning, maintenance, guest services, property management and more."
+        ctaA="View Opportunities"
+        ctaB="Submit Your Profile"
       />
 
       <section className="section">
         <div className="container">
           <SectionTitle
-            eyebrow="Who’s Hiring on ClickyTour"
-            title="Opportunities From Our Network"
-            subtitle="Instant access to opportunities across rentals, real estate, and travel services."
+            eyebrow="Career Paths"
+            title="Popular Job Categories"
+            subtitle="We match talent with real operational needs across the ClickyTour ecosystem."
           />
-          <FeatureGrid items={hiringGroups} cols={3} />
+          <FeatureGrid items={jobCategories} cols={3} />
         </div>
       </section>
 
       <section className="section section-soft">
         <div className="container">
-          <SectionTitle eyebrow="Current Openings" title="Open Vacancies" />
-          <FeatureGrid items={openRoles} cols={3} />
+          <SectionTitle
+            eyebrow="Application Process"
+            title="How to Apply"
+            subtitle="A simple process to help us quickly match you to suitable openings."
+          />
+          <CheckList items={applySteps} />
         </div>
       </section>
 
       <section className="section">
-        <div className="container max-w-4xl">
-          <SectionTitle title="How to Apply" subtitle="Choose a role, submit your profile, and we will contact you for next steps." />
-          <FAQ items={faq} />
+        <div className="container">
+          <SectionTitle
+            eyebrow="Why Join"
+            title="Benefits of Working with ClickyTour"
+          />
+          <FeatureGrid items={benefits} cols={4} />
         </div>
       </section>
     </PageShell>

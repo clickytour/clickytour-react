@@ -1,46 +1,83 @@
-import { FAQ, PageShell, SectionTitle } from '@/components/site';
+import { FAQ, Hero, PageShell, SectionTitle } from '@/components/site';
 
-const faqItems = [
+const generalFaq = [
   {
     q: 'What is ClickyTour?',
-    a: 'ClickyTour is a platform that connects travelers, owners, service providers, agents, and property management companies in one ecosystem.',
+    a: 'ClickyTour is a connected platform for guests, owners, service providers, agents, and PM companies.',
   },
   {
-    q: 'Which user roles can use the platform?',
-    a: 'The platform is built for Guests, Property Owners, Service Providers, Agents, and PM Companies.',
+    q: 'Do I need a paid plan to start?',
+    a: 'You can explore many sections and onboarding flows first, then choose a plan based on your role and goals.',
   },
   {
-    q: 'How do I get started?',
-    a: 'Choose your role, complete the relevant quick form, and the team guides you through the next onboarding steps.',
+    q: 'Is ClickyTour available in multiple destinations?',
+    a: 'Yes. The platform supports regional growth and local partner ecosystems across destinations.',
+  },
+];
+
+const roleFaqSections = [
+  {
+    title: 'Guests',
+    items: [
+      { q: 'Can I book more than accommodation?', a: 'Yes. You can discover local services, experiences, and support options alongside your stay.' },
+      { q: 'How do cancellations work?', a: 'Cancellation terms depend on listing policies. Review the property terms before confirming.' },
+    ],
   },
   {
-    q: 'Are there hidden fees?',
-    a: 'No. ClickyTour highlights transparent pricing and clear fee logic for every workflow.',
+    title: 'Owners',
+    items: [
+      { q: 'Can I list one or multiple properties?', a: 'Both are supported. You can start with one unit and scale your portfolio over time.' },
+      { q: 'Do you support promotional tools?', a: 'Yes. Owners can access visibility, marketing support, and partner-led promotion options.' },
+    ],
   },
   {
-    q: 'Can I contact support?',
-    a: 'Yes. You can contact support through the Contact Us page, ticket support, or direct follow-up from the team.',
+    title: 'Service Providers',
+    items: [
+      { q: 'What services can I offer?', a: 'Cleaning, maintenance, transport, wellness, guest assistance, and other destination services.' },
+      { q: 'How do I get leads?', a: 'Service providers are discoverable by relevant roles and categories across the platform.' },
+    ],
   },
   {
-    q: 'Do you offer white-label tools?',
-    a: 'Yes. Agents and partners can create white-label offers and presentations depending on role and plan.',
+    title: 'Agents',
+    items: [
+      { q: 'Can I work as an affiliate?', a: 'Yes. Agents and marketing partners can join referral and commission-based programmes.' },
+      { q: 'Do you provide white-label tools?', a: 'Yes. White-label and branded offer options are available in selected plans.' },
+    ],
+  },
+  {
+    title: 'PM Companies',
+    items: [
+      { q: 'Can we manage multiple owners in one place?', a: 'Yes. PM workflows are designed for portfolio operations and team collaboration.' },
+      { q: 'Are there tools for occupancy growth?', a: 'Yes. PM companies can use listing and promotion features to improve performance.' },
+    ],
   },
 ];
 
 export default function FaqPage() {
   return (
     <PageShell>
-      <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
-        <div className="container">
-          <h1 className="text-4xl md:text-5xl font-extrabold">General FAQ</h1>
-          <p className="max-w-2xl mt-4 text-cyan-100 text-lg">Where Travelers, Hosts & Partners Connect</p>
-        </div>
-      </section>
+      <Hero
+        title="Frequently Asked Questions"
+        subtitle="Find quick answers about ClickyTour and role-specific workflows."
+        ctaA="Browse Help Center"
+        ctaB="Contact Support"
+      />
 
       <section className="section section-soft">
         <div className="container max-w-4xl">
-          <SectionTitle title="Frequently Asked Questions" subtitle="General answers about ClickyTour and how the platform works." />
-          <FAQ items={faqItems} />
+          <SectionTitle title="General Questions" />
+          <FAQ items={generalFaq} />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container space-y-10">
+          {roleFaqSections.map((section) => (
+            <div key={section.title} className="max-w-4xl">
+              <SectionTitle title={section.title} />
+              <FAQ items={section.items} />
+            </div>
+          ))}
         </div>
       </section>
     </PageShell>

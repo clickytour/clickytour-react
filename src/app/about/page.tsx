@@ -1,84 +1,89 @@
-import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
-const timeline = [
-  { title: '2007–2015', desc: 'Our roots in property management & tourism.', icon: '📍' },
-  { title: '2016–2022', desc: 'Expansion to real estate and agent partnerships.', icon: '🤝' },
-  { title: '2023–2025', desc: 'ClickyTour platform launch connecting 5 user roles.', icon: '🚀' },
+const platformAreas = [
+  {
+    title: 'Travel & Guest Experience',
+    desc: 'Accommodation discovery, trip support, and destination services in one flow.',
+    icon: '✈️',
+  },
+  {
+    title: 'Owner & Property Growth',
+    desc: 'Listing exposure, bookings, and management support for property owners.',
+    icon: '🏡',
+  },
+  {
+    title: 'Service Marketplace',
+    desc: 'Connect trusted local providers with guests, owners, and managers.',
+    icon: '🛎️',
+  },
+  {
+    title: 'Agent & Partner Tools',
+    desc: 'Referral systems, white-label offers, and conversion-focused workflows.',
+    icon: '🤝',
+  },
 ];
 
-const whyClickyTourWorks = [
-  { title: 'Property Owners', desc: 'More visibility, easier management.', icon: '🏡' },
-  { title: 'PM Companies', desc: 'Grow portfolios without extra costs.', icon: '🏢' },
-  { title: 'Agents / Tour Operators', desc: 'Access to net pricing & white-label tools.', icon: '🧭' },
-  { title: 'Service Providers', desc: 'Direct connections to guests & partners.', icon: '🛎️' },
-  { title: 'Guests / Travelers', desc: 'Curated properties & services.', icon: '✈️' },
+const values = [
+  'Collaboration first — every role in the ecosystem should benefit',
+  'Transparent operations and clear commercial models',
+  'Practical technology that solves real day-to-day problems',
+  'Local expertise combined with global platform access',
+  'Long-term partnerships over one-time transactions',
+];
+
+const ecosystem = [
+  { title: 'Guests', desc: 'Find stays, services, and destination guidance.', icon: '🧳' },
+  { title: 'Owners', desc: 'List and manage properties with better visibility.', icon: '🏠' },
+  { title: 'Service Providers', desc: 'Offer valuable local services to active demand.', icon: '🧰' },
+  { title: 'Agents', desc: 'Promote and monetize through trusted inventory.', icon: '📢' },
+  { title: 'PM Companies', desc: 'Scale operations with centralized control.', icon: '📊' },
 ];
 
 export default function AboutPage() {
   return (
     <PageShell>
       <Hero
-        title="About Us"
-        subtitle="ClickyTour unites property owners, managers, agents, service providers, and travelers in a single ecosystem — simplifying bookings, sales, and growth for everyone."
-        ctaA="Get Started"
-        ctaB="Contact Us"
+        title="About ClickyTour"
+        subtitle="ClickyTour was built to connect travelers, property stakeholders, and service partners in one practical platform for growth."
+        ctaA="Explore the Platform"
+        ctaB="Talk to Our Team"
       />
 
       <section className="section">
-        <div className="container">
-          <SectionTitle title="Connecting Travel, Real Estate & Services in One Smart Platform" subtitle="A practical ecosystem where every role can collaborate and grow." />
-          <div className="card p-6 md:p-8 text-slate-700">
-            <p className="italic">
-              We combine hospitality, real estate, and local services into one connected platform — designed to remove friction and help every partner work smarter.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-soft">
-        <div className="container">
-          <SectionTitle eyebrow="Our Story" title="How ClickyTour evolved" />
-          <FeatureGrid items={timeline} cols={3} />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container grid lg:grid-cols-2 gap-6 items-start">
+        <div className="container grid lg:grid-cols-2 gap-8 items-start">
           <div>
-            <SectionTitle eyebrow="Why ClickyTour Works" title="Why Thousands Choose ClickyTour" />
-            <FeatureGrid items={whyClickyTourWorks} cols={2} />
+            <SectionTitle
+              eyebrow="Our Story"
+              title="From Local Operations to a Connected Ecosystem"
+              subtitle="After years of hands-on experience in tourism, rentals, and real estate, we created ClickyTour to unify fragmented workflows and partnerships."
+            />
           </div>
-          <div className="card p-6 md:p-7 bg-gradient-to-br from-cyan-50 to-white">
-            <h3 className="text-xl font-extrabold text-slate-900">Built for real operations</h3>
-            <p className="text-slate-600 mt-3">
-              We use brains and fancy machines to create brands, products and experiences that help our clients solve problems and seize opportunities.
-            </p>
-            <p className="text-slate-600 mt-3">
-              Pede posuere quis ipsum commodo hac facilisis hendrerit. Mauris adipiscing dignissim ultricies dolor potenti litora senectus. Mus montes interdum netus massa.
-            </p>
-            <p className="text-slate-600 mt-3">
-              Ad laoreet mauris sapien feugiat libero. Gravida porta odio enim ligula sapien conubia. Rutrum venenatis vestibulum leo lectus integer.
+          <div className="card p-6 md:p-8 text-slate-700">
+            <p>
+              Our mission is simple: make collaboration easier between guests, owners, providers, agents, and PM companies.
+              Instead of disconnected tools, emails, and spreadsheets, ClickyTour offers one ecosystem where each role can
+              discover opportunities, operate efficiently, and grow with confidence.
             </p>
           </div>
         </div>
       </section>
 
       <section className="section section-soft">
-        <div className="container text-center max-w-3xl">
-          <SectionTitle eyebrow="Meet the Team" title="Meet the People Behind ClickyTour" subtitle="We are a team of travel, real estate, and technology experts with over 18 years of combined experience." />
+        <div className="container">
+          <SectionTitle eyebrow="What We Do" title="A Platform Built Around Real Use Cases" />
+          <FeatureGrid items={platformAreas} cols={4} />
         </div>
       </section>
 
       <section className="section">
-        <div className="container">
-          <div className="card p-7 md:p-9 bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white text-center">
-            <p className="text-cyan-200 font-semibold text-sm uppercase tracking-[0.1em]">Join Us</p>
-            <h2 className="text-3xl md:text-4xl font-extrabold mt-2">Ready to Work With ClickyTour?</h2>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <button className="btn-primary">For Property Owners</button>
-              <button className="btn-secondary">For Agents</button>
-              <button className="btn-secondary">For PMCs</button>
-            </div>
+        <div className="container grid lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <SectionTitle eyebrow="Our Values" title="Principles That Guide Every Decision" />
+            <CheckList items={values} />
+          </div>
+          <div>
+            <SectionTitle eyebrow="Our Ecosystem" title="Who We Serve" />
+            <FeatureGrid items={ecosystem} cols={2} />
           </div>
         </div>
       </section>

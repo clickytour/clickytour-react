@@ -255,7 +255,8 @@ export function Footer() {
       t: 'Legal',
       l: [
         { href: '/privacy-policy/', label: 'Privacy Policy' },
-        { href: '/general-terms/', label: 'General Terms' },
+        { href: '/terms/', label: 'Terms & Conditions' },
+        { href: '/cookie-policy/', label: 'Cookie Policy' },
         { href: '/gdpr-compliance/', label: 'GDPR Compliance' },
       ],
     },

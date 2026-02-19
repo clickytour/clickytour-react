@@ -1,89 +1,77 @@
-import { FAQ, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
 const howItWorks = [
   {
-    title: 'Sign Up',
-    desc: 'Join and receive your unique affiliate referral links.',
+    title: 'Join the Programme',
+    desc: 'Complete a simple signup and receive your affiliate profile setup details.',
     icon: '📝',
   },
   {
-    title: 'Promote Listings',
-    desc: 'Share ClickyTour rentals, real-estate offers, and services in your channels.',
-    icon: '📣',
+    title: 'Share Your Referral Links',
+    desc: 'Promote ClickyTour listings, services, and offers to your audience or clients.',
+    icon: '🔗',
   },
   {
-    title: 'Earn Commissions',
-    desc: 'Get rewarded for confirmed bookings or sales generated from your referrals.',
+    title: 'Earn on Confirmed Results',
+    desc: 'Get paid for eligible bookings or conversions generated from your referrals.',
     icon: '💸',
   },
 ];
 
-const affiliateBenefits = [
-  {
-    title: 'Global Inventory',
-    desc: 'Access rentals, properties, and travel services in one ecosystem.',
-    icon: '🌍',
-  },
-  {
-    title: 'White-Label Tools',
-    desc: 'Use no-logo and partner-friendly presentation tools.',
-    icon: '🎨',
-  },
-  {
-    title: 'Performance Dashboard',
-    desc: 'Track clicks, conversions, and estimated earnings clearly.',
-    icon: '📊',
-  },
-  {
-    title: 'Secure Payouts',
-    desc: 'Reliable payout flows designed for affiliate operations.',
-    icon: '🔐',
-  },
+const commission = [
+  'Base commission for confirmed bookings and qualified sales',
+  'Higher tiers for high-performing affiliates with consistent volume',
+  'Recurring opportunities through long-term partner campaigns',
+  'Transparent tracking dashboard with clicks, leads, and conversions',
 ];
 
-const faq = [
-  {
-    q: 'Do I need to be a travel agent?',
-    a: 'No. Content creators, marketers, and partners can all join as affiliates.',
-  },
-  {
-    q: 'How are commissions calculated?',
-    a: 'Commissions are based on confirmed referral outcomes. Exact terms can be defined per partner plan.',
-  },
-  {
-    q: 'Can I start with a small audience?',
-    a: 'Yes. Many affiliates begin with niche audiences and scale over time.',
-  },
+const whoCanJoin = [
+  { title: 'Travel creators & bloggers', desc: 'Share destination and accommodation content with monetization built in.', icon: '🎥' },
+  { title: 'Real estate and rental agents', desc: 'Monetize your network with referral-based earnings.', icon: '🏘️' },
+  { title: 'Local businesses and tourism partners', desc: 'Promote relevant services and offers to your clients.', icon: '🧭' },
+  { title: 'Digital marketers & communities', desc: 'Run campaigns and grow affiliate revenue with performance data.', icon: '📈' },
 ];
 
 export default function WorkWithUsAffiliatePage() {
   return (
     <PageShell>
       <Hero
-        title="Earn with ClickyTour as an Affiliate"
-        subtitle="Promote rentals, real estate, and services. Earn commissions for every booking or sale through your referral links."
-        ctaA="Join the Program"
-        ctaB="Choose Your Plan"
+        title="Affiliate Programme: Earn by Referring"
+        subtitle="Turn your audience, network, or client base into recurring income by promoting ClickyTour properties and services."
+        ctaA="Join as Affiliate"
+        ctaB="View Commission Plans"
       />
 
       <section className="section">
         <div className="container">
-          <SectionTitle eyebrow="How It Works" title="Why Agents Choose ClickyTour" />
+          <SectionTitle eyebrow="How It Works" title="Start in 3 Simple Steps" />
           <FeatureGrid items={howItWorks} cols={3} />
         </div>
       </section>
 
       <section className="section section-soft">
         <div className="container">
-          <SectionTitle eyebrow="Affiliate Benefits" title="Why Affiliates Love ClickyTour" />
-          <FeatureGrid items={affiliateBenefits} cols={4} />
+          <SectionTitle
+            eyebrow="Commission Structure"
+            title="Simple, Transparent, Performance-Based"
+          />
+          <CheckList items={commission} />
         </div>
       </section>
 
       <section className="section">
-        <div className="container max-w-4xl">
-          <SectionTitle title="Affiliate FAQ" subtitle="Everything you need before joining." />
-          <FAQ items={faq} />
+        <div className="container">
+          <SectionTitle eyebrow="Who Can Join" title="Built for a Wide Range of Partners" />
+          <FeatureGrid items={whoCanJoin} cols={2} />
+
+          <div className="card p-7 md:p-8 mt-8 bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white">
+            <p className="text-cyan-200 font-semibold text-sm uppercase tracking-[0.08em]">Ready to start?</p>
+            <h3 className="text-3xl font-extrabold mt-2">Become a ClickyTour Affiliate</h3>
+            <p className="text-cyan-100 mt-3 max-w-2xl">
+              Join today, get your referral tools, and start earning from travel and property opportunities.
+            </p>
+            <button className="btn-primary mt-5">Apply for Affiliate Access</button>
+          </div>
         </div>
       </section>
     </PageShell>
