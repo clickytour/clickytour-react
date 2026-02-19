@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
     label: 'Work With Us',
     children: [
       { href: '/work-with-us-quiz/', label: 'Find Your Role - Quiz' },
-      { href: '/find-staff-contractors-job-seekers/', label: 'Job Opportunities' },
+      { href: '/work-with-us-jobs/', label: 'Job Opportunities' },
       { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
     ],
   },
