@@ -13,18 +13,18 @@ const menu = [
 
 export function Header() {
   return (
-    <header className="bg-[#0F2B46] text-white border-b border-cyan-800/50">
-      <div className="container py-4 flex items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={48} height={48} />
+    <header className="bg-[#0F2B46] text-white border-b border-cyan-900/40">
+      <div className="container py-3.5 flex items-center justify-between gap-6">
+        <Link href="/" className="flex items-center gap-2.5">
+          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={44} height={44} />
           <div className="leading-tight">
-            <p className="font-extrabold text-lg">ClickyTour</p>
-            <p className="text-[11px] text-cyan-200">Travel • Real Estate • Services</p>
+            <p className="font-extrabold text-[17px]">ClickyTour</p>
+            <p className="text-[11px] text-cyan-100/80">Travel • Real Estate • Services</p>
           </div>
         </Link>
-        <nav className="hidden lg:flex items-center gap-5 text-sm font-medium">
+        <nav className="hidden lg:flex items-center gap-4 text-[13px] font-semibold">
           {menu.map((item) => (
-            <Link key={item.href} href={item.href} className="text-cyan-50/90 hover:text-white">
+            <Link key={item.href} href={item.href} className="text-cyan-50/90 hover:text-white transition-colors">
               {item.label}
             </Link>
           ))}
@@ -42,15 +42,15 @@ export function Footer() {
     { t: 'Company & Legal', l: ['About ClickyTour', 'Privacy Policy', 'Terms & Conditions', 'Cookie Policy', 'Contact'] },
   ];
   return (
-    <footer className="bg-[#0F2B46] text-white mt-16">
+    <footer className="bg-[#0F2B46] text-white mt-14">
       <div className="section border-b border-cyan-900/40">
-        <div className="container grid md:grid-cols-2 gap-10 items-center">
+        <div className="container grid md:grid-cols-2 gap-8 items-center">
           <div>
             <p className="text-cyan-300 text-sm">Explore Our Platform</p>
-            <h3 className="text-3xl font-extrabold mt-2">One ecosystem for rentals, real estate, and local services.</h3>
-            <p className="text-cyan-100/80 mt-3">Built for guests, owners, providers, agents and property managers.</p>
+            <h3 className="text-[34px] font-extrabold mt-2 max-w-xl">One ecosystem for rentals, real estate, and local services.</h3>
+            <p className="text-cyan-100/80 mt-3 text-[15px]">Built for guests, owners, providers, agents and property managers.</p>
           </div>
-          <div className="flex flex-wrap gap-3 justify-start md:justify-end">
+          <div className="flex flex-wrap gap-2.5 justify-start md:justify-end">
             {menu.slice(1).map((m) => (
               <Link key={m.href} href={m.href} className="pill !bg-cyan-900/40 !text-cyan-100 !border-cyan-700">
                 {m.label}
@@ -59,10 +59,10 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="container py-12 grid md:grid-cols-4 gap-8">
+      <div className="container py-11 grid md:grid-cols-4 gap-8">
         <div>
-          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={72} height={72} />
-          <p className="mt-3 text-cyan-100/90">Where Travelers, Hosts, and Partners Connect.</p>
+          <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={68} height={68} />
+          <p className="mt-3 text-cyan-100/90 text-sm">Where Travelers, Hosts, and Partners Connect.</p>
         </div>
         {cols.map((c) => (
           <div key={c.t}>

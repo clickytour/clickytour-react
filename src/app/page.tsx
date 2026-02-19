@@ -462,12 +462,12 @@ export default function Home() {
 
   return (
     <PageShell>
-      <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-14 md:py-16 transition-all duration-300">
-        <div className="container grid lg:grid-cols-[1.25fr_0.95fr] gap-8 items-start">
+      <section className="bg-gradient-to-r from-[#0F2B46] to-[#123a5d] text-white py-12 md:py-14 transition-all duration-300">
+        <div className="container grid lg:grid-cols-[1.25fr_0.95fr] gap-7 items-start">
           <div>
-            <p className="text-cyan-200 text-sm mb-3">clickytour.club</p>
-            <h1 className="text-4xl md:text-5xl font-extrabold max-w-3xl leading-tight">{data.heroTitle}</h1>
-            <p className="text-cyan-100 mt-4 max-w-2xl">{data.heroSubtitle}</p>
+            <p className="text-cyan-200 text-xs mb-3">clickytour.club</p>
+            <h1 className="text-[48px] md:text-[56px] font-extrabold max-w-3xl leading-[1.08]">{data.heroTitle}</h1>
+            <p className="text-cyan-100 mt-4 max-w-2xl text-[15px]">{data.heroSubtitle}</p>
 
             <div className="flex flex-wrap gap-2 mt-7">
               {roleTabs.map((role) => (
@@ -477,10 +477,10 @@ export default function Home() {
                     setActiveRole(role);
                     setOpenFaq(0);
                   }}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+                  className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
                     activeRole === role
-                      ? 'bg-cyan-400/25 border-cyan-200 text-white'
-                      : 'bg-white/10 border-cyan-300/30 text-cyan-100 hover:bg-white/20'
+                      ? 'bg-cyan-500/25 border-cyan-200 text-white'
+                      : 'bg-white/10 border-cyan-200/35 text-cyan-100 hover:bg-white/20'
                   }`}
                 >
                   {role}
@@ -535,7 +535,7 @@ export default function Home() {
 
       <section className="section section-soft">
         <div className="container">
-          <h2 className="text-3xl font-extrabold">What you get</h2>
+          <h2 className="text-[34px] md:text-[40px] font-extrabold">What you get</h2>
           <div className="grid md:grid-cols-2 gap-3 mt-6">
             {data.whatYouGet.map((item) => (
               <div key={item} className="card p-4 font-medium">✅ {item}</div>
@@ -546,7 +546,7 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <h2 className="text-3xl font-extrabold">{data.nextStepsTitle}</h2>
+          <h2 className="text-[34px] md:text-[40px] font-extrabold">{data.nextStepsTitle}</h2>
           <p className="text-slate-500 mt-2">{data.nextStepsSubtitle}</p>
           <div className="grid md:grid-cols-3 gap-4 mt-6">
             {data.nextSteps.map((step) => (
@@ -562,7 +562,7 @@ export default function Home() {
 
       <section className="section section-soft">
         <div className="container">
-          <h2 className="text-3xl font-extrabold">How it works</h2>
+          <h2 className="text-[34px] md:text-[40px] font-extrabold">How it works</h2>
           <div className="grid md:grid-cols-4 gap-4 mt-6">
             {data.howItWorks.map((item, index) => (
               <article key={item.title} className="card p-5">
@@ -577,7 +577,7 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <h2 className="text-3xl font-extrabold">{data.toolsTitle}</h2>
+          <h2 className="text-[34px] md:text-[40px] font-extrabold">{data.toolsTitle}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
             {data.tools.map((tool) => (
               <article key={tool.title} className="card p-5">
@@ -593,7 +593,7 @@ export default function Home() {
       <section className="section section-soft">
         <div className="container grid lg:grid-cols-2 gap-6 items-center">
           <div>
-            <h2 className="text-3xl font-extrabold">White-label presentations</h2>
+            <h2 className="text-[34px] md:text-[40px] font-extrabold">White-label presentations</h2>
             <p className="text-slate-500 mt-3">Create offers as links or PDFs with your branding (or no branding), ready to share instantly.</p>
             <ul className="space-y-2 text-slate-600 mt-4">
               <li>• Offer links for rentals, services, and real estate</li>
@@ -613,7 +613,7 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <h2 className="text-3xl font-extrabold">Transparent, fair, and simple</h2>
+          <h2 className="text-[34px] md:text-[40px] font-extrabold">Transparent, fair, and simple</h2>
           <div className="grid md:grid-cols-3 gap-4 mt-6">
             {[
               {
@@ -640,7 +640,7 @@ export default function Home() {
 
       <section className="section section-soft">
         <div className="container max-w-4xl">
-          <h2 className="text-3xl font-extrabold">FAQ</h2>
+          <h2 className="text-[34px] md:text-[40px] font-extrabold">FAQ</h2>
           <div className="mt-6 space-y-3">
             {data.faq.map((item, idx) => (
               <div key={item.q} className="card p-4">
@@ -661,7 +661,7 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="card p-7 md:p-9 bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white">
-            <h2 className="text-3xl font-extrabold">{data.ctaTitle}</h2>
+            <h2 className="text-[34px] md:text-[40px] font-extrabold">{data.ctaTitle}</h2>
             <p className="text-cyan-100 mt-2">{data.ctaText}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <button className="btn-primary">{data.ctaButtons[0]}</button>
@@ -676,7 +676,7 @@ export default function Home() {
           <div className="flex flex-wrap justify-between gap-3 items-end">
             <div>
               <p className="text-cyan-700 font-semibold text-sm">Insight</p>
-              <h2 className="text-3xl font-extrabold">Latest Article & News</h2>
+              <h2 className="text-[34px] md:text-[40px] font-extrabold">Latest Article & News</h2>
             </div>
             <button className="btn-secondary">Discover</button>
           </div>
@@ -721,3 +721,4 @@ export default function Home() {
     </PageShell>
   );
 }
+
