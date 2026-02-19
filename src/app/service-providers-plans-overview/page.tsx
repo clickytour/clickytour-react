@@ -2,7 +2,7 @@ import { PageShell } from '@/components/site';
 
 const pageTitle = "Plans Overview";
 
-const pageHtml = "<p>Plans Overview content is coming soon. We are preparing practical guidance, clear next steps, and platform-specific details to help service providers grow on ClickyTour.</p><p>Please check back shortly for the full page content.</p>";
+const pageHtml = `<p>Plans Overview content is coming soon. We are preparing practical guidance, clear next steps, and platform-specific details to help service providers grow on ClickyTour.</p><p>Please check back shortly for the full page content.</p>`;
 
 export default function ServiceProviderSubpage() {
   return (
