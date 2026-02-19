@@ -2,36 +2,42 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
+import { MenuCategory, MenuLink, roleMenus } from './site-menu';
 
-/* ── Nav data ─────────────────────────────────────────── */
-type NavItem = { href: string; label: string; children?: { href: string; label: string }[] };
-
-const navItems: NavItem[] = [
-  { href: '/guests/', label: 'For Guests' },
-  { href: '/owners/', label: 'For Owners' },
-  { href: '/service-providers/', label: 'For Service Providers' },
-  { href: '/agents/', label: 'For Agents' },
-  { href: '/pm-companies/', label: 'For PM Companies' },
+const topNavItems: Array<{
+  href: string;
+  label: string;
+  megaMenu?: MenuCategory[];
+  children?: MenuLink[];
+}> = [
+  { href: '/guests/', label: 'For Guests', megaMenu: roleMenus.guests },
+  { href: '/owners/', label: 'For Owners', megaMenu: roleMenus.owners },
+  { href: '/service-providers/', label: 'For Service Providers', megaMenu: roleMenus.serviceProviders },
+  { href: '/agents/', label: 'For Agents', megaMenu: roleMenus.agents },
+  { href: '/pm-companies/', label: 'For PM Companies', megaMenu: roleMenus.pmCompanies },
   {
     href: '/work-with-us/',
     label: 'Work With Us',
     children: [
       { href: '/work-with-us-quiz/', label: 'Find Your Role - Quiz' },
-      { href: '/work-with-us-jobs/', label: 'Job Opportunities' },
+      { href: '/find-staff-contractors-job-seekers/', label: 'Job Opportunities' },
       { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
     ],
   },
+  { href: '/about/', label: 'About Us' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact Us' },
 ];
 
-/* ── V logo – clean mark without circle ── */
-function VLogo({ className = 'w-7 h-7' }: { className?: string }) {
-  return (
-    <Image src="/assets/v-logo-clean.png" alt="" width={120} height={120} className={className} />
-  );
+function flattenMenu(menu: MenuCategory[]) {
+  return menu.flatMap((category) => category.items);
 }
 
-/* ── Header ────────────────────────────────────────────── */
+function VLogo({ className = 'w-7 h-7' }: { className?: string }) {
+  return <Image src="/assets/v-logo-clean.png" alt="" width={120} height={120} className={className} />;
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [subOpen, setSubOpen] = useState<string | null>(null);
@@ -39,44 +45,74 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-[#0F2B46] text-white">
       <div className="container flex items-center justify-between h-12">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileOpen(false)}>
           <VLogo className="w-9 h-9" />
           <span className="font-bold text-[15px] tracking-tight">ClickyTour</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1 ml-8">
-          {navItems.map((item) =>
-            item.children ? (
-              <div key={item.href} className="relative group">
-                <Link href={item.href} className="px-2.5 py-1.5 text-[12px] font-medium text-cyan-100/90 hover:text-white transition-colors whitespace-nowrap">
-                  {item.label}
-                </Link>
-                <div className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-150 absolute left-0 top-full pt-1 z-50">
-                  <div className="min-w-[220px] rounded-lg border border-cyan-800/50 bg-[#0c2339] py-1 shadow-xl">
-                    {item.children.map((sub) => (
-                      <Link key={sub.href} href={sub.href} className="block px-3.5 py-2 text-[12px] text-cyan-100/90 hover:bg-cyan-500/15 hover:text-white transition-colors">
-                        {sub.label}
-                      </Link>
-                    ))}
+          {topNavItems.map((item) => {
+            if (item.children) {
+              return (
+                <div key={item.href} className="relative group">
+                  <Link href={item.href} className="px-2.5 py-1.5 text-[12px] font-medium text-cyan-100/90 hover:text-white transition-colors whitespace-nowrap">
+                    {item.label}
+                  </Link>
+                  <div className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-150 absolute left-0 top-full pt-1 z-50">
+                    <div className="min-w-[220px] rounded-lg border border-cyan-800/50 bg-[#0c2339] py-1 shadow-xl">
+                      {item.children.map((sub) => (
+                        <Link key={sub.href} href={sub.href} className="block px-3.5 py-2 text-[12px] text-cyan-100/90 hover:bg-cyan-500/15 hover:text-white transition-colors">
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ) : (
+              );
+            }
+
+            if (item.megaMenu) {
+              return (
+                <div key={item.href} className="relative group">
+                  <Link href={item.href} className="px-2.5 py-1.5 text-[12px] font-medium text-cyan-100/90 hover:text-white transition-colors whitespace-nowrap">
+                    {item.label}
+                  </Link>
+                  <div className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-150 absolute left-0 top-full pt-1 z-50">
+                    <div className="w-[760px] rounded-xl border border-cyan-800/50 bg-[#0c2339] p-4 shadow-xl">
+                      <div className="grid grid-cols-3 gap-4">
+                        {item.megaMenu.map((cat) => (
+                          <div key={cat.label}>
+                            <p className="text-[11px] uppercase tracking-wide text-cyan-300 mb-2">{cat.label}</p>
+                            <ul className="space-y-1.5">
+                              {cat.items.slice(0, 6).map((sub) => (
+                                <li key={sub.href}>
+                                  <Link href={sub.href} className="text-[12px] text-cyan-100/90 hover:text-white transition-colors leading-snug">
+                                    {sub.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
               <Link key={item.href} href={item.href} className="px-2.5 py-1.5 text-[12px] font-medium text-cyan-100/90 hover:text-white transition-colors whitespace-nowrap">
                 {item.label}
               </Link>
-            ),
-          )}
+            );
+          })}
         </nav>
 
-        {/* CTA */}
         <Link href="/get-started/" className="hidden lg:inline-flex ml-auto items-center px-4 py-1.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[12px] font-semibold transition-colors whitespace-nowrap">
           Get Started
         </Link>
 
-        {/* Mobile hamburger */}
         <button aria-label="Toggle menu" className="lg:hidden p-2 text-cyan-100" onClick={() => setMobileOpen((v) => !v)}>
           {mobileOpen ? (
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" /></svg>
@@ -86,33 +122,34 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-cyan-900/40 bg-[#0F2B46]">
           <nav className="container py-3 flex flex-col gap-0.5">
-            {navItems.map((item) =>
-              item.children ? (
-                <div key={item.href}>
-                  <button className="w-full flex items-center justify-between px-3 py-2.5 text-[13px] text-cyan-100 font-medium" onClick={() => setSubOpen((v) => (v === item.href ? null : item.href))}>
+            {topNavItems.map((item) => (
+              <div key={item.href}>
+                {(item.children || item.megaMenu) ? (
+                  <>
+                    <button className="w-full flex items-center justify-between px-3 py-2.5 text-[13px] text-cyan-100 font-medium" onClick={() => setSubOpen((v) => (v === item.href ? null : item.href))}>
+                      {item.label}
+                      <svg className={`w-4 h-4 transition-transform ${subOpen === item.href ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
+                    </button>
+                    {subOpen === item.href && (
+                      <div className="pl-4 pb-1">
+                        {(item.children ?? flattenMenu(item.megaMenu || [])).map((sub) => (
+                          <Link key={sub.href} href={sub.href} className="block px-3 py-2 text-[12px] text-cyan-100/80 hover:text-white" onClick={() => setMobileOpen(false)}>
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link href={item.href} className="block px-3 py-2.5 text-[13px] text-cyan-100 font-medium hover:text-white" onClick={() => setMobileOpen(false)}>
                     {item.label}
-                    <svg className={`w-4 h-4 transition-transform ${subOpen === item.href ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
-                  </button>
-                  {subOpen === item.href && (
-                    <div className="pl-4 pb-1">
-                      {item.children.map((sub) => (
-                        <Link key={sub.href} href={sub.href} className="block px-3 py-2 text-[12px] text-cyan-100/80 hover:text-white" onClick={() => setMobileOpen(false)}>
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link key={item.href} href={item.href} className="px-3 py-2.5 text-[13px] text-cyan-100 font-medium hover:text-white" onClick={() => setMobileOpen(false)}>
-                  {item.label}
-                </Link>
-              ),
-            )}
+                  </Link>
+                )}
+              </div>
+            ))}
             <Link href="/get-started/" className="mx-3 mt-2 text-center py-2 rounded-full bg-cyan-500 text-white text-[13px] font-semibold" onClick={() => setMobileOpen(false)}>
               Get Started
             </Link>
@@ -123,7 +160,67 @@ export function Header() {
   );
 }
 
-/* ── Footer ────────────────────────────────────────────── */
+export function SidebarLayout({
+  title,
+  menu,
+  children,
+}: {
+  title: string;
+  menu: MenuCategory[];
+  children: ReactNode;
+}) {
+  const links = useMemo(() => flattenMenu(menu), [menu]);
+  const [mobileTabsOpen, setMobileTabsOpen] = useState(false);
+
+  return (
+    <section className="section pt-8">
+      <div className="container">
+        <div className="lg:hidden mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-semibold text-[#0F2B46]">{title} navigation</p>
+            <button className="text-xs px-3 py-1.5 rounded-full border border-cyan-200 text-cyan-800" onClick={() => setMobileTabsOpen((v) => !v)}>
+              {mobileTabsOpen ? 'Hide menu' : 'Show menu'}
+            </button>
+          </div>
+          {mobileTabsOpen && (
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {links.map((link) => (
+                <Link key={link.href} href={link.href} className="whitespace-nowrap rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="grid lg:grid-cols-[280px_minmax(0,1fr)] gap-8">
+          <aside className="hidden lg:block card p-4 h-max sticky top-16">
+            <p className="text-xs uppercase tracking-wider text-cyan-700 font-semibold mb-3">{title}</p>
+            <div className="space-y-4">
+              {menu.map((category) => (
+                <div key={category.label}>
+                  <p className="text-xs text-slate-500 font-semibold mb-1.5">{category.label}</p>
+                  <ul className="space-y-1.5">
+                    {category.items.map((item) => (
+                      <li key={item.href}>
+                        <Link href={item.href} className="text-sm text-slate-700 hover:text-cyan-700 transition-colors leading-snug">
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </aside>
+
+          <div>{children}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Footer() {
   const footerCols = [
     {
@@ -168,7 +265,6 @@ export function Footer() {
 
   return (
     <footer className="bg-[#0F2B46] text-white mt-14">
-      {/* Row 1: Explore banner */}
       <div className="border-b border-cyan-900/40">
         <div className="container py-10 grid md:grid-cols-2 gap-8 items-center">
           <div>
@@ -186,9 +282,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Row 2: 4-column grid */}
       <div className="container py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {/* Logo column */}
         <div>
           <div className="flex items-center gap-2">
             <VLogo className="w-11 h-11" />
@@ -198,23 +292,8 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-3 text-cyan-100/80 text-sm">Where Travelers, Hosts & Partners Connect</p>
-          <div className="mt-4 flex items-center gap-2.5">
-            <Link href="#" aria-label="Facebook" className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-cyan-800/60 text-cyan-200/80 hover:bg-cyan-800/40 hover:text-white transition-colors text-[11px]">
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-            </Link>
-            <Link href="#" aria-label="Instagram" className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-cyan-800/60 text-cyan-200/80 hover:bg-cyan-800/40 hover:text-white transition-colors">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-            </Link>
-            <Link href="#" aria-label="LinkedIn" className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-cyan-800/60 text-cyan-200/80 hover:bg-cyan-800/40 hover:text-white transition-colors">
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
-            </Link>
-            <Link href="#" aria-label="YouTube" className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-cyan-800/60 text-cyan-200/80 hover:bg-cyan-800/40 hover:text-white transition-colors">
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-            </Link>
-          </div>
         </div>
 
-        {/* Link columns */}
         {footerCols.map((c) => (
           <div key={c.t}>
             <h4 className="font-bold text-sm mb-3 text-cyan-50">{c.t}</h4>
@@ -229,10 +308,7 @@ export function Footer() {
         ))}
       </div>
 
-      {/* Row 3: Copyright */}
-      <div className="border-t border-cyan-900/40 text-cyan-100/60 text-xs py-4 text-center">
-        © 2026 ClickyTour. All rights reserved.
-      </div>
+      <div className="border-t border-cyan-900/40 text-cyan-100/60 text-xs py-4 text-center">© 2026 ClickyTour. All rights reserved.</div>
     </footer>
   );
 }

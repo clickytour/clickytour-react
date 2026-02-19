@@ -1,45 +1,36 @@
-import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import Link from 'next/link';
+import { Hero, PageShell, SectionTitle, SidebarLayout } from '@/components/site';
+import { roleMenus } from '@/components/site-menu';
 
 export default function GuestsPage() {
+  const menu = roleMenus.guests;
+  const links = menu.flatMap((group) => group.items);
+
   return (
     <PageShell>
-      <Hero title="Find your perfect stay in Greece." subtitle="Search villas and apartments with clear pricing and quick filters." ctaA="Book now" ctaB="Request assistance" />
+      <Hero
+        title="Plan your best trip in one place"
+        subtitle="From stays and activities to support and premium planning, explore every guest service from the ClickyTour guest hub."
+        ctaA="Start planning"
+        ctaB="Get assistance"
+      />
 
-      <section className="section">
-        <div className="container card p-5">
-          <div className="flex gap-2 flex-wrap mb-4">{['Rentals', 'Activities', 'Real Estate'].map((x) => <span key={x} className="pill">{x}</span>)}</div>
-          <div className="grid md:grid-cols-4 gap-3">
-            <input className="rounded-xl border border-slate-200 px-4 py-3" placeholder="Destination" />
-            <input className="rounded-xl border border-slate-200 px-4 py-3" placeholder="Check-in / Date" />
-            <input className="rounded-xl border border-slate-200 px-4 py-3" placeholder="Check-out / Guests" />
-            <button className="btn-primary">Search</button>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2">{['Beachfront', 'Private Pool', 'Family Friendly', 'Luxury', 'Pet Friendly', 'Last Minute'].map((x) => <span key={x} className="pill">{x}</span>)}</div>
+      <SidebarLayout title="For Guests" menu={menu}>
+        <SectionTitle
+          eyebrow="Guest Hub"
+          title="Everything for guests"
+          subtitle="Browse all guest sections below. Each card links to a dedicated internal route from the WordPress menu structure."
+        />
+
+        <div className="grid md:grid-cols-2 gap-4">
+          {links.map((item) => (
+            <Link key={item.href} href={item.href} className="card p-5 hover:shadow-md transition-shadow">
+              <h3 className="font-bold text-[#0F2B46]">{item.label}</h3>
+              <p className="text-sm text-slate-500 mt-1">Open {item.label.toLowerCase()} section</p>
+            </Link>
+          ))}
         </div>
-      </section>
-
-      <section className="section section-soft"><div className="container"><SectionTitle title="Vacation Assistance" subtitle="Tell us dates, destination and preferences — we’ll send proposals." /><button className="btn-primary">Request a personalized plan</button></div></section>
-
-      <section className="section"><div className="container"><SectionTitle title="Top rental destinations" />
-        <FeatureGrid items={['Crete','Santorini','Athens','Mykonos','Paros','Halkidiki'].map((d)=>({title:d,desc:'Popular stays, activities and local services.',icon:'📍'}))} />
-      </div></section>
-
-      <section className="section section-soft"><div className="container"><SectionTitle title="Top stays right now" />
-        <FeatureGrid cols={2} items={[
-          {title:'Sea View Villa • Crete',desc:'Private pool, 8 guests, instant booking.',icon:'🏖️'},
-          {title:'Sunset Suite • Santorini',desc:'Caldera view, romantic setup.',icon:'🌅'},
-          {title:'Urban Flat • Athens',desc:'City center, walkable, modern.',icon:'🏙️'},
-          {title:'Cycladic Home • Paros',desc:'Family-friendly, near beach.',icon:'🏡'},
-        ]} />
-      </div></section>
-
-      <section className="section"><div className="container"><SectionTitle title="Deals & offers" /><FeatureGrid cols={3} items={[{title:'Last Minute Deals',desc:'Book quickly with discounted rates.',icon:'🔥'},{title:'Hot Offers',desc:'Weekly curated offers across islands.',icon:'🎁'},{title:'Group Packages',desc:'Bundles for friends and family trips.',icon:'👨‍👩‍👧‍👦'}]} /></div></section>
-
-      <section className="section section-soft"><div className="container"><SectionTitle title="Activities" /><FeatureGrid items={[{title:'Boat Trips',desc:'Daily cruises and private charters.',icon:'⛵'},{title:'Food & Wine',desc:'Tastings and local gastronomy routes.',icon:'🍷'},{title:'Wellness',desc:'Spa, yoga, and relaxation experiences.',icon:'🧘'},{title:'Transfers',desc:'Airport and island transportation.',icon:'🚐'},{title:'Adventure',desc:'Hiking, diving and outdoor activities.',icon:'🥾'},{title:'Cultural Tours',desc:'Guided history and village tours.',icon:'🏛️'}]} /></div></section>
-
-      <section className="section"><div className="container"><SectionTitle title="How booking works" />
-      <FeatureGrid cols={4} items={[{title:'Search',desc:'Choose destination and dates.',icon:'1️⃣'},{title:'Compare',desc:'Filter by features and price.',icon:'2️⃣'},{title:'Book',desc:'Secure reservation in a few clicks.',icon:'3️⃣'},{title:'Support',desc:'Get help before and during your stay.',icon:'4️⃣'}]} />
-      </div></section>
+      </SidebarLayout>
     </PageShell>
   );
 }

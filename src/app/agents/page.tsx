@@ -1,38 +1,42 @@
-import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import Link from 'next/link';
+import { Hero, PageShell, SectionTitle, SidebarLayout } from '@/components/site';
+import { roleMenus } from '@/components/site-menu';
 
 export default function AgentsPage() {
+  const menu = roleMenus.agents;
+
   return (
     <PageShell>
-      <Hero title="Work Smarter. Sell More. Earn More." subtitle="ClickyTour connects you to rentals, tours/activities, and real estate — plus tools to package, present, and close faster." ctaA="Join as agent" ctaB="Book demo" />
+      <Hero
+        title="Agent hub for bookings, offers, and growth"
+        subtitle="Access agent workflows for booking, real estate, toolkits, promotion, and support in one unified navigation system."
+        ctaA="Join as agent"
+        ctaB="Explore tools"
+      />
 
-      <section className="section"><div className="container"><SectionTitle title="Why Agents Choose ClickyTour" />
-      <FeatureGrid cols={3} items={[{title:'Access all listings',desc:'Rentals, real estate and services in one system.',icon:'🧭'},{title:'Instant white-label offers',desc:'Branded or no-logo quotes in one click.',icon:'📄'},{title:'Net pricing',desc:'Book at agent rates and earn your margin.',icon:'💰'}]} /></div></section>
+      <SidebarLayout title="For Agents" menu={menu}>
+        <SectionTitle
+          eyebrow="Agents Hub"
+          title="Everything agents need"
+          subtitle="Use category-based sections to jump directly to booking paths, tools, and support routes."
+        />
 
-      <section className="section section-soft"><div className="container"><SectionTitle title="How it works" subtitle="Search → Select → Send → Earn" />
-      <FeatureGrid cols={4} items={[{title:'Search',desc:'Advanced search across verticals.',icon:'1️⃣'},{title:'Select',desc:'Build multi-product proposals.',icon:'2️⃣'},{title:'Send',desc:'Generate PDF or share link instantly.',icon:'3️⃣'},{title:'Earn',desc:'Complete bookings and track payouts.',icon:'4️⃣'}]} /></div></section>
-
-      <section className="section"><div className="container"><SectionTitle title="Agent Tools" />
-      <FeatureGrid cols={3} items={[
-        {title:'Advanced Search',desc:'Filter by type, location, dates and budget.',icon:'🔎',tag:'Rentals • Services • Real Estate'},
-        {title:'Quotation Builder',desc:'Create white-label quotes in seconds.',icon:'🧾',tag:'PDF • Link • Brand'},
-        {title:'Dashboard',desc:'Track clients, offers, bookings and commissions.',icon:'📊',tag:'Clients • Commissions'},
-        {title:'White-label Payments',desc:'Secure, trackable payment workflows.',icon:'💳',tag:'Secure • Partner-ready'},
-        {title:'Promotion Tools',desc:'Email + social templates and reusable assets.',icon:'📣',tag:'Templates'},
-        {title:'Direct Role Access',desc:'Communicate with owners, PMCs and providers.',icon:'🤝',tag:'Unified access'},
-      ]} /></div></section>
-
-      <section className="section section-soft"><div className="container"><SectionTitle title="Operations support" subtitle="Find local support staff & contractors for tours, transfers, and vacation bookings." /><button className="btn-primary">Request support</button></div></section>
-
-      <section className="section"><div className="container card p-5"><SectionTitle title="Partner wizard" subtitle="Request partnership, find staff, or submit an advanced request on behalf of customers." /><div className="grid md:grid-cols-3 gap-3"><input className="rounded-xl border border-slate-200 px-4 py-3" placeholder="Agency / Name"/><input className="rounded-xl border border-slate-200 px-4 py-3" placeholder="Email"/><input className="rounded-xl border border-slate-200 px-4 py-3" placeholder="Request type"/></div><button className="btn-primary mt-4">Continue</button></div></section>
-
-      <section className="section section-soft"><div className="container"><SectionTitle title="Agent Plans & Pricing" />
-      <FeatureGrid cols={3} items={[{title:'Free Access',desc:'Limited listings, test workflow.',icon:'🆓'},{title:'Pro Plan',desc:'Full toolkit, net pricing, branded quotes.',icon:'⭐'},{title:'Commission Model',desc:'No subscription — pay per booking.',icon:'📈'}]} /></div></section>
-
-      <section className="section"><div className="container"><SectionTitle title="Why Choose Us" />
-      <FeatureGrid cols={3} items={[{title:'Cleaner workflow',desc:'Search → select → offer → book in one place.',icon:'⚡'},{title:'Client-ready presentation',desc:'Professional output that closes faster.',icon:'🎯'},{title:'Multi-vertical access',desc:'Travel + services + real estate ecosystem.',icon:'🌐'}]} /></div></section>
-
-      <section className="section section-soft"><div className="container"><SectionTitle eyebrow="Insight" title="Latest articles & news" />
-      <FeatureGrid cols={2} items={[{title:'A Coastal Gem Surrounded by Beauty',desc:'January 30, 2026',icon:'📰'},{title:'Platform updates',desc:'New tools, partner rules and improvements.',icon:'🚀'}]} /></div></section>
+        <div className="space-y-8">
+          {menu.map((category) => (
+            <section key={category.label}>
+              <h3 className="text-xl font-bold text-[#0F2B46] mb-3">{category.label}</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {category.items.map((item) => (
+                  <Link key={item.href} href={item.href} className="card p-5 hover:shadow-md transition-shadow">
+                    <h4 className="font-bold text-[#0F2B46]">{item.label}</h4>
+                    <p className="text-sm text-slate-500 mt-1">Open {item.label.toLowerCase()}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </SidebarLayout>
     </PageShell>
   );
 }
