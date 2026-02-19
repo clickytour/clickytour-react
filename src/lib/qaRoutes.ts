@@ -17,6 +17,7 @@ const staticRoutes: QARoute[] = [
   { href: "/services/airport-transfer-halkidiki", label: "Service Post (Sample)", group: "Company & Utility", status: "Pending QA" },
   { href: "/my-reservations", label: "My Reservations", group: "Company & Utility", status: "Pending QA" },
   { href: "/all-pages", label: "All Pages (QA)", group: "Company & Utility", status: "Pending QA" },
+  { href: "/qa", label: "QA Hub", group: "Company & Utility", status: "Pending QA" },
   { href: "/qa/search-tracking", label: "QA: Search Tracking Live Feed", group: "Company & Utility", status: "Pending QA" },
   { href: "/search", label: "Search Hub (Full)", group: "For Guests", status: "Pending QA" },
   { href: "/search?intent=vacation", label: "Search Hub: Vacation Rentals", group: "For Guests", status: "Pending QA" },
@@ -40,6 +41,7 @@ const staticRoutes: QARoute[] = [
   { href: "/contact", label: "Contact Us", group: "Company & Utility", status: "Pending QA" },
   { href: "/terms", label: "Terms & Conditions", group: "Company & Utility", status: "Pending QA" },
   { href: "/privacy", label: "Privacy Policy", group: "Company & Utility", status: "Pending QA" },
+  { href: "/privacy-policy", label: "Privacy Policy (Alt Route)", group: "Company & Utility", status: "Pending QA" },
   { href: "/cookies", label: "Cookie Policy", group: "Company & Utility", status: "Pending QA" },
   { href: "/testimonials", label: "Testimonials / Reviews", group: "For Guests", status: "Pending QA" },
 
@@ -69,6 +71,12 @@ const staticRoutes: QARoute[] = [
   { href: "/proposal/demo-nologo-hotel", label: "Proposal: No-logo Hotel Rooms", group: "Templates", status: "Pending QA" },
   { href: "/proposal/demo-nologo-realestate", label: "Proposal: No-logo Real Estate", group: "Templates", status: "Pending QA" },
   { href: "/proposal/demo-nologo-service", label: "Proposal: No-logo Services", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-individual?template=modern", label: "Proposal Template: Modern", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-individual?template=document", label: "Proposal Template: Document", group: "Templates", status: "Pending QA" },
+  { href: "/proposal/demo-brand-individual?template=magazine", label: "Proposal Template: Magazine", group: "Templates", status: "Pending QA" },
+  { href: "/pickedfor/detail", label: "PickedFor Detail Index", group: "Templates", status: "Pending QA" },
+  { href: "/pickedfor/detail/villa-sapphire?mode=brand", label: "PickedFor Detail (Brand)", group: "Templates", status: "Pending QA" },
+  { href: "/pickedfor/detail/villa-sapphire?mode=nologo", label: "PickedFor Detail (No-logo)", group: "Templates", status: "Pending QA" },
 
   { href: "/property/villa-glarokavos-sea-view", label: "Canonical Property Details (Core Mirror)", group: "Templates", status: "Pending QA" },
   { href: "/property/vacation/villa-glarokavos-sea-view", label: "Canonical Vacation Property (Type Route)", group: "Templates", status: "Pending QA" },
