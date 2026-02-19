@@ -1,27 +1,45 @@
-"use client";
-
-import { useParams, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getProposalById } from "@/lib/proposalMockData";
 import { getVilla4youProposalById } from "@/lib/villa4youProposalBridge";
 import { ModernTemplate } from "@/components/pickedfor/templates/ModernTemplate";
 import { DocumentTemplate } from "@/components/pickedfor/templates/DocumentTemplate";
 import { MagazineTemplate } from "@/components/pickedfor/templates/MagazineTemplate";
 
-function ProposalContent() {
-  const params = useParams();
-  const searchParams = useSearchParams();
-  const id = params.id as string;
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://staging.villa4you.gr";
 
-  // Try villa4you proposals first (Core Mirror data), then fall back to pickedfor demos
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
   const proposal = getVilla4youProposalById(id) ?? getProposalById(id);
-  const [fallbackHref, setFallbackHref] = useState("/proposal");
 
-  useEffect(() => {
-    if (window.location.hostname.includes("pickedfor")) {
-      setFallbackHref("/");
-    }
-  }, []);
+  if (!proposal) {
+    return { title: "Proposal Not Found | Villa4You" };
+  }
+
+  return {
+    title: `${proposal.title} | Proposal | Villa4You`,
+    description: proposal.subtitle || `View proposal: ${proposal.title}`,
+    alternates: {
+      canonical: `${baseUrl}/proposal/${id}`,
+    },
+  };
+}
+
+export default async function ProposalPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ mode?: string; template?: string }>;
+}) {
+  const { id } = await params;
+  const sp = await searchParams;
+
+  const proposal = getVilla4youProposalById(id) ?? getProposalById(id);
 
   if (!proposal) {
     return (
@@ -29,7 +47,9 @@ function ProposalContent() {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-400 mb-2">404</h1>
           <p className="text-gray-500">Proposal not found.</p>
-          <a href={fallbackHref} className="mt-4 inline-block text-blue-600 hover:underline text-sm">← Back</a>
+          <a href="/proposal" className="mt-4 inline-block text-blue-600 hover:underline text-sm">
+            ← Back
+          </a>
         </div>
       </div>
     );
@@ -37,9 +57,9 @@ function ProposalContent() {
 
   // Villa4you proposals are ALWAYS brand mode
   const isVilla4you = id.startsWith("v4y-");
-  const modeOverride = searchParams.get("mode") as "brand" | "nologo" | null;
+  const modeOverride = sp.mode as "brand" | "nologo" | null;
   const mode = isVilla4you ? "brand" : (modeOverride ?? proposal.mode);
-  const template = (searchParams.get("template") ?? "modern") as "modern" | "document" | "magazine";
+  const template = (sp.template ?? "modern") as "modern" | "document" | "magazine";
 
   switch (template) {
     case "document":
@@ -49,12 +69,4 @@ function ProposalContent() {
     default:
       return <ModernTemplate proposal={proposal} mode={mode} />;
   }
-}
-
-export default function ProposalPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading…</div>}>
-      <ProposalContent />
-    </Suspense>
-  );
 }
