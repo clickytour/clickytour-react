@@ -41,7 +41,7 @@ export function Header() {
       <div className="container flex items-center justify-between h-12">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileOpen(false)}>
-          <VLogo className="w-7 h-7" />
+          <VLogo className="w-9 h-9" />
           <span className="font-bold text-[15px] tracking-tight">ClickyTour</span>
         </Link>
 
@@ -191,7 +191,7 @@ export function Footer() {
         {/* Logo column */}
         <div>
           <div className="flex items-center gap-2">
-            <VLogo className="w-9 h-9" />
+            <VLogo className="w-11 h-11" />
             <div>
               <p className="font-bold text-lg">ClickyTour</p>
               <p className="text-[11px] text-cyan-100/70">Travel • Real Estate • Services</p>
