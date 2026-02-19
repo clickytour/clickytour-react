@@ -25,6 +25,9 @@ const menu: NavItem[] = [
       { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
     ],
   },
+  { href: '/about/', label: 'About Us' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact Us' },
 ];
 
 const footerRoleLinks = [
@@ -193,7 +196,13 @@ export function Footer() {
 
       <div className="container py-11 grid sm:grid-cols-2 lg:grid-cols-4 gap-9">
         <div>
-          <Image src="/assets/footer-logo.png" alt="ClickyTour" width={412} height={104} className="w-[210px] h-auto" />
+          <div className="flex items-center gap-3">
+            <Image src="/assets/Transparent-Logo-1-e1752933596331.png" alt="ClickyTour" width={100} height={100} className="w-14 h-14" />
+            <div>
+              <p className="font-extrabold text-xl">ClickyTour</p>
+              <p className="text-[12px] text-cyan-100/80">Travel • Real Estate • Services</p>
+            </div>
+          </div>
           <p className="mt-4 text-cyan-100/90 text-sm">Where Travelers, Hosts & Partners Connect</p>
           <div className="mt-4 flex items-center gap-3">
             <Link href="/language/" aria-label="Language" className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cyan-700 text-cyan-100 hover:bg-cyan-800/50">🌐</Link>
