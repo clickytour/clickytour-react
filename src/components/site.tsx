@@ -244,13 +244,19 @@ export function Footer() {
       ],
     },
     {
-      t: 'Company & Legal',
+      t: 'Company',
       l: [
         { href: '/about/', label: 'About ClickyTour' },
-        { href: '/privacy-policy/', label: 'Privacy Policy' },
-        { href: '/terms/', label: 'Terms & Conditions' },
-        { href: '/cookie-policy/', label: 'Cookie Policy' },
         { href: '/contact/', label: 'Contact' },
+        { href: '/blog/', label: 'News & Updates' },
+      ],
+    },
+    {
+      t: 'Legal',
+      l: [
+        { href: '/privacy-policy/', label: 'Privacy Policy' },
+        { href: '/general-terms/', label: 'General Terms' },
+        { href: '/gdpr-compliance/', label: 'GDPR Compliance' },
       ],
     },
   ];
@@ -282,7 +288,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container py-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
         <div>
           <div className="flex items-center gap-2">
             <VLogo className="w-11 h-11" />
