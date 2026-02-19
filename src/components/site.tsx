@@ -24,13 +24,10 @@ const navItems: NavItem[] = [
   },
 ];
 
-/* ── V logo as inline SVG (no circle, just the mark) ── */
+/* ── V logo from designed asset ── */
 function VLogo({ className = 'w-7 h-7' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 200 200" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M100 170 L30 55 L58 55 L100 132 L142 55 L170 55 Z" />
-      <path d="M130 55 Q145 55 155 45 Q148 55 142 55 Z" opacity="0.7" />
-    </svg>
+    <Image src="/assets/v-logo.jpg" alt="" width={80} height={80} className={`${className} rounded-full object-cover`} />
   );
 }
 
@@ -44,7 +41,7 @@ export function Header() {
       <div className="container flex items-center justify-between h-12">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileOpen(false)}>
-          <span className="text-cyan-400"><VLogo className="w-6 h-6" /></span>
+          <VLogo className="w-7 h-7" />
           <span className="font-bold text-[15px] tracking-tight">ClickyTour</span>
         </Link>
 
@@ -194,7 +191,7 @@ export function Footer() {
         {/* Logo column */}
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-cyan-400"><VLogo className="w-8 h-8" /></span>
+            <VLogo className="w-9 h-9" />
             <div>
               <p className="font-bold text-lg">ClickyTour</p>
               <p className="text-[11px] text-cyan-100/70">Travel • Real Estate • Services</p>
