@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestPremiumDiagram } from '@/components/diagrams';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
 
 const offerTypes = [
@@ -16,6 +17,8 @@ export default function GuestsPlansOffersPage() {
         ctaA="Browse offers"
         ctaB="Request custom plan"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestPremiumDiagram /></div></section>
 
       <section className="section">
         <div className="container">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { TripPlannerDiagram } from '@/components/diagrams';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
 
 const topDestinations = [
@@ -17,6 +18,8 @@ export default function TripPlanerPage() {
         ctaA="Start planning"
         ctaB="View destinations"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><TripPlannerDiagram /></div></section>
 
       <section className="section">
         <div className="container">

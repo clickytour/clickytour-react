@@ -1,4 +1,5 @@
 import { Hero, PageShell, SectionTitle } from '@/components/site';
+import { ContactDiagram } from '@/components/diagrams';
 
 const ticketCategories = [
   'Account Access',
@@ -18,6 +19,8 @@ export default function SupportPage() {
         ctaA="Submit Ticket"
         ctaB="Visit Help Center"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><ContactDiagram /></div></section>
 
       <section className="section section-soft">
         <div className="container max-w-4xl">

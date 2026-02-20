@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestPremiumDiagram } from '@/components/diagrams';
 import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
 const premiumBenefits = [
@@ -18,6 +19,8 @@ export default function GuestsPremiumTravelPlanPage() {
         ctaA="Request premium planning"
         ctaB="Compare planning options"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestPremiumDiagram /></div></section>
 
       <section className="section">
         <div className="container">

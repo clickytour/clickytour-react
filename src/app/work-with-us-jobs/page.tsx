@@ -1,4 +1,5 @@
 import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import { WorkWithUsDiagram } from '@/components/diagrams';
 
 const jobCategories = [
   {
@@ -72,6 +73,8 @@ export default function WorkWithUsJobsPage() {
         ctaA="View Opportunities"
         ctaB="Submit Your Profile"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><WorkWithUsDiagram /></div></section>
 
       <section className="section">
         <div className="container">

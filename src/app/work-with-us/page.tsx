@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { WorkWithUsDiagram } from '@/components/diagrams';
 import { PageShell } from '@/components/site';
 
 const roles = [
@@ -27,6 +28,8 @@ export default function WorkWithUsPage() {
           </p>
         </div>
       </section>
+
+      <section className="section"><div className="container max-w-lg mx-auto"><WorkWithUsDiagram /></div></section>
 
       <section className="py-14">
         <div className="container max-w-5xl">

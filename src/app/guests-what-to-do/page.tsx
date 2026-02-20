@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestServicesDiagram } from '@/components/diagrams';
 import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
 const categories = [
@@ -25,6 +26,8 @@ export default function GuestsWhatToDoPage() {
         ctaA="Explore categories"
         ctaB="Request suggestions"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestServicesDiagram /></div></section>
 
       <section className="section">
         <div className="container">

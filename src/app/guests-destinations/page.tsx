@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestServicesDiagram } from '@/components/diagrams';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
 
 const destinations = [
@@ -19,6 +20,8 @@ export default function GuestsDestinationsPage() {
         ctaA="Browse by destination"
         ctaB="Ask for recommendations"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestServicesDiagram /></div></section>
 
       <section className="section">
         <div className="container">

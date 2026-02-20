@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AboutPlatformDiagram } from '@/components/diagrams';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
 
 const categories = ['All', 'Travel Tips', 'Property Growth', 'Hospitality Ops', 'Affiliate & Marketing', 'Company News'];
@@ -51,6 +52,8 @@ export default function BlogPage() {
         ctaA="Read Latest"
         ctaB="Explore Categories"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><AboutPlatformDiagram /></div></section>
 
       <section className="section section-soft">
         <div className="container grid lg:grid-cols-[260px_minmax(0,1fr)] gap-6">

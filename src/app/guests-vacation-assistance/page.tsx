@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestPlanningDiagram } from '@/components/diagrams';
 import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
 const assistanceAreas = [
@@ -25,6 +26,8 @@ export default function GuestsVacationAssistancePage() {
         ctaA="Request assistance"
         ctaB="Browse rentals"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestPlanningDiagram /></div></section>
 
       <section className="section">
         <div className="container">

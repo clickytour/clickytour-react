@@ -1,4 +1,5 @@
 import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import { AffiliateDiagram } from '@/components/diagrams';
 
 const howItWorks = [
   {
@@ -41,6 +42,8 @@ export default function WorkWithUsAffiliatePage() {
         ctaA="Join as Affiliate"
         ctaB="View Commission Plans"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><AffiliateDiagram /></div></section>
 
       <section className="section">
         <div className="container">

@@ -1,4 +1,5 @@
 import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
+import { AboutPlatformDiagram } from '@/components/diagrams';
 
 const platformAreas = [
   {
@@ -48,6 +49,8 @@ export default function AboutPage() {
         ctaA="Explore the Platform"
         ctaB="Talk to Our Team"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><AboutPlatformDiagram /></div></section>
 
       <section className="section">
         <div className="container grid lg:grid-cols-2 gap-8 items-start">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ContactDiagram } from '@/components/diagrams';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
 
 export default function ContactPage() {
@@ -10,6 +11,8 @@ export default function ContactPage() {
         ctaA="Send Message"
         ctaB="Open Support Ticket"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><ContactDiagram /></div></section>
 
       <section className="section">
         <div className="container grid md:grid-cols-3 gap-4">

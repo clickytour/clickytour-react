@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestBookingFlowDiagram } from '@/components/diagrams';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
 
 export default function GuestsHelpHowBookingWorksPage() {
@@ -10,6 +11,8 @@ export default function GuestsHelpHowBookingWorksPage() {
         ctaA="Start a request"
         ctaB="Contact support"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestBookingFlowDiagram /></div></section>
 
       <section className="section">
         <div className="container">

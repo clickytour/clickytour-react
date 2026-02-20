@@ -52,3 +52,16 @@ export { default as OwnerInvestDiagram } from "./OwnerInvestDiagram";
 export { default as OwnerPlansDiagram } from "./OwnerPlansDiagram";
 export { default as OwnerBecomeAgentDiagram } from "./OwnerBecomeAgentDiagram";
 export { default as OwnerRequestProposalsDiagram } from "./OwnerRequestProposalsDiagram";
+
+// Guest Diagrams
+export { default as GuestBookingFlowDiagram } from "./GuestBookingFlowDiagram";
+export { default as GuestPlanningDiagram } from "./GuestPlanningDiagram";
+export { default as GuestServicesDiagram } from "./GuestServicesDiagram";
+export { default as GuestPremiumDiagram } from "./GuestPremiumDiagram";
+export { default as TripPlannerDiagram } from "./TripPlannerDiagram";
+
+// General Pages
+export { default as WorkWithUsDiagram } from "./WorkWithUsDiagram";
+export { default as AffiliateDiagram } from "./AffiliateDiagram";
+export { default as AboutPlatformDiagram } from "./AboutPlatformDiagram";
+export { default as ContactDiagram } from "./ContactDiagram";

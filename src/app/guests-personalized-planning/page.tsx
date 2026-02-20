@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestPlanningDiagram } from '@/components/diagrams';
 import { CheckList, Hero, PageShell, SectionTitle } from '@/components/site';
 
 const benefits = [
@@ -24,6 +25,8 @@ export default function GuestsPersonalizedPlanningPage() {
         ctaA="Start planning"
         ctaB="See how it works"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestPlanningDiagram /></div></section>
 
       <section className="section">
         <div className="container">

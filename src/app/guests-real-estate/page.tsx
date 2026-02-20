@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GuestServicesDiagram } from '@/components/diagrams';
 import { FeatureGrid, Hero, PageShell, SectionTitle } from '@/components/site';
 
 const reasons = [
@@ -24,6 +25,8 @@ export default function GuestsRealEstatePage() {
         ctaA="Browse properties"
         ctaB="Request property match"
       />
+
+      <section className="section"><div className="container max-w-lg mx-auto"><GuestServicesDiagram /></div></section>
 
       <section className="section">
         <div className="container">
