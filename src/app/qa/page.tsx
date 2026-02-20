@@ -58,6 +58,31 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
   { label: 'Forms & Apps', icon: '📝', routes: [
     'request-form','appointment','application-detail','submission-viewer',
   ]},
+  { label: 'Dynamic: Property Detail', icon: '🔗', routes: [
+    'property/vacation/villa-azure-halkidiki','property/vacation/villa-azure-halkidiki/sale','property/vacation/villa-azure-halkidiki/monthly',
+    'property/vacation/seaside-apartment-corfu',
+    'property/real-estate/crete-stone-house','property/real-estate/crete-stone-house/sale','property/real-estate/crete-stone-house/monthly','property/real-estate/crete-stone-house/vacation',
+  ]},
+  { label: 'Dynamic: Hotel & Room Detail', icon: '🏨', routes: [
+    'property/hotel/aegean-breeze-hotel','property/hotel/aegean-breeze-hotel/sale','property/hotel/aegean-breeze-hotel/monthly',
+    'property/hotel-room/aegean-deluxe-suite','property/hotel-room/aegean-standard-room',
+  ]},
+  { label: 'Dynamic: Service Detail', icon: '🔧', routes: [
+    'service/airport-transfer-halkidiki','service/villa-cleaning-pro','service/private-chef-corfu',
+  ]},
+  { label: 'Dynamic: Blog Posts', icon: '📰', routes: [
+    'blog/best-coastal-towns-halkidiki','blog/property-investment-crete-2026','blog/how-agents-earn-with-clickytour',
+  ]},
+  { label: 'Dynamic: Job Listings', icon: '💼', routes: [
+    'job/hospitality-manager-halkidiki','job/maintenance-technician-corfu','job/portfolio-manager-athens',
+  ]},
+  { label: 'Dynamic: Agent & PMC Profiles', icon: '👤', routes: [
+    'agent/elena-travel-halkidiki','agent/marco-adventures-crete',
+    'pmc/aegean-property-management','pmc/island-stays-corfu',
+  ]},
+  { label: 'Dynamic: Search Hub', icon: '🔍', routes: [
+    'search',
+  ]},
 ];
 
 const totalPages = sections.reduce((a, s) => a + s.routes.length, 0);
