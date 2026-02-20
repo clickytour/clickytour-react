@@ -259,21 +259,35 @@ export function Footer() {
       ],
     },
     {
-      t: 'Resources & Help',
+      t: 'Explore',
       l: [
-        { href: '/help/', label: 'Help Center' },
-        { href: '/faq/', label: 'FAQ' },
-        { href: '/support/', label: 'Support Tickets' },
-        { href: '/work-with-us-affiliate/', label: 'Affiliate FAQ' },
-        { href: '/blog/', label: 'Blog & Updates' },
+        { href: '/tours-activities/', label: 'Tours & Activities' },
+        { href: '/vacation-rentals/', label: 'Vacation Rentals' },
+        { href: '/offers/', label: 'Offers & Deals' },
+        { href: '/real-estate/', label: 'Real Estate' },
+        { href: '/destinations-2/', label: 'Destinations' },
+        { href: '/marketplace/', label: 'Marketplace' },
+      ],
+    },
+    {
+      t: 'Find Staff & Jobs',
+      l: [
+        { href: '/find-staff/', label: 'Find Staff' },
+        { href: '/find-staff-contractors-job-seekers/', label: 'Job Seekers' },
+        { href: '/find-staff-contractors-directory/', label: 'Staff Directory' },
+        { href: '/find-staff-contractors-quick-request/', label: 'Quick Request' },
+        { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
       ],
     },
     {
       t: 'Company',
       l: [
         { href: '/about/', label: 'About ClickyTour' },
+        { href: '/team/', label: 'Our Team' },
         { href: '/contact/', label: 'Contact' },
-        { href: '/blog/', label: 'News & Updates' },
+        { href: '/blog/', label: 'Blog & News' },
+        { href: '/general-faq/', label: 'FAQ' },
+        { href: '/support/', label: 'Help & Support' },
       ],
     },
     {
