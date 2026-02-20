@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from 'react';
-import { PageShell } from '@/components/site';
+import { useMemo, useState, useEffect } from 'react';
+import { PageShell, useNavScopeOverride } from '@/components/site';
 import { HomepageMiniForm, mapTabToMiniRole, mapMiniRoleToTab } from '@/components/forms/HomepageMiniForm';
 import type { MiniFormRoleKey } from '@/components/forms/HomepageMiniForm';
 
@@ -534,6 +534,39 @@ const guestSubContent: Record<string, Partial<RoleData>> = {
   },
 };
 
+/* Map homepage role tab → nav scope key */
+const roleToNavScope: Record<string, string> = {
+  Guest: 'guests',
+  'Vacation Owner': 'owners',
+  'Real Estate Owner': 'owners',
+  'Service Provider': 'serviceProviders',
+  Agent: 'agents',
+  'PM Company': 'pmCompanies',
+  'Job Seeker': 'findStaff',
+  'Media & Partners': '',
+};
+
+/* Map mini-form guest sub-roles → nav scope (all map to guests) */
+const miniRoleToNavScope: Record<string, string> = {
+  'guest-vacation': 'guests',
+  'guest-tours': 'guests',
+  'guest-real-estate': 'guests',
+};
+
+function NavScopeSync({ activeRole, activeMiniRole }: { activeRole: RoleKey | null; activeMiniRole: string | null }) {
+  const { setOverride } = useNavScopeOverride();
+  useEffect(() => {
+    if (activeMiniRole && miniRoleToNavScope[activeMiniRole]) {
+      setOverride(miniRoleToNavScope[activeMiniRole]);
+    } else if (activeRole) {
+      setOverride(roleToNavScope[activeRole] || null);
+    } else {
+      setOverride(null);
+    }
+  }, [activeRole, activeMiniRole, setOverride]);
+  return null;
+}
+
 export default function Home() {
   const [activeRole, setActiveRole] = useState<RoleKey | null>(null);
   const [activeMiniRole, setActiveMiniRole] = useState<string | null>(null);
@@ -551,6 +584,7 @@ export default function Home() {
 
   return (
     <PageShell>
+      <NavScopeSync activeRole={activeRole} activeMiniRole={activeMiniRole} />
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#123a5d] text-white py-12 md:py-14 transition-all duration-300">
         <div className="container grid lg:grid-cols-[1.25fr_0.95fr] gap-7 items-start">
           <div>

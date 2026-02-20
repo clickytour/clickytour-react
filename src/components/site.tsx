@@ -3,8 +3,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
 import { MenuCategory, MenuLink, roleMenus } from './site-menu';
+
+/* ── Nav Scope Override Context ── */
+type NavScopeOverrideCtx = { override: string | null; setOverride: (v: string | null) => void };
+const NavScopeOverrideContext = createContext<NavScopeOverrideCtx>({ override: null, setOverride: () => {} });
+export function NavScopeOverrideProvider({ children }: { children: ReactNode }) {
+  const [override, setOverride] = useState<string | null>(null);
+  return <NavScopeOverrideContext.Provider value={{ override, setOverride }}>{children}</NavScopeOverrideContext.Provider>;
+}
+export function useNavScopeOverride() { return useContext(NavScopeOverrideContext); }
 
 const topNavItems: Array<{
   href: string;
@@ -286,6 +295,10 @@ const scopedNavs: Record<string, NavScope> = {
 
 function useNavScope(): { scoped: boolean; scope: NavScope | null; key: string } {
   const pathname = usePathname();
+  const { override } = useContext(NavScopeOverrideContext);
+  if (override && scopedNavs[override as keyof typeof scopedNavs]) {
+    return { scoped: true, scope: scopedNavs[override as keyof typeof scopedNavs], key: override };
+  }
   if (pathname.startsWith('/guests') || pathname.startsWith('/guest-service')) return { scoped: true, scope: scopedNavs.guests, key: 'guests' };
   if (pathname.startsWith('/owners') || pathname.startsWith('/vacation-owners')) return { scoped: true, scope: scopedNavs.owners, key: 'owners' };
   if (pathname.startsWith('/service-providers')) return { scoped: true, scope: scopedNavs.serviceProviders, key: 'serviceProviders' };
@@ -536,6 +549,7 @@ type FooterContext = { hero: FooterHero; cols: FooterCol[] };
 
 function useContextualFooter(): FooterContext {
   const pathname = usePathname();
+  const { override } = useContext(NavScopeOverrideContext);
 
   const fixed = [
     {
@@ -781,14 +795,16 @@ function useContextualFooter(): FooterContext {
     { href: '/guests/', label: 'For Guests' }, { href: '/owners/', label: 'For Owners' }, { href: '/service-providers/', label: 'For Service Providers' }, { href: '/agents/', label: 'For Agents' }, { href: '/pm-companies/', label: 'For PM Companies' },
   ]};
 
-  let key = '';
-  if (pathname.startsWith('/guests')) key = 'guests';
-  else if (pathname.startsWith('/owners')) key = 'owners';
-  else if (pathname.startsWith('/service-providers')) key = 'serviceProviders';
-  else if (pathname.startsWith('/agents')) key = 'agents';
-  else if (pathname.startsWith('/pm-companies') || pathname.startsWith('/management')) key = 'pmCompanies';
-  else if (pathname.startsWith('/find-staff') || pathname.startsWith('/job-seeker') || pathname.startsWith('/list-cv') || pathname.startsWith('/my-applications') || pathname.startsWith('/request-')) key = 'findStaff';
-  else if (pathname.startsWith('/tours') || pathname.startsWith('/activities') || pathname.startsWith('/offers') || pathname.startsWith('/vacation-rental') || pathname.startsWith('/search-rental') || pathname.startsWith('/listings') || pathname.startsWith('/real-estate') || pathname.startsWith('/destinations') || pathname.startsWith('/discover') || pathname.startsWith('/marketplace')) key = 'explore';
+  let key = override || '';
+  if (!key) {
+    if (pathname.startsWith('/guests')) key = 'guests';
+    else if (pathname.startsWith('/owners')) key = 'owners';
+    else if (pathname.startsWith('/service-providers')) key = 'serviceProviders';
+    else if (pathname.startsWith('/agents')) key = 'agents';
+    else if (pathname.startsWith('/pm-companies') || pathname.startsWith('/management')) key = 'pmCompanies';
+    else if (pathname.startsWith('/find-staff') || pathname.startsWith('/job-seeker') || pathname.startsWith('/list-cv') || pathname.startsWith('/my-applications') || pathname.startsWith('/request-')) key = 'findStaff';
+    else if (pathname.startsWith('/tours') || pathname.startsWith('/activities') || pathname.startsWith('/offers') || pathname.startsWith('/vacation-rental') || pathname.startsWith('/search-rental') || pathname.startsWith('/listings') || pathname.startsWith('/real-estate') || pathname.startsWith('/destinations') || pathname.startsWith('/discover') || pathname.startsWith('/marketplace')) key = 'explore';
+  }
 
   const contextual = key ? contextSets[key] : defaultCols;
   const hero = key ? heroes[key] : defaultHero;
@@ -869,11 +885,11 @@ export function Footer() {
 
 export function PageShell({ children }: { children: ReactNode }) {
   return (
-    <>
+    <NavScopeOverrideProvider>
       <Header />
       <main>{children}</main>
       <Footer />
-    </>
+    </NavScopeOverrideProvider>
   );
 }
 
