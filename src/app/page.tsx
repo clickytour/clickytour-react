@@ -2,24 +2,8 @@
 
 import { useMemo, useState } from 'react';
 import { PageShell } from '@/components/site';
-import { HomepageMiniForm } from '@/components/forms';
-
-type MiniFormRole = "guest" | "vacation-owner" | "real-estate-owner" | "service-provider" | "agent" | "pmc" | "job-seeker" | "media-partner";
-
-const roleToMiniForm: Record<string, MiniFormRole> = {
-  'Guest': 'guest',
-  'Vacation Owner': 'vacation-owner',
-  'Real Estate Owner': 'real-estate-owner',
-  'Service Provider': 'service-provider',
-  'Agent': 'agent',
-  'PM Company': 'pmc',
-  'Job Seeker': 'job-seeker',
-  'Media & Partners': 'media-partner',
-};
-
-const miniFormToRole: Record<string, string> = Object.fromEntries(
-  Object.entries(roleToMiniForm).map(([k, v]) => [v, k])
-);
+import { HomepageMiniForm, mapTabToMiniRole, mapMiniRoleToTab } from '@/components/forms/HomepageMiniForm';
+import type { MiniFormRoleKey } from '@/components/forms/HomepageMiniForm';
 
 type RoleKey =
   | 'Guest'
@@ -513,11 +497,11 @@ export default function Home() {
           </div>
 
           <HomepageMiniForm
-            selectedRole={activeRole ? roleToMiniForm[activeRole] ?? null : null}
-            onRoleChange={(miniRole) => {
+            selectedRole={activeRole ? mapTabToMiniRole(activeRole) : null}
+            onRoleChange={(miniRole: MiniFormRoleKey | null) => {
               if (miniRole) {
-                const mapped = miniFormToRole[miniRole];
-                setActiveRole((mapped as RoleKey) || null);
+                const tab = mapMiniRoleToTab(miniRole);
+                setActiveRole((tab as RoleKey) || null);
               } else {
                 setActiveRole(null);
               }
@@ -699,11 +683,11 @@ export default function Home() {
       <section className="section">
         <div className="container max-w-lg">
           <HomepageMiniForm
-            selectedRole={activeRole ? roleToMiniForm[activeRole] ?? null : null}
-            onRoleChange={(miniRole) => {
+            selectedRole={activeRole ? mapTabToMiniRole(activeRole) : null}
+            onRoleChange={(miniRole: MiniFormRoleKey | null) => {
               if (miniRole) {
-                const mapped = miniFormToRole[miniRole];
-                setActiveRole((mapped as RoleKey) || null);
+                const tab = mapMiniRoleToTab(miniRole);
+                setActiveRole((tab as RoleKey) || null);
               } else {
                 setActiveRole(null);
               }
