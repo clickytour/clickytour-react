@@ -118,6 +118,86 @@ const scopedNavs: Record<string, NavScope> = {
     cta: { href: '/guests-vacation-request/', label: 'Plan My Trip' },
     crossSell: [{ href: '/service-providers-for-guests/', label: 'Local Services' }],
   },
+  guestsVacation: {
+    label: 'Guest: Vacation',
+    items: [
+      { href: '/guests/', label: 'Overview' },
+      { href: '/guests-vacation-assistance/', label: 'Vacation', children: [
+        { href: '/guests-vacation-assistance/', label: 'Vacation Assistance' },
+        { href: '/guests-personalized-planning/', label: 'Personalized Planning' },
+        { href: '/guests-premium-travel-plan/', label: 'Premium Travel Plan' },
+        { href: '/guests-what-to-do/', label: 'What to Do & Where to Go' },
+        { href: '/guests-destinations/', label: 'Destinations' },
+        { href: '/guests-plans-offers/', label: 'Plans & Offers' },
+        { href: '/trip-planer/', label: 'Trip Planner' },
+      ]},
+      { href: '/vacation-rentals/', label: 'Rentals', children: [
+        { href: '/vacation-rentals/', label: 'Vacation Rentals' },
+        { href: '/search-rentals/', label: 'Search Rentals' },
+        { href: '/offers/', label: 'Offers & Deals' },
+      ]},
+      { href: '/guests-help/', label: 'Help', children: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-help-how-booking-works/', label: 'How Booking Works' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    cta: { href: '/guests-vacation-request/', label: 'Plan My Trip' },
+    crossSell: [{ href: '/tours-activities/', label: 'Tours & Activities' }, { href: '/guests-real-estate/', label: 'Real Estate' }],
+  },
+  guestsTours: {
+    label: 'Guest: Activities',
+    items: [
+      { href: '/guests/', label: 'Overview' },
+      { href: '/tours-activities/', label: 'All Activities', children: [
+        { href: '/tours-activities/', label: 'All Tours' },
+        { href: '/activities-boats/', label: 'Boats & Water' },
+        { href: '/activities-outdoor/', label: 'Outdoor' },
+        { href: '/activities-food-wine/', label: 'Food & Wine' },
+        { href: '/activities-wellness/', label: 'Wellness' },
+        { href: '/activities-destination/', label: 'By Destination' },
+      ]},
+      { href: '/service-providers-for-guests/', label: 'Services', children: [
+        { href: '/service-providers-for-guests/', label: 'All Services' },
+        { href: '/service-providers-for-guests-transfers-transport/', label: 'Transfers' },
+        { href: '/service-providers-for-guests-dining-nightlife/', label: 'Dining & Nightlife' },
+        { href: '/service-providers-for-guests-wellness-spa/', label: 'Wellness & Spa' },
+        { href: '/service-providers-for-guests-local-activities/', label: 'Local Activities' },
+      ]},
+      { href: '/guests-help/', label: 'Help', children: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    cta: { href: '/guest-service-request/', label: 'Request a Service' },
+    crossSell: [{ href: '/guests-vacation-assistance/', label: 'Vacation' }, { href: '/guests-real-estate/', label: 'Real Estate' }],
+  },
+  guestsRealEstate: {
+    label: 'Guest: Real Estate',
+    items: [
+      { href: '/guests/', label: 'Overview' },
+      { href: '/real-estate/', label: 'Browse', children: [
+        { href: '/real-estate/', label: 'All Properties' },
+        { href: '/real-estate-buy/', label: 'Buy' },
+        { href: '/real-estate-rent/', label: 'Rent' },
+        { href: '/real-estate-proposals/', label: 'Request Proposals' },
+      ]},
+      { href: '/guests-real-estate/', label: 'For Buyers', children: [
+        { href: '/guests-real-estate/', label: 'Real Estate Hub' },
+        { href: '/guests-real-estate-request/', label: 'Request Options' },
+        { href: '/real-estate-request-consultation/', label: 'Consultation' },
+      ]},
+      { href: '/guests-help/', label: 'Help', children: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    cta: { href: '/guests-real-estate-request/', label: 'Request Proposals' },
+    crossSell: [{ href: '/guests-vacation-assistance/', label: 'Vacation' }, { href: '/tours-activities/', label: 'Activities' }],
+  },
   owners: {
     label: 'For Owners',
     items: [
@@ -599,6 +679,72 @@ function useContextualFooter(): FooterContext {
         { href: '/guests-faq/', label: 'Guest FAQ' },
       ]},
     ],
+    guestsVacation: [
+      { t: 'Vacation Planning', l: [
+        { href: '/guests-vacation-assistance/', label: 'Vacation Assistance' },
+        { href: '/guests-personalized-planning/', label: 'Personalized Planning' },
+        { href: '/guests-premium-travel-plan/', label: 'Premium Travel Plan' },
+        { href: '/guests-destinations/', label: 'Destinations' },
+        { href: '/trip-planer/', label: 'Trip Planner' },
+        { href: '/guests-plans-offers/', label: 'Plans & Offers' },
+      ]},
+      { t: 'Rentals & Offers', l: [
+        { href: '/vacation-rentals/', label: 'Vacation Rentals' },
+        { href: '/search-rentals/', label: 'Search Rentals' },
+        { href: '/offers/', label: 'Offers & Deals' },
+        { href: '/offers-last-minute/', label: 'Last Minute' },
+        { href: '/vacation-rentals-destination/', label: 'By Destination' },
+      ]},
+      { t: 'Guest Help', l: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-help-how-booking-works/', label: 'How Booking Works' },
+        { href: '/guests-help-rental-policies/', label: 'Rental Policies' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    guestsTours: [
+      { t: 'Tours & Activities', l: [
+        { href: '/tours-activities/', label: 'All Tours & Activities' },
+        { href: '/activities-boats/', label: 'Boats & Water Sports' },
+        { href: '/activities-outdoor/', label: 'Outdoor Adventures' },
+        { href: '/activities-food-wine/', label: 'Food & Wine' },
+        { href: '/activities-wellness/', label: 'Wellness & Spa' },
+        { href: '/activities-destination/', label: 'By Destination' },
+      ]},
+      { t: 'Local Services', l: [
+        { href: '/service-providers-for-guests/', label: 'All Guest Services' },
+        { href: '/service-providers-for-guests-transfers-transport/', label: 'Transfers & Transport' },
+        { href: '/service-providers-for-guests-dining-nightlife/', label: 'Dining & Nightlife' },
+        { href: '/service-providers-for-guests-wellness-spa/', label: 'Wellness & Spa' },
+        { href: '/service-providers-for-guests-local-activities/', label: 'Local Activities' },
+      ]},
+      { t: 'Guest Help', l: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    guestsRealEstate: [
+      { t: 'Property Search', l: [
+        { href: '/real-estate/', label: 'All Properties' },
+        { href: '/real-estate-buy/', label: 'Buy Property' },
+        { href: '/real-estate-rent/', label: 'Rent Property' },
+        { href: '/real-estate-proposals/', label: 'Request Proposals' },
+        { href: '/real-estate-request-consultation/', label: 'Get Consultation' },
+      ]},
+      { t: 'Real Estate Resources', l: [
+        { href: '/guests-real-estate/', label: 'Real Estate Hub' },
+        { href: '/guests-real-estate-request/', label: 'Request Options' },
+        { href: '/real-estate-owners-list/', label: 'Owner Listings' },
+        { href: '/real-estate-buyer-form/', label: 'Buyer Application' },
+      ]},
+      { t: 'Guest Help', l: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
     owners: [
       { t: 'Vacation Property', l: [
         { href: '/owners-vacation/', label: 'Vacation Owners Hub' },
@@ -770,6 +916,15 @@ function useContextualFooter(): FooterContext {
   const heroes: Record<string, FooterHero> = {
     guests: { eyebrow: 'For Travelers', title: 'Plan your perfect vacation with ClickyTour.', subtitle: 'Discover rentals, activities, and local experiences.', pills: [
       { href: '/guests-vacation-assistance/', label: 'Vacation Assistance' }, { href: '/tours-activities/', label: 'Tours & Activities' }, { href: '/search-rentals/', label: 'Search Rentals' }, { href: '/trip-planer/', label: 'Trip Planner' },
+    ]},
+    guestsVacation: { eyebrow: 'Vacation & Travel', title: 'Plan your perfect vacation with ClickyTour.', subtitle: 'Discover rentals, plan trips, and find the best deals.', pills: [
+      { href: '/guests-vacation-request/', label: 'Request a Trip' }, { href: '/vacation-rentals/', label: 'Browse Rentals' }, { href: '/search-rentals/', label: 'Search Rentals' }, { href: '/trip-planer/', label: 'Trip Planner' },
+    ]},
+    guestsTours: { eyebrow: 'Tours & Activities', title: 'Discover local experiences and services.', subtitle: 'Boat tours, wellness, dining, transfers, and more — all in one place.', pills: [
+      { href: '/tours-activities/', label: 'All Activities' }, { href: '/guest-service-request/', label: 'Request a Service' }, { href: '/activities-boats/', label: 'Boats & Water' }, { href: '/activities-wellness/', label: 'Wellness' },
+    ]},
+    guestsRealEstate: { eyebrow: 'Real Estate', title: 'Find your next property in Greece.', subtitle: 'Buy, rent, or invest — browse listings and get expert guidance.', pills: [
+      { href: '/real-estate/', label: 'Browse Properties' }, { href: '/guests-real-estate-request/', label: 'Request Proposals' }, { href: '/real-estate-buy/', label: 'Buy' }, { href: '/real-estate-rent/', label: 'Rent' },
     ]},
     owners: { eyebrow: 'For Property Owners', title: 'List, manage, and grow your property income.', subtitle: 'Vacation rentals, real estate, and full management services.', pills: [
       { href: '/owners-vacation-list-property/', label: 'List Property' }, { href: '/owners-vacation-free-evaluation/', label: 'Free Evaluation' }, { href: '/owners-real-estate/', label: 'Real Estate' }, { href: '/owners-plans-pricing/', label: 'Plans & Pricing' },

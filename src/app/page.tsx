@@ -546,11 +546,11 @@ const roleToNavScope: Record<string, string> = {
   'Media & Partners': '',
 };
 
-/* Map mini-form guest sub-roles → nav scope (all map to guests) */
+/* Map mini-form guest sub-roles → nav scope (each gets own scope) */
 const miniRoleToNavScope: Record<string, string> = {
-  'guest-vacation': 'guests',
-  'guest-tours': 'guests',
-  'guest-real-estate': 'guests',
+  'guest-vacation': 'guestsVacation',
+  'guest-tours': 'guestsTours',
+  'guest-real-estate': 'guestsRealEstate',
 };
 
 function NavScopeSync({ activeRole, activeMiniRole }: { activeRole: RoleKey | null; activeMiniRole: string | null }) {
