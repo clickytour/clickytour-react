@@ -8,17 +8,12 @@ export default function PMCompaniesPage() {
   return (
     <PageShell>
       <Hero
+        diagram={<EcosystemDiagram />}
         title="Grow your portfolio and bookings — with a structured PMC path"
         subtitle="Choose between two clear growth paths: list your own properties or expand through the ClickyTour network ecosystem."
         ctaA="List your properties"
         ctaB="Increase portfolio"
       />
-
-      <section className="section">
-        <div className="container max-w-lg mx-auto">
-          <EcosystemDiagram />
-        </div>
-      </section>
 
       <SidebarLayout title="For PM Companies" menu={menu}>
         <section className="py-16">
