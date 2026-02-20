@@ -74,7 +74,7 @@ export default function Page() {
             <div>
               <p className="text-amber-400 text-xs font-bold uppercase tracking-wider">⚙️ QA Dashboard — Dev Only</p>
               <h1 className="text-3xl font-extrabold mt-1">All Pages ({totalPages})</h1>
-              <p className="text-cyan-100/70 text-sm mt-1">{sections.length} sections • Click any link to review</p>
+              <p className="text-cyan-100/70 text-sm mt-1">{sections.length} sections • <span className="text-amber-400 font-semibold">All Pending QA</span></p>
             </div>
             <div className="flex gap-2">
               <input
@@ -108,15 +108,17 @@ export default function Page() {
                 </summary>
                 <div className="mt-1 ml-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-1 pb-2">
                   {filtered.map(route => (
-                    <Link
-                      key={route}
-                      href={`/${route}/`}
-                      target="_blank"
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-teal-50 hover:text-teal-700 transition-colors"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-teal-400 shrink-0" />
-                      /{route}
-                    </Link>
+                    <div key={route} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-amber-50 transition-colors">
+                      <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" title="Pending QA" />
+                      <Link
+                        href={`/${route}/`}
+                        target="_blank"
+                        className="text-slate-700 hover:text-teal-700 flex-1"
+                      >
+                        /{route}
+                      </Link>
+                      <span className="text-[10px] font-semibold text-amber-600 bg-amber-100 px-1.5 py-0.5 rounded-full whitespace-nowrap">Pending</span>
+                    </div>
                   ))}
                 </div>
               </details>
