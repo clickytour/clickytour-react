@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { searchRegions, type Preset, type PlaceEntry } from "@/lib/greekRegions";
 
 export type PlaceResult = {
   /** Display label */
@@ -13,6 +14,8 @@ export type PlaceResult = {
   lat: number | null;
   lng: number | null;
   listingCount: number;
+  /** Which tier resolved this result */
+  tier: 1 | 2 | 3;
 };
 
 type PlaceAutocompleteProps = {
@@ -28,6 +31,8 @@ type PlaceAutocompleteProps = {
   onChange?: (place: PlaceResult | null) => void;
   /** Filter by country (e.g. "Greece") */
   country?: string;
+  /** Preset for Tier 1 static regions: "villa4you" (Halkidiki/Mykonos/Crete) or "clickytour" (all Greece) */
+  preset?: Preset;
   /** Max suggestions to show */
   limit?: number;
   /** Input name attribute */
@@ -40,6 +45,22 @@ type PlaceAutocompleteProps = {
   className?: string;
 };
 
+/** Convert a Tier 1 PlaceEntry to PlaceResult */
+function entryToResult(e: PlaceEntry): PlaceResult {
+  return {
+    displayName: e.name,
+    label: e.name,
+    area: e.parent ?? "",
+    region: e.name,
+    country: "Greece",
+    placeId: e.placeId,
+    lat: e.lat,
+    lng: e.lng,
+    listingCount: 0,
+    tier: 1,
+  };
+}
+
 export function PlaceAutocomplete({
   label,
   placeholder = "Start typing a destination...",
@@ -47,6 +68,7 @@ export function PlaceAutocomplete({
   onTextChange,
   onChange,
   country,
+  preset = "clickytour",
   limit = 8,
   name,
   required,
@@ -77,6 +99,12 @@ export function PlaceAutocomplete({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  /**
+   * 3-Tier cascade:
+   *  1. Tier 1: instant static match from greekRegions (no network)
+   *  2. Tier 2: mirror DB /api/places/suggest (fills gaps from Core data)
+   *  3. Tier 3: Google Places API fallback /api/places/google (unknown locations)
+   */
   const fetchSuggestions = useCallback(
     async (q: string) => {
       if (q.length < 2) {
@@ -84,35 +112,81 @@ export function PlaceAutocomplete({
         setIsOpen(false);
         return;
       }
+
+      // ── Tier 1: instant static ──
+      const tier1 = searchRegions(q, preset, limit).map(entryToResult);
+
+      // If Tier 1 has enough results, show them immediately without API call
+      if (tier1.length >= limit) {
+        setSuggestions(tier1.slice(0, limit));
+        setIsOpen(true);
+        setHighlightIndex(-1);
+        return;
+      }
+
+      // Show Tier 1 results immediately while loading Tier 2
+      if (tier1.length > 0) {
+        setSuggestions(tier1);
+        setIsOpen(true);
+        setHighlightIndex(-1);
+      }
+
+      // ── Tier 2: mirror DB ──
       setLoading(true);
       try {
-        const params = new URLSearchParams({ q, limit: String(limit) });
+        const remaining = limit - tier1.length;
+        const params = new URLSearchParams({ q, limit: String(remaining + 5) }); // fetch extra to dedup
         if (country) params.set("country", country);
         const res = await fetch(`/api/places/suggest?${params}`);
         const data = await res.json();
-        const results: PlaceResult[] = (data.suggestions ?? []).map((s: PlaceResult) => ({
-          ...s,
-          displayName: s.label,
-        }));
-        setSuggestions(results);
-        setIsOpen(results.length > 0);
+
+        const tier1Labels = new Set(tier1.map((r) => r.displayName.toLowerCase()));
+        const tier2: PlaceResult[] = ((data.suggestions ?? []) as PlaceResult[])
+          .filter((s) => !tier1Labels.has(s.label.toLowerCase()))
+          .slice(0, remaining)
+          .map((s) => ({ ...s, displayName: s.label, tier: 2 as const }));
+
+        const merged = [...tier1, ...tier2];
+
+        // ── Tier 3: Google Places fallback ──
+        if (merged.length < 3) {
+          try {
+            const gParams = new URLSearchParams({ q, limit: String(limit - merged.length) });
+            if (country) gParams.set("country", country);
+            const gRes = await fetch(`/api/places/google?${gParams}`);
+            if (gRes.ok) {
+              const gData = await gRes.json();
+              const existingLabels = new Set(merged.map((r) => r.displayName.toLowerCase()));
+              const tier3: PlaceResult[] = ((gData.suggestions ?? []) as PlaceResult[])
+                .filter((s) => !existingLabels.has((s.displayName || s.label).toLowerCase()))
+                .slice(0, limit - merged.length)
+                .map((s) => ({ ...s, displayName: s.displayName || s.label, tier: 3 as const }));
+              merged.push(...tier3);
+            }
+          } catch {
+            // Tier 3 not configured yet — silently skip
+          }
+        }
+
+        setSuggestions(merged.slice(0, limit));
+        setIsOpen(merged.length > 0);
         setHighlightIndex(-1);
       } catch {
-        setSuggestions([]);
+        // Keep Tier 1 results if API fails
+        if (tier1.length === 0) setSuggestions([]);
       } finally {
         setLoading(false);
       }
     },
-    [country, limit]
+    [country, limit, preset]
   );
 
   function handleInputChange(val: string) {
     setInputValue(val);
     onTextChange?.(val);
 
-    // Debounce API call
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => fetchSuggestions(val), 200);
+    debounceRef.current = setTimeout(() => fetchSuggestions(val), 150);
   }
 
   function handleSelect(place: PlaceResult) {
@@ -139,6 +213,11 @@ export function PlaceAutocomplete({
       setIsOpen(false);
     }
   }
+
+  const tierBadge = (tier: number) => {
+    if (tier === 3) return "Google";
+    return null;
+  };
 
   return (
     <div ref={wrapperRef} className={`relative ${className}`}>
@@ -175,7 +254,7 @@ export function PlaceAutocomplete({
         <ul className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
           {suggestions.map((s, i) => (
             <li
-              key={`${s.area}-${s.region}-${s.country}`}
+              key={`${s.displayName}-${s.tier}`}
               onMouseDown={() => handleSelect(s)}
               onMouseEnter={() => setHighlightIndex(i)}
               className={`flex cursor-pointer items-center justify-between px-4 py-2 text-sm ${
@@ -188,11 +267,18 @@ export function PlaceAutocomplete({
                   <span className="ml-1 text-slate-400">{s.country}</span>
                 )}
               </span>
-              {s.listingCount > 0 && (
-                <span className="ml-2 text-xs text-slate-400">
-                  {s.listingCount} listing{s.listingCount !== 1 ? "s" : ""}
-                </span>
-              )}
+              <span className="ml-2 flex items-center gap-1.5">
+                {s.listingCount > 0 && (
+                  <span className="text-xs text-slate-400">
+                    {s.listingCount} listing{s.listingCount !== 1 ? "s" : ""}
+                  </span>
+                )}
+                {tierBadge(s.tier) && (
+                  <span className="rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-500">
+                    {tierBadge(s.tier)}
+                  </span>
+                )}
+              </span>
             </li>
           ))}
         </ul>
