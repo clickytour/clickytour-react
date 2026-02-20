@@ -1,26 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PageShell, Hero } from "@/components/site";
 import { PoolBrowser, SubscriptionGate } from "@/components/marketplace";
 import { MOCK_POOL_CARDS } from "@/lib/marketplace";
+import { fetchPool, submitClaim as apiSubmitClaim } from "@/lib/marketplace/client";
 import type { PoolCard } from "@/lib/marketplace/types";
 
 export default function PMCRequestsPoolPage() {
+  const [cards, setCards] = useState<PoolCard[]>(MOCK_POOL_CARDS);
+  const [loading, setLoading] = useState(true);
+  const [isLive, setIsLive] = useState(false);
   const [claimModal, setClaimModal] = useState<PoolCard | null>(null);
   const [claimForm, setClaimForm] = useState({ pmcName: "", pmcEmail: "", pmcPhone: "" });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    fetchPool()
+      .then((res) => {
+        if (res.ok && res.items && res.items.length > 0) {
+          setCards(res.items as unknown as PoolCard[]);
+          setIsLive(!res._mock);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
 
   function handleClaim(card: PoolCard) {
     setClaimModal(card);
     setSubmitted(false);
   }
 
-  function submitClaim() {
-    if (!claimForm.pmcName) return;
-    // Mock submit — in production this calls POST /api/claim
-    console.log("Claim submitted:", { ref: claimModal?.ref, ...claimForm });
-    setSubmitted(true);
+  async function handleSubmitClaim() {
+    if (!claimForm.pmcName || !claimModal) return;
+    try {
+      await apiSubmitClaim("mock-token", {
+        ref: claimModal.ref,
+        pmcName: claimForm.pmcName,
+        pmcEmail: claimForm.pmcEmail,
+        pmcPhone: claimForm.pmcPhone,
+      });
+      setSubmitted(true);
+    } catch {
+      alert("Failed to submit claim. Please try again.");
+    }
   }
 
   return (
@@ -34,14 +58,26 @@ export default function PMCRequestsPoolPage() {
         ctaHrefB="/pmc-directory"
       />
 
+      {/* Data source indicator */}
+      <section className="border-b border-slate-200 bg-white">
+        <div className="container py-2 flex items-center gap-2 text-xs">
+          <span className={`h-2 w-2 rounded-full ${isLive ? "bg-emerald-500" : "bg-amber-400"}`} />
+          <span className="text-slate-500">{isLive ? "Live data from ClickyTour API" : "Demo data (API not connected)"}</span>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container">
-          <PoolBrowser
-            cards={MOCK_POOL_CARDS}
-            title="Incoming Property Requests"
-            subtitle="Owner contact information is protected. Claim a request to start the connection process."
-            onClaim={handleClaim}
-          />
+          {loading ? (
+            <div className="py-16 text-center text-slate-400">Loading pool data...</div>
+          ) : (
+            <PoolBrowser
+              cards={cards}
+              title="Incoming Property Requests"
+              subtitle="Owner contact information is protected. Claim a request to start the connection process."
+              onClaim={handleClaim}
+            />
+          )}
         </div>
       </section>
 
@@ -86,55 +122,32 @@ export default function PMCRequestsPoolPage() {
                 <p className="mt-2 text-sm text-slate-600">
                   Your claim for <strong>{claimModal.leadName}</strong> ({claimModal.ref}) has been submitted. ClickyTour will review and connect you with the owner.
                 </p>
-                <button onClick={() => setClaimModal(null)} className="mt-4 rounded-full bg-cyan-600 px-6 py-2 text-sm font-semibold text-white hover:bg-cyan-700">
-                  Close
-                </button>
+                <button onClick={() => setClaimModal(null)} className="mt-4 rounded-full bg-cyan-600 px-6 py-2 text-sm font-semibold text-white hover:bg-cyan-700">Close</button>
               </div>
             ) : (
               <>
                 <h3 className="text-lg font-bold text-slate-900">Claim This Property</h3>
-                <p className="mt-1 text-sm text-slate-500">
-                  <strong>{claimModal.leadName}</strong> &middot; {claimModal.region} &middot; {claimModal.ref}
-                </p>
+                <p className="mt-1 text-sm text-slate-500"><strong>{claimModal.leadName}</strong> &middot; {claimModal.region} &middot; {claimModal.ref}</p>
                 <div className="mt-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Your Company Name *</label>
-                    <input
-                      type="text"
-                      value={claimForm.pmcName}
-                      onChange={(e) => setClaimForm({ ...claimForm, pmcName: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100"
-                      placeholder="Aegean Property Management"
-                    />
+                    <input type="text" value={claimForm.pmcName} onChange={(e) => setClaimForm({ ...claimForm, pmcName: e.target.value })}
+                      className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100" placeholder="Aegean Property Management" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                    <input
-                      type="email"
-                      value={claimForm.pmcEmail}
-                      onChange={(e) => setClaimForm({ ...claimForm, pmcEmail: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100"
-                      placeholder="info@company.com"
-                    />
+                    <input type="email" value={claimForm.pmcEmail} onChange={(e) => setClaimForm({ ...claimForm, pmcEmail: e.target.value })}
+                      className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100" placeholder="info@company.com" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                    <input
-                      type="tel"
-                      value={claimForm.pmcPhone}
-                      onChange={(e) => setClaimForm({ ...claimForm, pmcPhone: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100"
-                      placeholder="+30 XXX XXX XXXX"
-                    />
+                    <input type="tel" value={claimForm.pmcPhone} onChange={(e) => setClaimForm({ ...claimForm, pmcPhone: e.target.value })}
+                      className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100" placeholder="+30 XXX XXX XXXX" />
                   </div>
                 </div>
                 <div className="mt-5 flex gap-3">
-                  <button onClick={submitClaim} disabled={!claimForm.pmcName} className="flex-1 rounded-full bg-cyan-600 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
-                    Submit Claim
-                  </button>
-                  <button onClick={() => setClaimModal(null)} className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">
-                    Cancel
-                  </button>
+                  <button onClick={handleSubmitClaim} disabled={!claimForm.pmcName} className="flex-1 rounded-full bg-cyan-600 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition disabled:opacity-50 disabled:cursor-not-allowed">Submit Claim</button>
+                  <button onClick={() => setClaimModal(null)} className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">Cancel</button>
                 </div>
               </>
             )}

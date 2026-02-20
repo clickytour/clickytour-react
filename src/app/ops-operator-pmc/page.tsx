@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { PageShell } from "@/components/site";
 import { MOCK_POOL_CARDS, MOCK_PMC_ITEMS } from "@/lib/marketplace";
+import { listAllSubmissions } from "@/lib/marketplace/client";
 import type { PoolCard } from "@/lib/marketplace/types";
 
 type Tab = "submissions" | "claims" | "pmcs" | "stats";
@@ -31,15 +32,28 @@ export default function OpsOperatorPMCPage() {
   const [tab, setTab] = useState<Tab>("submissions");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [liveCards, setLiveCards] = useState<PoolCard[]>(MOCK_POOL_CARDS);
+  const [isLive, setIsLive] = useState(false);
+
+  useEffect(() => {
+    listAllSubmissions()
+      .then((res) => {
+        if (res.ok && res.items) {
+          setLiveCards(res.items as unknown as PoolCard[]);
+          setIsLive(!res._mock);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const filteredSubmissions = useMemo(() => {
-    let items = MOCK_POOL_CARDS;
+    let items = liveCards;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       items = items.filter((c) => c.leadName.toLowerCase().includes(q) || c.ref.toLowerCase().includes(q) || c.region.toLowerCase().includes(q));
     }
     return items;
-  }, [searchQuery]);
+  }, [searchQuery, liveCards]);
 
   const filteredClaims = useMemo(() => {
     let items = MOCK_CLAIMS;
@@ -52,7 +66,7 @@ export default function OpsOperatorPMCPage() {
   }, [searchQuery, statusFilter]);
 
   const tabs: { id: Tab; label: string; count: number }[] = [
-    { id: "submissions", label: "Submissions", count: MOCK_POOL_CARDS.length },
+    { id: "submissions", label: "Submissions", count: liveCards.length },
     { id: "claims", label: "Claims", count: MOCK_CLAIMS.length },
     { id: "pmcs", label: "PMCs", count: MOCK_PMC_ITEMS.length },
     { id: "stats", label: "Stats", count: 0 },
@@ -76,7 +90,7 @@ export default function OpsOperatorPMCPage() {
       <section className="bg-slate-50 py-6 border-b border-slate-200">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCard label="Total Submissions" value={MOCK_POOL_CARDS.length} change="+2 this week" color="cyan" />
+            <StatCard label="Total Submissions" value={liveCards.length} change="+2 this week" color="cyan" />
             <StatCard label="Active Claims" value={MOCK_CLAIMS.filter((c) => c.status === "pending").length} color="amber" />
             <StatCard label="PMCs Registered" value={MOCK_PMC_ITEMS.length} change="+1 this week" color="violet" />
             <StatCard label="Successful Matches" value={MOCK_CLAIMS.filter((c) => c.status === "approved").length} color="emerald" />
@@ -266,9 +280,9 @@ export default function OpsOperatorPMCPage() {
                 <div className="rounded-xl border border-slate-200 bg-white p-6">
                   <h3 className="font-bold text-slate-900 mb-4">Submissions by Region</h3>
                   <div className="space-y-3">
-                    {Array.from(new Set(MOCK_POOL_CARDS.map((c) => c.region))).map((region) => {
-                      const count = MOCK_POOL_CARDS.filter((c) => c.region === region).length;
-                      const pct = Math.round((count / MOCK_POOL_CARDS.length) * 100);
+                    {Array.from(new Set(liveCards.map((c) => c.region))).map((region) => {
+                      const count = liveCards.filter((c) => c.region === region).length;
+                      const pct = Math.round((count / liveCards.length) * 100);
                       return (
                         <div key={region}>
                           <div className="flex justify-between text-sm mb-1">
@@ -302,8 +316,8 @@ export default function OpsOperatorPMCPage() {
                 <div className="rounded-xl border border-slate-200 bg-white p-6">
                   <h3 className="font-bold text-slate-900 mb-4">Property Types</h3>
                   <div className="space-y-3">
-                    {Array.from(new Set(MOCK_POOL_CARDS.map((c) => c.propertyType))).map((type) => {
-                      const count = MOCK_POOL_CARDS.filter((c) => c.propertyType === type).length;
+                    {Array.from(new Set(liveCards.map((c) => c.propertyType))).map((type) => {
+                      const count = liveCards.filter((c) => c.propertyType === type).length;
                       return (
                         <div key={type} className="flex items-center justify-between text-sm">
                           <span className="text-slate-700">{type}</span>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PageShell, Hero, SectionTitle } from "@/components/site";
 import { PlaceAutocomplete } from "@/components/PlaceAutocomplete";
 import { PMC_SERVICE_TAGS } from "@/lib/marketplace/config";
+import { initSubmission, submitData } from "@/lib/marketplace/client";
 
 type Step = 1 | 2 | 3;
 
@@ -37,25 +38,27 @@ export default function OwnerSubmitPropertyPage() {
       const fields: Record<string, string> = {};
       formData.forEach((v, k) => { fields[k] = v.toString(); });
 
+      // Step 1: Init submission (get ref + tokens from CF Worker via proxy)
+      const initRes = await initSubmission();
+      if (!initRes.ok) throw new Error(initRes.error || "Init failed");
+
+      const { ref: newRef, uploadToken, shareToken } = initRes;
+
+      // Step 2: Submit data to CF Worker
       const payload = {
         source: "clickytour-react",
-        formType: "owner-property-submission",
         role: "owner",
         subrole,
+        leadName: fields.leadName || "Property Submission",
         tags: selectedTags,
-        submittedAt: new Date().toISOString(),
         fields,
+        createdAtIso: new Date().toISOString(),
       };
 
-      // In production: POST to CF Worker /api/init first (Turnstile), then /api/submissions
-      const r = await fetch("/api/forms/owner-property-submission", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!r.ok) throw new Error("failed");
-      const data = await r.json();
-      setRefId(data.ref || "CTV-DEMO01");
+      const submitRes = await submitData(newRef, shareToken, payload);
+      if (!submitRes.ok && !submitRes._mock) throw new Error("Submit failed");
+
+      setRefId(newRef);
       setSubmitted(true);
     } catch {
       alert("Submission failed. Please try again.");
