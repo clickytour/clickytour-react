@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { CoreMirrorProperty, DealMode } from "@/lib/coreMirror/types";
+import { buildPickedForSingleUrl } from "@/lib/pickedfor";
 
 const ALL_MODES: DealMode[] = ["short_term_rent", "sale", "monthly_rent"];
 
@@ -25,6 +26,7 @@ export function PropertyDetailSections({
   property: CoreMirrorProperty;
   activeMode?: DealMode;
 }) {
+  const pickedForUrl = buildPickedForSingleUrl(property.type, property.slug);
   const availableModes = (property.dealTypes.length ? property.dealTypes : ["short_term_rent"]) as DealMode[];
   const currentMode = activeMode && availableModes.includes(activeMode) ? activeMode : availableModes[0];
   const isVacation = currentMode === "short_term_rent";
@@ -345,12 +347,12 @@ export function PropertyDetailSections({
             {isVacation ? "Book Now" : "Request Info"}
           </button>
           <a
-            href="https://pickedfor.com"
+            href={pickedForUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
           >
-            View on PickedFor
+            View Presentation on PickedFor
           </a>
         </div>
       </section>

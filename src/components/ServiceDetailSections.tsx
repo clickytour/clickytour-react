@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import type { CoreMirrorService } from "@/lib/coreMirror/types";
+import { buildPickedForSingleUrl } from "@/lib/pickedfor";
 
 export function ServiceDetailSections({ service }: { service: CoreMirrorService }) {
+  const pickedForUrl = buildPickedForSingleUrl("service", service.slug);
   return (
     <div className="mx-auto max-w-[1320px] px-4 py-8">
       <div className="mb-4 text-sm text-slate-500">
@@ -80,6 +82,15 @@ export function ServiceDetailSections({ service }: { service: CoreMirrorService 
           </div>
         </section>
       )}
+
+      {/* PickedFor CTA */}
+      <section className="mt-6 rounded-2xl bg-teal-600 p-8 text-center text-white">
+        <h2 className="text-2xl font-bold">Include this service in a proposal?</h2>
+        <p className="mt-2 text-teal-100">Create a shareable presentation for your clients on PickedFor.</p>
+        <a href={pickedForUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10">
+          View on PickedFor
+        </a>
+      </section>
     </div>
   );
 }

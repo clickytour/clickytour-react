@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { SearchResultItem } from "@/lib/searchHubEngine";
+import { buildPickedForSingleUrl } from "@/lib/pickedfor";
 
 const INTENT_COLORS: Record<string, string> = {
   vacation: "bg-sky-100 text-sky-700",

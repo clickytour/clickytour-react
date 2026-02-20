@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { CoreMirrorHotel, CoreMirrorHotelRoom, DealMode } from "@/lib/coreMirror/types";
+import { buildPickedForSingleUrl } from "@/lib/pickedfor";
 
 function modeLabel(mode: DealMode) {
   if (mode === "short_term_rent") return "Vacation";
@@ -18,6 +19,7 @@ export function HotelDetailSections({
   rooms: CoreMirrorHotelRoom[];
   activeMode?: DealMode;
 }) {
+  const pickedForUrl = buildPickedForSingleUrl("hotel", hotel.slug);
   const availableModes = hotel.dealTypes.length ? hotel.dealTypes : ["short_term_rent"];
   const currentMode = activeMode && availableModes.includes(activeMode) ? activeMode : availableModes[0];
 
@@ -134,6 +136,18 @@ export function HotelDetailSections({
           </div>
         </section>
       )}
+
+      {/* PickedFor CTA */}
+      <section className="mt-6 rounded-2xl bg-teal-600 p-8 text-center text-white">
+        <h2 className="text-2xl font-bold">Want a presentation of this hotel?</h2>
+        <p className="mt-2 text-teal-100">Get an unbranded proposal you can share with your clients or group.</p>
+        <div className="mt-4 flex justify-center gap-3">
+          <button className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">Book Now</button>
+          <a href={pickedForUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10">
+            View on PickedFor
+          </a>
+        </div>
+      </section>
 
       {/* Video */}
       {hotel.media.videoUrl && (

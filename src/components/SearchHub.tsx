@@ -15,6 +15,7 @@ import {
 } from "@/lib/searchHubEngine";
 import { ListingCard } from "./ListingCard";
 import { FilterSidebar } from "./FilterSidebar";
+import { buildPickedForUrl, type PickedForItem } from "@/lib/pickedfor";
 
 /* ── Intent tab colors ──────────────────────────────────── */
 const INTENT_TAB_COLORS: Record<SearchIntent, { active: string; inactive: string }> = {
@@ -266,7 +267,7 @@ export function SearchHub() {
                       </div>
                     ))}
                     <a
-                      href="https://pickedfor.com"
+                      href={buildPickedForUrl(basket.map((b) => ({ type: "property" as const, slug: b.id.replace(/^(vac|re|hotel|svc|act|job|pmc|blog)-/, ""), title: b.title, image: b.image, price: b.price, priceLabel: b.priceLabel })))}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-2 block rounded-xl bg-teal-600 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-teal-700"
