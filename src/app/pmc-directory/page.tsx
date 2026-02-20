@@ -3,13 +3,14 @@ import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { ListingCard } from '@/components/ListingCard';
 import { getAllSearchItems } from '@/lib/searchHubEngine';
+import { PMCDirectoryDiagram } from '@/components/diagrams';
 
 export default function Page() {
   const pmcItems = getAllSearchItems().filter((i) => i.intent === 'pmcs');
 
   return (
     <PageShell>
-      <Hero title="PMC Directory" subtitle="Find property management companies by destination and service type." ctaA="Browse PMCs" ctaB="Apply as PMC" />
+      <Hero diagram={<PMCDirectoryDiagram />} title="PMC Directory" subtitle="Find property management companies by destination and service type." ctaA="Browse PMCs" ctaB="Apply as PMC" />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Directory" title="Property Management Companies" subtitle="Trusted partners managing vacation and real estate portfolios." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

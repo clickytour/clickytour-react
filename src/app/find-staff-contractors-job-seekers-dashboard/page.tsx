@@ -1,10 +1,11 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { JobSeekerDashboardDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Job Seeker Dashboard" subtitle="Track your applications and matches." ctaA="New Application" ctaB="View Profile" />
+      <Hero diagram={<JobSeekerDashboardDiagram />} title="Job Seeker Dashboard" subtitle="Track your applications and matches." ctaA="New Application" ctaB="View Profile" />
       <section className="section"><div className="container">
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           {[{n:'0',t:'Active Applications',c:'bg-teal-50 text-teal-700'},{n:'0',t:'Interviews',c:'bg-amber-50 text-amber-700'},{n:'0',t:'Offers',c:'bg-green-50 text-green-700'}].map(s => (

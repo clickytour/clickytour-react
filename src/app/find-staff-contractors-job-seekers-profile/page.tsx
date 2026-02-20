@@ -1,10 +1,11 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { JobSeekerProfileDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Job Seeker Profile" subtitle="Your professional profile for employers." ctaA="Edit Profile" ctaB="View Applications" />
+      <Hero diagram={<JobSeekerProfileDiagram />} title="Job Seeker Profile" subtitle="Your professional profile for employers." ctaA="Edit Profile" ctaB="View Applications" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Your Profile" subtitle="Complete your profile to get better matches." />
         <div className="space-y-6">

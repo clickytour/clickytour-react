@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { Hero, PageShell, SectionTitle } from '@/components/site';
+import { WorkWithUsQuizDiagram } from '@/components/diagrams';
 
 type RoleKey = 'guests' | 'owners' | 'service-providers' | 'agents' | 'pm-companies';
 
@@ -72,6 +73,7 @@ export default function WorkWithUsQuizPage() {
         subtitle="A quick 2-step quiz to match you with the right role, tools, and next actions in our ecosystem."
         ctaA="Start Quiz"
         ctaB="Explore Roles"
+        diagram={<WorkWithUsQuizDiagram />}
       />
 
       <section className="section section-soft">

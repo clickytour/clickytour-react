@@ -1,41 +1,35 @@
-"use client";
-
-export default function GuestVacationFormDiagram() {
+export function GuestVacationFormDiagram() {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h3 className="mb-4 text-center text-xs font-bold uppercase tracking-wider text-slate-500">
-        Vacation Request Flow
-      </h3>
-      <div className="space-y-3">
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">1</div>
-          <div>
-            <p className="text-xs font-bold text-slate-800">📍 Destination & Dates</p>
-            <p className="text-[10px] text-slate-500 mt-0.5">Where and when you want to travel</p>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">2</div>
-          <div>
-            <p className="text-xs font-bold text-slate-800">👥 Group & Preferences</p>
-            <p className="text-[10px] text-slate-500 mt-0.5">Number of guests and room needs</p>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">3</div>
-          <div>
-            <p className="text-xs font-bold text-slate-800">💰 Budget & Services</p>
-            <p className="text-[10px] text-slate-500 mt-0.5">Price range and extras</p>
-          </div>
-        </div>
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">4</div>
-          <div>
-            <p className="text-xs font-bold text-slate-800">✉️ Submit & Get Matched</p>
-            <p className="text-[10px] text-slate-500 mt-0.5">We find the best options for you</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+      {/* Title */}
+      <rect x="60" y="10" width="200" height="36" rx="8" fill="#0891B2" />
+      <text x="160" y="33" textAnchor="middle" className="fill-white text-[13px] font-bold">Vacation Request</text>
+
+      {/* Steps */}
+      <rect x="40" y="70" width="240" height="44" rx="10" fill="#0891B2" fillOpacity="0.10" stroke="#0891B2" strokeWidth="1.5" />
+      <circle cx="66" cy="92" r="12" fill="#0891B2" />
+      <text x="66" y="96" textAnchor="middle" className="fill-white text-[11px] font-bold">1</text>
+      <text x="88" y="96" className="fill-slate-700 text-[11px] font-medium">Dates & Destination</text>
+
+      <line x1="160" y1="114" x2="160" y2="130" stroke="#0891B2" strokeWidth="1.5" strokeDasharray="4 3" />
+      <polygon points="155,128 160,136 165,128" fill="#0891B2" />
+
+      <rect x="40" y="138" width="240" height="44" rx="10" fill="#0891B2" fillOpacity="0.10" stroke="#0891B2" strokeWidth="1.5" />
+      <circle cx="66" cy="160" r="12" fill="#0891B2" />
+      <text x="66" y="164" textAnchor="middle" className="fill-white text-[11px] font-bold">2</text>
+      <text x="88" y="164" className="fill-slate-700 text-[11px] font-medium">Preferences</text>
+
+      <line x1="160" y1="182" x2="160" y2="198" stroke="#0891B2" strokeWidth="1.5" strokeDasharray="4 3" />
+      <polygon points="155,196 160,204 165,196" fill="#0891B2" />
+
+      <rect x="40" y="206" width="240" height="44" rx="10" fill="#0891B2" fillOpacity="0.15" stroke="#0891B2" strokeWidth="2" />
+      <circle cx="66" cy="228" r="12" fill="#0891B2" />
+      <text x="66" y="232" textAnchor="middle" className="fill-white text-[11px] font-bold">3</text>
+      <text x="88" y="232" className="fill-slate-700 text-[11px] font-semibold">Contact & Submit</text>
+
+      {/* Checkmark */}
+      <circle cx="268" cy="228" r="10" fill="#0891B2" fillOpacity="0.2" />
+      <path d="M262 228l4 4 8-8" stroke="#0891B2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

@@ -3,6 +3,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, SelectField, TextAreaField } from '@/components/form-fields';
+import { JobSeekerFormDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (<Suspense fallback={null}><QuickApplicationInner /></Suspense>);
@@ -48,7 +49,7 @@ function QuickApplicationInner() {
 
   return (
     <PageShell>
-      <Hero title="Quick Application" subtitle="Apply in 2 minutes - get matched with opportunities." ctaA="Submit" ctaB="Learn More" />
+      <Hero diagram={<JobSeekerFormDiagram />} title="Quick Application" subtitle="Apply in 2 minutes - get matched with opportunities." ctaA="Submit" ctaB="Learn More" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Quick Application" />
         <form className="space-y-4" onSubmit={handleSubmit}>

@@ -3,13 +3,14 @@ import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { ListingCard } from '@/components/ListingCard';
 import { getAllSearchItems } from '@/lib/searchHubEngine';
+import { RealEstateBuyDiagram } from '@/components/diagrams';
 
 export default function Page() {
   const reItems = getAllSearchItems().filter((i) => i.intent === 'real-estate');
 
   return (
     <PageShell>
-      <Hero title="Real Estate — Rent" subtitle="Find long-term rental properties across Greece." ctaA="Search Rentals" ctaB="Learn More" />
+      <Hero diagram={<RealEstateBuyDiagram />} title="Real Estate — Rent" subtitle="Find long-term rental properties across Greece." ctaA="Search Rentals" ctaB="Learn More" />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="For Rent" title="Properties Available for Monthly Rental" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

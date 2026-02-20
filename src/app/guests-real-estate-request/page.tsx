@@ -6,6 +6,7 @@ import { GuestREFormDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
 import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
+import { GuestRealEstateFormDiagram } from '@/components/diagrams';
 
 export default function GuestsRealEstateRequest() {
   return (<Suspense fallback={null}><GuestsRealEstateRequestInner /></Suspense>);
@@ -44,7 +45,7 @@ function GuestsRealEstateRequestInner() {
 
   return (
     <PageShell>
-      <Hero title="Request Real-Estate Options in Minutes" subtitle="Tell us what you're looking for and we'll find the best matches" ctaA="Submit Request" ctaB="Browse Properties" />
+      <Hero diagram={<GuestRealEstateFormDiagram />} title="Request Real-Estate Options in Minutes" subtitle="Tell us what you're looking for and we'll find the best matches" ctaA="Submit Request" ctaB="Browse Properties" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Tell Us What You're Looking For" />
         <MultiStepForm steps={steps} currentStep={step} onNext={() => setStep(s => s + 1)} onPrev={() => setStep(s => s - 1)} onSubmit={async () => {

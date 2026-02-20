@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { ManagementChannelDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Connect Once, Manage Everywhere"}
+  return <PMPage diagram={<ManagementChannelDiagram />} title={"Connect Once, Manage Everywhere"}
     subtitle={"Sync availability, rates, and bookings across your distribution channels — and control everything from your ClickyTour PMC Dashboard."}
     introTitle={"Keep channels synced and controlled"}
     introText={"Although the original page included placeholder content, its core intent is clear: centralized channel synchronization to prevent conflicts and reduce manual updates."}

@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PageShell, Hero } from '@/components/site';
 import { AgentsApplyForm } from '@/components/forms';
+import { AgentsFormDiagram } from '@/components/diagrams';
 
 export default function AgentsAgenciesForm() {
   return (<Suspense fallback={null}><AgentsAgenciesFormInner /></Suspense>);
@@ -25,6 +26,7 @@ function AgentsAgenciesFormInner() {
         subtitle="Apply to access rentals, services, and real-estate inventory with white-label offers and net-pricing options."
         ctaA="Start Application"
         ctaB="Back to Agents"
+        diagram={<AgentsFormDiagram />}
       />
       <AgentsApplyForm initialValues={iv} />
     </PageShell>

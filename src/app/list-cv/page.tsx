@@ -2,11 +2,12 @@
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
+import { ListCvDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Apply as Staff / Contractor" subtitle="Submit your CV and get matched with opportunities." ctaA="Submit" ctaB="Learn More" />
+      <Hero diagram={<ListCvDiagram />} title="Apply as Staff / Contractor" subtitle="Submit your CV and get matched with opportunities." ctaA="Submit" ctaB="Learn More" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Apply as Staff / Contractor" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

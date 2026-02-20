@@ -1,4 +1,5 @@
 import { FAQ, Hero, PageShell, SectionTitle } from '@/components/site';
+import { ContactFormDiagram } from '@/components/diagrams';
 
 const generalFaq = [
   {
@@ -61,6 +62,7 @@ export default function FaqPage() {
         subtitle="Find quick answers about ClickyTour and role-specific workflows."
         ctaA="Browse Help Center"
         ctaB="Contact Support"
+        diagram={<ContactFormDiagram />}
       />
 
       <section className="section section-soft">

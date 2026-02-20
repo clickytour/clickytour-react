@@ -2,11 +2,12 @@
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
 import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
+import { FindStaffAdvancedDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Advanced Staff Request" subtitle="Detailed staff request with full specifications as service provider." ctaA="Submit" ctaB="Quick Form" />
+      <Hero diagram={<FindStaffAdvancedDiagram />} title="Advanced Staff Request" subtitle="Detailed staff request with full specifications as service provider." ctaA="Submit" ctaB="Quick Form" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Advanced Staff Request Form" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

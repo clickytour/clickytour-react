@@ -1,5 +1,6 @@
 import { CheckList, FAQ, FeatureGrid, PageShell, SectionTitle } from '@/components/site';
 import { OwnerRealEstateDiagram } from '@/components/diagrams';
+import { FreeEvaluationForm } from '@/components/forms';
 
 export default function Page() {
   return (
@@ -13,6 +14,13 @@ export default function Page() {
       </section>
       
 <section className="section"><div className="container"><SectionTitle title="ClickyTour.com • Real Estate Owners" /><CheckList items={['Property details and positioning','High-quality photos and floor plans','Sale/rent configuration and pricing','Contact and lead routing preferences','Review, approval, and publication']} /></div></section>
+
+      <section className="section bg-slate-50">
+        <div className="container max-w-3xl">
+          <SectionTitle title="List Your Real Estate Property" subtitle="Fill in the details below and our team will review your listing within 24 hours." />
+          <FreeEvaluationForm />
+        </div>
+      </section>
 
       <section className="section">
         <div className="container">

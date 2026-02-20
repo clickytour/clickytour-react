@@ -2,11 +2,12 @@
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
 import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
+import { JobSeekerFormDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Quick Staff Request" subtitle="Post a quick staff request as pm companies." ctaA="Submit" ctaB="Advanced Form" />
+      <Hero diagram={<JobSeekerFormDiagram />} title="Quick Staff Request" subtitle="Post a quick staff request as pm companies." ctaA="Submit" ctaB="Advanced Form" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Quick Staff Request" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>
