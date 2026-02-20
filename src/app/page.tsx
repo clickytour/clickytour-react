@@ -456,11 +456,98 @@ const articleCards = [
   },
 ];
 
+/* Guest sub-role content overrides (when mini-form selects Tours or RE) */
+const guestSubContent: Record<string, Partial<RoleData>> = {
+  'guest-tours': {
+    heroTitle: 'Discover tours, activities & local services — curated for your trip.',
+    heroSubtitle: 'From boat tours to private chefs, find and book local experiences with transparent pricing.',
+    ctaPrimary: 'Browse Activities',
+    ctaSecondary: 'Request a Service',
+    formTitle: 'Request a tour or local service',
+    formSubtitle: 'Fill the form and we will respond quickly with tailored proposals within 1 business day.',
+    formRoleLabel: 'Guest (Tours & Activities)',
+    formFields: ['Destination/Region', 'Service Category*', 'Date', 'Adults', 'Email*', 'Phone'],
+    quickPills: ['Local tours', 'Boat trips', 'Food & wine', 'Wellness', 'Outdoor', 'Transfers', 'Events', 'Custom'],
+    whatYouGet: ['Curated local experiences', 'Transparent pricing', 'Verified providers', 'Instant booking support'],
+    nextStepsTitle: 'Next steps for Activity Seekers',
+    nextSteps: [
+      { title: 'Browse activities', desc: 'Explore tours, transfers, wellness, and more by destination.', linkText: 'Explore →' },
+      { title: 'Request a service', desc: 'Tell us what you need and get matched with local providers.', linkText: 'Request →' },
+      { title: 'Book & enjoy', desc: 'Confirm your booking and get trip-day details.', linkText: 'Book →' },
+    ],
+    toolsTitle: 'Tools for Activity Seekers',
+    tools: [
+      { title: 'Activity Search', desc: 'Filter by type, destination, date, and group size.', linkText: 'Learn more' },
+      { title: 'Service Request', desc: 'Submit what you need and let providers come to you.', linkText: 'Learn more' },
+      { title: 'Provider Profiles', desc: 'Read reviews and compare verified local businesses.', linkText: 'Learn more' },
+      { title: 'Trip Builder', desc: 'Combine services into a full day or multi-day plan.', linkText: 'Learn more' },
+      { title: 'Group Booking', desc: 'Book for families or groups with flexible headcounts.', linkText: 'Learn more' },
+      { title: 'Support', desc: 'Changes, cancellations, and on-trip assistance.', linkText: 'Learn more' },
+    ],
+    faq: faqFromQuestions([
+      'What types of activities are available?',
+      'How do I book a tour?',
+      'Can I customize an activity?',
+      'What if I need to cancel?',
+      'Are providers verified?',
+    ]),
+    ctaTitle: 'Ready to explore local experiences?',
+    ctaText: 'Browse activities or request a custom service for your trip.',
+    ctaButtons: ['Browse Activities', 'Request a Service'],
+  },
+  'guest-real-estate': {
+    heroTitle: 'Find your next property — to buy, rent, or invest in Greece.',
+    heroSubtitle: 'Browse real estate listings with transparent details, or request tailored proposals from our network.',
+    ctaPrimary: 'Browse Properties',
+    ctaSecondary: 'Request Proposals',
+    formTitle: 'Request real estate proposals',
+    formSubtitle: 'Fill the form and we will respond quickly with tailored proposals within 1 business day.',
+    formRoleLabel: 'Guest (Real Estate Buyer / Renter)',
+    formFields: ['Mode*', 'Type*', 'Regions*', 'Email*', 'Phone'],
+    quickPills: ['Buy', 'Rent', 'Monthly', 'Investment', 'Land', 'Commercial', 'Legal support', 'Agents'],
+    whatYouGet: ['Verified property listings', 'Investment insights', 'Agent & legal support', 'No hidden fees'],
+    nextStepsTitle: 'Next steps for Property Seekers',
+    nextSteps: [
+      { title: 'Define your search', desc: 'Set type, budget, region and preferences.', linkText: 'Search →' },
+      { title: 'Request proposals', desc: 'Get curated options from agents and owners.', linkText: 'Request →' },
+      { title: 'Visit & decide', desc: 'Schedule viewings and get legal/mortgage guidance.', linkText: 'Schedule →' },
+    ],
+    toolsTitle: 'Tools for Property Seekers',
+    tools: [
+      { title: 'Property Search', desc: 'Filter by type, price, location, and features.', linkText: 'Learn more' },
+      { title: 'Proposal Request', desc: 'Submit criteria and receive matched listings.', linkText: 'Learn more' },
+      { title: 'Market Insights', desc: 'Area trends, price ranges, and investment data.', linkText: 'Learn more' },
+      { title: 'Agent Directory', desc: 'Connect with verified local real estate agents.', linkText: 'Learn more' },
+      { title: 'Legal & Finance', desc: 'Mortgage, notary, and legal support referrals.', linkText: 'Learn more' },
+      { title: 'Comparison Tools', desc: 'Side-by-side property comparison and favorites.', linkText: 'Learn more' },
+    ],
+    faq: faqFromQuestions([
+      'Can foreigners buy property in Greece?',
+      'What are the buying costs?',
+      'How long does a purchase take?',
+      'Do you offer rental properties too?',
+      'Can I get mortgage support?',
+    ]),
+    ctaTitle: 'Ready to find your property?',
+    ctaText: 'Browse listings or request tailored proposals from our agent network.',
+    ctaButtons: ['Browse Properties', 'Request Proposals'],
+  },
+};
+
 export default function Home() {
   const [activeRole, setActiveRole] = useState<RoleKey | null>(null);
+  const [activeMiniRole, setActiveMiniRole] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number>(0);
 
-  const data = useMemo(() => (activeRole ? roleContent[activeRole] : defaultRoleContent), [activeRole]);
+  const data = useMemo(() => {
+    if (!activeRole) return defaultRoleContent;
+    const base = roleContent[activeRole];
+    // If a guest sub-role is active, merge its overrides
+    if (activeMiniRole && guestSubContent[activeMiniRole]) {
+      return { ...base, ...guestSubContent[activeMiniRole] } as RoleData;
+    }
+    return base;
+  }, [activeRole, activeMiniRole]);
 
   return (
     <PageShell>
@@ -477,6 +564,7 @@ export default function Home() {
                   key={role}
                   onClick={() => {
                     setActiveRole(role);
+                    setActiveMiniRole(null);
                     setOpenFaq(0);
                   }}
                   className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
@@ -498,15 +586,7 @@ export default function Home() {
 
           <HomepageMiniForm
             selectedRole={activeRole ? mapTabToMiniRole(activeRole) : null}
-            onRoleChange={(miniRole: MiniFormRoleKey | null) => {
-              if (miniRole) {
-                const tab = mapMiniRoleToTab(miniRole);
-                setActiveRole((tab as RoleKey) || null);
-              } else {
-                setActiveRole(null);
-              }
-              setOpenFaq(0);
-            }}
+            onRoleChange={(miniRole: MiniFormRoleKey | null) => { if (miniRole) { const tab = mapMiniRoleToTab(miniRole); setActiveRole((tab as RoleKey) || null); setActiveMiniRole(miniRole); } else { setActiveRole(null); setActiveMiniRole(null); } setOpenFaq(0); }}
           />
         </div>
       </section>
@@ -684,15 +764,7 @@ export default function Home() {
         <div className="container max-w-lg">
           <HomepageMiniForm
             selectedRole={activeRole ? mapTabToMiniRole(activeRole) : null}
-            onRoleChange={(miniRole: MiniFormRoleKey | null) => {
-              if (miniRole) {
-                const tab = mapMiniRoleToTab(miniRole);
-                setActiveRole((tab as RoleKey) || null);
-              } else {
-                setActiveRole(null);
-              }
-              setOpenFaq(0);
-            }}
+            onRoleChange={(miniRole: MiniFormRoleKey | null) => { if (miniRole) { const tab = mapMiniRoleToTab(miniRole); setActiveRole((tab as RoleKey) || null); setActiveMiniRole(miniRole); } else { setActiveRole(null); setActiveMiniRole(null); } setOpenFaq(0); }}
           />
         </div>
       </section>
