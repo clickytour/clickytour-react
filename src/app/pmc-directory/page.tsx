@@ -1,26 +1,61 @@
-'use client';
-import Link from 'next/link';
-import { PageShell, Hero, SectionTitle } from '@/components/site';
-import { ListingCard } from '@/components/ListingCard';
-import { getAllSearchItems } from '@/lib/searchHubEngine';
-import { PMCDirectoryDiagram } from '@/components/diagrams';
+"use client";
 
-export default function Page() {
-  const pmcItems = getAllSearchItems().filter((i) => i.intent === 'pmcs');
+import { PageShell, Hero } from "@/components/site";
+import { DirectorySearch } from "@/components/marketplace";
+import { MOCK_PMC_ITEMS, PMC_SERVICE_TAGS, GREEK_REGIONS } from "@/lib/marketplace";
+import { PMCDirectoryDiagram } from "@/components/diagrams";
 
+const categories = PMC_SERVICE_TAGS.map((t) => ({ slug: t, label: t }));
+const regions = [...GREEK_REGIONS];
+
+export default function PMCDirectoryPage() {
   return (
     <PageShell>
-      <Hero diagram={<PMCDirectoryDiagram />} title="PMC Directory" subtitle="Find property management companies by destination and service type." ctaA="Browse PMCs" ctaB="Apply as PMC" />
-      <section className="section"><div className="container">
-        <SectionTitle eyebrow="Directory" title="Property Management Companies" subtitle="Trusted partners managing vacation and real estate portfolios." />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-          {pmcItems.map((item) => (<ListingCard key={item.id} item={item} />))}
+      <Hero
+        diagram={<PMCDirectoryDiagram />}
+        title="PMC Directory"
+        subtitle="Find trusted property management companies across Greece. Browse profiles, compare services, and connect with the right partner for your property."
+        ctaA="List Your PMC"
+        ctaHrefA="/pmc-apply"
+        ctaB="Submit Your Property"
+        ctaHrefB="/marketplace/property-management/submit"
+      />
+
+      <section className="section">
+        <div className="container">
+          <DirectorySearch
+            items={MOCK_PMC_ITEMS}
+            categories={categories}
+            regions={regions}
+            directoryLabel="Property Management Companies"
+            showCategoryFilter
+            showRegionFilter
+          />
         </div>
-        {pmcItems.length === 0 && <div className="text-center py-12 text-slate-500"><p>No PMCs listed yet.</p></div>}
-        <div className="mt-8 text-center">
-          <Link href="/search?intent=pmcs" className="inline-block px-8 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Search All PMCs</Link>
+      </section>
+
+      {/* How to get listed */}
+      <section className="bg-slate-50 py-12">
+        <div className="container max-w-4xl text-center">
+          <h2 className="text-2xl font-bold text-slate-900">Are You a Property Management Company?</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            Join the ClickyTour directory and get matched with property owners looking for management services.
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {[
+              { n: "1", t: "Apply", d: "Submit your company profile with services, coverage areas, and portfolio." },
+              { n: "2", t: "Get Listed", d: "After verification, your profile appears in the directory for owners to find." },
+              { n: "3", t: "Access the Pool", d: "Browse incoming property requests from owners seeking management." },
+            ].map((s) => (
+              <div key={s.n} className="rounded-xl bg-white p-5 shadow-sm border border-slate-200">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-600 text-white text-sm font-bold">{s.n}</span>
+                <h3 className="mt-2 font-bold text-slate-900">{s.t}</h3>
+                <p className="mt-1 text-sm text-slate-600">{s.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div></section>
+      </section>
     </PageShell>
   );
 }
