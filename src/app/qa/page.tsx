@@ -103,6 +103,28 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
     'real-estate-owners-list',
     'submission-viewer',
   ]},
+  { label: 'Marketplace Thank You', icon: '🎯', routes: [
+    'thank-you-marketplace-submission',
+    'thank-you-marketplace-claim',
+    'thank-you-directory-listing',
+    'thank-you-hotel-listing',
+    'thank-you-partner-application',
+  ]},
+  { label: 'Programmatic SEO: Region', icon: '📍', routes: [
+    'directory/services/athens','directory/services/crete','directory/services/mykonos','directory/services/santorini','directory/services/halkidiki',
+    'directory/agents/athens','directory/agents/crete','directory/agents/rhodes',
+    'directory/property-managers/crete','directory/property-managers/mykonos','directory/property-managers/athens',
+    'directory/hotels/crete','directory/hotels/santorini','directory/hotels/corfu',
+    'directory/staff/athens','directory/staff/crete','directory/staff/halkidiki',
+    'directory/partners/athens','directory/partners/thessaloniki',
+  ]},
+  { label: 'Programmatic SEO: Category', icon: '🏷', routes: [
+    'directory/services/category/cleaning','directory/services/category/transfers','directory/services/category/tours-activities','directory/services/category/maintenance',
+    'directory/agents/category/travel-agents','directory/agents/category/real-estate-brokers','directory/agents/category/tour-operators',
+    'directory/property-managers/category/full-management','directory/property-managers/category/guest-ops','directory/property-managers/category/revenue-management',
+    'directory/hotels/category/hotels','directory/hotels/category/boutique','directory/hotels/category/resorts',
+    'directory/staff/category/cleaner','directory/staff/category/host','directory/staff/category/manager','directory/staff/category/chef',
+  ]},
 ];
 
 const totalPages = sections.reduce((a, s) => a + s.routes.length, 0);
