@@ -91,8 +91,8 @@ export function HotelDetailSections({
           </div>
 
           <div className="mt-auto flex flex-col gap-2 pt-4">
-            <button className="w-full rounded-xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white hover:bg-teal-700">Book Now</button>
-            <button className="w-full rounded-xl border border-teal-600 px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">Contact Hotel</button>
+            <button onClick={() => document.getElementById("guest-request-form")?.scrollIntoView({ behavior: "smooth" })} className="w-full rounded-xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white hover:bg-teal-700">Book Now</button>
+            <button onClick={() => document.getElementById("guest-request-form")?.scrollIntoView({ behavior: "smooth" })} className="w-full rounded-xl border border-teal-600 px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">Contact Hotel</button>
           </div>
         </aside>
       </section>

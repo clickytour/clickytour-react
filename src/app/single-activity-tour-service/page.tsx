@@ -12,7 +12,7 @@ export default function Page() {
         <div className="grid md:grid-cols-2 gap-4 mt-6">
           {['Type','Location','Duration','Price','Provider','Languages'].map(f => (<div key={f}><p className="text-sm font-semibold text-slate-500">{f}</p><p className="text-slate-800">&mdash;</p></div>))}
         </div>
-        <div className="mt-8 flex gap-3"><button className="px-6 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Book Now</button><button className="px-6 py-3 border border-teal-600 text-teal-700 font-semibold rounded-xl hover:bg-teal-50">Contact Provider</button></div>
+        <div className="mt-8 flex gap-3"><a href="/guest-service-request" className="px-6 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Book Now</a><a href="/contact" className="px-6 py-3 border border-teal-600 text-teal-700 font-semibold rounded-xl hover:bg-teal-50">Contact Provider</a></div>
       </div></div></section>
     </PageShell>
   );

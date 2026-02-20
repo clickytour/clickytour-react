@@ -74,7 +74,7 @@ diagram={<AffiliateDiagram />}
             <p className="text-cyan-100 mt-3 max-w-2xl">
               Join today, get your referral tools, and start earning from travel and property opportunities.
             </p>
-            <button className="btn-primary mt-5">Apply for Affiliate Access</button>
+            <a href="/agents-affiliate" className="btn-primary mt-5">Apply for Affiliate Access</a>
           </div>
         </div>
       </section>

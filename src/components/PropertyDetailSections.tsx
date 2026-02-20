@@ -139,10 +139,10 @@ export function PropertyDetailSections({
           </div>
 
           <div className="mt-auto flex flex-col gap-2 pt-4">
-            <button className="w-full rounded-xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white hover:bg-teal-700">
+            <button onClick={() => document.getElementById("guest-request-form")?.scrollIntoView({ behavior: "smooth" })} className="w-full rounded-xl bg-teal-600 px-6 py-3 text-sm font-semibold text-white hover:bg-teal-700">
               {isVacation ? "Book Now" : isSale ? "Request Info" : "Apply"}
             </button>
-            <button className="w-full rounded-xl border border-teal-600 px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">
+            <button onClick={() => document.getElementById("guest-request-form")?.scrollIntoView({ behavior: "smooth" })} className="w-full rounded-xl border border-teal-600 px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">
               Contact Owner
             </button>
           </div>
@@ -353,7 +353,7 @@ export function PropertyDetailSections({
         <h2 className="text-2xl font-bold">Interested in this property?</h2>
         <p className="mt-2 text-teal-100">Get a personalized proposal or book directly through ClickyTour.</p>
         <div className="mt-4 flex justify-center gap-3">
-          <button className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">
+          <button onClick={() => document.getElementById("guest-request-form")?.scrollIntoView({ behavior: "smooth" })} className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">
             {isVacation ? "Book Now" : "Request Info"}
           </button>
           <a

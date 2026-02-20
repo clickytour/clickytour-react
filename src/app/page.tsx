@@ -702,7 +702,7 @@ export default function Home() {
               <li>• One-click PDF export</li>
               <li>• Great for agents, PM companies, and owners</li>
             </ul>
-            <button className="btn-primary mt-5">Get White-label Tools</button>
+            <a href="/agents-tools-white-label-offers" className="btn-primary mt-5">Get White-label Tools</a>
           </div>
           <div className="card p-6 bg-gradient-to-br from-cyan-50 to-white">
             <p className="font-semibold">✓ Agent branded template</p>

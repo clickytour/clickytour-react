@@ -40,7 +40,7 @@ diagram={<ContactDiagram />}
               <input className="rounded-xl border border-slate-200 px-4 py-3" type="email" placeholder="Email address" />
               <input className="rounded-xl border border-slate-200 px-4 py-3 md:col-span-2" placeholder="Subject" />
               <textarea className="rounded-xl border border-slate-200 px-4 py-3 md:col-span-2" rows={6} placeholder="Message" />
-              <button className="btn-primary md:col-span-2">Send Message</button>
+              <button type="submit" className="btn-primary md:col-span-2">Send Message</button>
             </form>
           </div>
 

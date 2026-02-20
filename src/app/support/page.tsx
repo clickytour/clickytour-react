@@ -45,7 +45,7 @@ diagram={<ContactDiagram />}
               <input className="rounded-xl border border-slate-200 px-4 py-3 md:col-span-2" placeholder="Subject" />
               <textarea className="rounded-xl border border-slate-200 px-4 py-3 md:col-span-2" rows={7} placeholder="Describe your issue in detail" />
 
-              <button className="btn-primary md:col-span-2">Submit Ticket</button>
+              <button type="submit" className="btn-primary md:col-span-2">Submit Ticket</button>
             </form>
           </div>
         </div>

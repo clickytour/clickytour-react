@@ -53,7 +53,7 @@ export default function GuestsPage() {
                   </div>
                 ))}
               </div>
-              <button className="btn-primary mt-4">Search rentals</button>
+              <a href="/search" className="btn-primary mt-4">Search rentals</a>
             </article>
 
             <article className="card p-6">
@@ -65,7 +65,7 @@ export default function GuestsPage() {
                   </div>
                 ))}
               </div>
-              <button className="btn-secondary mt-4">Explore real estate</button>
+              <a href="/real-estate-buy" className="btn-secondary mt-4">Explore real estate</a>
             </article>
           </div>
 
