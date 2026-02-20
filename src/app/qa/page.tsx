@@ -17,7 +17,7 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
     'agents','agents-book-get-paid','agents-book-net-pricing','agents-vacation-property-pool','agents-explore-services','agents-explore-activities','agents-explore-index','agents-local-activities','agents-real-estate-input','agents-real-estate','agents-real-estate-tools-sales','agents-list-properties','agents-real-estate-tools','agents-tools','agents-tools-advanced-search','agents-tools-white-label-offers','agents-tools-branded-templates','agents-dashboard','agents-offer-no-branding','agents-promote-local-services','agents-grow-promote','agents-affiliate','agents-help','agents-help-contact','agents-help-faq','agents-help-plans-pricing','agents-agenicies-form','agent-tools-hub',
   ]},
   { label: 'PM Companies', icon: '🏢', routes: [
-    'pm-companies','management-promote-services','management-match-properties','management-showcase-white-label','management-grow-portfolio','management-vacation-property-pool','management-list-properties','management-allow-agents-book','management-increase-bookings','management-dashboard','management-channel-manager','management-tools-center','management-manage-operate','management-help','management-help-faq','management-help-plans-pricing','pmc-apply','pmc-directory','pmc-presentation','pmc-profile','pmc-requests-pool','pmc-submission-viewer','ops-operator-pmc','property-management-company-form',
+    'pm-companies','management-promote-services','management-match-properties','management-showcase-white-label','management-grow-portfolio','management-vacation-property-pool','management-list-properties','management-allow-agents-book','management-increase-bookings','management-dashboard','management-channel-manager','management-tools-center','management-manage-operate','management-help','management-help-faq','management-help-plans-pricing','pmc-apply','property-management-company-form',
   ]},
   { label: 'Find Staff & Jobs', icon: '👥', routes: [
     'find-staff','find-staff-contractors','find-staff-contractors-management','find-staff-contractors-owners','find-staff-contractors-providers','find-staff-contractors-providers-categories','find-staff-contractors-job-seekers','find-staff-contractors-job-seekers-hub','find-staff-contractors-job-seekers-dashboard','find-staff-contractors-job-seekers-profile','find-staff-contractors-job-seekers-quick-application','find-staff-contractors-job-seekers-application','find-staff-contractors-job-seekers-advanced','find-staff-contractors-quick-request','find-staff-contractors-advanced','find-staff-contractors-advancedrolemanagement','find-staff-contractors-advancedroleowners','find-staff-contractors-advancedroleproviders','find-staff-contractors-management-quick-request','find-staff-contractors-owners-quick-request','find-staff-contractors-providers-quick-request','find-staff-contractors-universal','find-staff-contractors-directory','job-seeker-directory','request-detail-single','request-applications','my-applications','list-cv',
@@ -35,7 +35,7 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
     'real-estate','real-estate-buy','real-estate-rent','real-estate-buyer-form','real-estate-owners-list','real-estate-request-consultation','real-estate-proposals',
   ]},
   { label: 'Destinations & Explore', icon: '🌍', routes: [
-    'destinations-2','destinations-planning','discover','marketplace','advanced-search-booking','services-activities-search-cards-grid-all-roles',
+    'destinations-2','destinations-planning','discover','advanced-search-booking','services-activities-search-cards-grid-all-roles',
   ]},
   { label: 'Vacation Assistance', icon: '🛎', routes: [
     'vacation-assistance-personalized-planning','vacation-assistance-reservation-help','vacation-assistance-reservation-help-2',
@@ -44,7 +44,7 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
     'work-with-us','work-with-us-jobs','work-with-us-affiliate','work-with-us-quiz',
   ]},
   { label: 'Company & Info', icon: '🏛', routes: [
-    'about','team','contact','blog','blog-category-travel-tips','media-partnerships','compare-partner-roles','portfolio','single-portfolio','property-presentation',
+    'about','team','contact','blog','blog-category-travel-tips','media-partnerships','compare-partner-roles','portfolio','single-portfolio',
   ]},
   { label: 'Help & Support', icon: '❓', routes: [
     'help','faq','general-faq','support',
@@ -56,7 +56,7 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
     'thank-you-agent','thank-you-guest-real-estate','thank-you-guest-service-request','thank-you-guest-vacation-request','thank-you-job-seeker','thank-you-media-partnerships','thank-you-pmc','thank-you-real-estate-owner','thank-you-service-provider','thank-you-vacation-owner',
   ]},
   { label: 'Forms & Apps', icon: '📝', routes: [
-    'request-form','appointment','application-detail','submission-viewer',
+    'request-form','appointment','application-detail',
   ]},
   { label: 'Dynamic: Property Detail', icon: '🔗', routes: [
     'property/vacation/villa-azure-halkidiki','property/vacation/villa-azure-halkidiki/sale','property/vacation/villa-azure-halkidiki/monthly',
@@ -82,6 +82,25 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
   ]},
   { label: 'Dynamic: Search Hub', icon: '🔍', routes: [
     'search',
+  ]},
+  { label: 'Marketplace & Directories', icon: '🏪', routes: [
+    'marketplace',
+    'directory/services',
+    'directory/agents',
+    'directory/property-managers',
+    'directory/hotels',
+    'directory/staff',
+    'directory/partners',
+    'pmc-directory',
+    'pmc-requests-pool',
+    'pmc-profile',
+    'pmc-presentation',
+    'pmc-submission-viewer',
+    'property-presentation',
+    'ops-operator-pmc',
+    'vacation-owners-list',
+    'real-estate-owners-list',
+    'submission-viewer',
   ]},
 ];
 
