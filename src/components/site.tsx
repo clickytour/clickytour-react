@@ -351,10 +351,7 @@ export function Footer() {
         </div>
         <p className="text-cyan-100/80 text-sm mb-8 sm:hidden">Where Travelers, Hosts & Partners Connect</p>
 
-        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
-          <div className="hidden lg:block">
-            <p className="text-cyan-100/80 text-sm">Where Travelers, Hosts & Partners Connect</p>
-          </div>
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-8 mt-8">
           {footerCols.map((c) => (
             <div key={c.t}>
               <h4 className="font-bold text-sm mb-3 text-cyan-50">{c.t}</h4>
