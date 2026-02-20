@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { OwnerListFormDiagram } from '@/components/diagrams';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
 
@@ -12,7 +13,7 @@ export default function VacationOwnersList() {
   const steps = intent === 'maintenance' ? maintSteps : listSteps;
   return (
     <PageShell>
-      <Hero title="List, Evaluate, or Request Services for Your Property" subtitle="Work with ClickyTour as a Vacation Property Owner" ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="List, Evaluate, or Request Services for Your Property" subtitle="Work with ClickyTour as a Vacation Property Owner" ctaA="Get Started" ctaB="Learn More" diagram={<OwnerListFormDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Vacation Property Owner Form" />
         <div className="mb-6">

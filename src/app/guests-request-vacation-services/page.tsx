@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { GuestServiceFormDiagram } from '@/components/diagrams';
 
 const services = [
   { icon: '🧹', title: 'Cleaning & Linen', desc: 'Schedule trusted local cleaners and linen pickup.' },

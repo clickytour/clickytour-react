@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { GuestREFormDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
 

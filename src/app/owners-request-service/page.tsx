@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { GuestServiceFormDiagram } from '@/components/diagrams';
 
 const services = [
   { icon: '🧽', title: 'Cleaning & Linen', desc: 'Schedule trusted local cleaners and linen pickup.' },
@@ -12,7 +13,7 @@ const services = [
 export default function OwnersRequestService() {
   return (
     <PageShell>
-      <Hero title="Start Getting Help with Your Property Today" subtitle="Need Help Managing Your Vacation Home?" ctaA="Request a Service" ctaB="Learn More" />
+      <Hero title="Start Getting Help with Your Property Today" subtitle="Need Help Managing Your Vacation Home?" ctaA="Request a Service" ctaB="Learn More" diagram={<GuestServiceFormDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Request Home Services — What's Available" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

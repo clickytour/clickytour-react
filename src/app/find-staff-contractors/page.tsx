@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { FindStaffFlowDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Find Staff & Contractors" subtitle="Tourism & property staffing, worldwide." ctaA="Post Request" ctaB="Browse" />
+      <Hero title="Find Staff & Contractors" subtitle="Tourism & property staffing, worldwide." ctaA="Post Request" ctaB="Browse" diagram={<FindStaffFlowDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="How It Works" subtitle="Simple, fast, location-based hiring." />
         <div className="grid md:grid-cols-3 gap-6">

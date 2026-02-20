@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { PMCApplyFormDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
 
@@ -9,7 +10,7 @@ export default function PMCApply() {
   const steps = ['Company Info', 'Services & Coverage', 'Profile & Submit'];
   return (
     <PageShell>
-      <Hero title="Apply as a PMC on ClickyTour" subtitle="PMC Profile Submission" ctaA="Apply Now" ctaB="Learn More" />
+      <Hero title="Apply as a PMC on ClickyTour" subtitle="PMC Profile Submission" ctaA="Apply Now" ctaB="Learn More" diagram={<PMCApplyFormDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="PMC Application Form" />
         <MultiStepForm steps={steps} currentStep={step} onNext={() => setStep(s => s + 1)} onPrev={() => setStep(s => s - 1)} onSubmit={() => alert('Thank you! This form is in demo mode.')}>

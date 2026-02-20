@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { FindStaffManagementDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Build Your Local Team Per Destination" subtitle="Hire staff for your property management operations." ctaA="Quick Request" ctaB="Advanced Request" />
+      <Hero title="Build Your Local Team Per Destination" subtitle="Hire staff for your property management operations." ctaA="Quick Request" ctaB="Advanced Request" diagram={<FindStaffManagementDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Why Use ClickyTour" />
         <div className="grid md:grid-cols-3 gap-4">

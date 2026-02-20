@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { FAQDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Guest FAQ" subtitle="Common questions from travelers and guests." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Guest FAQ" subtitle="Common questions from travelers and guests." ctaA="Get Started" ctaB="Learn More" diagram={<FAQDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Guest FAQ" />
         <div className="space-y-3">

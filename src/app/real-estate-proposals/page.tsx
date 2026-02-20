@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { REBuyerFormDiagram2 } from '@/components/diagrams';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 
 export default function RealEstateProposals() {

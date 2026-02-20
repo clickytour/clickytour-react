@@ -1,11 +1,12 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { StaffRequestDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Quick Staff Request" subtitle="Post a quick staff request as any role." ctaA="Submit" ctaB="Advanced Form" />
+      <Hero title="Quick Staff Request" subtitle="Post a quick staff request as any role." ctaA="Submit" ctaB="Advanced Form" diagram={<StaffRequestDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Quick Staff Request" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

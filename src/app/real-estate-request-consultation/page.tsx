@@ -1,5 +1,6 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { REBuyerFormDiagram2 } from '@/components/diagrams';
 import { TextInput, SelectField, TextAreaField } from '@/components/form-fields';
 
 export default function RealEstateRequestConsultation() {

@@ -1,13 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { PMCApplyFormDiagram } from '@/components/diagrams';
 import { TextInput, DateInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
 
 export default function PropertyManagementCompanyForm() {
   const [intent, setIntent] = useState('list');
   return (
     <PageShell>
-      <Hero title="Work with ClickyTour as a PMC" subtitle="Property Management Company — Request Form" ctaA="Submit" ctaB="Learn More" />
+      <Hero title="Work with ClickyTour as a PMC" subtitle="Property Management Company — Request Form" ctaA="Submit" ctaB="Learn More" diagram={<PMCApplyFormDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="PMC Request Form" />
         <form className="space-y-6" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

@@ -1,5 +1,6 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { GuestServiceFormDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
 
 export default function GuestServiceRequest() {

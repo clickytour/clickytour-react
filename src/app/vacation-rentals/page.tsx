@@ -1,10 +1,11 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { VacationRentalsDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Vacation Rentals" subtitle="Find your perfect vacation home — villas, apartments, and more." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Vacation Rentals" subtitle="Find your perfect vacation home — villas, apartments, and more." ctaA="Get Started" ctaB="Learn More" diagram={<VacationRentalsDiagram />} />
       <section className="section"><div className="container">
         <div className="card p-6 mb-6">
           <div className="grid md:grid-cols-4 gap-4">

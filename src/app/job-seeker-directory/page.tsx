@@ -1,10 +1,11 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { StaffDirectoryDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Job Seeker Directory" subtitle="Search and filter candidates for staffing." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Job Seeker Directory" subtitle="Search and filter candidates for staffing." ctaA="Get Started" ctaB="Learn More" diagram={<StaffDirectoryDiagram />} />
       <section className="section"><div className="container">
         <div className="card p-6 mb-6">
           <div className="grid md:grid-cols-3 gap-4">

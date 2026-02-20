@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { RealEstateHubDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Real Estate" subtitle="Buy, sell, or rent property in Greece and beyond." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Real Estate" subtitle="Buy, sell, or rent property in Greece and beyond." ctaA="Get Started" ctaB="Learn More" diagram={<RealEstateHubDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Real Estate" subtitle="Buy, sell, or rent property in Greece and beyond." />
         <div className="grid md:grid-cols-3 gap-4">

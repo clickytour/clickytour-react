@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { JobSeekerHubDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
