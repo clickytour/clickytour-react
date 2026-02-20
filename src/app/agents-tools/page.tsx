@@ -12,8 +12,8 @@ export default function Page() {
       sections={[{"title":"Overview","body":"Access every tool you need — from branded offers to advanced searches — all in your dedicated dashboard.","points":["Open Toolbox","Go to Manager Dashboard","Tools Overview"]},{"title":"How agents apply this","body":"Why Agents Choose ClickyTour","points":["Send branded or no-logo presentations instantly","Templates Library","Pre-built and customizable messaging templates","Advanced Search"]},{"title":"Next steps","body":"White-label Offers","points":["Why It Saves Time","Save Hours on Every Deal","⏱ Reduce manual work with auto-generated documents"]}]}
       ctaTitle={"Start growing with ClickyTour"}
       ctaBody={"Ready-made marketing assets, share tools, and quick exports to speed up promotion."}
-      ctaPrimary={{ label: 'Get started', href: '/contact' }}
-      ctaSecondary={{ label: 'View agent tools', href: '/for-agents' }}
+      ctaPrimary={{ label: 'Browse All Agent Tools', href: '/tools?role=agent' }}
+      ctaSecondary={{ label: 'Get started', href: '/contact' }}
     />
   );
 }

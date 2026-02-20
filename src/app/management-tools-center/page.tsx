@@ -10,6 +10,7 @@ export default function Page() {
     steps={[{"title":"Enable relevant modules","desc":"Select tools that match your team workflow."},{"title":"Assign roles","desc":"Set permissions for managers, coordinators, and finance users."},{"title":"Track impact","desc":"Measure time saved and conversion improvements over time."}]}
     ctaTitle={"Explore the Tools Center"}
     ctaText={"Equip your team with practical tools that improve execution every week."}
-    ctaPrimary={"Open Tools Center"}
+    ctaPrimary={"Browse All PMC Tools"}
+    ctaHrefPrimary={"/tools?role=pmc"}
     ctaSecondary={"Talk to Support"} />;
 }

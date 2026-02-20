@@ -63,8 +63,8 @@ export default function ServiceProvidersSubpage() {
             <h2 className="text-2xl md:text-3xl font-extrabold">Ready to move forward?</h2>
             <p className="text-cyan-100 mt-2">Take the next step and strengthen your provider visibility on ClickyTour.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">{ctas[0] ?? 'Get Started'}</button>
-              <button className="btn-secondary">{ctas[1] ?? 'Learn More'}</button>
+              <a href="/tools?role=serviceProvider" className="btn-primary">Browse All SP Tools</a>
+              <a href="/service-providers-list-service" className="btn-secondary">List Your Service</a>
             </div>
           </article>
         </div>

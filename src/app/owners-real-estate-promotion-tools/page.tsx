@@ -21,8 +21,8 @@ export default function Page() {
             <h2 className="text-3xl font-extrabold">Ready to move forward?</h2>
             <p className="text-cyan-100 mt-2">List your property or speak with owner support to choose the right path.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/owners-real-estate-list-property" className="btn-primary">Get started</Link>
-              <Link href="/contact" className="btn-secondary">Talk to support</Link>
+              <Link href="/tools?role=owner" className="btn-primary">Browse All Owner Tools</Link>
+              <Link href="/owners-real-estate-list-property" className="btn-secondary">List Your Property</Link>
             </div>
           </div>
         </div>
