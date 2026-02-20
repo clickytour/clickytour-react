@@ -24,3 +24,17 @@ export { default as AgentAdvancedSearchDiagram } from "./AgentAdvancedSearchDiag
 export { default as AgentBrandedTemplatesDiagram } from "./AgentBrandedTemplatesDiagram";
 export { default as AgentPlansDiagram } from "./AgentPlansDiagram";
 export { default as AgentRealEstateDiagram } from "./AgentRealEstateDiagram";
+
+// Service Provider Diagrams
+export { default as SPListServiceDiagram } from "./SPListServiceDiagram";
+export { default as SPDashboardDiagram } from "./SPDashboardDiagram";
+export { default as SPGrowReachDiagram } from "./SPGrowReachDiagram";
+export { default as SPPromotionToolsDiagram } from "./SPPromotionToolsDiagram";
+export { default as SPPlansDiagram } from "./SPPlansDiagram";
+export { default as SPWhatYouOfferDiagram } from "./SPWhatYouOfferDiagram";
+export { default as SPForGuestsDiagram } from "./SPForGuestsDiagram";
+export { default as SPForOwnersDiagram } from "./SPForOwnersDiagram";
+export { default as SPFreeVisibilityDiagram } from "./SPFreeVisibilityDiagram";
+export { default as SPInvestTourismDiagram } from "./SPInvestTourismDiagram";
+export { default as SPListPromoteDiagram } from "./SPListPromoteDiagram";
+export { default as SPSaleRentDiagram } from "./SPSaleRentDiagram";

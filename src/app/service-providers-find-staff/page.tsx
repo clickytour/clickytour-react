@@ -1,4 +1,6 @@
 import { PageShell } from '@/components/site';
+import { SPForOwnersDiagram } from '@/components/diagrams';
+
 
 const subtitle = "From seasonal employees to event crew and skilled contractors, ClickyTour connects your service business with trusted professionals.";
 const overview = [
@@ -26,9 +28,14 @@ export default function ServiceProvidersSubpage() {
     <PageShell>
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-14 md:py-16">
         <div className="container">
+          <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-start">
+          <div>
           <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Service Providers</p>
           <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Find Staff / Contractors</h1>
           <p className="text-cyan-100 mt-4 max-w-3xl">{subtitle}</p>
+        </div>
+            <div className="hidden lg:block max-w-sm"><SPForOwnersDiagram /></div>
+          </div>
         </div>
       </section>
 
