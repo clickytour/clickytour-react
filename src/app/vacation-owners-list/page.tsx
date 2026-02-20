@@ -4,6 +4,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { OwnerListFormDiagram } from '@/components/diagrams';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function VacationOwnersList() {
   const [step, setStep] = useState(0);
@@ -24,7 +25,7 @@ export default function VacationOwnersList() {
           {intent !== 'maintenance' && step === 0 && <div className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <TextInput label="Property Type" name="propertyType" required />
-              <TextInput label="Region" name="region" required />
+              <PlaceAutocomplete label="Region" name="region" />
               <TextInput label="Street Address" name="street1" />
               <TextInput label="City" name="city" />
               <TextInput label="State / Region" name="state" />

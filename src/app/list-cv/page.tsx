@@ -1,6 +1,7 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function Page() {
   return (
@@ -18,7 +19,7 @@ export default function Page() {
             <DateInput label="Available From" name="availFrom" />
             <DateInput label="Available To" name="availTo" />
             <TextInput label="Desired Role" name="role" />
-            <TextInput label="Region" name="region" />
+            <PlaceAutocomplete label="Region" name="region" />
           </div>
           <CheckboxGroup label="Roles Interested" name="roles" options={['Driver','Tour Guide','Cleaner','Check-in / Host','Maintenance','Cook / Kitchen','Pool & Garden','Security','Concierge','Admin']} />
           <TextAreaField label="Experience & Skills" name="experience" />

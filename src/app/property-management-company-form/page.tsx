@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { PMCApplyFormDiagram } from '@/components/diagrams';
 import { TextInput, DateInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function PropertyManagementCompanyForm() {
   const [intent, setIntent] = useState('list');
@@ -15,7 +16,7 @@ export default function PropertyManagementCompanyForm() {
           <div className="mb-4"><label className="block text-sm font-semibold text-slate-700 mb-1">What do you want to do? *</label><select className="w-full rounded-xl border border-slate-200 px-4 py-3" value={intent} onChange={e => setIntent(e.target.value)}><option value="list">List your properties</option><option value="matched">Get matched with owners</option><option value="collab">Collaboration / partnership</option><option value="staff">Staff finding (contractors)</option><option value="services">Request services</option></select></div>
           <div className="grid md:grid-cols-2 gap-4">
             <TextInput label="Company Name" name="companyName" required />
-            <TextInput label="Regions Managed" name="regions" required />
+            <PlaceAutocomplete label="Regions Managed" name="regions" required />
             <TextInput label="Email" name="email" type="email" required />
             <TextInput label="Phone" name="phone" type="tel" />
           </div>

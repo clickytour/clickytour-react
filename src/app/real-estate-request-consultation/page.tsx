@@ -2,6 +2,7 @@
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { REBuyerFormDiagram2 } from '@/components/diagrams';
 import { TextInput, SelectField, TextAreaField } from '@/components/form-fields';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function RealEstateRequestConsultation() {
   return (
@@ -16,7 +17,7 @@ export default function RealEstateRequestConsultation() {
             <TextInput label="Phone / WhatsApp" name="phone" type="tel" />
             <SelectField label="Preferred Contact Method" name="contactMethod" options={[{value:'email',label:'Email'},{value:'phone',label:'Phone call'},{value:'whatsapp',label:'WhatsApp'},{value:'telegram',label:'Telegram'},{value:'viber',label:'Viber'},{value:'messenger',label:'Messenger'}]} />
             <SelectField label="What do you need help with?" name="topic" options={[{value:'vacation',label:'Vacation rentals / stays'},{value:'tours',label:'Tours & activities'},{value:'rebuy',label:'Real estate — buy'},{value:'rerent',label:'Real estate — rent long-term'},{value:'other',label:'Other / Not sure'}]} required />
-            <TextInput label="Destination / Area (optional)" name="destination" />
+            <PlaceAutocomplete label="Destination / Region" name="destination" required />
           </div>
           <TextAreaField label="Short Details" name="message" placeholder="Tell us more about what you need..." />
           <button type="submit" className="px-6 py-3 rounded-xl bg-teal-600 text-white font-semibold hover:bg-teal-700">Send Request</button>

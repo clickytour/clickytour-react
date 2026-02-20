@@ -1,6 +1,7 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function Page() {
   return (
@@ -11,7 +12,7 @@ export default function Page() {
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>
           <div className="grid md:grid-cols-2 gap-4">
             <TextInput label="Request ID" name="requestId" placeholder="From the job listing" />
-            <TextInput label="Destination" name="destination" />
+            <PlaceAutocomplete label="Destination / Region" name="destination" required />
             <TextInput label="First Name" name="firstName" required />
             <TextInput label="Last Name" name="lastName" required />
             <TextInput label="Email" name="email" type="email" required />

@@ -40,6 +40,8 @@ const managementModels = [
   },
 ];
 
+import { PlaceAutocomplete } from "@/components/PlaceAutocomplete";
+
 const amenities = ["Pool", "Sea view", "Parking", "Wi-Fi", "A/C", "BBQ", "Pet-friendly", "Baby equipment", "EV charger", "Hot tub", "Gym", "Accessible"];
 
 export function FreeEvaluationForm({ initialValues }: { initialValues?: Record<string, string> }) {
@@ -199,9 +201,7 @@ export function FreeEvaluationForm({ initialValues }: { initialValues?: Record<s
               <fieldset className="mt-4 rounded-xl border border-slate-200 p-3">
                 <legend className="px-2 text-sm font-semibold text-slate-800">Region & Address</legend>
                 <div className="grid gap-3 md:grid-cols-2">
-                  <label className={labelClass}>Region *
-                    <select name="region" className={inputClass} defaultValue={iv.region}><option>Crete</option><option>Halkidiki</option><option>Santorini</option><option>Athens</option><option>Mykonos</option><option>Paros</option><option>Other</option></select>
-                  </label>
+                  <PlaceAutocomplete label="Region *" name="region" placeholder="e.g., Crete" required value={iv.region || ""} />
                   <label className={labelClass}>Region (text)<input name="regionText" className={inputClass} placeholder="If Other" defaultValue={iv.region} /></label>
                   <label className={labelClass}>Street<input name="street" className={inputClass} /></label>
                   <label className={labelClass}>City<input name="city" className={inputClass} /></label>

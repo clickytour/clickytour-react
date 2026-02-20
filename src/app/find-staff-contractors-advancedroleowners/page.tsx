@@ -1,6 +1,7 @@
 'use client';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { TextInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function Page() {
   return (
@@ -12,7 +13,7 @@ export default function Page() {
           <div className="grid md:grid-cols-2 gap-4">
             <SelectField label="Role Category" name="roleCategory" options={[{value:'cleaning',label:'Cleaning'},{value:'checkin',label:'Check-in'},{value:'maintenance',label:'Maintenance'},{value:'garden',label:'Pool & Garden'},{value:'cooking',label:'Cooking'},{value:'guide',label:'Tour Guide'},{value:'driver',label:'Driver'},{value:'security',label:'Security'},{value:'admin',label:'Admin'},{value:'other',label:'Other'}]} required />
             <TextInput label="Role" name="role" required />
-            <TextInput label="Destination" name="destination" required />
+            <PlaceAutocomplete label="Destination / Region" name="destination" required />
             <TextInput label="Property Type" name="propertyType" />
             <SelectField label="Work Frequency" name="frequency" options={[{value:'daily',label:'Daily'},{value:'weekly',label:'Weekly'},{value:'biweekly',label:'Bi-weekly'},{value:'monthly',label:'Monthly'},{value:'seasonal',label:'Seasonal'},{value:'ondemand',label:'On Demand'}]} />
             <SelectField label="Availability" name="availability" options={[{value:'immediate',label:'Immediately'},{value:'1week',label:'Within 1 week'},{value:'1month',label:'Within 1 month'},{value:'seasonal',label:'Seasonal'},{value:'flexible',label:'Flexible'}]} />

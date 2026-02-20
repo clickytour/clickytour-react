@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PlaceAutocomplete } from "@/components/PlaceAutocomplete";
+import type { PlaceSelection } from "@/lib/greekRegions";
 
 type RoleKey =
   | "guest-vacation"
@@ -23,6 +25,7 @@ type FieldDef = {
   required?: boolean;
   options?: { value: string; label: string }[];
   colSpan?: 1 | 2;
+  isPlace?: boolean;
 };
 
 type RoleMeta = {
@@ -60,7 +63,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
     fields: [
       { name: "checkIn", label: "Check-in", placeholder: "dd/mm/yyyy", type: "date", required: true },
       { name: "checkOut", label: "Check-out", placeholder: "dd/mm/yyyy", type: "date", required: true },
-      { name: "destination", label: "Destination / Region", placeholder: "e.g., Santorini", required: true },
+      { name: "destination", label: "Destination / Region", placeholder: "e.g., Santorini", required: true, isPlace: true },
       { name: "adults", label: "Adults", placeholder: "2", type: "number" },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "" },
@@ -74,7 +77,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
     redirectTo: "/guest-service-request",
     submitLabel: "Continue",
     fields: [
-      { name: "destination", label: "Destination / Region", placeholder: "e.g., Chania", required: true },
+      { name: "destination", label: "Destination / Region", placeholder: "e.g., Chania", required: true, isPlace: true },
       {
         name: "serviceCategory",
         label: "Service Category",
@@ -120,7 +123,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
           { value: "business", label: "Business" },
         ],
       },
-      { name: "regions", label: "Regions", placeholder: "", required: true },
+      { name: "regions", label: "Regions", placeholder: "e.g., Crete", required: true, isPlace: true },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "", colSpan: 1 },
     ],
@@ -147,7 +150,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
           { value: "other", label: "Other" },
         ],
       },
-      { name: "region", label: "Region", placeholder: "e.g., Crete", required: true },
+      { name: "region", label: "Region", placeholder: "e.g., Crete", required: true, isPlace: true },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "" },
     ],
@@ -173,7 +176,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
           { value: "business", label: "Business" },
         ],
       },
-      { name: "region", label: "City / Region", placeholder: "", required: true },
+      { name: "region", label: "City / Region", placeholder: "e.g., Athens", required: true, isPlace: true },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "" },
     ],
@@ -193,7 +196,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
         required: true,
         options: serviceCategories.map((c) => ({ value: c.toLowerCase().replace(/\s+/g, "-"), label: c })),
       },
-      { name: "region", label: "Region", placeholder: "e.g., Halkidiki", required: true },
+      { name: "region", label: "Region", placeholder: "e.g., Halkidiki", required: true, isPlace: true },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "" },
     ],
@@ -207,7 +210,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
     submitLabel: "Continue",
     fields: [
       { name: "agencyName", label: "Agency Name", placeholder: "", required: true },
-      { name: "markets", label: "Markets / Regions", placeholder: "", required: true },
+      { name: "markets", label: "Markets / Regions", placeholder: "e.g., Crete, Santorini", required: true, isPlace: true },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "" },
     ],
@@ -221,7 +224,7 @@ const roleMeta: Record<RoleKey, RoleMeta> = {
     submitLabel: "Continue",
     fields: [
       { name: "companyName", label: "Company Name", placeholder: "", required: true },
-      { name: "region", label: "Region / Manager", placeholder: "", required: true },
+      { name: "region", label: "Region / Manager", placeholder: "e.g., Halkidiki", required: true, isPlace: true },
       { name: "email", label: "Email", placeholder: "", type: "email", required: true },
       { name: "phone", label: "Phone", placeholder: "" },
     ],
@@ -452,7 +455,24 @@ export function HomepageMiniForm({
                     {field.label}
                     {field.required && "*"}
                   </label>
-                  {field.options ? (
+                  {field.isPlace ? (
+                    <PlaceAutocomplete
+                      label=""
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      required={field.required}
+                      value={formData[field.name] || ""}
+                      onTextChange={(text) => setField(field.name, text)}
+                      onChange={(place: PlaceSelection | null) => {
+                        if (place) {
+                          setField(field.name, place.displayName);
+                          setField(`${field.name}PlaceId`, place.placeId);
+                          setField(`${field.name}Lat`, String(place.lat));
+                          setField(`${field.name}Lng`, String(place.lng));
+                        }
+                      }}
+                    />
+                  ) : field.options ? (
                     <select
                       className={`mt-1 ${inputClass}`}
                       value={formData[field.name] || ""}

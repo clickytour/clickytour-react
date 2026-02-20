@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { GuestServiceFormDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, TextAreaField } from '@/components/form-fields';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function GuestServiceRequest() {
   return (<Suspense fallback={null}><GuestServiceRequestInner /></Suspense>);
@@ -65,7 +66,7 @@ function GuestServiceRequestInner() {
         <SectionTitle title="Request a Service" />
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="grid md:grid-cols-2 gap-4">
-            <TextInput label="Destination / Region" name="destination" required value={form.destination} onChange={e => u('destination', e.target.value)} />
+            <PlaceAutocomplete label="Destination / Region" name="destination" required value={form.destination} onTextChange={v => u('destination', v)} onChange={p => { if (p) { u('destination', p.displayName); } }} />
             <SelectField label="Service Category" name="category" options={categoryOptions} required value={form.category} onChange={e => u('category', e.target.value)} />
             <div><label className="block text-sm font-semibold text-slate-700 mb-1">Date & Time</label><input type="datetime-local" name="dateTime" className="w-full rounded-xl border border-slate-200 px-4 py-3" value={form.dateTime} onChange={e => u('dateTime', e.target.value)} /></div>
             <NumberInput label="Adults" name="adults" min={1} value={form.adults} onChange={e => u('adults', e.target.value)} />

@@ -4,6 +4,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { OwnerListFormDiagram } from '@/components/diagrams';
 import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function RealEstateOwnersList() {
   const [step, setStep] = useState(0);
@@ -18,7 +19,7 @@ export default function RealEstateOwnersList() {
         <MultiStepForm steps={steps} currentStep={step} onNext={() => setStep(s => s + 1)} onPrev={() => setStep(s => s - 1)} onSubmit={() => alert('Thank you! This form is in demo mode.')}>
           {intent !== 'maintenance' && step === 0 && <div className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
-              <TextInput label="Property Type" name="propertyType" required /><TextInput label="City / Region" name="region" required />
+              <TextInput label="Property Type" name="propertyType" required /><PlaceAutocomplete label="City / Region" name="region" required />
               <TextInput label="Street Address" name="street" /><TextInput label="City" name="city" />
               <TextInput label="Postal Code" name="postal" /><TextInput label="Country" name="country" />
               <TextInput label="Google Map Link" name="mapUrl" type="url" />

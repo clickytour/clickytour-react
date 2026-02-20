@@ -4,6 +4,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { REBuyerFormDiagram2 } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function RealEstateBuyerForm() {
   const [step, setStep] = useState(0);
@@ -18,7 +19,7 @@ export default function RealEstateBuyerForm() {
             <div className="grid md:grid-cols-2 gap-4">
               <SelectField label="Mode" name="mode" options={[{value:'buy',label:'Buy'},{value:'rent',label:'Monthly Rent'}]} required />
               <SelectField label="Type" name="type" options={[{value:'home',label:'Home'},{value:'land',label:'Land'},{value:'business',label:'Business'}]} required />
-              <TextInput label="Regions" name="regions" required />
+              <PlaceAutocomplete label="Regions" name="regions" required />
               <SelectField label="Bedrooms" name="bedrooms" options={[{value:'any',label:'Any'},{value:'1',label:'1'},{value:'2',label:'2'},{value:'3',label:'3'},{value:'4',label:'4'},{value:'5+',label:'5+'}]} />
             </div>
             <CheckboxGroup label="Property Type" name="propType" options={['Apartment','House','Villa','Land Plot','Commercial']} />

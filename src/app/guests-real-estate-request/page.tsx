@@ -5,6 +5,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { GuestREFormDiagram } from '@/components/diagrams';
 import { TextInput, SelectField, NumberInput, CheckboxGroup, TextAreaField } from '@/components/form-fields';
 import { MultiStepForm } from '@/components/multi-step-form';
+import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 
 export default function GuestsRealEstateRequest() {
   return (<Suspense fallback={null}><GuestsRealEstateRequestInner /></Suspense>);
@@ -60,7 +61,7 @@ function GuestsRealEstateRequestInner() {
             <div className="grid md:grid-cols-2 gap-4">
               <SelectField label="Mode" name="mode" options={[{value:'buy',label:'Buy'},{value:'rent',label:'Monthly Rent'}]} required value={form.mode} onChange={e => u('mode', e.target.value)} />
               <SelectField label="Type" name="type" options={[{value:'home',label:'Home'},{value:'land',label:'Land'},{value:'business',label:'Business'}]} required value={form.type} onChange={e => u('type', e.target.value)} />
-              <TextInput label="Regions" name="regions" required value={form.regions} onChange={e => u('regions', e.target.value)} />
+              <PlaceAutocomplete label="Regions" name="regions" required value={form.regions} onTextChange={v => u('regions', v)} onChange={p => { if (p) { u('regions', p.displayName); } }} />
               <SelectField label="Bedrooms" name="bedrooms" options={[{value:'any',label:'Any'},{value:'1',label:'1'},{value:'2',label:'2'},{value:'3',label:'3'},{value:'4',label:'4'},{value:'5+',label:'5+'}]} value={form.bedrooms} onChange={e => u('bedrooms', e.target.value)} />
             </div>
             <CheckboxGroup label="Property Type" name="propType" options={['Apartment','House','Villa','Land Plot','Commercial']} value={form.propType} onChange={(vals: string[]) => u('propType', vals)} />

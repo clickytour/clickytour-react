@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PlaceAutocomplete } from "@/components/PlaceAutocomplete";
 
 type Step = 1 | 2 | 3;
 type AgentType = "independent" | "agency" | "tour-operator";
@@ -158,7 +159,7 @@ export function AgentsApplyForm({ initialValues }: { initialValues?: Partial<For
                 <label className={labelClass}>Email *<input type="email" className={inputClass} value={form.email} onChange={(e) => setField("email", e.target.value)} />{errors.email && <span className="text-xs text-red-600">{errors.email}</span>}</label>
                 <label className={labelClass}>Phone *<input className={inputClass} value={form.phone} onChange={(e) => setField("phone", e.target.value)} />{errors.phone && <span className="text-xs text-red-600">{errors.phone}</span>}</label>
                 <label className={labelClass}>Website *<input className={inputClass} placeholder="https://..." value={form.website} onChange={(e) => setField("website", e.target.value)} />{errors.website && <span className="text-xs text-red-600">{errors.website}</span>}</label>
-                <label className={labelClass}>Regions *<input className={inputClass} placeholder="Halkidiki, Crete..." value={form.regions} onChange={(e) => setField("regions", e.target.value)} />{errors.regions && <span className="text-xs text-red-600">{errors.regions}</span>}</label>
+                <div><PlaceAutocomplete label="Regions *" name="regions" placeholder="e.g., Halkidiki" required value={form.regions} onTextChange={v => setField("regions", v)} onChange={p => { if (p) setField("regions", p.displayName); }} />{errors.regions && <span className="text-xs text-red-600">{errors.regions}</span>}</div>
                 <label className={labelClass}>Languages *<input className={inputClass} placeholder="EN, EL, DE..." value={form.languages} onChange={(e) => setField("languages", e.target.value)} />{errors.languages && <span className="text-xs text-red-600">{errors.languages}</span>}</label>
               </div>
             </fieldset>
