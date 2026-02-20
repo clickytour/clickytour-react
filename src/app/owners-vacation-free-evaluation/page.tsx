@@ -1,9 +1,24 @@
 'use client';
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { PageShell } from '@/components/site';
 import { OwnerFreeEvalDiagram } from '@/components/diagrams';
 import { FreeEvaluationForm } from '@/components/forms';
 
 export default function FreeEvaluation() {
+  return (<Suspense fallback={null}><FreeEvaluationInner /></Suspense>);
+}
+
+function FreeEvaluationInner() {
+  const searchParams = useSearchParams();
+  const iv: Record<string, string> = {};
+  if (searchParams.get('source')) {
+    if (searchParams.get('propertyType')) iv.propertyType = searchParams.get('propertyType')!;
+    if (searchParams.get('region')) iv.region = searchParams.get('region')!;
+    if (searchParams.get('email')) iv.email = searchParams.get('email')!;
+    if (searchParams.get('phone')) iv.phone = searchParams.get('phone')!;
+  }
+
   return (
     <PageShell>
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
@@ -32,7 +47,7 @@ export default function FreeEvaluation() {
         </div>
       </section>
 
-      <FreeEvaluationForm />
+      <FreeEvaluationForm initialValues={iv} />
 
       <section className="section">
         <div className="container max-w-4xl">

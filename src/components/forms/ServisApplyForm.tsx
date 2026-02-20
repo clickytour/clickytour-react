@@ -116,9 +116,9 @@ const initial: FormState = {
   websiteHp: "",
 };
 
-export function ServisApplyForm() {
+export function ServisApplyForm({ initialValues }: { initialValues?: Partial<FormState> }) {
   const [step, setStep] = useState<Step>(1);
-  const [form, setForm] = useState<FormState>(initial);
+  const [form, setForm] = useState<FormState>({ ...initial, ...initialValues });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState("");

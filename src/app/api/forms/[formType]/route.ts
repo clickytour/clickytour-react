@@ -27,6 +27,7 @@ const VALID_FORM_TYPES = [
   "guest-vacation-request",
   "guest-service-request",
   "guest-real-estate-request",
+  "job-seeker-apply",
 ];
 
 export async function POST(

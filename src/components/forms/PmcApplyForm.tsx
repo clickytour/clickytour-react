@@ -54,9 +54,9 @@ const initial: FormState = {
   consentData: false, consentAccuracy: false, websiteHp: "",
 };
 
-export function PmcApplyForm() {
+export function PmcApplyForm({ initialValues }: { initialValues?: Partial<FormState> }) {
   const [step, setStep] = useState<Step>(1);
-  const [form, setForm] = useState<FormState>(initial);
+  const [form, setForm] = useState<FormState>({ ...initial, ...initialValues });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");

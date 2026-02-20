@@ -1,4 +1,6 @@
 'use client';
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { PageShell } from '@/components/site';
 import { SPListServiceDiagram } from '@/components/diagrams';
 import { ServisApplyForm } from '@/components/forms';
@@ -6,6 +8,19 @@ import { ServisApplyForm } from '@/components/forms';
 const subtitle = "Join ClickyTour and make your service visible to tourists, property owners, and agents — in just a few steps.";
 
 export default function ServiceProvidersListService() {
+  return (<Suspense fallback={null}><ServiceProvidersListServiceInner /></Suspense>);
+}
+
+function ServiceProvidersListServiceInner() {
+  const searchParams = useSearchParams();
+  const iv: Record<string, string> = {};
+  if (searchParams.get('source')) {
+    if (searchParams.get('serviceType')) iv.serviceCategory = searchParams.get('serviceType')!;
+    if (searchParams.get('region')) iv.region = searchParams.get('region')!;
+    if (searchParams.get('email')) iv.email = searchParams.get('email')!;
+    if (searchParams.get('phone')) iv.phone = searchParams.get('phone')!;
+  }
+
   return (
     <PageShell>
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-14 md:py-16">
@@ -49,7 +64,7 @@ export default function ServiceProvidersListService() {
       </section>
 
       <div id="provider-form">
-        <ServisApplyForm />
+        <ServisApplyForm initialValues={iv} />
       </div>
 
       <section className="section">

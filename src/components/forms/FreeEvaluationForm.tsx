@@ -42,7 +42,8 @@ const managementModels = [
 
 const amenities = ["Pool", "Sea view", "Parking", "Wi-Fi", "A/C", "BBQ", "Pet-friendly", "Baby equipment", "EV charger", "Hot tub", "Gym", "Accessible"];
 
-export function FreeEvaluationForm() {
+export function FreeEvaluationForm({ initialValues }: { initialValues?: Record<string, string> }) {
+  const iv = initialValues || {};
   const [step, setStep] = useState<Step>(1);
   const [requestType, setRequestType] = useState("Property Evaluation");
   const [submitting, setSubmitting] = useState(false);
@@ -132,7 +133,7 @@ export function FreeEvaluationForm() {
                     </select>
                   </label>
                   <label className={labelClass}>Property Type *
-                    <select name="propertyType" className={inputClass}>
+                    <select name="propertyType" className={inputClass} defaultValue={iv.propertyType}>
                       <option>Villa</option><option>House</option><option>Apartment</option><option>Townhouse</option><option>Maisonette</option><option>Other</option>
                     </select>
                   </label>
@@ -182,8 +183,8 @@ export function FreeEvaluationForm() {
                 <div className="grid gap-3 md:grid-cols-2">
                   <label className={labelClass}>First Name *<input name="firstName" className={inputClass} /></label>
                   <label className={labelClass}>Last Name *<input name="lastName" className={inputClass} /></label>
-                  <label className={labelClass}>Email *<input name="email" type="email" className={inputClass} /></label>
-                  <label className={labelClass}>Phone<input name="phone" className={inputClass} placeholder="+30 ..." /></label>
+                  <label className={labelClass}>Email *<input name="email" type="email" className={inputClass} defaultValue={iv.email} /></label>
+                  <label className={labelClass}>Phone<input name="phone" className={inputClass} placeholder="+30 ..." defaultValue={iv.phone} /></label>
                   <label className={labelClass}>Preferred chat
                     <select name="chat" className={inputClass}><option value="">Select...</option><option>whatsapp</option><option>viber</option><option>telegram</option><option>messenger</option><option>email</option></select>
                   </label>
@@ -199,9 +200,9 @@ export function FreeEvaluationForm() {
                 <legend className="px-2 text-sm font-semibold text-slate-800">Region & Address</legend>
                 <div className="grid gap-3 md:grid-cols-2">
                   <label className={labelClass}>Region *
-                    <select name="region" className={inputClass}><option>Crete</option><option>Halkidiki</option><option>Santorini</option><option>Athens</option><option>Mykonos</option><option>Paros</option><option>Other</option></select>
+                    <select name="region" className={inputClass} defaultValue={iv.region}><option>Crete</option><option>Halkidiki</option><option>Santorini</option><option>Athens</option><option>Mykonos</option><option>Paros</option><option>Other</option></select>
                   </label>
-                  <label className={labelClass}>Region (text)<input name="regionText" className={inputClass} placeholder="If Other" /></label>
+                  <label className={labelClass}>Region (text)<input name="regionText" className={inputClass} placeholder="If Other" defaultValue={iv.region} /></label>
                   <label className={labelClass}>Street<input name="street" className={inputClass} /></label>
                   <label className={labelClass}>City<input name="city" className={inputClass} /></label>
                   <label className={labelClass}>Postal Code<input name="postalCode" className={inputClass} /></label>
