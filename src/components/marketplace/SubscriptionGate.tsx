@@ -52,13 +52,13 @@ export function SubscriptionGate({
       {/* CTAs */}
       <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
         <Link
-          href="/pricing"
+          href="/contact"
           className="rounded-full bg-cyan-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition shadow-sm"
         >
           Subscribe Now
         </Link>
         <Link
-          href="/register"
+          href="/contact"
           className="rounded-full border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
         >
           Register Free

@@ -93,7 +93,7 @@ export default async function DirectoryRegionPage({
         ctaA={config.sideA.cta}
         ctaHrefA={config.urlBase}
         ctaB={config.sideB.cta}
-        ctaHrefB={`${config.urlBase}#get-listed`}
+        ctaHrefB={config.listUrl}
       />
 
       <section className="section">
@@ -137,7 +137,7 @@ export default async function DirectoryRegionPage({
             <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-16 text-center">
               <p className="text-lg font-medium text-slate-700">No {config.pluralLabel.toLowerCase()} listed in {region} yet</p>
               <p className="mt-2 text-sm text-slate-500">Be the first to list your business in this region.</p>
-              <Link href={config.urlBase} className="mt-4 inline-block rounded-full bg-cyan-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition">Get Listed</Link>
+              <Link href={config.listUrl} className="mt-4 inline-block rounded-full bg-cyan-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition">Get Listed</Link>
             </div>
           )}
         </div>
@@ -180,7 +180,7 @@ export default async function DirectoryRegionPage({
           <h2 className="text-2xl font-bold">List Your Business in {region}</h2>
           <p className="mt-2 text-cyan-100">Join the ClickyTour marketplace and reach thousands of potential clients.</p>
           <div className="mt-6 flex justify-center gap-3">
-            <Link href={config.urlBase} className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-cyan-700 hover:bg-cyan-50 transition">{config.sideB.cta}</Link>
+            <Link href={config.listUrl} className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-cyan-700 hover:bg-cyan-50 transition">{config.sideB.cta}</Link>
             <Link href="/marketplace" className="rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition">Explore All</Link>
           </div>
         </div>

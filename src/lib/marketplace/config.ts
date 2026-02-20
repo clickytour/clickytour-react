@@ -74,6 +74,7 @@ export const DIRECTORY_CONFIG: Record<
     label: string;
     pluralLabel: string;
     urlBase: string;
+    listUrl: string;
     sideA: { label: string; cta: string; description: string };
     sideB: { label: string; cta: string; description: string };
     icon: string;
@@ -84,6 +85,7 @@ export const DIRECTORY_CONFIG: Record<
     label: "Property Manager",
     pluralLabel: "Property Management Companies",
     urlBase: "/directory/property-managers",
+    listUrl: "/pmc-apply",
     sideA: {
       label: "Find a Property Manager",
       cta: "Browse PMCs",
@@ -101,6 +103,7 @@ export const DIRECTORY_CONFIG: Record<
     label: "Service Provider",
     pluralLabel: "Services & Businesses",
     urlBase: "/directory/services",
+    listUrl: "/service-providers-list-service",
     sideA: {
       label: "Find a Service",
       cta: "Browse Services",
@@ -118,6 +121,7 @@ export const DIRECTORY_CONFIG: Record<
     label: "Agent / Broker",
     pluralLabel: "Agents, Brokers & Tour Operators",
     urlBase: "/directory/agents",
+    listUrl: "/agents-agenicies-form",
     sideA: {
       label: "Find an Agent",
       cta: "Browse Agents",
@@ -135,6 +139,7 @@ export const DIRECTORY_CONFIG: Record<
     label: "Hotel",
     pluralLabel: "Hotels & Accommodation",
     urlBase: "/directory/hotels",
+    listUrl: "/contact",
     sideA: {
       label: "Find a Hotel",
       cta: "Browse Hotels",
@@ -152,6 +157,7 @@ export const DIRECTORY_CONFIG: Record<
     label: "Staff / Job Seeker",
     pluralLabel: "Staff & Job Seekers",
     urlBase: "/directory/staff",
+    listUrl: "/find-staff-contractors-job-seekers-quick-application",
     sideA: {
       label: "Find Staff",
       cta: "Browse Talent",
@@ -169,6 +175,7 @@ export const DIRECTORY_CONFIG: Record<
     label: "B2B Partner",
     pluralLabel: "B2B Partners",
     urlBase: "/directory/partners",
+    listUrl: "/media-partnerships",
     sideA: {
       label: "Find a Partner",
       cta: "Browse Partners",
@@ -185,7 +192,8 @@ export const DIRECTORY_CONFIG: Record<
   property: {
     label: "Property",
     pluralLabel: "Properties",
-    urlBase: "/marketplace/property-management",
+    urlBase: "/pmc-requests-pool",
+    listUrl: "/owner-submit-property",
     sideA: {
       label: "List Your Property",
       cta: "Submit Property",

@@ -33,7 +33,7 @@ export default function MarketplacePage() {
             <Link href="#directories" className="rounded-full bg-cyan-600 px-8 py-3 text-sm font-semibold text-white hover:bg-cyan-700 transition shadow-lg">
               Explore Directories
             </Link>
-            <Link href="/pricing" className="rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold text-white hover:bg-white/20 transition backdrop-blur-sm">
+            <Link href="/contact" className="rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold text-white hover:bg-white/20 transition backdrop-blur-sm">
               View Plans
             </Link>
           </div>
@@ -86,7 +86,7 @@ export default function MarketplacePage() {
                   <div className="rounded-xl bg-emerald-50 p-3">
                     <p className="text-xs font-semibold text-emerald-700 mb-1">Are you a {cfg.label.toLowerCase()}?</p>
                     <p className="text-xs text-slate-600">{cfg.sideB.description}</p>
-                    <Link href={`${cfg.urlBase}/list`} className="mt-2 inline-block text-xs font-semibold text-emerald-600 hover:text-emerald-700">
+                    <Link href={`${cfg.listUrl}`} className="mt-2 inline-block text-xs font-semibold text-emerald-600 hover:text-emerald-700">
                       {cfg.sideB.cta} &rarr;
                     </Link>
                   </div>
@@ -138,10 +138,10 @@ export default function MarketplacePage() {
             <h2 className="text-2xl font-bold">Join the ClickyTour Ecosystem</h2>
             <p className="mt-2 text-cyan-100">Whether you&apos;re looking for services or offering them — there&apos;s a place for you.</p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/register" className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-cyan-700 hover:bg-cyan-50 transition">
+              <Link href="/contact" className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-cyan-700 hover:bg-cyan-50 transition">
                 Register Free
               </Link>
-              <Link href="/pricing" className="rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">
+              <Link href="/contact" className="rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">
                 View Plans
               </Link>
             </div>

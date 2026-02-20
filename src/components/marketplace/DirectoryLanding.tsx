@@ -50,7 +50,7 @@ export function DirectoryLanding({
             <Link href={`${config.urlBase}`} className="rounded-full bg-cyan-600 px-8 py-3 text-sm font-semibold text-white hover:bg-cyan-700 transition shadow-lg">
               {config.sideA.cta}
             </Link>
-            <Link href={`${config.urlBase}/list`} className="rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold text-white hover:bg-white/20 transition backdrop-blur-sm">
+            <Link href={`${config.listUrl}`} className="rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold text-white hover:bg-white/20 transition backdrop-blur-sm">
               {config.sideB.cta}
             </Link>
           </div>
@@ -96,7 +96,7 @@ export function DirectoryLanding({
                   </li>
                 ))}
               </ul>
-              <Link href={`${config.urlBase}/list`} className="mt-6 inline-block rounded-full bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition">
+              <Link href={`${config.listUrl}`} className="mt-6 inline-block rounded-full bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition">
                 {config.sideB.cta}
               </Link>
             </div>
@@ -138,7 +138,7 @@ export function DirectoryLanding({
               <Link href={config.urlBase} className="rounded-full bg-white px-8 py-3 text-sm font-semibold text-cyan-700 hover:bg-cyan-50 transition">
                 {config.sideA.cta}
               </Link>
-              <Link href={`${config.urlBase}/list`} className="rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">
+              <Link href={`${config.listUrl}`} className="rounded-full border border-white/40 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">
                 {config.sideB.cta}
               </Link>
             </div>

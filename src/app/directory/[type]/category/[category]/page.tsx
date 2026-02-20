@@ -89,7 +89,7 @@ export default async function DirectoryCategoryPage({
         ctaA={`Browse ${cat.label}`}
         ctaHrefA={config.urlBase}
         ctaB="Get Listed"
-        ctaHrefB={`${config.urlBase}#get-listed`}
+        ctaHrefB={config.listUrl}
       />
 
       <section className="section">
@@ -123,7 +123,7 @@ export default async function DirectoryCategoryPage({
             <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 py-16 text-center">
               <p className="text-lg font-medium text-slate-700">No {cat.label.toLowerCase()} providers listed yet</p>
               <p className="mt-2 text-sm text-slate-500">Be the first to list your {cat.label.toLowerCase()} business.</p>
-              <Link href={config.urlBase} className="mt-4 inline-block rounded-full bg-cyan-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition">Get Listed</Link>
+              <Link href={config.listUrl} className="mt-4 inline-block rounded-full bg-cyan-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700 transition">Get Listed</Link>
             </div>
           )}
         </div>
