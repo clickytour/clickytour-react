@@ -24,6 +24,9 @@ const VALID_FORM_TYPES = [
   "agents-apply",
   "owner-evaluation",
   "contact",
+  "guest-vacation-request",
+  "guest-service-request",
+  "guest-real-estate-request",
 ];
 
 export async function POST(
