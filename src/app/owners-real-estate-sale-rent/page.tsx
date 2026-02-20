@@ -1,14 +1,15 @@
 import { CheckList, FAQ, FeatureGrid, PageShell, SectionTitle } from '@/components/site';
+import { OwnerRealEstateDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <PageShell>
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
         <div className="container">
-          <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Owners</p>
+          <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-start"><div><p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Owners</p>
           <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Start Earning from Your Property</h1>
           <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Want to sell or rent your property? Start with a free valuation. ClickyTour connects you with qualified agents and buyers — and guides you step by step.</p>
-        </div>
+        </div><div className="hidden lg:block max-w-sm"><OwnerRealEstateDiagram /></div></div></div>
       </section>
       
 <section className="section"><div className="container"><SectionTitle title="ClickyTour.com • Real Estate Owners" /><div className="grid md:grid-cols-2 gap-4"><article className="card p-6"><h3 className="font-bold text-[#0F2B46]">For Sale</h3><p className="text-sm text-slate-600 mt-2">Showcase investment value, location highlights, and financing-ready information for serious buyers.</p></article><article className="card p-6"><h3 className="font-bold text-[#0F2B46]">For Rent</h3><p className="text-sm text-slate-600 mt-2">Focus on occupancy speed, tenant quality, and terms clarity with streamlined lead handling.</p></article></div></div></section>

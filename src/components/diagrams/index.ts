@@ -38,3 +38,17 @@ export { default as SPFreeVisibilityDiagram } from "./SPFreeVisibilityDiagram";
 export { default as SPInvestTourismDiagram } from "./SPInvestTourismDiagram";
 export { default as SPListPromoteDiagram } from "./SPListPromoteDiagram";
 export { default as SPSaleRentDiagram } from "./SPSaleRentDiagram";
+
+// Owner Diagrams
+export { default as OwnerListPropertyDiagram } from "./OwnerListPropertyDiagram";
+export { default as OwnerDashboardDiagram } from "./OwnerDashboardDiagram";
+export { default as OwnerFullManagementDiagram } from "./OwnerFullManagementDiagram";
+export { default as OwnerSelfManagedDiagram } from "./OwnerSelfManagedDiagram";
+export { default as OwnerFreeEvalDiagram } from "./OwnerFreeEvalDiagram";
+export { default as OwnerMultiPlatformDiagram } from "./OwnerMultiPlatformDiagram";
+export { default as OwnerPromoteRentalDiagram } from "./OwnerPromoteRentalDiagram";
+export { default as OwnerRealEstateDiagram } from "./OwnerRealEstateDiagram";
+export { default as OwnerInvestDiagram } from "./OwnerInvestDiagram";
+export { default as OwnerPlansDiagram } from "./OwnerPlansDiagram";
+export { default as OwnerBecomeAgentDiagram } from "./OwnerBecomeAgentDiagram";
+export { default as OwnerRequestProposalsDiagram } from "./OwnerRequestProposalsDiagram";
