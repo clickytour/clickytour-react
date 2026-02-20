@@ -17,17 +17,33 @@ import { NextRequest, NextResponse } from "next/server";
  */
 
 const VALID_FORM_TYPES = [
+  // Tier 0: Mini / Inline
   "pre-lead",
   "guest-request",
+  "contact",
+  // Tier 1: Quick (ad traffic)
+  "owner-quick",
+  "pmc-quick",
+  "sp-quick",
+  "agent-quick",
+  "staff-quick",
+  "hotel-quick",
+  "guest-quick",
+  // Tier 2: Existing full forms
   "service-provider-apply",
   "pmc-apply",
   "agents-apply",
   "owner-evaluation",
-  "contact",
   "guest-vacation-request",
   "guest-service-request",
   "guest-real-estate-request",
   "job-seeker-apply",
+  // Tier 3: Advanced (subscription path)
+  "pmc-advanced",
+  "sp-advanced",
+  "agent-advanced",
+  "hotel-advanced",
+  "staff-advanced",
 ];
 
 export async function POST(
