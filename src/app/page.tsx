@@ -537,12 +537,12 @@ const guestSubContent: Record<string, Partial<RoleData>> = {
 /* Map homepage role tab → nav scope key */
 const roleToNavScope: Record<string, string> = {
   Guest: 'guests',
-  'Vacation Owner': 'owners',
-  'Real Estate Owner': 'owners',
+  'Vacation Owner': 'ownersVacation',
+  'Real Estate Owner': 'ownersRealEstate',
   'Service Provider': 'serviceProviders',
   Agent: 'agents',
   'PM Company': 'pmCompanies',
-  'Job Seeker': 'findStaff',
+  'Job Seeker': 'findStaffJobSeeker',
   'Media & Partners': '',
 };
 
