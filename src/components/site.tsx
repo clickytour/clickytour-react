@@ -398,9 +398,15 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-cyan-900/40 bg-[#0F2B46]">
+        <div className="lg:hidden border-t border-cyan-900/40 bg-[#0F2B46] max-h-[85vh] overflow-y-auto">
           <nav className="container py-3 flex flex-col gap-0.5">
-            {topNavItems.map((item) => (
+            {scoped && scope && (
+              <div className="flex items-center justify-between px-3 py-2 mb-1 bg-teal-700/20 rounded-lg">
+                <p className="text-[12px] text-teal-300 font-semibold">{scope.label}</p>
+                <Link href="/" className="text-[11px] text-cyan-300 hover:text-white font-medium" onClick={() => setMobileOpen(false)}>← All Roles</Link>
+              </div>
+            )}
+            {navItems.map((item) => (
               <div key={item.href} className="border-b border-cyan-900/30 last:border-0">
                 {(item.children || item.megaMenu) ? (
                   <>
@@ -438,6 +444,18 @@ export function Header() {
                 )}
               </div>
             ))}
+            {scoped && scope && scope.crossSell.length > 0 && (
+              <div className="px-3 py-2 mt-1">
+                <p className="text-[10px] uppercase tracking-wider text-cyan-400 font-semibold mb-1">Related</p>
+                <div className="flex flex-wrap gap-2">
+                  {scope.crossSell.map(cs => (
+                    <Link key={cs.href} href={cs.href} className="px-3 py-1.5 text-[12px] rounded-full border border-cyan-700/50 text-cyan-200 hover:bg-cyan-800/30" onClick={() => setMobileOpen(false)}>
+                      {cs.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
             <Link href={scoped && scope ? scope.cta.href : '/get-started/'} className="mx-3 mt-3 text-center py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[14px] font-bold shadow-lg" onClick={() => setMobileOpen(false)}>
               {scoped && scope ? scope.cta.label : 'Get Started'}
             </Link>
