@@ -1,184 +1,204 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { searchRegions, type Preset, type PlaceEntry, type PlaceSelection } from "@/lib/greekRegions";
 
-const inputClass =
-  "w-full rounded-xl border border-slate-200 px-4 py-3 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none text-sm";
-const labelClass = "block text-sm font-semibold text-slate-700 mb-1";
+export type PlaceResult = {
+  /** Display label */
+  displayName: string;
+  label: string;
+  area: string;
+  region: string;
+  country: string;
+  placeId: string | null;
+  lat: number | null;
+  lng: number | null;
+  listingCount: number;
+};
 
-type Props = {
+type PlaceAutocompleteProps = {
+  /** Field label */
   label?: string;
+  /** Placeholder text */
   placeholder?: string;
-  required?: boolean;
+  /** Current value (controlled) */
   value?: string;
-  onChange?: (selection: PlaceSelection | null) => void;
-  onTextChange?: (text: string) => void;
-  preset?: Preset;
-  country?: string | null; // "gr" | null (worldwide)
-  mirrorApiUrl?: string;   // Tier 2 endpoint (future)
-  enableGoogleFallback?: boolean; // Tier 3 (future)
+  /** Called when user types (free text changes) */
+  onTextChange?: (value: string) => void;
+  /** Called when user selects a structured suggestion */
+  onChange?: (place: PlaceResult | null) => void;
+  /** Filter by country (e.g. "Greece") */
+  country?: string;
+  /** Max suggestions to show */
+  limit?: number;
+  /** Input name attribute */
   name?: string;
+  /** Required field */
+  required?: boolean;
+  /** Error message */
+  error?: string;
+  /** Additional className for the wrapper */
+  className?: string;
 };
 
 export function PlaceAutocomplete({
-  label = "Destination / Region",
-  placeholder = "e.g., Santorini",
-  required = false,
-  value = "",
-  onChange,
+  label,
+  placeholder = "Start typing a destination...",
+  value: controlledValue,
   onTextChange,
-  preset = "clickytour",
-  // country = "gr",         // reserved for Tier 3
-  // mirrorApiUrl,           // reserved for Tier 2
-  // enableGoogleFallback,   // reserved for Tier 3
-  name = "destination",
-}: Props) {
-  const [query, setQuery] = useState(value);
-  const [suggestions, setSuggestions] = useState<PlaceEntry[]>([]);
-  const [open, setOpen] = useState(false);
-  const [activeIdx, setActiveIdx] = useState(-1);
+  onChange,
+  country,
+  limit = 8,
+  name,
+  required,
+  error,
+  className = "",
+}: PlaceAutocompleteProps) {
+  const [inputValue, setInputValue] = useState(controlledValue ?? "");
+  const [suggestions, setSuggestions] = useState<PlaceResult[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [highlightIndex, setHighlightIndex] = useState(-1);
+  const [loading, setLoading] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  // Sync external value
+  // Sync controlled value
   useEffect(() => {
-    setQuery(value);
-  }, [value]);
+    if (controlledValue !== undefined) setInputValue(controlledValue);
+  }, [controlledValue]);
 
-  // Close dropdown on outside click
+  // Close on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setOpen(false);
+        setIsOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const handleInput = useCallback(
-    (text: string) => {
-      setQuery(text);
-      onTextChange?.(text);
-      setActiveIdx(-1);
-
-      if (text.length < 2) {
+  const fetchSuggestions = useCallback(
+    async (q: string) => {
+      if (q.length < 2) {
         setSuggestions([]);
-        setOpen(false);
+        setIsOpen(false);
         return;
       }
-
-      // Tier 1: static region search
-      const results = searchRegions(text, preset, 8);
-      setSuggestions(results);
-      setOpen(results.length > 0);
-
-      // TODO Tier 2: if results < 3, query /api/places/suggest
-      // TODO Tier 3: if still < 1, query Google Places API
+      setLoading(true);
+      try {
+        const params = new URLSearchParams({ q, limit: String(limit) });
+        if (country) params.set("country", country);
+        const res = await fetch(`/api/places/suggest?${params}`);
+        const data = await res.json();
+        const results: PlaceResult[] = (data.suggestions ?? []).map((s: PlaceResult) => ({
+          ...s,
+          displayName: s.label,
+        }));
+        setSuggestions(results);
+        setIsOpen(results.length > 0);
+        setHighlightIndex(-1);
+      } catch {
+        setSuggestions([]);
+      } finally {
+        setLoading(false);
+      }
     },
-    [preset, onTextChange]
+    [country, limit]
   );
 
-  function selectPlace(entry: PlaceEntry) {
-    setQuery(entry.name);
-    setOpen(false);
-    setSuggestions([]);
+  function handleInputChange(val: string) {
+    setInputValue(val);
+    onTextChange?.(val);
 
-    const selection: PlaceSelection = {
-      displayName: entry.name,
-      placeId: entry.placeId,
-      lat: entry.lat,
-      lng: entry.lng,
-      country: "GR",
-      region: entry.parent || entry.name,
-      placeType: entry.type,
-      tier: 1,
-    };
-    onChange?.(selection);
+    // Debounce API call
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => fetchSuggestions(val), 200);
+  }
+
+  function handleSelect(place: PlaceResult) {
+    setInputValue(place.displayName);
+    onTextChange?.(place.displayName);
+    onChange?.(place);
+    setIsOpen(false);
+    setSuggestions([]);
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
-    if (!open || suggestions.length === 0) return;
+    if (!isOpen || suggestions.length === 0) return;
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIdx((i) => (i < suggestions.length - 1 ? i + 1 : 0));
+      setHighlightIndex((i) => Math.min(i + 1, suggestions.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setActiveIdx((i) => (i > 0 ? i - 1 : suggestions.length - 1));
-    } else if (e.key === "Enter" && activeIdx >= 0) {
+      setHighlightIndex((i) => Math.max(i - 1, 0));
+    } else if (e.key === "Enter" && highlightIndex >= 0) {
       e.preventDefault();
-      selectPlace(suggestions[activeIdx]);
+      handleSelect(suggestions[highlightIndex]);
     } else if (e.key === "Escape") {
-      setOpen(false);
+      setIsOpen(false);
     }
   }
 
-  const typeLabel: Record<string, string> = {
-    region: "Region",
-    island: "Island",
-    city: "City",
-    area: "Area",
-  };
-
   return (
-    <div ref={wrapperRef} className="relative">
+    <div ref={wrapperRef} className={`relative ${className}`}>
       {label && (
-        <label className={labelClass}>
+        <label className="mb-1 block text-sm font-medium text-slate-700">
           {label}
-          {required && " *"}
+          {required && <span className="ml-0.5 text-red-500">*</span>}
         </label>
       )}
-      <input
-        ref={inputRef}
-        type="text"
-        name={name}
-        className={inputClass}
-        placeholder={placeholder}
-        value={query}
-        onChange={(e) => handleInput(e.target.value)}
-        onFocus={() => {
-          if (suggestions.length > 0) setOpen(true);
-        }}
-        onKeyDown={handleKeyDown}
-        autoComplete="off"
-        required={required}
-      />
+      <div className="relative">
+        <input
+          type="text"
+          name={name}
+          value={inputValue}
+          onChange={(e) => handleInputChange(e.target.value)}
+          onFocus={() => { if (suggestions.length > 0) setIsOpen(true); }}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          required={required}
+          autoComplete="off"
+          className={`w-full rounded-lg border px-4 py-2.5 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${
+            error ? "border-red-400" : "border-slate-300"
+          }`}
+        />
+        {loading && (
+          <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+          </div>
+        )}
+      </div>
 
-      {open && suggestions.length > 0 && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-slate-200 bg-white shadow-lg max-h-64 overflow-y-auto">
-          {suggestions.map((s, idx) => (
-            <button
-              key={s.placeId}
-              type="button"
-              className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center justify-between gap-2 ${
-                idx === activeIdx
-                  ? "bg-teal-50 text-teal-900"
-                  : "text-slate-700 hover:bg-slate-50"
-              } ${idx === 0 ? "rounded-t-xl" : ""} ${idx === suggestions.length - 1 ? "rounded-b-xl" : ""}`}
-              onClick={() => selectPlace(s)}
-              onMouseEnter={() => setActiveIdx(idx)}
+      {/* Dropdown */}
+      {isOpen && suggestions.length > 0 && (
+        <ul className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
+          {suggestions.map((s, i) => (
+            <li
+              key={`${s.area}-${s.region}-${s.country}`}
+              onMouseDown={() => handleSelect(s)}
+              onMouseEnter={() => setHighlightIndex(i)}
+              className={`flex cursor-pointer items-center justify-between px-4 py-2 text-sm ${
+                i === highlightIndex ? "bg-cyan-50 text-cyan-700" : "text-slate-700 hover:bg-slate-50"
+              }`}
             >
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                </svg>
-                <span>
-                  <span className="font-medium">{s.name}</span>
-                  {s.parent && (
-                    <span className="text-slate-400 ml-1 text-xs">({s.parent})</span>
-                  )}
+              <span>
+                <span className="font-medium">{s.displayName}</span>
+                {s.country && s.displayName !== s.country && (
+                  <span className="ml-1 text-slate-400">{s.country}</span>
+                )}
+              </span>
+              {s.listingCount > 0 && (
+                <span className="ml-2 text-xs text-slate-400">
+                  {s.listingCount} listing{s.listingCount !== 1 ? "s" : ""}
                 </span>
-              </span>
-              <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wide">
-                {typeLabel[s.type] || s.type}
-              </span>
-            </button>
+              )}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
+
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }

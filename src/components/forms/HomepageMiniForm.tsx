@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PlaceAutocomplete } from "@/components/PlaceAutocomplete";
-import type { PlaceSelection } from "@/lib/greekRegions";
+// PlaceResult type inferred from PlaceAutocomplete onChange callback
 
 type RoleKey =
   | "guest-vacation"
@@ -463,12 +463,12 @@ export function HomepageMiniForm({
                       required={field.required}
                       value={formData[field.name] || ""}
                       onTextChange={(text) => setField(field.name, text)}
-                      onChange={(place: PlaceSelection | null) => {
+                      onChange={(place) => {
                         if (place) {
                           setField(field.name, place.displayName);
-                          setField(`${field.name}PlaceId`, place.placeId);
-                          setField(`${field.name}Lat`, String(place.lat));
-                          setField(`${field.name}Lng`, String(place.lng));
+                          setField(`${field.name}PlaceId`, place.placeId ?? '');
+                          setField(`${field.name}Lat`, String(place.lat ?? ''));
+                          setField(`${field.name}Lng`, String(place.lng ?? ''));
                         }
                       }}
                     />

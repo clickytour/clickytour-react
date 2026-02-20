@@ -90,7 +90,7 @@ function GuestsVacationRequestInner() {
           {step === 0 && <div className="grid md:grid-cols-2 gap-4">
             <DateInput label="Check-in" name="dateStart" required value={form.dateStart} onChange={e => updateField('dateStart', e.target.value)} />
             <DateInput label="Check-out" name="dateEnd" required value={form.dateEnd} onChange={e => updateField('dateEnd', e.target.value)} />
-            <PlaceAutocomplete label="Destination / Region" name="destination" required value={form.destination} onTextChange={v => updateField('destination', v)} onChange={p => { if (p) { updateField('destination', p.displayName); updateField('destinationPlaceId', p.placeId); } }} />
+            <PlaceAutocomplete label="Destination / Region" name="destination" required value={form.destination} onTextChange={v => updateField('destination', v)} onChange={p => { if (p) { updateField('destination', p.displayName); updateField('destinationPlaceId', p.placeId ?? ''); } }} />
             <SelectField label="Bedrooms" name="bedrooms" options={[{value:'1',label:'1'},{value:'2',label:'2'},{value:'3',label:'3'},{value:'4+',label:'4+'}]} value={form.bedrooms} onChange={e => updateField('bedrooms', e.target.value)} />
             <SelectField label="Adults" name="adults" options={[{value:'1',label:'1'},{value:'2',label:'2'},{value:'3',label:'3'},{value:'4',label:'4'},{value:'5+',label:'5+'}]} required value={form.adults} onChange={e => updateField('adults', e.target.value)} />
             <SelectField label="Children (3-14)" name="children314" options={[{value:'0',label:'0'},{value:'1',label:'1'},{value:'2',label:'2'},{value:'3+',label:'3+'}]} value={form.children314} onChange={e => updateField('children314', e.target.value)} />
