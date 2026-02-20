@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentNetPricingDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentNetPricingDiagram />}
       title={"Net Pricing for Agents"}
       subtitle={"Net pricing is your B2B partner rate. You add your margin, send a client-ready offer, and keep the difference as profit."}
       cardTitle={"What you can do"}

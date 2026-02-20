@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentAffiliateDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentAffiliateDiagram />}
       title={"Earn by Referring Partners — Not Only Bookings"}
       subtitle={"Invite property owners, service providers, and other agents to ClickyTour. Get rewarded when they activate and start using the platform."}
       cardTitle={"What you can do"}

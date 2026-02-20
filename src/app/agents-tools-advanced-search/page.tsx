@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentAdvancedSearchDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentAdvancedSearchDiagram />}
       title={"Find the Perfect Listing in Seconds – Across All ClickyTour Pools"}
       subtitle={"Vacation Rentals, Real Estate, Services — all in one powerful search."}
       cardTitle={"Highlights"}

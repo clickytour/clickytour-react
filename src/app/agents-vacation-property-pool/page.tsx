@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentPropertyPoolDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentPropertyPoolDiagram />}
       title={"Vacation Property Pool"}
       subtitle={"Your Private Pool of Vacation Rentals"}
       cardTitle={"Highlights"}

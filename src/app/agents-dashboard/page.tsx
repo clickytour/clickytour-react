@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentDashboardDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentDashboardDiagram />}
       title={"Agent Dashboard"}
       subtitle={"Your Business. One Dashboard."}
       cardTitle={"Highlights"}

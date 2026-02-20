@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentListPropertiesDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentListPropertiesDiagram />}
       title={"List Properties on ClickyTour"}
       subtitle={"Add Your Properties to ClickyTour"}
       cardTitle={"Highlights"}

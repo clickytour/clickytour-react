@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentGrowPromoteDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentGrowPromoteDiagram />}
       title={"Grow & Promote"}
       subtitle={"Grow Your Reach, Maximize Your Earnings"}
       cardTitle={"Highlights"}

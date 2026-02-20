@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentToolboxDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentToolboxDiagram />}
       title={"Your Agent Toolbox in One Place"}
       subtitle={"Access every tool you need — from branded offers to advanced searches — all in your dedicated dashboard."}
       cardTitle={"Highlights"}

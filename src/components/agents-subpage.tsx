@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PageShell } from '@/components/site';
+import { ReactNode } from 'react';
 
 type Section = {
   title: string;
@@ -17,6 +18,7 @@ type AgentsSubpageProps = {
   ctaBody: string;
   ctaPrimary: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
+  diagram?: ReactNode;
 };
 
 export function AgentsSubpageTemplate({
@@ -29,14 +31,20 @@ export function AgentsSubpageTemplate({
   ctaBody,
   ctaPrimary,
   ctaSecondary,
+  diagram,
 }: AgentsSubpageProps) {
   return (
     <PageShell>
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-14 md:py-16">
         <div className="container">
-          <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Agents</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">{title}</h1>
-          <p className="text-cyan-100 mt-4 max-w-3xl">{subtitle}</p>
+          <div className={diagram ? "grid lg:grid-cols-[1fr_auto] gap-8 items-start" : ""}>
+            <div>
+              <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Agents</p>
+              <h1 className="text-4xl md:text-5xl font-extrabold mt-2">{title}</h1>
+              <p className="text-cyan-100 mt-4 max-w-3xl">{subtitle}</p>
+            </div>
+            {diagram && <div className="hidden lg:block max-w-sm">{diagram}</div>}
+          </div>
         </div>
       </section>
 

@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentBookEarnDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentBookEarnDiagram />}
       title={"Book Smarter. Earn More."}
       subtitle={"Net pricing gives you a built-in profit margin on every booking — with faster quotes and cleaner client offers."}
       cardTitle={"Highlights"}

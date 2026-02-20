@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentBrandedTemplatesDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentBrandedTemplatesDiagram />}
       title={"Branded Templates & Chat Tools"}
       subtitle={"Communicate Like a Pro — With Zero Design or Setup"}
       cardTitle={"Highlights"}

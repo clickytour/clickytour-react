@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentPlansDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentPlansDiagram />}
       title={"Choose Your Agent Plan"}
       subtitle={"Pick the access model that fits your workflow — subscription tools, commission-based access, or a free account to explore the ecosystem."}
       cardTitle={"What you can do"}

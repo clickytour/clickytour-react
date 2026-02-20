@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentRealEstateDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentRealEstateDiagram />}
       title={"Real Estate Sales Agent Tools"}
       subtitle={"Explore Real Estate Listings"}
       cardTitle={"Highlights"}

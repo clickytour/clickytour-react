@@ -1,8 +1,10 @@
 import { AgentsSubpageTemplate } from '@/components/agents-subpage';
+import { AgentWhiteLabelDiagram } from '@/components/diagrams';
 
 export default function Page() {
   return (
     <AgentsSubpageTemplate
+      diagram={<AgentWhiteLabelDiagram />}
       title={"Offer Listings Without Branding"}
       subtitle={"Send Clean, Professional Offers in Seconds"}
       cardTitle={"Highlights"}
