@@ -1,8 +1,9 @@
 import { PMPage } from '@/components/pm-page';
+import { ThreeStepsListedDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"List Your Properties on ClickyTour"}
-    subtitle={"Reach more guests, agents, and partners with each listing you publish."}
+  return <PMPage diagram={<ThreeStepsListedDiagram />} title={"List Your Properties on ClickyTour"}
+    subtitle={"Reach more guests, agents, and partners with every listing."}
     introTitle={"From upload to active demand"}
     introText={"The source page described a simple listing flow: upload, validate, publish, then receive leads and bookings through multiple channels."}
     highlights={["Publish across ClickyTour and partner demand channels","Share high-quality media and rich listing details","Track listing performance with analytics"]}

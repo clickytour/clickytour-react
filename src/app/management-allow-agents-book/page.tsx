@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { NetPricingFlowDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Allow Agents to Book with Net Pricing"}
+  return <PMPage diagram={<NetPricingFlowDiagram />} title={"Allow Agents to Book with Net Pricing"}
     subtitle={"Give verified agents controlled access to your inventory and unlock additional sales."}
     introTitle={"Your inventory, their distribution reach"}
     introText={"The original content focused on setting net rates, publishing to agent dashboards, and receiving net payouts while agents add their margin."}

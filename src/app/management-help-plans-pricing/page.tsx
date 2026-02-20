@@ -1,8 +1,8 @@
 import { PMPage } from '@/components/pm-page';
 
 export default function Page() {
-  return <PMPage title={"Manager Plans & Pricing"}
-    subtitle={"Choose the plan that fits your portfolio size, workflow needs, and growth goals."}
+  return <PMPage title={"Plans & Pricing — What’s Included"}
+    subtitle={"Use this page to understand how ClickyTour PMC access works: onboarding, tools, pool inventory,"}
     introTitle={"Clear pricing for every stage"}
     introText={"This page had empty WP content. We rebuilt it as a practical overview for PM companies evaluating plan levels, feature access, and support options."}
     highlights={["Plans aligned to team size and inventory complexity","Transparent feature access by tier","Upgrade paths as your operation grows"]}

@@ -6,18 +6,16 @@ export default function Page() {
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
         <div className="container">
           <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Owners</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Real Estate Owners</h1>
-          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">List, present, and manage properties for sale or rent with professional visibility and support tools.</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Sell or Lease Your Property Faster with ClickyTour</h1>
+          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Reach global buyers, investors, and agents — without agency headaches. List, get matched, track proposals, and manage the deal flow with clear tools.</p>
         </div>
       </section>
       
-<section className="section"><div className="container"><SectionTitle title="All-in-one real-estate workflow" /><FeatureGrid items={[
-{ title:'Publish sale & rent listings', desc:'Create polished listings with key details, media, and positioning.', icon:'??'},
-{ title:'Lead-ready presentation', desc:'Share professional pages and branded proposals with prospects.', icon:'??'},
-{ title:'Agent collaboration', desc:'Coordinate co-brokering and partner visibility safely.', icon:'??'},
-{ title:'Promotion tools', desc:'Boost exposure through campaigns and partner channels.', icon:'??'},
-{ title:'Owner reporting', desc:'Track inquiries, activity, and conversion progress.', icon:'??'}
-]} /></div></section>
+<section className="section"><div className="container"><SectionTitle title="ClickyTour.com • Real Estate Owners" /><FeatureGrid items={[{ title:'Fill the form with property details', desc:'Location, type, rooms, and any links/photos you already have.', icon:'??'},
+{ title:'Receive estimated market value', desc:'Based on local market signals and comparable demand.', icon:'??'},
+{ title:'Get pricing & presentation recommendations', desc:'What to adjust to attract buyers/tenants faster.', icon:'??'},
+{ title:'Optional', desc:'marketing or legal support: Only if you need it — choose the services you want.', icon:'??'},
+{ title:'Pre-screened buyer matches (new)', desc:'Receive proposals only from verified buyers matched by budget, interest, and location filters.', icon:'??'}]} /></div></section>
 
       <section className="section">
         <div className="container">

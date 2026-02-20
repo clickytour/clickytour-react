@@ -3,11 +3,11 @@ import { AgentsSubpageTemplate } from '@/components/agents-subpage';
 export default function Page() {
   return (
     <AgentsSubpageTemplate
-      title={"Book & Get Paid"}
-      subtitle={"Book Smarter. Earn More."}
+      title={"Book Smarter. Earn More."}
+      subtitle={"Net pricing gives you a built-in profit margin on every booking — with faster quotes and cleaner client offers."}
       cardTitle={"Highlights"}
-      cards={["Net pricing gives you a built-in profit margin on every booking.","Search Listings","View Agent Plans","How It Works","Your Net Pricing Advantage","Filter by rentals, real estate, or services"]}
-      sections={[{"title":"Overview","body":"Net pricing gives you a built-in profit margin on every booking.","points":["Search Listings","View Agent Plans","How It Works"]},{"title":"How agents apply this","body":"Your Net Pricing Advantage","points":["See Net Prices","Available to Pro Agents & Subscribers","Sell at Your Rate","Keep the margin as your profit"]},{"title":"Next steps","body":"Filter by rentals, real estate, or services","points":["Why It Works for You","Why Agents Love Net Pricing","💼 Instant Margin"]}]}
+      cards={["Search Listings", "See Net Prices", "Sell at Your Rate", "October 14, 2025: test another saving NEW", "Updates: Net pricing updates"]}
+      sections={[{"title": "Pick a listing", "body": "Choose rentals, services, or real estate offers that match your customer."}, {"title": "See your net cost", "body": "If your plan includes net access, you’ll see the net price instantly."}, {"title": "Set your selling rate", "body": "You add your margin and send a client-ready offer (PDF / link)."}]}
       ctaTitle={"Start growing with ClickyTour"}
       ctaBody={"Create your agent profile, publish your offers, and help clients book faster with a complete digital journey."}
       ctaPrimary={{ label: 'Get started', href: '/contact' }}

@@ -1,8 +1,9 @@
 import { PMPage } from '@/components/pm-page';
+import { DashboardToolsDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Manager Dashboard"}
-    subtitle={"Your command center for bookings, performance, payouts, and partner communication."}
+  return <PMPage diagram={<DashboardToolsDiagram />} title={"ClickyTour.com • Property Management Companies"}
+    subtitle={"Your Command Center for Property Management"}
     introTitle={"Everything in one secure place"}
     introText={"The source page described the dashboard as a single interface for reservations, earnings, communications, and integrations with channel and tools modules."}
     highlights={["Monitor real-time booking activity","Track revenue and occupancy trends","Manage payouts and communication centrally"]}

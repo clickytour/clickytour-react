@@ -6,17 +6,17 @@ export default function Page() {
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
         <div className="container">
           <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Owners</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Free Evaluation Form</h1>
-          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Get a no-obligation estimate of your property?s earning potential and best-fit management plan.</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">ClickyTour.com • Vacation Owners • Free Evaluation</h1>
+          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Want to Know What Your Property Can Earn</p>
         </div>
       </section>
       
-<section className="section"><div className="container"><SectionTitle title="Why request an evaluation" /><FeatureGrid cols={2} items={[
-{ title:'Income potential estimate', desc:'Understand expected range based on property type, seasonality, and demand.', icon:'??'},
-{ title:'Market positioning', desc:'Learn how to improve occupancy and pricing competitiveness.', icon:'??'},
-{ title:'Operations fit', desc:'Choose self-managed, sync, or full-management with confidence.', icon:'??'},
-{ title:'Actionable next steps', desc:'Receive a practical launch plan, not just numbers.', icon:'?'}
-]} /></div></section>
+<section className="section"><div className="container"><SectionTitle title="ClickyTour.com • Vacation Owners • Free Evaluation" /><FeatureGrid cols={2} items={[{ title:'Review & Submit', desc:'Review & Submit', icon:'??'},
+{ title:'Submit', desc:'What happens next?', icon:'??'},
+{ title:'Expert Review', desc:'Market positioning, potential earnings & service matches.', icon:'??'},
+{ title:'Presentation Link', desc:'No-brand URL to share freely without contact risk.', icon:'??'},
+{ title:'Optional Onboarding', desc:'Continue with Self-managed, Multi-Channel, or Full Management.', icon:'??'},
+{ title:'🚪 Check-in/out', desc:'🚪 Check-in/out', icon:'??'}]} /></div></section>
 
       <section className="section">
         <div className="container">

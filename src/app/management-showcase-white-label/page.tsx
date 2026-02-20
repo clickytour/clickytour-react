@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { WhiteLabelWorkflowDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Showcase Your Properties with White-label Offers"}
+  return <PMPage diagram={<WhiteLabelWorkflowDiagram />} title={"Showcase Your Properties with White-label Offers"}
     subtitle={"Send professional proposals instantly under your own agency brand."}
     introTitle={"Stay visible while competitors stay hidden"}
     introText={"The WordPress page focused on full branding control, faster sales cycles, and client protection through neutral white-label presentation."}

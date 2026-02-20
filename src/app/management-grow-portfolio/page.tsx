@@ -1,8 +1,9 @@
 import { PMPage } from '@/components/pm-page';
+import { WhiteLabelPoolDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Grow Your Portfolio with ClickyTour"}
-    subtitle={"Expand your reach, add properties from other PM companies, and get more bookings without adding extra staff or overhead."}
+  return <PMPage diagram={<WhiteLabelPoolDiagram />} title={"ClickyTour.com • Property Management Companies"}
+    subtitle={"Grow Your Portfolio with ClickyTour"}
     introTitle={"Scale with less manual work"}
     introText={"The original page focused on moving from manual, limited growth to automated and scalable portfolio expansion. With ClickyTour, you can access a shared network of inventory, agents, and services while keeping your operations lean."}
     highlights={["Move beyond managing only your own inventory","Send white-label offers in seconds","Increase bookings while reducing repetitive tasks"]}

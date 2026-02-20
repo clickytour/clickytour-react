@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { PropertyFlowDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Get Matched with New Properties Instantly"}
+  return <PMPage diagram={<PropertyFlowDiagram />} title={"Get Matched with New Properties Instantly"}
     subtitle={"Expand your portfolio with verified properties from ClickyTour owner channels."}
     introTitle={"Smart matching for PM growth"}
     introText={"The source content emphasized instant match alerts, fit by region and style, and fast onboarding from dashboard to live listing."}

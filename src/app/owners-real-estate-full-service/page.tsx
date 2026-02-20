@@ -6,17 +6,17 @@ export default function Page() {
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
         <div className="container">
           <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Owners</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Full Service</h1>
-          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Let our network support your listing lifecycle?from preparation to buyer/tenant engagement.</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">About Services • Reside Sphere by ClickyTour</h1>
+          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Expert Services for Property Owners</p>
         </div>
       </section>
       
-<section className="section"><div className="container"><SectionTitle title="Service coverage" /><FeatureGrid cols={2} items={[
-{ title:'Preparation support', desc:'Guidance for content, visuals, and market positioning.', icon:'??'},
-{ title:'Promotion execution', desc:'Campaign and partner distribution to increase visibility.', icon:'??'},
-{ title:'Lead management flow', desc:'Structured handling of inquiries and follow-up actions.', icon:'??'},
-{ title:'Reporting and optimization', desc:'Continuous performance review and next-step recommendations.', icon:'??'}
-]} /></div></section>
+<section className="section"><div className="container"><SectionTitle title="About Services • Reside Sphere by ClickyTour" /><FeatureGrid cols={2} items={[{ title:'Long-term support (strategy → execution → post-sale help)', desc:'Long-term support (strategy → execution → post-sale help)', icon:'??'},
+{ title:'Fast access to vetted professionals (builders, inspectors, legal)', desc:'Fast access to vetted professionals (builders, inspectors, legal)', icon:'??'},
+{ title:'Optional dashboard tracking + white-label quotes when needed', desc:'Optional dashboard tracking + white-label quotes when needed', icon:'??'},
+{ title:'Guidance through the full transaction lifecycle.', desc:'Request a Service', icon:'??'},
+{ title:'Private link', desc:'with your request status', icon:'??'},
+{ title:'Direct contact', desc:'with a specialist (via dashboard)', icon:'??'}]} /></div></section>
 
       <section className="section">
         <div className="container">

@@ -1,8 +1,8 @@
 import { PMPage } from '@/components/pm-page';
 
 export default function Page() {
-  return <PMPage title={"Channel Manager Integration"}
-    subtitle={"Connect once and manage rates, availability, and bookings across your distribution stack."}
+  return <PMPage title={"Connect Once, Manage Everywhere"}
+    subtitle={"Sync availability, rates, and bookings across your distribution channels — and control everything from your ClickyTour PMC Dashboard."}
     introTitle={"Keep channels synced and controlled"}
     introText={"Although the original page included placeholder content, its core intent is clear: centralized channel synchronization to prevent conflicts and reduce manual updates."}
     highlights={["Sync rates and availability from one source","Reduce overbookings through real-time updates","Maintain operational consistency across channels"]}

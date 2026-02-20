@@ -1,8 +1,8 @@
 import { PMPage } from '@/components/pm-page';
 
 export default function Page() {
-  return <PMPage title={"FAQ for Managers"}
-    subtitle={"Quick answers to common PM questions about listings, bookings, channels, and payments."}
+  return <PMPage title={"Help & FAQ for Property Management Companies"}
+    subtitle={"Find quick answers about the PMC Dashboard, Channel Manager, listings, property pool,"}
     introTitle={"Answers to the questions teams ask most"}
     introText={"This page had empty WP content. We rebuilt it as a dedicated FAQ view for manager operations and platform workflows."}
     highlights={["Coverage across onboarding, bookings, pricing, and reporting","Simple answers designed for daily PM operations","Direct links to next actions and support routes"]}

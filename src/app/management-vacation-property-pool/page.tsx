@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { SimpleThreeStepDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Vacation Property Pool"}
+  return <PMPage diagram={<SimpleThreeStepDiagram />} title={"Vacation Property Pool"}
     subtitle={"Book and promote network properties to grow supply and revenue without extra acquisition costs."}
     introTitle={"Expand inventory through the pool"}
     introText={"The original content focused on access to more properties, reduced workload, and commission opportunities through net pricing and white-label distribution."}

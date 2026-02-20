@@ -6,12 +6,12 @@ export default function Page() {
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
         <div className="container">
           <p className="text-cyan-200 text-xs font-semibold uppercase tracking-[0.1em]">For Owners</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Promotion Tools</h1>
-          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">Use modern campaigns and presentation tools to increase listing visibility and conversion quality.</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold mt-2">Promote Your Real Estate Listing with Smart Tools</h1>
+          <p className="max-w-3xl mt-4 text-cyan-100 text-lg">From agent collaboration to social media campaigns, ClickyTour gives you powerful options</p>
         </div>
       </section>
       
-<section className="section"><div className="container"><SectionTitle title="Toolset for stronger reach" /><CheckList items={['Campaign-ready listing formats','Partner and agent distribution options','Branded sharing materials','Lead activity analytics','Optimization recommendations']} /></div></section>
+<section className="section"><div className="container"><SectionTitle title="Real Estate Owners • Promotion Tools" /><CheckList items={['Campaign-ready listing formats','Partner and agent distribution options','Branded sharing materials','Lead activity analytics','Optimization recommendations']} /></div></section>
 
       <section className="section">
         <div className="container">

@@ -13,7 +13,7 @@ export default function GuestsHelpHowBookingWorksPage() {
 
       <section className="section">
         <div className="container">
-          <SectionTitle title="Booking flow" subtitle="This page was created from title intent because WP content is empty." />
+          <SectionTitle title="How Booking Works" subtitle="This page was created from title intent because WP content is empty." />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               '1. Search listings or submit a custom request',

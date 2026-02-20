@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { ThreeWaysBookingDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Increase Bookings Without Increasing Costs"}
+  return <PMPage diagram={<ThreeWaysBookingDiagram />} title={"Increase Bookings Without Increasing Costs"}
     subtitle={"Use ClickyTour booking channels, agent demand, and operational tools to lift occupancy."}
     introTitle={"More demand, same operational control"}
     introText={"Source content highlighted three growth drivers: booking pool participation, agent bookings, and visibility through targeted campaigns."}

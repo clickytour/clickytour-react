@@ -1,7 +1,8 @@
 import { PMPage } from '@/components/pm-page';
+import { OperationsSimplifiedDiagram } from '@/components/diagrams';
 
 export default function Page() {
-  return <PMPage title={"Manage & Operate in One System"}
+  return <PMPage diagram={<OperationsSimplifiedDiagram />} title={"Manage & Operate in One System"}
     subtitle={"Run properties, bookings, payouts, and communications from a centralized operational hub."}
     introTitle={"Simplify daily operations"}
     introText={"This page emphasized centralized dashboards, channel automation, integrated reporting, and connected tools that reduce fragmentation in day-to-day management."}

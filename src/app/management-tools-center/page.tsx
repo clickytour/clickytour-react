@@ -2,7 +2,7 @@ import { PMPage } from '@/components/pm-page';
 
 export default function Page() {
   return <PMPage title={"Tools Center"}
-    subtitle={"A practical toolkit for PM companies to operate faster, communicate better, and convert more bookings."}
+    subtitle={"Everything you need to grow, sell, and operate your portfolio — from white-label offers and booking pool access"}
     introTitle={"One place for operational tools"}
     introText={"This page had empty WP content. We rebuilt it as a structured overview of the manager toolkit: proposal tools, communication flows, reporting, and automation support."}
     highlights={["Access proposal, communication, and reporting tools","Reduce repetitive admin work","Standardize team workflows and outputs"]}

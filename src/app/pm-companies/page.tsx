@@ -1,4 +1,5 @@
 import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle, SidebarLayout } from '@/components/site';
+import { EcosystemDiagram } from '@/components/diagrams';
 import { roleMenus } from '@/components/site-menu';
 
 export default function PMCompaniesPage() {
@@ -12,6 +13,12 @@ export default function PMCompaniesPage() {
         ctaA="List your properties"
         ctaB="Increase portfolio"
       />
+
+      <section className="section">
+        <div className="container max-w-lg mx-auto">
+          <EcosystemDiagram />
+        </div>
+      </section>
 
       <SidebarLayout title="For PM Companies" menu={menu}>
         <section className="py-16">

@@ -3,13 +3,13 @@ import { AgentsSubpageTemplate } from '@/components/agents-subpage';
 export default function Page() {
   return (
     <AgentsSubpageTemplate
-      title={"Book Rentals & Services with Net Pricing"}
-      subtitle={"Use ClickyTour book net pricing tools to deliver a faster, clearer experience for every client you support."}
+      title={"Net Pricing for Agents"}
+      subtitle={"Net pricing is your B2B partner rate. You add your margin, send a client-ready offer, and keep the difference as profit."}
       cardTitle={"What you can do"}
-      cards={["Set up book net pricing in minutes","Share branded links with clients","Track views, clicks, and bookings","Keep communication in one dashboard","Save time with reusable templates","Scale your local sales process"]}
-      sections={[{"title":"How it works","body":"ClickyTour gives agents a practical workflow for book net pricing, from setup to delivery and follow-up.","points":["Pick the right tools for your market and client profile.","Publish and share polished offers or listings quickly.","Measure performance and refine your outreach each week."]},{"title":"Best practices","points":["Keep messaging simple and outcome-focused.","Use consistent branding across every client touchpoint.","Bundle services to increase booking confidence and revenue."]},{"title":"Why agents use this","body":"Agents choose ClickyTour for book net pricing because it reduces manual work while improving conversion and service quality."}]}
+      cards={["Instant Margin", "Client-ready Offers", "Faster Closing", "Net pricing visibility: depends on your plan + listing eligibility.", "Some listings may be", "Use white-label offers to keep client presentation consistent.: Margin Calculator"]}
+      sections={[{"title": "Search inventory", "body": "Use filters to find the right option for your customer."}, {"title": "View net price", "body": "Net pricing appears based on your plan and listing eligibility."}, {"title": "Add margin", "body": "Set your selling price (or keep public price as-is)."}, {"title": "Frequently Asked Questions", "points": ["Is net pricing available for all listings?", "Can I bundle rentals with tours/transfers in one offer?", "Do clients see my net price?", "Where do I track bookings and earnings?"]}]}
       ctaTitle={"Start growing with ClickyTour"}
-      ctaBody={"Create your agent profile, publish your offers, and help clients book faster with a complete digital journey."}
+      ctaBody={"Net pricing is your B2B partner rate. You add your margin, send a client-ready offer, and keep the difference as profit."}
       ctaPrimary={{ label: 'Get started', href: '/contact' }}
       ctaSecondary={{ label: 'View agent tools', href: '/for-agents' }}
     />
