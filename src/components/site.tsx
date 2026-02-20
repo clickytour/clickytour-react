@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ReactNode, useMemo, useState } from 'react';
 import { MenuCategory, MenuLink, roleMenus } from './site-menu';
 
@@ -259,39 +260,10 @@ export function SidebarLayout({
   );
 }
 
-export function Footer() {
-  const footerCols = [
-    {
-      t: 'Partner With Us',
-      l: [
-        { href: '/guests/', label: 'For Guests' },
-        { href: '/owners/', label: 'For Owners' },
-        { href: '/service-providers/', label: 'For Service Providers' },
-        { href: '/agents/', label: 'For Agents' },
-        { href: '/pm-companies/', label: 'For PM Companies' },
-      ],
-    },
-    {
-      t: 'Explore',
-      l: [
-        { href: '/tours-activities/', label: 'Tours & Activities' },
-        { href: '/vacation-rentals/', label: 'Vacation Rentals' },
-        { href: '/offers/', label: 'Offers & Deals' },
-        { href: '/real-estate/', label: 'Real Estate' },
-        { href: '/destinations-2/', label: 'Destinations' },
-        { href: '/marketplace/', label: 'Marketplace' },
-      ],
-    },
-    {
-      t: 'Find Staff & Jobs',
-      l: [
-        { href: '/find-staff/', label: 'Find Staff' },
-        { href: '/find-staff-contractors-job-seekers/', label: 'Job Seekers' },
-        { href: '/find-staff-contractors-directory/', label: 'Staff Directory' },
-        { href: '/find-staff-contractors-quick-request/', label: 'Quick Request' },
-        { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
-      ],
-    },
+function useContextualFooterCols() {
+  const pathname = usePathname();
+
+  const fixed = [
     {
       t: 'Company',
       l: [
@@ -313,6 +285,214 @@ export function Footer() {
       ],
     },
   ];
+
+  const contextSets: Record<string, Array<{ t: string; l: Array<{ href: string; label: string }> }>> = {
+    guests: [
+      { t: 'Guest Services', l: [
+        { href: '/guests-vacation-assistance/', label: 'Vacation Assistance' },
+        { href: '/guests-personalized-planning/', label: 'Personalized Planning' },
+        { href: '/guests-premium-travel-plan/', label: 'Premium Travel Plan' },
+        { href: '/guests-what-to-do/', label: 'What to Do & Where to Go' },
+        { href: '/guests-destinations/', label: 'Destinations' },
+        { href: '/guests-plans-offers/', label: 'Plans & Offers' },
+      ]},
+      { t: 'Explore', l: [
+        { href: '/tours-activities/', label: 'Tours & Activities' },
+        { href: '/vacation-rentals/', label: 'Vacation Rentals' },
+        { href: '/offers/', label: 'Offers & Deals' },
+        { href: '/trip-planer/', label: 'Trip Planner' },
+        { href: '/search-rentals/', label: 'Search Rentals' },
+      ]},
+      { t: 'Guest Help', l: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-help-how-booking-works/', label: 'How Booking Works' },
+        { href: '/guests-help-rental-policies/', label: 'Rental Policies' },
+        { href: '/guests-help-refunds-cancellation/', label: 'Refunds & Cancellation' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+      ]},
+    ],
+    owners: [
+      { t: 'Vacation Property', l: [
+        { href: '/owners-vacation/', label: 'Vacation Owners Hub' },
+        { href: '/owners-vacation-list-property/', label: 'List My Property' },
+        { href: '/owners-vacation-full-management/', label: 'Full Management' },
+        { href: '/owners-vacation-self-managed/', label: 'Self Managed' },
+        { href: '/owners-vacation-promote-rental/', label: 'Promote My Rental' },
+        { href: '/owners-vacation-free-evaluation/', label: 'Free Evaluation' },
+      ]},
+      { t: 'Real Estate', l: [
+        { href: '/owners-real-estate/', label: 'Real Estate Hub' },
+        { href: '/owners-real-estate-sale-rent/', label: 'Sale or Rent' },
+        { href: '/owners-real-estate-list-property/', label: 'List Property' },
+        { href: '/owners-real-estate-invest/', label: 'Invest' },
+        { href: '/owners-real-estate-request-proposals/', label: 'Request Proposals' },
+      ]},
+      { t: 'Owner Resources', l: [
+        { href: '/owners-vacation-dashboard/', label: 'Dashboard' },
+        { href: '/owners-faq/', label: 'Owner FAQ' },
+        { href: '/owners-plans-pricing/', label: 'Plans & Pricing' },
+        { href: '/owners-support/', label: 'Owner Support' },
+        { href: '/owners-vacation-become-agent/', label: 'Become an Agent' },
+      ]},
+    ],
+    serviceProviders: [
+      { t: 'List & Promote', l: [
+        { href: '/service-providers-list-promote/', label: 'List & Promote' },
+        { href: '/service-providers-list-service/', label: 'List Your Service' },
+        { href: '/service-providers-free-visibility/', label: 'Free Visibility' },
+        { href: '/service-providers-promotion-tools/', label: 'Promotion Tools' },
+        { href: '/service-providers-grow-your-reach/', label: 'Grow Your Reach' },
+      ]},
+      { t: 'Services For', l: [
+        { href: '/service-providers-for-guests/', label: 'For Guests / Tourists' },
+        { href: '/service-providers-for-owners/', label: 'For Owners / Hosts' },
+        { href: '/service-providers-what-you-can-offer/', label: 'What You Can Offer' },
+        { href: '/service-providers-sale-rent-business/', label: 'Sale or Rent Business' },
+        { href: '/service-providers-invest-tourism/', label: 'Invest in Tourism' },
+      ]},
+      { t: 'Provider Resources', l: [
+        { href: '/service-providers-dashboard/', label: 'Dashboard' },
+        { href: '/service-providers-faq/', label: 'Business FAQ' },
+        { href: '/service-providers-faq-pricing/', label: 'FAQ & Pricing' },
+        { href: '/service-providers-plans-overview/', label: 'Plans Overview' },
+        { href: '/service-providers-find-staff/', label: 'Find Staff' },
+      ]},
+    ],
+    agents: [
+      { t: 'Book & Earn', l: [
+        { href: '/agents-book-get-paid/', label: 'Book & Get Paid' },
+        { href: '/agents-book-net-pricing/', label: 'Net Pricing' },
+        { href: '/agents-vacation-property-pool/', label: 'Property Pool' },
+        { href: '/agents-explore-services/', label: 'Explore Services' },
+        { href: '/agents-explore-activities/', label: 'Explore Activities' },
+      ]},
+      { t: 'Agent Tools', l: [
+        { href: '/agents-tools/', label: 'Tools Hub' },
+        { href: '/agents-tools-advanced-search/', label: 'Advanced Search' },
+        { href: '/agents-tools-white-label-offers/', label: 'White-label Offers' },
+        { href: '/agents-tools-branded-templates/', label: 'Branded Templates' },
+        { href: '/agents-dashboard/', label: 'Dashboard' },
+      ]},
+      { t: 'Agent Support', l: [
+        { href: '/agents-real-estate/', label: 'Real Estate' },
+        { href: '/agents-help-faq/', label: 'Agent FAQ' },
+        { href: '/agents-help-plans-pricing/', label: 'Plans & Pricing' },
+        { href: '/agents-help-contact/', label: 'Contact Support' },
+        { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
+      ]},
+    ],
+    pmCompanies: [
+      { t: 'Grow Portfolio', l: [
+        { href: '/management-promote-services/', label: 'Promote Services' },
+        { href: '/management-match-properties/', label: 'Match Properties' },
+        { href: '/management-showcase-white-label/', label: 'White-label Showcase' },
+        { href: '/management-grow-portfolio/', label: 'Grow Portfolio' },
+      ]},
+      { t: 'Bookings & Operations', l: [
+        { href: '/management-vacation-property-pool/', label: 'Property Pool' },
+        { href: '/management-list-properties/', label: 'List Properties' },
+        { href: '/management-allow-agents-book/', label: 'Agent Bookings (Net)' },
+        { href: '/management-channel-manager/', label: 'Channel Manager' },
+        { href: '/management-dashboard/', label: 'Dashboard' },
+      ]},
+      { t: 'PM Resources', l: [
+        { href: '/management-tools-center/', label: 'Tools Center' },
+        { href: '/management-help-faq/', label: 'Manager FAQ' },
+        { href: '/management-help-plans-pricing/', label: 'Plans & Pricing' },
+        { href: '/pmc-directory/', label: 'PMC Directory' },
+        { href: '/pmc-apply/', label: 'Apply as PMC' },
+      ]},
+    ],
+    findStaff: [
+      { t: 'For Employers', l: [
+        { href: '/find-staff/', label: 'Find Staff Hub' },
+        { href: '/find-staff-contractors-management/', label: 'For PM Companies' },
+        { href: '/find-staff-contractors-owners/', label: 'For Owners' },
+        { href: '/find-staff-contractors-providers/', label: 'For Providers' },
+        { href: '/find-staff-contractors-quick-request/', label: 'Quick Request' },
+      ]},
+      { t: 'For Job Seekers', l: [
+        { href: '/find-staff-contractors-job-seekers/', label: 'Job Opportunities' },
+        { href: '/find-staff-contractors-job-seekers-application/', label: 'Apply Now' },
+        { href: '/find-staff-contractors-job-seekers-dashboard/', label: 'Dashboard' },
+        { href: '/find-staff-contractors-job-seekers-profile/', label: 'My Profile' },
+        { href: '/my-applications/', label: 'My Applications' },
+      ]},
+      { t: 'Directory', l: [
+        { href: '/find-staff-contractors-directory/', label: 'Candidate Directory' },
+        { href: '/job-seeker-directory/', label: 'Job Seeker Directory' },
+        { href: '/find-staff-contractors-universal/', label: 'Universal Entry' },
+        { href: '/list-cv/', label: 'Submit CV' },
+        { href: '/find-staff-contractors-providers-categories/', label: 'All Categories' },
+      ]},
+    ],
+    explore: [
+      { t: 'Tours & Activities', l: [
+        { href: '/tours-activities/', label: 'All Tours' },
+        { href: '/activities-boats/', label: 'Boats & Water' },
+        { href: '/activities-outdoor/', label: 'Outdoor Adventures' },
+        { href: '/activities-food-wine/', label: 'Food & Wine' },
+        { href: '/activities-wellness/', label: 'Wellness & Spa' },
+        { href: '/activities-destination/', label: 'By Destination' },
+      ]},
+      { t: 'Vacation Rentals', l: [
+        { href: '/vacation-rentals/', label: 'All Rentals' },
+        { href: '/search-rentals/', label: 'Search Rentals' },
+        { href: '/vacation-rentals-destination/', label: 'By Destination' },
+        { href: '/offers/', label: 'Offers & Deals' },
+        { href: '/offers-hot/', label: 'Hot Offers' },
+        { href: '/offers-last-minute/', label: 'Last Minute' },
+      ]},
+      { t: 'More', l: [
+        { href: '/real-estate/', label: 'Real Estate' },
+        { href: '/destinations-2/', label: 'Destinations' },
+        { href: '/marketplace/', label: 'Marketplace' },
+        { href: '/discover/', label: 'Discover' },
+        { href: '/blog/', label: 'Blog' },
+      ]},
+    ],
+  };
+
+  // Default columns
+  const defaultCols = [
+    { t: 'Partner With Us', l: [
+      { href: '/guests/', label: 'For Guests' },
+      { href: '/owners/', label: 'For Owners' },
+      { href: '/service-providers/', label: 'For Service Providers' },
+      { href: '/agents/', label: 'For Agents' },
+      { href: '/pm-companies/', label: 'For PM Companies' },
+    ]},
+    { t: 'Explore', l: [
+      { href: '/tours-activities/', label: 'Tours & Activities' },
+      { href: '/vacation-rentals/', label: 'Vacation Rentals' },
+      { href: '/offers/', label: 'Offers & Deals' },
+      { href: '/real-estate/', label: 'Real Estate' },
+      { href: '/destinations-2/', label: 'Destinations' },
+      { href: '/marketplace/', label: 'Marketplace' },
+    ]},
+    { t: 'Find Staff & Jobs', l: [
+      { href: '/find-staff/', label: 'Find Staff' },
+      { href: '/find-staff-contractors-job-seekers/', label: 'Job Seekers' },
+      { href: '/find-staff-contractors-directory/', label: 'Staff Directory' },
+      { href: '/find-staff-contractors-quick-request/', label: 'Quick Request' },
+      { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
+    ]},
+  ];
+
+  let contextual = defaultCols;
+  if (pathname.startsWith('/guests')) contextual = contextSets.guests;
+  else if (pathname.startsWith('/owners')) contextual = contextSets.owners;
+  else if (pathname.startsWith('/service-providers')) contextual = contextSets.serviceProviders;
+  else if (pathname.startsWith('/agents')) contextual = contextSets.agents;
+  else if (pathname.startsWith('/pm-companies') || pathname.startsWith('/management')) contextual = contextSets.pmCompanies;
+  else if (pathname.startsWith('/find-staff') || pathname.startsWith('/job-seeker') || pathname.startsWith('/list-cv') || pathname.startsWith('/my-applications') || pathname.startsWith('/request-')) contextual = contextSets.findStaff;
+  else if (pathname.startsWith('/tours') || pathname.startsWith('/activities') || pathname.startsWith('/offers') || pathname.startsWith('/vacation-rental') || pathname.startsWith('/search-rental') || pathname.startsWith('/listings') || pathname.startsWith('/real-estate') || pathname.startsWith('/destinations') || pathname.startsWith('/discover') || pathname.startsWith('/marketplace')) contextual = contextSets.explore;
+
+  return [...contextual, ...fixed];
+}
+
+export function Footer() {
+  const footerCols = useContextualFooterCols();
 
   const rolePills = [
     { href: '/guests/', label: 'For Guests' },
