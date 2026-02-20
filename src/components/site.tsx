@@ -151,31 +151,44 @@ export function Header() {
         <div className="lg:hidden border-t border-cyan-900/40 bg-[#0F2B46]">
           <nav className="container py-3 flex flex-col gap-0.5">
             {topNavItems.map((item) => (
-              <div key={item.href}>
+              <div key={item.href} className="border-b border-cyan-900/30 last:border-0">
                 {(item.children || item.megaMenu) ? (
                   <>
-                    <button className="w-full flex items-center justify-between px-3 py-2.5 text-[13px] text-cyan-100 font-medium" onClick={() => setSubOpen((v) => (v === item.href ? null : item.href))}>
+                    <button className="w-full flex items-center justify-between px-3 py-3 text-[14px] text-cyan-100 font-semibold" onClick={() => setSubOpen((v) => (v === item.href ? null : item.href))}>
                       {item.label}
                       <svg className={`w-4 h-4 transition-transform ${subOpen === item.href ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
                     </button>
                     {subOpen === item.href && (
-                      <div className="pl-4 pb-1">
-                        {(item.children ?? flattenMenu(item.megaMenu || [])).map((sub) => (
-                          <Link key={sub.href} href={sub.href} className="block px-3 py-2 text-[12px] text-cyan-100/80 hover:text-white" onClick={() => setMobileOpen(false)}>
-                            {sub.label}
-                          </Link>
-                        ))}
+                      <div className="pl-2 pb-2 max-h-[50vh] overflow-y-auto">
+                        {item.megaMenu ? (
+                          item.megaMenu.map((cat) => (
+                            <div key={cat.label} className="mb-2">
+                              <p className="px-3 py-1 text-[10px] uppercase tracking-wider text-cyan-400 font-semibold">{cat.label}</p>
+                              {cat.items.slice(0, 6).map((sub) => (
+                                <Link key={sub.href} href={sub.href} className="block px-3 py-2 text-[13px] text-cyan-100/80 hover:text-white hover:bg-cyan-800/30 rounded-md" onClick={() => setMobileOpen(false)}>
+                                  {sub.label}
+                                </Link>
+                              ))}
+                            </div>
+                          ))
+                        ) : (
+                          (item.children || []).map((sub) => (
+                            <Link key={sub.href} href={sub.href} className="block px-3 py-2 text-[13px] text-cyan-100/80 hover:text-white hover:bg-cyan-800/30 rounded-md" onClick={() => setMobileOpen(false)}>
+                              {sub.label}
+                            </Link>
+                          ))
+                        )}
                       </div>
                     )}
                   </>
                 ) : (
-                  <Link href={item.href} className="block px-3 py-2.5 text-[13px] text-cyan-100 font-medium hover:text-white" onClick={() => setMobileOpen(false)}>
+                  <Link href={item.href} className="block px-3 py-3 text-[14px] text-cyan-100 font-semibold hover:text-white" onClick={() => setMobileOpen(false)}>
                     {item.label}
                   </Link>
                 )}
               </div>
             ))}
-            <Link href="/get-started/" className="mx-3 mt-2 text-center py-2 rounded-full bg-cyan-500 text-white text-[13px] font-semibold" onClick={() => setMobileOpen(false)}>
+            <Link href="/get-started/" className="mx-3 mt-3 mb-1 text-center py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[14px] font-bold shadow-lg" onClick={() => setMobileOpen(false)}>
               Get Started
             </Link>
           </nav>
@@ -328,30 +341,51 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container py-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
-        <div>
-          <div className="flex items-center gap-2">
-            <VLogo className="w-11 h-11" />
-            <div>
-              <p className="font-bold text-lg">ClickyTour</p>
-              <p className="text-[11px] text-cyan-100/70">Travel • Real Estate • Services</p>
-            </div>
+      <div className="container py-10">
+        <div className="flex items-center gap-2 mb-8 sm:mb-0">
+          <VLogo className="w-11 h-11" />
+          <div>
+            <p className="font-bold text-lg">ClickyTour</p>
+            <p className="text-[11px] text-cyan-100/70">Travel • Real Estate • Services</p>
           </div>
-          <p className="mt-3 text-cyan-100/80 text-sm">Where Travelers, Hosts & Partners Connect</p>
+        </div>
+        <p className="text-cyan-100/80 text-sm mb-8 sm:hidden">Where Travelers, Hosts & Partners Connect</p>
+
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="hidden lg:block">
+            <p className="text-cyan-100/80 text-sm">Where Travelers, Hosts & Partners Connect</p>
+          </div>
+          {footerCols.map((c) => (
+            <div key={c.t}>
+              <h4 className="font-bold text-sm mb-3 text-cyan-50">{c.t}</h4>
+              <ul className="space-y-2 text-[13px]">
+                {c.l.map((x) => (
+                  <li key={x.label}>
+                    <Link href={x.href} className="text-cyan-100/80 hover:text-white transition-colors">{x.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {footerCols.map((c) => (
-          <div key={c.t}>
-            <h4 className="font-bold text-sm mb-3 text-cyan-50">{c.t}</h4>
-            <ul className="space-y-2 text-[13px]">
-              {c.l.map((x) => (
-                <li key={x.label}>
-                  <Link href={x.href} className="text-cyan-100/80 hover:text-white transition-colors">{x.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div className="sm:hidden divide-y divide-cyan-900/40">
+          {footerCols.map((c) => (
+            <details key={c.t} className="group">
+              <summary className="flex items-center justify-between py-3 cursor-pointer">
+                <h4 className="font-bold text-sm text-cyan-50">{c.t}</h4>
+                <svg className="w-4 h-4 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
+              </summary>
+              <ul className="space-y-2 text-[13px] pb-3 pl-2">
+                {c.l.map((x) => (
+                  <li key={x.label}>
+                    <Link href={x.href} className="text-cyan-100/80 hover:text-white transition-colors">{x.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))}
+        </div>
       </div>
 
       <div className="border-t border-cyan-900/40 text-cyan-100/60 text-xs py-4 text-center">© 2026 ClickyTour. All rights reserved.</div>
