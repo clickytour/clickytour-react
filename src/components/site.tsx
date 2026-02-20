@@ -64,12 +64,260 @@ function VLogo({ className = 'w-7 h-7' }: { className?: string }) {
   return <Image src="/assets/v-logo-clean.png" alt="" width={120} height={120} className={className} />;
 }
 
+type NavScope = {
+  label: string;
+  items: typeof topNavItems;
+  cta: { href: string; label: string };
+  crossSell: Array<{ href: string; label: string }>;
+};
+
+const scopedNavs: Record<string, NavScope> = {
+  guests: {
+    label: 'For Guests',
+    items: [
+      { href: '/guests/', label: 'Overview' },
+      { href: '/guests-vacation-assistance/', label: 'Vacation', children: [
+        { href: '/guests-vacation-assistance/', label: 'Vacation Assistance' },
+        { href: '/guests-personalized-planning/', label: 'Personalized Planning' },
+        { href: '/guests-premium-travel-plan/', label: 'Premium Travel Plan' },
+        { href: '/guests-what-to-do/', label: 'What to Do & Where to Go' },
+        { href: '/guests-destinations/', label: 'Destinations' },
+        { href: '/guests-plans-offers/', label: 'Plans & Offers' },
+        { href: '/trip-planer/', label: 'Trip Planner' },
+      ]},
+      { href: '/guests-real-estate/', label: 'Real Estate' },
+      { href: '/tours-activities/', label: 'Tours & Activities', children: [
+        { href: '/tours-activities/', label: 'All Tours' },
+        { href: '/activities-boats/', label: 'Boats & Water' },
+        { href: '/activities-outdoor/', label: 'Outdoor' },
+        { href: '/activities-food-wine/', label: 'Food & Wine' },
+        { href: '/activities-wellness/', label: 'Wellness' },
+      ]},
+      { href: '/vacation-rentals/', label: 'Rentals', children: [
+        { href: '/vacation-rentals/', label: 'Vacation Rentals' },
+        { href: '/search-rentals/', label: 'Search Rentals' },
+        { href: '/offers/', label: 'Offers & Deals' },
+      ]},
+      { href: '/guests-help/', label: 'Help', children: [
+        { href: '/guests-help/', label: 'Help Center' },
+        { href: '/guests-help-how-booking-works/', label: 'How Booking Works' },
+        { href: '/guests-help-rental-policies/', label: 'Rental Policies' },
+        { href: '/guests-faq/', label: 'Guest FAQ' },
+        { href: '/guests-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    cta: { href: '/guests-vacation-request/', label: 'Plan My Trip' },
+    crossSell: [{ href: '/service-providers-for-guests/', label: 'Local Services' }],
+  },
+  owners: {
+    label: 'For Owners',
+    items: [
+      { href: '/owners/', label: 'Overview' },
+      { href: '/owners-vacation/', label: 'Vacation', children: [
+        { href: '/owners-vacation/', label: 'Vacation Hub' },
+        { href: '/owners-vacation-list-property/', label: 'List Property' },
+        { href: '/owners-vacation-full-management/', label: 'Full Management' },
+        { href: '/owners-vacation-self-managed/', label: 'Self Managed' },
+        { href: '/owners-vacation-promote-rental/', label: 'Promote Rental' },
+        { href: '/owners-vacation-free-evaluation/', label: 'Free Evaluation' },
+        { href: '/owners-vacation-dashboard/', label: 'Dashboard' },
+      ]},
+      { href: '/owners-real-estate/', label: 'Real Estate', children: [
+        { href: '/owners-real-estate/', label: 'Real Estate Hub' },
+        { href: '/owners-real-estate-sale-rent/', label: 'Sale or Rent' },
+        { href: '/owners-real-estate-list-property/', label: 'List Property' },
+        { href: '/owners-real-estate-invest/', label: 'Invest' },
+        { href: '/owners-real-estate-request-proposals/', label: 'Proposals' },
+      ]},
+      { href: '/owners-faq/', label: 'Help', children: [
+        { href: '/owners-faq/', label: 'FAQ' },
+        { href: '/owners-plans-pricing/', label: 'Plans & Pricing' },
+        { href: '/owners-support/', label: 'Support' },
+      ]},
+    ],
+    cta: { href: '/owners-vacation-list-property/', label: 'List My Property' },
+    crossSell: [{ href: '/service-providers-for-owners/', label: 'Services' }, { href: '/pm-companies/', label: 'PMC' }],
+  },
+  serviceProviders: {
+    label: 'For Providers',
+    items: [
+      { href: '/service-providers/', label: 'Overview' },
+      { href: '/service-providers-list-promote/', label: 'List & Promote', children: [
+        { href: '/service-providers-list-promote/', label: 'List & Promote' },
+        { href: '/service-providers-list-service/', label: 'List Service' },
+        { href: '/service-providers-free-visibility/', label: 'Free Visibility' },
+        { href: '/service-providers-promotion-tools/', label: 'Promotion Tools' },
+        { href: '/service-providers-grow-your-reach/', label: 'Grow Reach' },
+      ]},
+      { href: '/service-providers-for-guests/', label: 'For Tourists', children: [
+        { href: '/service-providers-for-guests/', label: 'All Tourist Services' },
+        { href: '/service-providers-for-guests-dining-nightlife/', label: 'Dining & Nightlife' },
+        { href: '/service-providers-for-guests-local-activities/', label: 'Local Activities' },
+        { href: '/service-providers-for-guests-wellness-spa/', label: 'Wellness & Spa' },
+        { href: '/service-providers-for-guests-transfers-transport/', label: 'Transfers' },
+      ]},
+      { href: '/service-providers-for-owners/', label: 'For Owners', children: [
+        { href: '/service-providers-for-owners/', label: 'All Owner Services' },
+        { href: '/service-providers-for-owners-cleaning-services/', label: 'Cleaning' },
+        { href: '/service-providers-for-owners-home-maintenance/', label: 'Maintenance' },
+        { href: '/service-providers-for-owners-checkin-checkout/', label: 'Check-in/out' },
+      ]},
+      { href: '/service-providers-dashboard/', label: 'Dashboard' },
+      { href: '/service-providers-faq/', label: 'Help', children: [
+        { href: '/service-providers-faq/', label: 'FAQ' },
+        { href: '/service-providers-faq-pricing/', label: 'Pricing' },
+        { href: '/service-providers-plans-overview/', label: 'Plans' },
+      ]},
+    ],
+    cta: { href: '/service-providers-list-service/', label: 'List My Service' },
+    crossSell: [{ href: '/find-staff/', label: 'Find Staff' }],
+  },
+  agents: {
+    label: 'For Agents',
+    items: [
+      { href: '/agents/', label: 'Overview' },
+      { href: '/agents-book-get-paid/', label: 'Book & Earn', children: [
+        { href: '/agents-book-get-paid/', label: 'Book & Get Paid' },
+        { href: '/agents-book-net-pricing/', label: 'Net Pricing' },
+        { href: '/agents-vacation-property-pool/', label: 'Property Pool' },
+        { href: '/agents-explore-services/', label: 'Explore Services' },
+        { href: '/agents-explore-activities/', label: 'Explore Activities' },
+      ]},
+      { href: '/agents-real-estate/', label: 'Real Estate', children: [
+        { href: '/agents-real-estate/', label: 'Real Estate' },
+        { href: '/agents-real-estate-tools/', label: 'RE Tools' },
+        { href: '/agents-list-properties/', label: 'List Properties' },
+      ]},
+      { href: '/agents-tools/', label: 'Tools', children: [
+        { href: '/agents-tools/', label: 'Tools Hub' },
+        { href: '/agents-tools-advanced-search/', label: 'Advanced Search' },
+        { href: '/agents-tools-white-label-offers/', label: 'White-label' },
+        { href: '/agents-tools-branded-templates/', label: 'Templates' },
+        { href: '/agents-dashboard/', label: 'Dashboard' },
+      ]},
+      { href: '/agents-help-faq/', label: 'Help', children: [
+        { href: '/agents-help-faq/', label: 'FAQ' },
+        { href: '/agents-help-plans-pricing/', label: 'Plans & Pricing' },
+        { href: '/agents-help-contact/', label: 'Contact' },
+      ]},
+    ],
+    cta: { href: '/agents-agenicies-form/', label: 'Register as Agent' },
+    crossSell: [{ href: '/service-providers/', label: 'Services' }],
+  },
+  pmCompanies: {
+    label: 'For PMC',
+    items: [
+      { href: '/pm-companies/', label: 'Overview' },
+      { href: '/management-grow-portfolio/', label: 'Grow', children: [
+        { href: '/management-promote-services/', label: 'Promote Services' },
+        { href: '/management-match-properties/', label: 'Match Properties' },
+        { href: '/management-showcase-white-label/', label: 'White-label' },
+      ]},
+      { href: '/management-list-properties/', label: 'Bookings', children: [
+        { href: '/management-vacation-property-pool/', label: 'Property Pool' },
+        { href: '/management-list-properties/', label: 'List Properties' },
+        { href: '/management-allow-agents-book/', label: 'Agent Bookings' },
+        { href: '/management-increase-bookings/', label: 'Increase Bookings' },
+      ]},
+      { href: '/management-dashboard/', label: 'Manage', children: [
+        { href: '/management-dashboard/', label: 'Dashboard' },
+        { href: '/management-channel-manager/', label: 'Channel Manager' },
+        { href: '/management-tools-center/', label: 'Tools Center' },
+      ]},
+      { href: '/management-help-faq/', label: 'Help', children: [
+        { href: '/management-help-faq/', label: 'FAQ' },
+        { href: '/management-help-plans-pricing/', label: 'Plans & Pricing' },
+      ]},
+    ],
+    cta: { href: '/pmc-apply/', label: 'Apply as PMC' },
+    crossSell: [{ href: '/find-staff/', label: 'Find Staff' }, { href: '/agents/', label: 'Agents' }],
+  },
+  findStaff: {
+    label: 'Find Staff',
+    items: [
+      { href: '/find-staff/', label: 'Overview' },
+      { href: '/find-staff-contractors-management/', label: 'For Employers', children: [
+        { href: '/find-staff-contractors-management/', label: 'For PM Companies' },
+        { href: '/find-staff-contractors-owners/', label: 'For Owners' },
+        { href: '/find-staff-contractors-providers/', label: 'For Providers' },
+        { href: '/find-staff-contractors-quick-request/', label: 'Quick Request' },
+      ]},
+      { href: '/find-staff-contractors-job-seekers/', label: 'For Job Seekers', children: [
+        { href: '/find-staff-contractors-job-seekers/', label: 'Job Opportunities' },
+        { href: '/find-staff-contractors-job-seekers-application/', label: 'Apply' },
+        { href: '/find-staff-contractors-job-seekers-dashboard/', label: 'Dashboard' },
+        { href: '/my-applications/', label: 'My Applications' },
+      ]},
+      { href: '/find-staff-contractors-directory/', label: 'Directory' },
+      { href: '/list-cv/', label: 'Submit CV' },
+    ],
+    cta: { href: '/find-staff-contractors-quick-request/', label: 'Post a Request' },
+    crossSell: [{ href: '/service-providers/', label: 'Services' }],
+  },
+  explore: {
+    label: 'Explore',
+    items: [
+      { href: '/tours-activities/', label: 'Tours', children: [
+        { href: '/tours-activities/', label: 'All Tours' },
+        { href: '/activities-boats/', label: 'Boats & Water' },
+        { href: '/activities-outdoor/', label: 'Outdoor' },
+        { href: '/activities-food-wine/', label: 'Food & Wine' },
+        { href: '/activities-wellness/', label: 'Wellness' },
+      ]},
+      { href: '/vacation-rentals/', label: 'Rentals', children: [
+        { href: '/vacation-rentals/', label: 'All Rentals' },
+        { href: '/search-rentals/', label: 'Search' },
+        { href: '/vacation-rentals-destination/', label: 'By Destination' },
+      ]},
+      { href: '/offers/', label: 'Offers', children: [
+        { href: '/offers/', label: 'All Offers' },
+        { href: '/offers-hot/', label: 'Hot Offers' },
+        { href: '/offers-last-minute/', label: 'Last Minute' },
+        { href: '/offers-group-deals/', label: 'Group Deals' },
+      ]},
+      { href: '/real-estate/', label: 'Real Estate' },
+      { href: '/destinations-2/', label: 'Destinations' },
+      { href: '/marketplace/', label: 'Marketplace' },
+    ],
+    cta: { href: '/search-rentals/', label: 'Search Now' },
+    crossSell: [{ href: '/guests/', label: 'For Guests' }],
+  },
+};
+
+function useNavScope(): { scoped: boolean; scope: NavScope | null; key: string } {
+  const pathname = usePathname();
+  if (pathname.startsWith('/guests') || pathname.startsWith('/guest-service')) return { scoped: true, scope: scopedNavs.guests, key: 'guests' };
+  if (pathname.startsWith('/owners') || pathname.startsWith('/vacation-owners')) return { scoped: true, scope: scopedNavs.owners, key: 'owners' };
+  if (pathname.startsWith('/service-providers')) return { scoped: true, scope: scopedNavs.serviceProviders, key: 'serviceProviders' };
+  if (pathname.startsWith('/agents')) return { scoped: true, scope: scopedNavs.agents, key: 'agents' };
+  if (pathname.startsWith('/pm-companies') || pathname.startsWith('/management') || pathname.startsWith('/pmc')) return { scoped: true, scope: scopedNavs.pmCompanies, key: 'pmCompanies' };
+  if (pathname.startsWith('/find-staff') || pathname.startsWith('/job-seeker') || pathname.startsWith('/list-cv') || pathname.startsWith('/my-applications') || pathname.startsWith('/request-detail') || pathname.startsWith('/request-applications')) return { scoped: true, scope: scopedNavs.findStaff, key: 'findStaff' };
+  if (pathname.startsWith('/tours') || pathname.startsWith('/activities') || pathname.startsWith('/offers') || pathname.startsWith('/vacation-rental') || pathname.startsWith('/search-rental') || pathname.startsWith('/listings') || pathname.startsWith('/real-estate') && !pathname.startsWith('/real-estate-owner') || pathname.startsWith('/destinations') || pathname.startsWith('/discover') || pathname.startsWith('/marketplace')) return { scoped: true, scope: scopedNavs.explore, key: 'explore' };
+  return { scoped: false, scope: null, key: '' };
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [subOpen, setSubOpen] = useState<string | null>(null);
+  const { scoped, scope } = useNavScope();
+
+  const navItems = scoped && scope ? scope.items : topNavItems;
 
   return (
     <header className="sticky top-0 z-40 bg-[#0F2B46] text-white">
+      {scoped && scope && (
+        <div className="bg-teal-700/30 border-b border-teal-600/30">
+          <div className="container flex items-center justify-between h-7">
+            <p className="text-[11px] text-teal-200 font-medium">{scope.label} Section</p>
+            <div className="flex items-center gap-3">
+              {scope.crossSell.map(cs => (
+                <Link key={cs.href} href={cs.href} className="text-[10px] text-teal-300/80 hover:text-white">Also: {cs.label}</Link>
+              ))}
+              <Link href="/" className="text-[10px] text-cyan-300 hover:text-white font-medium">← All Roles</Link>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="container flex items-center justify-between h-12">
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileOpen(false)}>
           <VLogo className="w-9 h-9" />
@@ -77,7 +325,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-8">
-          {topNavItems.map((item) => {
+          {navItems.map((item) => {
             if (item.children) {
               return (
                 <div key={item.href} className="relative group">
@@ -135,9 +383,14 @@ export function Header() {
           })}
         </nav>
 
-        <Link href="/get-started/" className="hidden lg:inline-flex ml-auto items-center px-4 py-1.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[12px] font-semibold transition-colors whitespace-nowrap">
-          Get Started
-        </Link>
+        <div className="hidden lg:flex items-center gap-2 ml-auto">
+          <Link href="/qa/" className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[10px] font-semibold hover:bg-amber-500/30 transition-colors whitespace-nowrap">
+            ⚙ QA
+          </Link>
+          <Link href={scoped && scope ? scope.cta.href : '/get-started/'} className="inline-flex items-center px-4 py-1.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[12px] font-semibold transition-colors whitespace-nowrap">
+            {scoped && scope ? scope.cta.label : 'Get Started'}
+          </Link>
+        </div>
 
         <button aria-label="Toggle menu" className="lg:hidden p-2 text-cyan-100" onClick={() => setMobileOpen((v) => !v)}>
           {mobileOpen ? (
@@ -189,8 +442,11 @@ export function Header() {
                 )}
               </div>
             ))}
-            <Link href="/get-started/" className="mx-3 mt-3 mb-1 text-center py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[14px] font-bold shadow-lg" onClick={() => setMobileOpen(false)}>
-              Get Started
+            <Link href={scoped && scope ? scope.cta.href : '/get-started/'} className="mx-3 mt-3 text-center py-3 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[14px] font-bold shadow-lg" onClick={() => setMobileOpen(false)}>
+              {scoped && scope ? scope.cta.label : 'Get Started'}
+            </Link>
+            <Link href="/qa/" className="mx-3 mt-1 mb-1 text-center py-2 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[12px] font-semibold" onClick={() => setMobileOpen(false)}>
+              ⚙ QA Dashboard
             </Link>
           </nav>
         </div>
