@@ -47,13 +47,14 @@ export default function BlogPage() {
   return (
     <PageShell>
       <Hero
-        title="ClickyTour Blog"
+diagram={<AboutPlatformDiagram />}
+                title="ClickyTour Blog"
         subtitle="Insights, guides, and updates for guests, owners, providers, agents and PM companies."
         ctaA="Read Latest"
         ctaB="Explore Categories"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><AboutPlatformDiagram /></div></section>
+      
 
       <section className="section section-soft">
         <div className="container grid lg:grid-cols-[260px_minmax(0,1fr)] gap-6">

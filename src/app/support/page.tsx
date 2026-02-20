@@ -14,13 +14,14 @@ export default function SupportPage() {
   return (
     <PageShell>
       <Hero
-        title="Support Tickets"
+diagram={<ContactDiagram />}
+                title="Support Tickets"
         subtitle="Submit a ticket and our team will route your request to the right support specialist."
         ctaA="Submit Ticket"
         ctaB="Visit Help Center"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><ContactDiagram /></div></section>
+      
 
       <section className="section section-soft">
         <div className="container max-w-4xl">

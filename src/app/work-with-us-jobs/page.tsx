@@ -68,13 +68,14 @@ export default function WorkWithUsJobsPage() {
   return (
     <PageShell>
       <Hero
-        title="Job Opportunities Across Tourism, Rentals & Real Estate"
+diagram={<WorkWithUsDiagram />}
+                title="Job Opportunities Across Tourism, Rentals & Real Estate"
         subtitle="Discover roles with ClickyTour and our partner network in cleaning, maintenance, guest services, property management and more."
         ctaA="View Opportunities"
         ctaB="Submit Your Profile"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><WorkWithUsDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

@@ -21,13 +21,14 @@ export default function GuestsWhatToDoPage() {
   return (
     <PageShell>
       <Hero
-        title="What to Do & Where to Go"
+diagram={<GuestServicesDiagram />}
+                title="What to Do & Where to Go"
         subtitle="Explore handpicked experiences for your stay in Greece, from tours and dining to wellness and family activities."
         ctaA="Explore categories"
         ctaB="Request suggestions"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestServicesDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

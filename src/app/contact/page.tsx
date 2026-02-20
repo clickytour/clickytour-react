@@ -6,13 +6,14 @@ export default function ContactPage() {
   return (
     <PageShell>
       <Hero
-        title="Contact ClickyTour"
+diagram={<ContactDiagram />}
+                title="Contact ClickyTour"
         subtitle="Need help with listings, bookings, partnerships, or account setup? Our team is here to support you."
         ctaA="Send Message"
         ctaB="Open Support Ticket"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><ContactDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container grid md:grid-cols-3 gap-4">

@@ -29,13 +29,14 @@ export default function GuestsHelpPage() {
   return (
     <PageShell>
       <Hero
-        title="Guest Help & FAQ"
+diagram={<GuestBookingFlowDiagram />}
+                title="Guest Help & FAQ"
         subtitle="Find quick answers about booking, planning, support, and policies so you can travel with confidence."
         ctaA="Browse topics"
         ctaB="Contact support"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestBookingFlowDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

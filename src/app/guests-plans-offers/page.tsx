@@ -12,13 +12,14 @@ export default function GuestsPlansOffersPage() {
   return (
     <PageShell>
       <Hero
-        title="Plans & Offers"
+diagram={<GuestPremiumDiagram />}
+                title="Plans & Offers"
         subtitle="Discover exclusive guest offers including hot deals, last-minute options, and group booking benefits."
         ctaA="Browse offers"
         ctaB="Request custom plan"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestPremiumDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

@@ -21,13 +21,14 @@ export default function GuestsVacationAssistancePage() {
   return (
     <PageShell>
       <Hero
-        title="Vacation Assistance"
+diagram={<GuestPlanningDiagram />}
+                title="Vacation Assistance"
         subtitle="Plan your ideal Greek trip with expert help for accommodation, activities, transport, and on-trip support."
         ctaA="Request assistance"
         ctaB="Browse rentals"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestPlanningDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

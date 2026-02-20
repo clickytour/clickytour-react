@@ -20,13 +20,14 @@ export default function GuestsPersonalizedPlanningPage() {
   return (
     <PageShell>
       <Hero
-        title="Personalized Planning"
+diagram={<GuestPlanningDiagram />}
+                title="Personalized Planning"
         subtitle="Answer a few questions and receive a tailored trip proposal for your Greek vacation — practical, fast, and personalized."
         ctaA="Start planning"
         ctaB="See how it works"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestPlanningDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

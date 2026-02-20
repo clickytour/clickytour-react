@@ -15,13 +15,14 @@ export default function GuestsDestinationsPage() {
   return (
     <PageShell>
       <Hero
-        title="Destinations"
+diagram={<GuestServicesDiagram />}
+                title="Destinations"
         subtitle="Browse top Greek regions and discover activities, services, and local highlights based on where you stay."
         ctaA="Browse by destination"
         ctaB="Ask for recommendations"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestServicesDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

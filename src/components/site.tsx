@@ -330,15 +330,20 @@ export function PageShell({ children }: { children: ReactNode }) {
   );
 }
 
-export function Hero({ title, subtitle, ctaA = 'Start now', ctaB = 'Book demo' }: { title: string; subtitle: string; ctaA?: string; ctaB?: string }) {
+export function Hero({ title, subtitle, ctaA = 'Start now', ctaB = 'Book demo', diagram }: { title: string; subtitle: string; ctaA?: string; ctaB?: string; diagram?: React.ReactNode }) {
   return (
     <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
       <div className="container">
-        <h1 className="text-4xl md:text-5xl font-extrabold max-w-4xl">{title}</h1>
-        <p className="max-w-3xl mt-4 text-cyan-100 text-lg">{subtitle}</p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <button className="btn-primary">{ctaA}</button>
-          <button className="btn-secondary">{ctaB}</button>
+        <div className={diagram ? "grid lg:grid-cols-[1fr_auto] gap-8 items-start" : ""}>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-extrabold max-w-4xl">{title}</h1>
+            <p className="max-w-3xl mt-4 text-cyan-100 text-lg">{subtitle}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <button className="btn-primary">{ctaA}</button>
+              <button className="btn-secondary">{ctaB}</button>
+            </div>
+          </div>
+          {diagram && <div className="hidden lg:block max-w-sm">{diagram}</div>}
         </div>
       </div>
     </section>

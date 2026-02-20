@@ -13,13 +13,14 @@ export default function TripPlanerPage() {
   return (
     <PageShell>
       <Hero
-        title="Trip Planner"
+diagram={<TripPlannerDiagram />}
+                title="Trip Planner"
         subtitle="Plan your dream trip to Greece by combining destinations, personalized support, and current travel deals."
         ctaA="Start planning"
         ctaB="View destinations"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><TripPlannerDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

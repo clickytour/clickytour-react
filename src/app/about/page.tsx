@@ -44,13 +44,14 @@ export default function AboutPage() {
   return (
     <PageShell>
       <Hero
-        title="About ClickyTour"
+diagram={<AboutPlatformDiagram />}
+                title="About ClickyTour"
         subtitle="ClickyTour was built to connect travelers, property stakeholders, and service partners in one practical platform for growth."
         ctaA="Explore the Platform"
         ctaB="Talk to Our Team"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><AboutPlatformDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container grid lg:grid-cols-2 gap-8 items-start">

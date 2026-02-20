@@ -37,13 +37,14 @@ export default function WorkWithUsAffiliatePage() {
   return (
     <PageShell>
       <Hero
-        title="Affiliate Programme: Earn by Referring"
+diagram={<AffiliateDiagram />}
+                title="Affiliate Programme: Earn by Referring"
         subtitle="Turn your audience, network, or client base into recurring income by promoting ClickyTour properties and services."
         ctaA="Join as Affiliate"
         ctaB="View Commission Plans"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><AffiliateDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">

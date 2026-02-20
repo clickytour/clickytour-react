@@ -21,15 +21,18 @@ export default function WorkWithUsPage() {
   return (
     <PageShell>
       <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
-        <div className="container max-w-4xl text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold">Work With Us</h1>
-          <p className="text-cyan-100 mt-4 text-lg max-w-2xl mx-auto">
-            Whether you want to join our team, become a partner, or earn through referrals — there's a place for you at ClickyTour.
-          </p>
+        <div className="container">
+          <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-start">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-extrabold">Work With Us</h1>
+              <p className="text-cyan-100 mt-4 text-lg max-w-2xl">
+                Whether you want to join our team, become a partner, or earn through referrals — there&apos;s a place for you at ClickyTour.
+              </p>
+            </div>
+            <div className="hidden lg:block max-w-sm"><WorkWithUsDiagram /></div>
+          </div>
         </div>
       </section>
-
-      <section className="section"><div className="container max-w-lg mx-auto"><WorkWithUsDiagram /></div></section>
 
       <section className="py-14">
         <div className="container max-w-5xl">

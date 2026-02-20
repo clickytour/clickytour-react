@@ -20,13 +20,14 @@ export default function GuestsRealEstatePage() {
   return (
     <PageShell>
       <Hero
-        title="Real Estate"
+diagram={<GuestServicesDiagram />}
+                title="Real Estate"
         subtitle="Explore property opportunities in Greece for relocation, investment, vacation homes, or long-term lifestyle plans."
         ctaA="Browse properties"
         ctaB="Request property match"
       />
 
-      <section className="section"><div className="container max-w-lg mx-auto"><GuestServicesDiagram /></div></section>
+      
 
       <section className="section">
         <div className="container">
