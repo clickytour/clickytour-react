@@ -22,48 +22,37 @@ const topNavItems: Array<{
     children: [
       { href: '/work-with-us-quiz/', label: 'Find Your Role - Quiz' },
       { href: '/find-staff-contractors-job-seekers/', label: 'Job Opportunities' },
+      { href: '/find-staff/', label: 'Find Staff & Contractors' },
+      { href: '/find-staff-contractors-directory/', label: 'Staff Directory' },
+      { href: '/find-staff-contractors-quick-request/', label: 'Quick Staff Request' },
       { href: '/work-with-us-affiliate/', label: 'Affiliate Programme' },
     ],
   },
   {
-    href: '/find-staff/',
-    label: 'Find Staff',
-    children: [
-      { href: '/find-staff-contractors/', label: 'Overview' },
-      { href: '/find-staff-contractors-management/', label: 'For PM Companies' },
-      { href: '/find-staff-contractors-owners/', label: 'For Owners' },
-      { href: '/find-staff-contractors-providers/', label: 'For Providers' },
-      { href: '/find-staff-contractors-job-seekers/', label: 'For Job Seekers' },
-      { href: '/find-staff-contractors-directory/', label: 'Directory' },
-      { href: '/find-staff-contractors-quick-request/', label: 'Quick Request' },
-    ],
-  },
-  {
     href: '/tours-activities/',
-    label: 'Tours & Activities',
+    label: 'Explore',
     children: [
-      { href: '/activities/', label: 'All Activities' },
-      { href: '/activities-boats/', label: 'Boats & Water' },
-      { href: '/activities-outdoor/', label: 'Outdoor' },
-      { href: '/activities-food-wine/', label: 'Food & Wine' },
-      { href: '/activities-wellness/', label: 'Wellness' },
-      { href: '/activities-destination/', label: 'By Destination' },
-    ],
-  },
-  {
-    href: '/vacation-rentals/',
-    label: 'Rentals',
-    children: [
+      { href: '/tours-activities/', label: 'Tours & Activities' },
+      { href: '/vacation-rentals/', label: 'Vacation Rentals' },
       { href: '/search-rentals/', label: 'Search Rentals' },
-      { href: '/vacation-rentals-destination/', label: 'By Destination' },
-      { href: '/listings/', label: 'All Listings' },
       { href: '/offers/', label: 'Offers & Deals' },
       { href: '/real-estate/', label: 'Real Estate' },
+      { href: '/destinations-2/', label: 'Destinations' },
+      { href: '/marketplace/', label: 'Marketplace' },
+      { href: '/blog/', label: 'Blog' },
     ],
   },
-  { href: '/about/', label: 'About Us' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/contact/', label: 'Contact Us' },
+  {
+    href: '/about/',
+    label: 'About',
+    children: [
+      { href: '/about/', label: 'About Us' },
+      { href: '/team/', label: 'Our Team' },
+      { href: '/contact/', label: 'Contact Us' },
+      { href: '/general-faq/', label: 'FAQ' },
+      { href: '/support/', label: 'Support' },
+    ],
+  },
 ];
 
 function flattenMenu(menu: MenuCategory[]) {
