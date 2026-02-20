@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PageShell, SectionTitle } from "@/components/site";
 import { TOOLS, TOOL_CATEGORIES, TOOL_ROLES, getToolBySlug } from "@/lib/tools";
+import ToolCalculatorEmbed from "@/components/tools/ToolCalculatorEmbed";
 
 export async function generateStaticParams() {
   return TOOLS.map((t) => ({ slug: t.slug }));
@@ -69,6 +70,9 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
           </div>
         </div>
       </section>
+
+      {/* Interactive Calculator (if available) */}
+      <ToolCalculatorEmbed slug={tool.slug} />
 
       {/* Features */}
       <section className="py-16">
