@@ -5,7 +5,7 @@ import { JobSeekerHubDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Job Seeker Hub" subtitle="Your central dashboard for job opportunities." ctaA="Apply" ctaB="Browse" diagram={<JobSeekerHubDiagram />} />
+      <Hero title="Job Seeker Hub" subtitle="Your central dashboard for job opportunities." ctaA="Apply" ctaB="Browse" ctaHrefA="/find-staff-contractors-job-seekers-quick-application" ctaHrefB="/find-staff-contractors-job-seekers" diagram={<JobSeekerHubDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Quick Access" />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">

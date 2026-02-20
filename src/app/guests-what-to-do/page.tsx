@@ -21,11 +21,11 @@ export default function GuestsWhatToDoPage() {
   return (
     <PageShell>
       <Hero
-diagram={<GuestServicesDiagram />}
+diagram={<GuestServicesDiagram/>}
                 title="What to Do & Where to Go"
         subtitle="Explore handpicked experiences for your stay in Greece, from tours and dining to wellness and family activities."
         ctaA="Explore categories"
-        ctaB="Request suggestions"
+        ctaB="Request suggestions" ctaHrefA="/tours-activities" ctaHrefB="/guests"
       />
 
       

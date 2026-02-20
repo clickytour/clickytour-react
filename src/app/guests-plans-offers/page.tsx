@@ -12,11 +12,11 @@ export default function GuestsPlansOffersPage() {
   return (
     <PageShell>
       <Hero
-diagram={<GuestPremiumDiagram />}
+diagram={<GuestPremiumDiagram/>}
                 title="Plans & Offers"
         subtitle="Discover exclusive guest offers including hot deals, last-minute options, and group booking benefits."
         ctaA="Browse offers"
-        ctaB="Request custom plan"
+        ctaB="Request custom plan" ctaHrefA="/guests-vacation-request" ctaHrefB="/guests"
       />
 
       

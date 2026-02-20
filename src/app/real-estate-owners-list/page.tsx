@@ -12,7 +12,7 @@ export default function RealEstateOwnersList() {
   const steps = intent === 'maintenance' ? ['Service Details','Contact'] : ['Property Info','Details & Pricing','Contact'];
   return (
     <PageShell>
-      <Hero title="Sell, Evaluate, or Request Services for Your Property" subtitle="Sell or List Your Property with ClickyTour" ctaA="Get Started" ctaB="Learn More" diagram={<OwnerListFormDiagram />} />
+      <Hero title="Sell, Evaluate, or Request Services for Your Property" subtitle="Sell or List Your Property with ClickyTour" ctaA="Get Started" ctaB="Learn More" ctaHrefA="/real-estate-owners-list" ctaHrefB="/real-estate" diagram={<OwnerListFormDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Real Estate Property Form" />
         <div className="mb-6"><label className="block text-sm font-semibold text-slate-700 mb-1">What do you need? *</label><select className="w-full rounded-xl border border-slate-200 px-4 py-3" value={intent} onChange={e => { setIntent(e.target.value); setStep(0); }}><option value="eval">Property Evaluation</option><option value="list">List My Property</option><option value="maintenance">Repairs / Maintenance</option></select></div>

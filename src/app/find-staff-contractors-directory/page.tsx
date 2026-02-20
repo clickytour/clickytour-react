@@ -6,7 +6,7 @@ import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Job Seeker Directory" subtitle="Browse candidates by role, location, and availability." ctaA="Get Started" ctaB="Learn More" diagram={<StaffDirectoryDiagram />} />
+      <Hero title="Job Seeker Directory" subtitle="Browse candidates by role, location, and availability." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/find-staff-contractors-quick-request" ctaHrefB="/find-staff-contractors" diagram={<StaffDirectoryDiagram />} />
       <section className="section"><div className="container">
         <div className="card p-6 mb-6">
           <div className="grid md:grid-cols-4 gap-4">

@@ -4,7 +4,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Reservation Assistance" subtitle="Extended support for complex bookings." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Reservation Assistance" subtitle="Extended support for complex bookings." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/guests-vacation-request" ctaHrefB="/guests-vacation-assistance" />
       <section className="section"><div className="container">
         <SectionTitle title="Reservation Assistance" subtitle="Extended support for complex bookings." />
         <div className="text-center py-8"><Link href="/contact" className="px-6 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Contact Us</Link></div>

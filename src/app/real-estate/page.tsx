@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Real Estate" subtitle="Buy, sell, or rent properties across Greece. Investment and lifestyle opportunities." ctaA="Browse Properties" ctaB="List Yours" diagram={<OwnerRealEstateDiagram />} />
+      <Hero title="Real Estate" subtitle="Buy, sell, or rent properties across Greece. Investment and lifestyle opportunities." ctaA="Browse Properties" ctaB="List Yours" ctaHrefA="/real-estate-buy" ctaHrefB="/real-estate-owners-list" diagram={<OwnerRealEstateDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Market" title="Featured Real Estate" subtitle="Properties for sale, monthly rent, and vacation rental." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

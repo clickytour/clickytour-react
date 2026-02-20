@@ -5,7 +5,7 @@ import { FindStaffFlowDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Find Staff & Contractors" subtitle="Tourism & property staffing, worldwide." ctaA="Post Request" ctaB="Browse" diagram={<FindStaffFlowDiagram />} />
+      <Hero title="Find Staff & Contractors" subtitle="Tourism & property staffing, worldwide." ctaA="Post Request" ctaB="Browse" ctaHrefA="/find-staff-contractors-quick-request" ctaHrefB="/find-staff-contractors-directory" diagram={<FindStaffFlowDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="How It Works" subtitle="Simple, fast, location-based hiring." />
         <div className="grid md:grid-cols-3 gap-6">

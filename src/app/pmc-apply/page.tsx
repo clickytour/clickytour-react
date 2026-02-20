@@ -25,7 +25,7 @@ function PMCApplyInner() {
         title="Apply as a PMC Partner on ClickyTour"
         subtitle="Complete the onboarding form to join our collaboration ecosystem. We review your portfolio profile, regional coverage, and operating model."
         ctaA="Start Application"
-        ctaB="Back to Collaborate"
+        ctaB="Back to Collaborate" ctaHrefA="/pmc-apply" ctaHrefB="/pm-companies"
         diagram={<PMCApplyFormDiagram />}
       />
       <PmcApplyForm initialValues={iv} />

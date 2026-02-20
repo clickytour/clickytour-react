@@ -5,7 +5,7 @@ import { StaffDirectoryDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Find the Right Staff for Your Business" subtitle="Browse all categories and roles available on ClickyTour." ctaA="Post Request" ctaB="Browse Directory" diagram={<StaffDirectoryDiagram />} />
+      <Hero title="Find the Right Staff for Your Business" subtitle="Browse all categories and roles available on ClickyTour." ctaA="Post Request" ctaB="Browse Directory" ctaHrefA="/find-staff-contractors-quick-request" ctaHrefB="/find-staff-contractors-directory" diagram={<StaffDirectoryDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="All Categories & Roles" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

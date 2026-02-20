@@ -5,7 +5,7 @@ import { MarketplaceDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="ClickyTour Marketplace" subtitle="Services, tools, and add-ons for tourism professionals." ctaA="Get Started" ctaB="Learn More" diagram={<MarketplaceDiagram />} />
+      <Hero title="ClickyTour Marketplace" subtitle="Services, tools, and add-ons for tourism professionals." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/search" ctaHrefB="/about" diagram={<MarketplaceDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Browse the Marketplace" subtitle="Find services, tools, and solutions for your business." />
         <div className="grid md:grid-cols-3 gap-4">

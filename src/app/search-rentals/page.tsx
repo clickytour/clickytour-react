@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Search Vacation Rentals" subtitle="Find and filter properties by destination, dates, and features." ctaA="Search Now" ctaB="Learn More" diagram={<VacationRentalsDiagram />} />
+      <Hero title="Search Vacation Rentals" subtitle="Find and filter properties by destination, dates, and features." ctaA="Search Now" ctaB="Learn More" ctaHrefA="/search" ctaHrefB="/vacation-rentals" diagram={<VacationRentalsDiagram />} />
       <section className="section"><div className="container">
         <div className="card p-6 mb-6">
           <div className="grid md:grid-cols-4 gap-4">

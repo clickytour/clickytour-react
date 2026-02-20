@@ -4,7 +4,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Job Request Details" subtitle="View full details of a staff request." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Job Request Details" subtitle="View full details of a staff request." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/find-staff-contractors-quick-request" ctaHrefB="/find-staff-contractors" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <div className="flex items-center justify-between mb-6"><span className="px-3 py-1 bg-teal-100 text-teal-700 text-sm font-semibold rounded-full">Open</span><span className="text-slate-400 text-sm">Request #---</span></div>
         <h2 className="text-2xl font-bold text-slate-900">Sample Request Title</h2>

@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Services & Activities" subtitle="Discover local services and activities for all roles — guests, owners, agents, and providers." ctaA="Browse All" ctaB="List Yours" />
+      <Hero title="Services & Activities" subtitle="Discover local services and activities for all roles — guests, owners, agents, and providers." ctaA="Browse All" ctaB="List Yours" ctaHrefA="/search" ctaHrefB="/service-providers-list-service" />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="All Roles" title="Services & Activities Directory" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

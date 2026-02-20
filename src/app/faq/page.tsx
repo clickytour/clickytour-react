@@ -61,7 +61,7 @@ export default function FaqPage() {
         title="Frequently Asked Questions"
         subtitle="Find quick answers about ClickyTour and role-specific workflows."
         ctaA="Browse Help Center"
-        ctaB="Contact Support"
+        ctaB="Contact Support" ctaHrefA="/help" ctaHrefB="/contact"
         diagram={<ContactFormDiagram />}
       />
 

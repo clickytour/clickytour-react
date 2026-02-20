@@ -14,7 +14,7 @@ export default function GuestsHelpContactPage() {
         title="Support Contacts"
         subtitle="Reach the ClickyTour support team through the right channel for booking questions, trip planning, and urgent travel issues."
         ctaA="Submit support request"
-        ctaB="View help center"
+        ctaB="View help center" ctaHrefA="/contact" ctaHrefB="/guests-help"
       />
 
       <section className="section">

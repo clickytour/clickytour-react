@@ -11,7 +11,7 @@ export default function AgentsPage() {
         title="Work Smarter. Sell More. Earn More."
         subtitle="ClickyTour connects you to rentals, tours/activities, and real estate — plus the tools to package, present, and close faster."
         ctaA="Join as agent"
-        ctaB="Open agent tools"
+        ctaB="Open agent tools" ctaHrefA="/agents-agenicies-form" ctaHrefB="/agents-tools"
       />
 
       <SidebarLayout title="For Agents" menu={menu}>
@@ -123,8 +123,8 @@ export default function AgentsPage() {
             <h2 className="text-3xl font-extrabold">Ready to accelerate your agent workflow?</h2>
             <p className="text-cyan-100 mt-2">Start with free access and upgrade as your sales pipeline grows.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">Create agent account</button>
-              <button className="btn-secondary">Compare plans</button>
+              <Link href="/agents-agenicies-form" className="btn-primary">Create agent account</Link>
+              <Link href="/agents-help-plans-pricing" className="btn-secondary">Compare plans</Link>
             </div>
           </div>
         </section>

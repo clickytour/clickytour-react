@@ -7,7 +7,7 @@ export default function CookiePolicyPage() {
         title="Cookie Policy"
         subtitle="How ClickyTour uses cookies and similar technologies to improve functionality and experience."
         ctaA="Manage Preferences"
-        ctaB="Read Privacy Policy"
+        ctaB="Read Privacy Policy" ctaHrefA="/privacy-policy" ctaHrefB="/privacy-policy"
       />
 
       <section className="section section-soft">

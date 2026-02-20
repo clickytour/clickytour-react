@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Service Providers" subtitle="Find trusted local service providers for your property or vacation needs." ctaA="Browse Services" ctaB="List Your Service" diagram={<SPListPromoteDiagram />} />
+      <Hero title="Service Providers" subtitle="Find trusted local service providers for your property or vacation needs." ctaA="Browse Services" ctaB="List Your Service" ctaHrefA="/service-providers-list-service" ctaHrefB="/service-providers" diagram={<SPListPromoteDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Directory" title="Local Service Providers" subtitle="Professional services across Greece." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

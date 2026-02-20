@@ -8,7 +8,7 @@ export default function RealEstateProposals() {
   const [mode, setMode] = useState('buy');
   return (
     <PageShell>
-      <Hero title="We'll Find the Perfect Options for You" subtitle="Choose the type of property you need" ctaA="Submit Request" ctaB="Browse Listings" />
+      <Hero title="We'll Find the Perfect Options for You" subtitle="Choose the type of property you need" ctaA="Submit Request" ctaB="Browse Listings" ctaHrefA="/guests-real-estate-request" ctaHrefB="/real-estate-buy" />
       <section className="section"><div className="container">
         <div className="grid md:grid-cols-2 gap-4 mb-8">
           {[{v:'buy',icon:'🏠',t:'Buy Property',d:'Find your dream home or investment.'},{v:'rent',icon:'🔑',t:'Rent Property',d:'Long-term or seasonal rentals.'}].map(c => <button key={c.v} onClick={() => setMode(c.v)} className={`card p-6 text-left border-2 ${mode === c.v ? 'border-teal-600' : 'border-transparent'}`}><p className="text-3xl">{c.icon}</p><h3 className="font-bold mt-2">{c.t}</h3><p className="text-slate-600 text-sm">{c.d}</p></button>)}

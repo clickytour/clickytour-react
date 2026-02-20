@@ -5,7 +5,7 @@ import { TeamDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Our Team" subtitle="Meet the people behind ClickyTour." ctaA="Get Started" ctaB="Learn More" diagram={<TeamDiagram />} />
+      <Hero title="Our Team" subtitle="Meet the people behind ClickyTour." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/work-with-us" ctaHrefB="/about" diagram={<TeamDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Leadership" />
         <div className="text-center py-12 text-slate-500"><p>Team profiles coming soon.</p></div>

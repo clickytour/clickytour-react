@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Tours & Activities" subtitle="Discover unique local experiences, tours, and activities across Greece." ctaA="Browse Activities" ctaB="List Yours" />
+      <Hero title="Tours & Activities" subtitle="Discover unique local experiences, tours, and activities across Greece." ctaA="Browse Activities" ctaB="List Yours" ctaHrefA="/search" ctaHrefB="/service-providers-list-service" />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Explore" title="Featured Activities" subtitle="Curated experiences from local providers." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

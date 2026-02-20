@@ -5,7 +5,7 @@ import { TextInput, SelectField, TextAreaField } from '@/components/form-fields'
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Submission Viewer" subtitle="Review submitted forms and applications." ctaA="Submit" ctaB="Learn More" />
+      <Hero title="Submission Viewer" subtitle="Review submitted forms and applications." ctaA="Submit" ctaB="Learn More" ctaHrefA="/pmc-apply" ctaHrefB="/pm-companies" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Submission Viewer" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

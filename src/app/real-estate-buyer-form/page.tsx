@@ -11,7 +11,7 @@ export default function RealEstateBuyerForm() {
   const steps = ['Property Type', 'Details & Budget', 'Contact Info'];
   return (
     <PageShell>
-      <Hero title="Find Your Ideal Property" subtitle="Tell us what you're looking for" ctaA="Submit Request" ctaB="Browse Listings" />
+      <Hero title="Find Your Ideal Property" subtitle="Tell us what you're looking for" ctaA="Submit Request" ctaB="Browse Listings" ctaHrefA="/real-estate-buyer-form" ctaHrefB="/real-estate-buy" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Tell Us What You're Looking For" />
         <MultiStepForm steps={steps} currentStep={step} onNext={() => setStep(s => s + 1)} onPrev={() => setStep(s => s - 1)} onSubmit={() => alert('Thank you! This form is in demo mode.')}>

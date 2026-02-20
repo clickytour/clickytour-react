@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle, SidebarLayout } from '@/components/site';
 import { EcosystemDiagram } from '@/components/diagrams';
 import { roleMenus } from '@/components/site-menu';
@@ -8,19 +9,19 @@ export default function PMCompaniesPage() {
   return (
     <PageShell>
       <Hero
-        diagram={<EcosystemDiagram />}
+        diagram={<EcosystemDiagram/>}
         title="Grow your portfolio and bookings — with a structured PMC path"
         subtitle="Choose between two clear growth paths: list your own properties or expand through the ClickyTour network ecosystem."
         ctaA="List your properties"
-        ctaB="Increase portfolio"
+        ctaB="Increase portfolio" ctaHrefA="/pmc-apply" ctaHrefB="/pmc-directory"
       />
 
       <SidebarLayout title="For PM Companies" menu={menu}>
         <section className="py-16">
           <SectionTitle title="Choose your goal" />
           <div className="flex flex-wrap gap-3">
-            <button className="btn-primary">List Your Properties</button>
-            <button className="btn-secondary">Increase Your Portfolio</button>
+            <Link href="/pmc-apply" className="btn-primary">List Your Properties</Link>
+            <Link href="/pmc-directory" className="btn-secondary">Increase Your Portfolio</Link>
           </div>
         </section>
 
@@ -123,8 +124,8 @@ export default function PMCompaniesPage() {
             <h2 className="text-3xl font-extrabold">Ready to grow as a PM Company?</h2>
             <p className="text-cyan-100 mt-2">Pick your path and activate your portfolio growth workflow today.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">Start onboarding</button>
-              <button className="btn-secondary">Talk to PMC team</button>
+              <Link href="/pmc-apply" className="btn-primary">Start onboarding</Link>
+              <Link href="/contact" className="btn-secondary">Talk to PMC team</Link>
             </div>
           </div>
         </section>

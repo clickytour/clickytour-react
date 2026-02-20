@@ -655,7 +655,7 @@ export default function Home() {
               <article key={step.title} className="card p-5">
                 <h3 className="font-bold text-lg">{step.title}</h3>
                 <p className="text-sm text-slate-500 mt-2">{step.desc}</p>
-                <a href="#" className="text-cyan-700 text-sm font-semibold mt-3 inline-block">{step.linkText}</a>
+                <a href="/search" className="text-cyan-700 text-sm font-semibold mt-3 inline-block">{step.linkText}</a>
               </article>
             ))}
           </div>
@@ -685,7 +685,7 @@ export default function Home() {
               <article key={tool.title} className="card p-5">
                 <h3 className="font-bold">{tool.title}</h3>
                 <p className="text-sm text-slate-500 mt-2">{tool.desc}</p>
-                <a href="#" className="text-cyan-700 text-sm font-semibold mt-3 inline-block">{tool.linkText}</a>
+                <a href="/search" className="text-cyan-700 text-sm font-semibold mt-3 inline-block">{tool.linkText}</a>
               </article>
             ))}
           </div>
@@ -780,7 +780,7 @@ export default function Home() {
               <p className="text-cyan-700 font-semibold text-sm">Insight</p>
               <h2 className="text-[34px] md:text-[40px] font-extrabold">Latest Article & News</h2>
             </div>
-            <button className="btn-secondary">Discover</button>
+            <a href="/search" className="btn-secondary">Discover</a>
           </div>
           <div className="grid md:grid-cols-2 gap-4 mt-6">
             {articleCards.map((a) => (

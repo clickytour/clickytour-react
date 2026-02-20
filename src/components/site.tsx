@@ -1205,7 +1205,7 @@ export function PageShell({ children }: { children: ReactNode }) {
   );
 }
 
-export function Hero({ title, subtitle, ctaA = 'Start now', ctaB = 'Book demo', diagram }: { title: string; subtitle: string; ctaA?: string; ctaB?: string; diagram?: React.ReactNode }) {
+export function Hero({ title, subtitle, ctaA = 'Start now', ctaB = 'Book demo', ctaHrefA, ctaHrefB, diagram }: { title: string; subtitle: string; ctaA?: string; ctaB?: string; ctaHrefA?: string; ctaHrefB?: string; diagram?: React.ReactNode }) {
   return (
     <section className="bg-gradient-to-r from-[#0F2B46] to-[#164E73] text-white py-16 md:py-20">
       <div className="container">
@@ -1214,8 +1214,8 @@ export function Hero({ title, subtitle, ctaA = 'Start now', ctaB = 'Book demo', 
             <h1 className="text-4xl md:text-5xl font-extrabold max-w-4xl">{title}</h1>
             <p className="max-w-3xl mt-4 text-cyan-100 text-lg">{subtitle}</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <button className="btn-primary">{ctaA}</button>
-              <button className="btn-secondary">{ctaB}</button>
+              {ctaHrefA ? <Link href={ctaHrefA} className="btn-primary">{ctaA}</Link> : <button className="btn-primary">{ctaA}</button>}
+              {ctaHrefB ? <Link href={ctaHrefB} className="btn-secondary">{ctaB}</Link> : <button className="btn-secondary">{ctaB}</button>}
             </div>
           </div>
           {diagram && <div className="hidden lg:block max-w-sm">{diagram}</div>}

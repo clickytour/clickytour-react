@@ -5,7 +5,7 @@ import { FindStaffProvidersDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Post Requests and Hire Local Help — Fast" subtitle="Service providers: find the staff you need." ctaA="Quick Request" ctaB="Advanced Request" diagram={<FindStaffProvidersDiagram />} />
+      <Hero title="Post Requests and Hire Local Help — Fast" subtitle="Service providers: find the staff you need." ctaA="Quick Request" ctaB="Advanced Request" ctaHrefA="/find-staff-contractors-providers-quick-request" ctaHrefB="/find-staff-contractors-advancedroleproviders" diagram={<FindStaffProvidersDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Why Use ClickyTour" />
         <div className="grid md:grid-cols-3 gap-4">

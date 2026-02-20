@@ -25,7 +25,7 @@ export default function HelpPage() {
         title="Help Center"
         subtitle="Search guides, explore categories, and find answers for every ClickyTour role."
         ctaA="Search Help"
-        ctaB="Create Support Ticket"
+        ctaB="Create Support Ticket" ctaHrefA="/faq" ctaHrefB="/contact"
       />
 
       <section className="section section-soft">

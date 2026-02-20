@@ -6,7 +6,7 @@ import { TextInput, DateInput, SelectField, NumberInput, CheckboxGroup, TextArea
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Apply Once — Get Matched Across the ClickyTour Network" subtitle="Complete your full application for the best matches." ctaA="Submit" ctaB="Learn More" diagram={<JobSeekerFlowDiagram />} />
+      <Hero title="Apply Once — Get Matched Across the ClickyTour Network" subtitle="Complete your full application for the best matches." ctaA="Submit" ctaB="Learn More" ctaHrefA="/find-staff-contractors-job-seekers-quick-application" ctaHrefB="/find-staff-contractors-job-seekers" diagram={<JobSeekerFlowDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Apply Once — Get Matched Across the ClickyTour Network" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

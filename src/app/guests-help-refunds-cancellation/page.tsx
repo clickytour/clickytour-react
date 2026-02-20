@@ -8,7 +8,7 @@ export default function GuestsHelpRefundsCancellationPage() {
         title="Refunds & Cancellation"
         subtitle="Understand how cancellation requests, refund timelines, and policy conditions are handled."
         ctaA="Check cancellation rules"
-        ctaB="Contact support"
+        ctaB="Contact support" ctaHrefA="/guests-help-contact" ctaHrefB="/guests-help"
       />
 
       <section className="section">

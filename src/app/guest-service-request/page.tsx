@@ -61,7 +61,7 @@ function GuestServiceRequestInner() {
 
   return (
     <PageShell>
-      <Hero title="Request a Local Service in Minutes" subtitle="Tell us what you need and we'll arrange it" ctaA="Submit Request" ctaB="Browse Services" />
+      <Hero title="Request a Local Service in Minutes" subtitle="Tell us what you need and we'll arrange it" ctaA="Submit Request" ctaB="Browse Services" ctaHrefA="/guest-service-request" ctaHrefB="/tours-activities" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Request a Service" />
         <form className="space-y-4" onSubmit={handleSubmit}>

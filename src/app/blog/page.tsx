@@ -8,7 +8,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="ClickyTour Blog" subtitle="Travel tips, owner insights, and partner guides." ctaA="Latest Posts" ctaB="Subscribe" diagram={<AboutPlatformDiagram />} />
+      <Hero title="ClickyTour Blog" subtitle="Travel tips, owner insights, and partner guides." ctaA="Latest Posts" ctaB="Subscribe" ctaHrefA="/blog" ctaHrefB="/about" diagram={<AboutPlatformDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Latest" title="Blog Posts" />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6">

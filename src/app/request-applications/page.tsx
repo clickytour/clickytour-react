@@ -4,7 +4,7 @@ import { PageShell, Hero, SectionTitle } from '@/components/site';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Request Applications" subtitle="Review applications for your staff request." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Request Applications" subtitle="Review applications for your staff request." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/find-staff-contractors-quick-request" ctaHrefB="/find-staff-contractors" />
       <section className="section"><div className="container">
         <div className="card p-6 mb-6">
           <div className="grid md:grid-cols-3 gap-4">

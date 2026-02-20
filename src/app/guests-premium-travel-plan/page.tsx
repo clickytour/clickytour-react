@@ -14,11 +14,11 @@ export default function GuestsPremiumTravelPlanPage() {
   return (
     <PageShell>
       <Hero
-diagram={<GuestPremiumDiagram />}
+diagram={<GuestPremiumDiagram/>}
                 title="Premium Travel Plan"
         subtitle="Unlock VIP-level planning and concierge support for a stress-free, highly personalized travel experience in Greece."
         ctaA="Request premium planning"
-        ctaB="Compare planning options"
+        ctaB="Compare planning options" ctaHrefA="/guests-vacation-request" ctaHrefB="/guests"
       />
 
       

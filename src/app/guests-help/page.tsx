@@ -29,11 +29,11 @@ export default function GuestsHelpPage() {
   return (
     <PageShell>
       <Hero
-diagram={<GuestBookingFlowDiagram />}
+diagram={<GuestBookingFlowDiagram/>}
                 title="Guest Help & FAQ"
         subtitle="Find quick answers about booking, planning, support, and policies so you can travel with confidence."
         ctaA="Browse topics"
-        ctaB="Contact support"
+        ctaB="Contact support" ctaHrefA="/guests-help-contact" ctaHrefB="/faq"
       />
 
       

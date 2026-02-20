@@ -76,7 +76,7 @@ function PartnershipForm() {
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Media & Partnerships" subtitle="Collaborate with ClickyTour — press, affiliates, and strategic partners." ctaA="Get Started" ctaB="Learn More" diagram={<MediaPartnersDiagram />} />
+      <Hero title="Media & Partnerships" subtitle="Collaborate with ClickyTour — press, affiliates, and strategic partners." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/media-partnerships" ctaHrefB="/about" diagram={<MediaPartnersDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Partner With Us" subtitle="Join the ClickyTour ecosystem." />
         <div className="grid md:grid-cols-3 gap-4">

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CheckList, FeatureGrid, Hero, PageShell, SectionTitle, SidebarLayout } from '@/components/site';
 import { roleMenus } from '@/components/site-menu';
 
@@ -10,7 +11,7 @@ export default function OwnersPage() {
         title="Everything a property owner needs — in one clear path."
         subtitle="List, promote, manage, and collaborate with agents/partners using transparent rules and clean presentation tools."
         ctaA="List your property"
-        ctaB="View owner options"
+        ctaB="View owner options" ctaHrefA="/owners-vacation-free-evaluation" ctaHrefB="/owners-faq"
       />
 
       <SidebarLayout title="For Owners" menu={menu}>
@@ -151,8 +152,8 @@ export default function OwnersPage() {
             <h2 className="text-3xl font-extrabold">Ready to grow your property with ClickyTour?</h2>
             <p className="text-cyan-100 mt-2">Choose your model, publish confidently, and scale with transparent support.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">Get started now</button>
-              <button className="btn-secondary">Talk to owner support</button>
+              <Link href="/owners-vacation-free-evaluation" className="btn-primary">Get started now</Link>
+              <Link href="/contact" className="btn-secondary">Talk to owner support</Link>
             </div>
           </div>
         </section>

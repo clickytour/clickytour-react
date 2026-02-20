@@ -32,7 +32,7 @@ export default function GuestsPage() {
         title="Find your perfect stay in Greece."
         subtitle="Search villas and apartments with clear pricing and quick filters."
         ctaA="Start search"
-        ctaB="Need planning help?"
+        ctaB="Need planning help?" ctaHrefA="/guests-vacation-request" ctaHrefB="/guests-help"
       />
 
       <SidebarLayout title="For Guests" menu={menu}>
@@ -148,8 +148,8 @@ export default function GuestsPage() {
             <h2 className="text-3xl font-extrabold">Ready to plan your stay in Greece?</h2>
             <p className="text-cyan-100 mt-2">Search instantly or ask our team to prepare options tailored to your trip.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">Start searching</button>
-              <button className="btn-secondary">Send trip brief</button>
+              <Link href="/search" className="btn-primary">Start searching</Link>
+              <Link href="/guests-vacation-request" className="btn-secondary">Send trip brief</Link>
             </div>
           </div>
         </section>

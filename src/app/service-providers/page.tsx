@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FeatureGrid, Hero, PageShell, SectionTitle, SidebarLayout } from '@/components/site';
 import { roleMenus } from '@/components/site-menu';
 
@@ -10,7 +11,7 @@ export default function ServiceProvidersPage() {
         title="Grow bookings and visibility — with a clear provider path."
         subtitle="List your business, reach guests and agents, and offer services to property owners — all from one structured menu."
         ctaA="Join as provider"
-        ctaB="View categories"
+        ctaB="View categories" ctaHrefA="/service-providers-list-service" ctaHrefB="/service-providers-faq"
       />
 
       <SidebarLayout title="For Service Providers" menu={menu}>
@@ -72,8 +73,8 @@ export default function ServiceProvidersPage() {
             <h2 className="text-3xl font-extrabold">Ready to join as a provider?</h2>
             <p className="text-cyan-100 mt-2">Create your listing, select your categories, and start receiving opportunities.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">Create provider profile</button>
-              <button className="btn-secondary">Read onboarding FAQ</button>
+              <Link href="/service-providers-list-service" className="btn-primary">Create provider profile</Link>
+              <Link href="/service-providers-faq" className="btn-secondary">Read onboarding FAQ</Link>
             </div>
           </div>
         </section>

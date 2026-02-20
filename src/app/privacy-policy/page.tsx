@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
         title="Privacy Policy"
         subtitle="How ClickyTour collects, uses, and protects personal information across our platform."
         ctaA="Contact Privacy Team"
-        ctaB="View Terms"
+        ctaB="View Terms" ctaHrefA="mailto:privacy@clickytour.com" ctaHrefB="/terms"
       />
 
       <section className="section section-soft">

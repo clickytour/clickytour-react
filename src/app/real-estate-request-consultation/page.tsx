@@ -7,7 +7,7 @@ import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 export default function RealEstateRequestConsultation() {
   return (
     <PageShell>
-      <Hero title="Talk to an Advisor" subtitle="Get expert guidance on your real estate needs" ctaA="Send Message" ctaB="Call Us" />
+      <Hero title="Talk to an Advisor" subtitle="Get expert guidance on your real estate needs" ctaA="Send Message" ctaB="Call Us" ctaHrefA="/real-estate-request-consultation" ctaHrefB="/real-estate" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Request a Consultation" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

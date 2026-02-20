@@ -69,7 +69,7 @@ function GuestsVacationRequestInner() {
   const role = searchParams.get('role') || 'guest-vacation';
   return (
     <PageShell>
-      <Hero title="Request a Tailored Vacation Proposal" subtitle="Tell us about your ideal trip and we'll create a personalized proposal" ctaA="Submit Request" ctaB="Browse Rentals" />
+      <Hero title="Request a Tailored Vacation Proposal" subtitle="Tell us about your ideal trip and we'll create a personalized proposal" ctaA="Submit Request" ctaB="Browse Rentals" ctaHrefA="/guests-vacation-request" ctaHrefB="/vacation-rentals" />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Tailored Proposal Request Form" />
         <MultiStepForm steps={steps} currentStep={step} onNext={() => setStep(s => s + 1)} onPrev={() => setStep(s => s - 1)} onSubmit={async () => {

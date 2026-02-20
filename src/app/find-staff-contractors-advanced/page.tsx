@@ -7,7 +7,7 @@ import { PlaceAutocomplete } from '@/components/PlaceAutocomplete';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="Advanced Staff Request" subtitle="Detailed staff request with full specifications as any role." ctaA="Submit" ctaB="Quick Form" diagram={<StaffRequestDiagram />} />
+      <Hero title="Advanced Staff Request" subtitle="Detailed staff request with full specifications as any role." ctaA="Submit" ctaB="Quick Form" ctaHrefA="/find-staff-contractors-advanced" ctaHrefB="/find-staff-contractors-quick-request" diagram={<StaffRequestDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Advanced Staff Request Form" />
         <form className="space-y-4" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

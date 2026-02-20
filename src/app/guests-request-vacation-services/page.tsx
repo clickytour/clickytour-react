@@ -14,7 +14,7 @@ const services = [
 export default function GuestsRequestVacationServices() {
   return (
     <PageShell>
-      <Hero title="Need Help During Your Stay? We've Got You Covered." subtitle="Most Requested Services by Our Guests" ctaA="Request a Service" ctaB="Browse Services" />
+      <Hero title="Need Help During Your Stay? We've Got You Covered." subtitle="Most Requested Services by Our Guests" ctaA="Request a Service" ctaB="Browse Services" ctaHrefA="/guest-service-request" ctaHrefB="/tours-activities" />
       <section className="section"><div className="container">
         <SectionTitle title="Popular Services" subtitle="Choose from our most requested services" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

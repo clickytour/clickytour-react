@@ -72,7 +72,7 @@ export default function WorkWithUsQuizPage() {
         title="Find Your Role on ClickyTour"
         subtitle="A quick 2-step quiz to match you with the right role, tools, and next actions in our ecosystem."
         ctaA="Start Quiz"
-        ctaB="Explore Roles"
+        ctaB="Explore Roles" ctaHrefA="/work-with-us-quiz" ctaHrefB="/work-with-us"
         diagram={<WorkWithUsQuizDiagram />}
       />
 

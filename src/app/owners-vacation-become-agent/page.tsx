@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { CheckList, FAQ, FeatureGrid, PageShell, SectionTitle } from '@/components/site';
 import { OwnerBecomeAgentDiagram } from '@/components/diagrams';
 
@@ -21,8 +22,8 @@ export default function Page() {
             <h2 className="text-3xl font-extrabold">Ready to move forward?</h2>
             <p className="text-cyan-100 mt-2">List your property or speak with owner support to choose the right path.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">Get started</button>
-              <button className="btn-secondary">Talk to support</button>
+              <Link href="/agents-agenicies-form" className="btn-primary">Get started</Link>
+              <Link href="/contact" className="btn-secondary">Talk to support</Link>
             </div>
           </div>
         </div>

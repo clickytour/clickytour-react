@@ -14,7 +14,7 @@ export default function VacationOwnersList() {
   const steps = intent === 'maintenance' ? maintSteps : listSteps;
   return (
     <PageShell>
-      <Hero title="List, Evaluate, or Request Services for Your Property" subtitle="Work with ClickyTour as a Vacation Property Owner" ctaA="Get Started" ctaB="Learn More" diagram={<OwnerListFormDiagram />} />
+      <Hero title="List, Evaluate, or Request Services for Your Property" subtitle="Work with ClickyTour as a Vacation Property Owner" ctaA="Get Started" ctaB="Learn More" ctaHrefA="/vacation-owners-list" ctaHrefB="/owners" diagram={<OwnerListFormDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="Vacation Property Owner Form" />
         <div className="mb-6">

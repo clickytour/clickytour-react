@@ -6,11 +6,11 @@ export default function GuestsHelpHowBookingWorksPage() {
   return (
     <PageShell>
       <Hero
-diagram={<GuestBookingFlowDiagram />}
+diagram={<GuestBookingFlowDiagram/>}
                 title="How Booking Works"
         subtitle="A clear step-by-step guide for finding, requesting, and confirming your stay or service on ClickyTour."
         ctaA="Start a request"
-        ctaB="Contact support"
+        ctaB="Contact support" ctaHrefA="/guests-vacation-request" ctaHrefB="/guests-help"
       />
 
       

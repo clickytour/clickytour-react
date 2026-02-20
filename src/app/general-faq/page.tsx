@@ -5,7 +5,7 @@ import { FAQDiagram } from '@/components/diagrams';
 export default function Page() {
   return (
     <PageShell>
-      <Hero title="General FAQ" subtitle="Frequently asked questions about ClickyTour." ctaA="Get Started" ctaB="Learn More" diagram={<FAQDiagram />} />
+      <Hero title="General FAQ" subtitle="Frequently asked questions about ClickyTour." ctaA="Get Started" ctaB="Learn More" ctaHrefA="/faq" ctaHrefB="/contact" diagram={<FAQDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="General FAQ" />
         <div className="space-y-3">

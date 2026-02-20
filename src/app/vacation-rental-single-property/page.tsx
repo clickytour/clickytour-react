@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Vacation Properties" subtitle="Browse individual vacation rental properties with full details." ctaA="Search All" ctaB="Learn More" />
+      <Hero title="Vacation Properties" subtitle="Browse individual vacation rental properties with full details." ctaA="Search All" ctaB="Learn More" ctaHrefA="/search" ctaHrefB="/guests" />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Properties" title="Available Vacation Rentals" subtitle="Click any property to view full details, gallery, pricing, and availability." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">

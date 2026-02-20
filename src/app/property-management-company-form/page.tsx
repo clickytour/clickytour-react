@@ -9,7 +9,7 @@ export default function PropertyManagementCompanyForm() {
   const [intent, setIntent] = useState('list');
   return (
     <PageShell>
-      <Hero title="Work with ClickyTour as a PMC" subtitle="Property Management Company — Request Form" ctaA="Submit" ctaB="Learn More" diagram={<PMCApplyFormDiagram />} />
+      <Hero title="Work with ClickyTour as a PMC" subtitle="Property Management Company — Request Form" ctaA="Submit" ctaB="Learn More" ctaHrefA="/property-management-company-form" ctaHrefB="/pm-companies" diagram={<PMCApplyFormDiagram />} />
       <section className="section"><div className="container"><div className="card p-6 md:p-8">
         <SectionTitle title="PMC Request Form" />
         <form className="space-y-6" onSubmit={e => { e.preventDefault(); alert('Thank you! This form is in demo mode.'); }}>

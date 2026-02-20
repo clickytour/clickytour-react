@@ -13,7 +13,7 @@ const services = [
 export default function OwnersRequestService() {
   return (
     <PageShell>
-      <Hero title="Start Getting Help with Your Property Today" subtitle="Need Help Managing Your Vacation Home?" ctaA="Request a Service" ctaB="Learn More" diagram={<GuestServiceFormDiagram />} />
+      <Hero title="Start Getting Help with Your Property Today" subtitle="Need Help Managing Your Vacation Home?" ctaA="Request a Service" ctaB="Learn More" ctaHrefA="/guest-service-request" ctaHrefB="/owners" diagram={<GuestServiceFormDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle title="Request Home Services — What's Available" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PageShell, SectionTitle, FeatureGrid, CheckList, FAQ } from '@/components/site';
 import { ReactNode } from 'react';
 
@@ -17,6 +18,8 @@ type PMPageProps = {
   ctaText: string;
   ctaPrimary: string;
   ctaSecondary: string;
+  ctaHrefPrimary?: string;
+  ctaHrefSecondary?: string;
   diagram?: ReactNode;
 };
 
@@ -33,6 +36,8 @@ export function PMPage({
   ctaText,
   ctaPrimary,
   ctaSecondary,
+  ctaHrefPrimary,
+  ctaHrefSecondary,
   diagram,
 }: PMPageProps) {
   return (
@@ -108,8 +113,8 @@ export function PMPage({
             <h2 className="text-3xl font-extrabold">{ctaTitle}</h2>
             <p className="text-cyan-100 mt-2">{ctaText}</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <button className="btn-primary">{ctaPrimary}</button>
-              <button className="btn-secondary">{ctaSecondary}</button>
+              {ctaHrefPrimary ? <Link href={ctaHrefPrimary} className="btn-primary">{ctaPrimary}</Link> : <button className="btn-primary">{ctaPrimary}</button>}
+              {ctaHrefSecondary ? <Link href={ctaHrefSecondary} className="btn-secondary">{ctaSecondary}</Link> : <button className="btn-secondary">{ctaSecondary}</button>}
             </div>
           </div>
         </div>

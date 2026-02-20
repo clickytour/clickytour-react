@@ -8,7 +8,7 @@ export default function GuestsHelpRentalPoliciesPage() {
         title="Rental Policies"
         subtitle="Understand the key stay rules and policy checks to avoid surprises before and during your booking."
         ctaA="Review policies"
-        ctaB="Ask a question"
+        ctaB="Ask a question" ctaHrefA="/guests-help-contact" ctaHrefB="/guests-help"
       />
 
       <section className="section">

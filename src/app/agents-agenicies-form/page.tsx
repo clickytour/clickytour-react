@@ -25,7 +25,7 @@ function AgentsAgenciesFormInner() {
         title="Work Smarter. Sell More. Earn More."
         subtitle="Apply to access rentals, services, and real-estate inventory with white-label offers and net-pricing options."
         ctaA="Start Application"
-        ctaB="Back to Agents"
+        ctaB="Back to Agents" ctaHrefA="/agents-agenicies-form" ctaHrefB="/agents"
         diagram={<AgentsFormDiagram />}
       />
       <AgentsApplyForm initialValues={iv} />

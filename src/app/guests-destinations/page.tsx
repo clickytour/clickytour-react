@@ -15,11 +15,11 @@ export default function GuestsDestinationsPage() {
   return (
     <PageShell>
       <Hero
-diagram={<GuestServicesDiagram />}
+diagram={<GuestServicesDiagram/>}
                 title="Destinations"
         subtitle="Browse top Greek regions and discover activities, services, and local highlights based on where you stay."
         ctaA="Browse by destination"
-        ctaB="Ask for recommendations"
+        ctaB="Ask for recommendations" ctaHrefA="/search" ctaHrefB="/guests"
       />
 
       

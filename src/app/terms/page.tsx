@@ -7,7 +7,7 @@ export default function TermsPage() {
         title="Terms & Conditions"
         subtitle="The rules and responsibilities for using ClickyTour services and platform features."
         ctaA="Contact Support"
-        ctaB="View Privacy Policy"
+        ctaB="View Privacy Policy" ctaHrefA="/contact" ctaHrefB="/privacy-policy"
       />
 
       <section className="section section-soft">

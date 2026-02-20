@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <PageShell>
-      <Hero title="Job Board" subtitle="Find hospitality, property management, and tourism jobs across Greece." ctaA="Browse Jobs" ctaB="Post a Job" diagram={<WorkWithUsDiagram />} />
+      <Hero title="Job Board" subtitle="Find hospitality, property management, and tourism jobs across Greece." ctaA="Browse Jobs" ctaB="Post a Job" ctaHrefA="/find-staff-contractors-job-seekers" ctaHrefB="/find-staff-contractors-quick-request" diagram={<WorkWithUsDiagram />} />
       <section className="section"><div className="container">
         <SectionTitle eyebrow="Open Positions" title="Current Job Listings" subtitle="Seasonal and full-time opportunities in tourism and property management." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
