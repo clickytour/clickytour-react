@@ -36,11 +36,11 @@ export default function ThankYouTemplate({
 }: ThankYouTemplateProps) {
   return (
     <PageShell>
-      <div className="container">
-        <Hero icon={icon} title={title} subtitle={subtitle} />
+      <Hero title={`${icon} ${title}`} subtitle={subtitle} ctaA={ctaLabel} ctaB="Contact Us" />
 
+      <div className="container">
         <section className="section section-soft">
-          <SectionTitle>What happens next?</SectionTitle>
+          <SectionTitle title="What happens next?" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {steps.map((step, index) => (
               <div
@@ -57,7 +57,7 @@ export default function ThankYouTemplate({
 
         {urgentSection && (
           <section className="section section-soft" id={urgentSection.refId}>
-            <SectionTitle>Need urgent help?</SectionTitle>
+            <SectionTitle title="Need urgent help?" />
             <p className="text-slate-800 font-semibold">{urgentSection.text}</p>
           </section>
         )}
