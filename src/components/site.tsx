@@ -260,7 +260,11 @@ export function SidebarLayout({
   );
 }
 
-function useContextualFooterCols() {
+type FooterCol = { t: string; l: Array<{ href: string; label: string }> };
+type FooterHero = { eyebrow: string; title: string; subtitle: string; pills: Array<{ href: string; label: string }> };
+type FooterContext = { hero: FooterHero; cols: FooterCol[] };
+
+function useContextualFooter(): FooterContext {
   const pathname = usePathname();
 
   const fixed = [
@@ -479,40 +483,63 @@ function useContextualFooterCols() {
     ]},
   ];
 
-  let contextual = defaultCols;
-  if (pathname.startsWith('/guests')) contextual = contextSets.guests;
-  else if (pathname.startsWith('/owners')) contextual = contextSets.owners;
-  else if (pathname.startsWith('/service-providers')) contextual = contextSets.serviceProviders;
-  else if (pathname.startsWith('/agents')) contextual = contextSets.agents;
-  else if (pathname.startsWith('/pm-companies') || pathname.startsWith('/management')) contextual = contextSets.pmCompanies;
-  else if (pathname.startsWith('/find-staff') || pathname.startsWith('/job-seeker') || pathname.startsWith('/list-cv') || pathname.startsWith('/my-applications') || pathname.startsWith('/request-')) contextual = contextSets.findStaff;
-  else if (pathname.startsWith('/tours') || pathname.startsWith('/activities') || pathname.startsWith('/offers') || pathname.startsWith('/vacation-rental') || pathname.startsWith('/search-rental') || pathname.startsWith('/listings') || pathname.startsWith('/real-estate') || pathname.startsWith('/destinations') || pathname.startsWith('/discover') || pathname.startsWith('/marketplace')) contextual = contextSets.explore;
+  const heroes: Record<string, FooterHero> = {
+    guests: { eyebrow: 'For Travelers', title: 'Plan your perfect vacation with ClickyTour.', subtitle: 'Discover rentals, activities, and local experiences.', pills: [
+      { href: '/guests-vacation-assistance/', label: 'Vacation Assistance' }, { href: '/tours-activities/', label: 'Tours & Activities' }, { href: '/search-rentals/', label: 'Search Rentals' }, { href: '/trip-planer/', label: 'Trip Planner' },
+    ]},
+    owners: { eyebrow: 'For Property Owners', title: 'List, manage, and grow your property income.', subtitle: 'Vacation rentals, real estate, and full management services.', pills: [
+      { href: '/owners-vacation-list-property/', label: 'List Property' }, { href: '/owners-vacation-free-evaluation/', label: 'Free Evaluation' }, { href: '/owners-real-estate/', label: 'Real Estate' }, { href: '/owners-plans-pricing/', label: 'Plans & Pricing' },
+    ]},
+    serviceProviders: { eyebrow: 'For Service Providers', title: 'Reach travelers and property owners directly.', subtitle: 'List your services, grow your reach, and get booked.', pills: [
+      { href: '/service-providers-list-service/', label: 'List Service' }, { href: '/service-providers-free-visibility/', label: 'Free Visibility' }, { href: '/service-providers-for-guests/', label: 'For Tourists' }, { href: '/service-providers-for-owners/', label: 'For Owners' },
+    ]},
+    agents: { eyebrow: 'For Travel Agents', title: 'Book, earn, and grow your travel business.', subtitle: 'Net pricing, white-label tools, and property access.', pills: [
+      { href: '/agents-book-net-pricing/', label: 'Net Pricing' }, { href: '/agents-tools/', label: 'Agent Tools' }, { href: '/agents-dashboard/', label: 'Dashboard' }, { href: '/agents-help-plans-pricing/', label: 'Plans & Pricing' },
+    ]},
+    pmCompanies: { eyebrow: 'For PM Companies', title: 'Scale your property management operations.', subtitle: 'Grow your portfolio, increase bookings, streamline operations.', pills: [
+      { href: '/management-list-properties/', label: 'List Properties' }, { href: '/management-dashboard/', label: 'Dashboard' }, { href: '/management-channel-manager/', label: 'Channel Manager' }, { href: '/management-help-plans-pricing/', label: 'Plans & Pricing' },
+    ]},
+    findStaff: { eyebrow: 'Staff & Jobs', title: 'Hire tourism professionals or find your next job.', subtitle: 'Fast, location-based matching for the hospitality industry.', pills: [
+      { href: '/find-staff-contractors-quick-request/', label: 'Post a Request' }, { href: '/find-staff-contractors-job-seekers-application/', label: 'Apply Now' }, { href: '/find-staff-contractors-directory/', label: 'Directory' }, { href: '/list-cv/', label: 'Submit CV' },
+    ]},
+    explore: { eyebrow: 'Explore', title: 'Discover tours, rentals, deals, and destinations.', subtitle: 'Your gateway to the best travel experiences.', pills: [
+      { href: '/tours-activities/', label: 'Tours' }, { href: '/vacation-rentals/', label: 'Rentals' }, { href: '/offers/', label: 'Deals' }, { href: '/real-estate/', label: 'Real Estate' }, { href: '/destinations-2/', label: 'Destinations' },
+    ]},
+  };
 
-  return [...contextual, ...fixed];
+  const defaultHero: FooterHero = { eyebrow: 'Explore Our Platform', title: 'Built for guests, owners, providers, agents and property managers.', subtitle: 'Where Travelers, Hosts, and Partners Connect.', pills: [
+    { href: '/guests/', label: 'For Guests' }, { href: '/owners/', label: 'For Owners' }, { href: '/service-providers/', label: 'For Service Providers' }, { href: '/agents/', label: 'For Agents' }, { href: '/pm-companies/', label: 'For PM Companies' },
+  ]};
+
+  let key = '';
+  if (pathname.startsWith('/guests')) key = 'guests';
+  else if (pathname.startsWith('/owners')) key = 'owners';
+  else if (pathname.startsWith('/service-providers')) key = 'serviceProviders';
+  else if (pathname.startsWith('/agents')) key = 'agents';
+  else if (pathname.startsWith('/pm-companies') || pathname.startsWith('/management')) key = 'pmCompanies';
+  else if (pathname.startsWith('/find-staff') || pathname.startsWith('/job-seeker') || pathname.startsWith('/list-cv') || pathname.startsWith('/my-applications') || pathname.startsWith('/request-')) key = 'findStaff';
+  else if (pathname.startsWith('/tours') || pathname.startsWith('/activities') || pathname.startsWith('/offers') || pathname.startsWith('/vacation-rental') || pathname.startsWith('/search-rental') || pathname.startsWith('/listings') || pathname.startsWith('/real-estate') || pathname.startsWith('/destinations') || pathname.startsWith('/discover') || pathname.startsWith('/marketplace')) key = 'explore';
+
+  const contextual = key ? contextSets[key] : defaultCols;
+  const hero = key ? heroes[key] : defaultHero;
+
+  return { hero, cols: [...contextual, ...fixed] };
 }
 
 export function Footer() {
-  const footerCols = useContextualFooterCols();
-
-  const rolePills = [
-    { href: '/guests/', label: 'For Guests' },
-    { href: '/owners/', label: 'For Owners' },
-    { href: '/service-providers/', label: 'For Service Providers' },
-    { href: '/agents/', label: 'For Agents' },
-    { href: '/pm-companies/', label: 'For PM Companies' },
-  ];
+  const { hero, cols: footerCols } = useContextualFooter();
 
   return (
     <footer className="bg-[#0F2B46] text-white mt-14">
       <div className="border-b border-cyan-900/40">
         <div className="container py-10 grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <p className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Explore Our Platform</p>
-            <h3 className="text-2xl md:text-3xl font-extrabold mt-2 leading-tight">Built for guests, owners, providers, agents and property managers.</h3>
-            <p className="text-cyan-100/70 mt-2 text-sm">Where Travelers, Hosts, and Partners Connect.</p>
+            <p className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">{hero.eyebrow}</p>
+            <h3 className="text-2xl md:text-3xl font-extrabold mt-2 leading-tight">{hero.title}</h3>
+            <p className="text-cyan-100/70 mt-2 text-sm">{hero.subtitle}</p>
           </div>
           <div className="flex flex-wrap gap-2 md:justify-end">
-            {rolePills.map((p) => (
+            {hero.pills.map((p) => (
               <Link key={p.href} href={p.href} className="px-3 py-1.5 text-[11px] font-medium rounded-full border border-cyan-700/60 text-cyan-100/90 hover:bg-cyan-800/40 hover:text-white transition-colors">
                 {p.label}
               </Link>
