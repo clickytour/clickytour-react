@@ -97,6 +97,7 @@ const sections: Array<{ label: string; icon: string; routes: string[] }> = [
     'pmc-presentation',
     'pmc-submission-viewer',
     'property-presentation',
+    'owner-submit-property',
     'ops-operator-pmc',
     'vacation-owners-list',
     'real-estate-owners-list',

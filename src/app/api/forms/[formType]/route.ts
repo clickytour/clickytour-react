@@ -34,6 +34,7 @@ const VALID_FORM_TYPES = [
   "pmc-apply",
   "agents-apply",
   "owner-evaluation",
+  "owner-property-submission",
   "guest-vacation-request",
   "guest-service-request",
   "guest-real-estate-request",
