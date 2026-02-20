@@ -305,19 +305,6 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 bg-[#0F2B46] text-white">
-      {scoped && scope && (
-        <div className="bg-teal-700/30 border-b border-teal-600/30">
-          <div className="container flex items-center justify-between h-7">
-            <p className="text-[11px] text-teal-200 font-medium">{scope.label} Section</p>
-            <div className="flex items-center gap-3">
-              {scope.crossSell.map(cs => (
-                <Link key={cs.href} href={cs.href} className="text-[10px] text-teal-300/80 hover:text-white">Also: {cs.label}</Link>
-              ))}
-              <Link href="/" className="text-[10px] text-cyan-300 hover:text-white font-medium">← All Roles</Link>
-            </div>
-          </div>
-        </div>
-      )}
       <div className="container flex items-center justify-between h-12">
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileOpen(false)}>
           <VLogo className="w-9 h-9" />
@@ -384,7 +371,16 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-2 ml-auto">
-          <Link href="/qa/" className="inline-flex items-center px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[10px] font-semibold hover:bg-amber-500/30 transition-colors whitespace-nowrap">
+          {scoped && scope && (
+            <>
+              {scope.crossSell.map(cs => (
+                <Link key={cs.href} href={cs.href} className="text-[10px] text-teal-300/70 hover:text-white whitespace-nowrap">{cs.label}</Link>
+              ))}
+              <Link href="/" className="text-[10px] text-cyan-300/70 hover:text-white whitespace-nowrap">All Roles</Link>
+              <span className="w-px h-4 bg-cyan-700/50" />
+            </>
+          )}
+          <Link href="/qa/" className="inline-flex items-center px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[10px] font-semibold hover:bg-amber-500/30 transition-colors whitespace-nowrap">
             ⚙ QA
           </Link>
           <Link href={scoped && scope ? scope.cta.href : '/get-started/'} className="inline-flex items-center px-4 py-1.5 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white text-[12px] font-semibold transition-colors whitespace-nowrap">
