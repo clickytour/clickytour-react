@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { CoreMirrorHotelRoom, DealMode } from "@/lib/coreMirror/types";
+import { GuestRequestInlineForm } from "@/components/forms";
 
 export function HotelRoomDetailSections({
   room,
@@ -58,6 +59,15 @@ export function HotelRoomDetailSections({
           </div>
         </aside>
       </section>
+
+      {/* Guest Request Form */}
+      <GuestRequestInlineForm
+        contextType="property"
+        contextId={room.id}
+        contextSlug={room.slug}
+        contextTitle={room.title}
+        propertyMode="short_term_rent"
+      />
 
       {/* Amenities */}
       {room.amenities.length > 0 && (

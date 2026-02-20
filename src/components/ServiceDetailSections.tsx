@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { CoreMirrorService } from "@/lib/coreMirror/types";
 import { buildPickedForSingleUrl } from "@/lib/pickedfor";
+import { GuestRequestInlineForm } from "@/components/forms";
 
 export function ServiceDetailSections({ service }: { service: CoreMirrorService }) {
   const pickedForUrl = buildPickedForSingleUrl("service", service.slug);
@@ -82,6 +83,16 @@ export function ServiceDetailSections({ service }: { service: CoreMirrorService 
           </div>
         </section>
       )}
+
+      {/* Guest Request Form */}
+      <GuestRequestInlineForm
+        contextType="service"
+        contextId={service.slug}
+        contextSlug={service.slug}
+        contextTitle={service.businessName}
+        categoryName={service.categoryId}
+        subcategoryName={service.subcategoryId}
+      />
 
       {/* PickedFor CTA */}
       <section className="mt-6 rounded-2xl bg-teal-600 p-8 text-center text-white">

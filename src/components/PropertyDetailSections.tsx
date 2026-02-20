@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { CoreMirrorProperty, DealMode } from "@/lib/coreMirror/types";
 import { buildPickedForSingleUrl } from "@/lib/pickedfor";
+import { GuestRequestInlineForm } from "@/components/forms";
 
 const ALL_MODES: DealMode[] = ["short_term_rent", "sale", "monthly_rent"];
 
@@ -337,6 +338,15 @@ export function PropertyDetailSections({
           </div>
         </section>
       )}
+
+      {/* Guest Request Form */}
+      <GuestRequestInlineForm
+        contextType="property"
+        contextId={property.id}
+        contextSlug={property.slug}
+        contextTitle={property.title}
+        propertyMode={activeMode === "sale" ? "sale" : activeMode === "monthly_rent" ? "monthly_rent" : "short_term_rent"}
+      />
 
       {/* CTA Footer */}
       <section className="mt-8 rounded-2xl bg-teal-600 p-8 text-center text-white">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { CoreMirrorHotel, CoreMirrorHotelRoom, DealMode } from "@/lib/coreMirror/types";
 import { buildPickedForSingleUrl } from "@/lib/pickedfor";
+import { GuestRequestInlineForm } from "@/components/forms";
 
 function modeLabel(mode: DealMode) {
   if (mode === "short_term_rent") return "Vacation";
@@ -148,6 +149,15 @@ export function HotelDetailSections({
           </a>
         </div>
       </section>
+
+      {/* Guest Request Form */}
+      <GuestRequestInlineForm
+        contextType="property"
+        contextId={hotel.id}
+        contextSlug={hotel.slug}
+        contextTitle={hotel.title}
+        propertyMode="short_term_rent"
+      />
 
       {/* Video */}
       {hotel.media.videoUrl && (

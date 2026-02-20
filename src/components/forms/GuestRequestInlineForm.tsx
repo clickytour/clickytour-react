@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 type ContextType = "property" | "service";
@@ -21,6 +21,14 @@ const inputClass =
 const labelClass = "text-xs font-medium text-slate-600";
 
 export function GuestRequestInlineForm(props: Props) {
+  return (
+    <Suspense fallback={<div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-center text-slate-400">Loading form...</div>}>
+      <GuestRequestInlineFormInner {...props} />
+    </Suspense>
+  );
+}
+
+function GuestRequestInlineFormInner(props: Props) {
   const searchParams = useSearchParams();
   const [sending, setSending] = useState(false);
   const [msg, setMsg] = useState("");

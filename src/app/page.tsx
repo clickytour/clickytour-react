@@ -2,6 +2,24 @@
 
 import { useMemo, useState } from 'react';
 import { PageShell } from '@/components/site';
+import { HomepageMiniForm } from '@/components/forms';
+
+type MiniFormRole = "guest" | "vacation-owner" | "real-estate-owner" | "service-provider" | "agent" | "pmc" | "job-seeker" | "media-partner";
+
+const roleToMiniForm: Record<string, MiniFormRole> = {
+  'Guest': 'guest',
+  'Vacation Owner': 'vacation-owner',
+  'Real Estate Owner': 'real-estate-owner',
+  'Service Provider': 'service-provider',
+  'Agent': 'agent',
+  'PM Company': 'pmc',
+  'Job Seeker': 'job-seeker',
+  'Media & Partners': 'media-partner',
+};
+
+const miniFormToRole: Record<string, string> = Object.fromEntries(
+  Object.entries(roleToMiniForm).map(([k, v]) => [v, k])
+);
 
 type RoleKey =
   | 'Guest'
@@ -494,32 +512,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="card p-5 md:p-6 text-slate-800 transition-all duration-300">
-            <h3 className="font-extrabold text-xl">{data.formTitle}</h3>
-            <p className="text-slate-500 text-sm mt-1">{data.formSubtitle}</p>
-
-            <div className="mt-4 space-y-3">
-              <select
-                className="w-full rounded-xl border border-slate-200 px-4 py-3 bg-white"
-                value={activeRole ?? ''}
-                onChange={(e) => {
-                  const nextRole = e.target.value as RoleKey | '';
-                  setActiveRole(nextRole || null);
-                  setOpenFaq(0);
-                }}
-              >
-                <option value="">{data.formRoleLabel}</option>
-                {roleTabs.map((role) => (
-                  <option key={role} value={role}>{role}</option>
-                ))}
-              </select>
-              {data.formFields.map((field) => (
-                <input key={field} placeholder={field} className="w-full rounded-xl border border-slate-200 px-4 py-3" />
-              ))}
-            </div>
-            <button className="btn-primary w-full mt-4">Continue →</button>
-            {data.formNote && <p className="text-slate-500 text-sm mt-3">{data.formNote}</p>}
-          </div>
+          <HomepageMiniForm
+            selectedRole={activeRole ? roleToMiniForm[activeRole] ?? null : null}
+            onRoleChange={(miniRole) => {
+              if (miniRole) {
+                const mapped = miniFormToRole[miniRole];
+                setActiveRole((mapped as RoleKey) || null);
+              } else {
+                setActiveRole(null);
+              }
+              setOpenFaq(0);
+            }}
+          />
         </div>
       </section>
 
@@ -693,29 +697,19 @@ export default function Home() {
       </section>
 
       <section className="section">
-        <div className="container max-w-3xl">
-          <div className="card p-6">
-            <h3 className="text-2xl font-extrabold">How would you like to work with ClickyTour?</h3>
-            <p className="text-slate-500 text-sm mt-2">Choose a role to see the right quick form.</p>
-            <div className="grid sm:grid-cols-[1fr_auto] gap-3 mt-4">
-              <select
-                className="rounded-xl border border-slate-200 px-4 py-3"
-                value={activeRole ?? ''}
-                onChange={(e) => {
-                  const nextRole = e.target.value as RoleKey | '';
-                  setActiveRole(nextRole || null);
-                  setOpenFaq(0);
-                }}
-              >
-                <option value="">- Choose...</option>
-                {roleTabs.map((role) => (
-                  <option key={role} value={role}>{role}</option>
-                ))}
-              </select>
-              <button className="btn-primary">Continue →</button>
-            </div>
-            <p className="text-slate-500 text-sm mt-3">We'll prefill the next step and match you instantly.</p>
-          </div>
+        <div className="container max-w-lg">
+          <HomepageMiniForm
+            selectedRole={activeRole ? roleToMiniForm[activeRole] ?? null : null}
+            onRoleChange={(miniRole) => {
+              if (miniRole) {
+                const mapped = miniFormToRole[miniRole];
+                setActiveRole((mapped as RoleKey) || null);
+              } else {
+                setActiveRole(null);
+              }
+              setOpenFaq(0);
+            }}
+          />
         </div>
       </section>
     </PageShell>
