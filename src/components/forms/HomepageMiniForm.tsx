@@ -326,17 +326,39 @@ export function mapMiniRoleToTab(role: RoleKey): string | null {
 export type { RoleKey as MiniFormRoleKey };
 
 export function HomepageMiniForm({
-  selectedRole,
+  selectedRole: externalRole,
   onRoleChange,
 }: {
   selectedRole: RoleKey | null;
   onRoleChange: (role: RoleKey | null) => void;
 }) {
   const router = useRouter();
+  const [internalRole, setInternalRole] = useState<RoleKey | null>(externalRole);
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState("");
 
+  // Sync from parent tab changes (but not when user picks a sub-role inside the dropdown)
+  const [lastExternalRole, setLastExternalRole] = useState(externalRole);
+  if (externalRole !== lastExternalRole) {
+    setLastExternalRole(externalRole);
+    if (externalRole !== null) {
+      // Only override if the new external role is a different "family"
+      const extFamily = externalRole?.startsWith("guest-") ? "guest" : externalRole;
+      const intFamily = internalRole?.startsWith("guest-") ? "guest" : internalRole;
+      if (extFamily !== intFamily) {
+        setInternalRole(externalRole);
+        setFormData({});
+        setMsg("");
+      }
+    } else {
+      setInternalRole(null);
+      setFormData({});
+      setMsg("");
+    }
+  }
+
+  const selectedRole = internalRole;
   const meta = selectedRole ? roleMeta[selectedRole] : null;
 
   function setField(name: string, value: string) {
@@ -405,6 +427,7 @@ export function HomepageMiniForm({
             value={selectedRole ?? ""}
             onChange={(e) => {
               const val = e.target.value as RoleKey | "";
+              setInternalRole(val || null);
               onRoleChange(val || null);
               setFormData({});
               setMsg("");
