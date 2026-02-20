@@ -1,20 +1,24 @@
 'use client';
+import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
+import { ListingCard } from '@/components/ListingCard';
+import { getAllSearchItems } from '@/lib/searchHubEngine';
 
 export default function Page() {
+  const vacationItems = getAllSearchItems().filter((i) => i.intent === 'vacation');
+
   return (
     <PageShell>
-      <Hero title="Property Details" subtitle="View full details, photos, and availability." ctaA="Get Started" ctaB="Learn More" />
+      <Hero title="Vacation Properties" subtitle="Browse individual vacation rental properties with full details." ctaA="Search All" ctaB="Learn More" />
       <section className="section"><div className="container">
-        <div className="card p-6 mb-6">
-          <div className="grid md:grid-cols-4 gap-4">
-            <div><label className="block text-sm font-semibold text-slate-700 mb-1">Destination</label><input className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Where?" /></div>
-            <div><label className="block text-sm font-semibold text-slate-700 mb-1">Check-in</label><input type="date" className="w-full rounded-xl border border-slate-200 px-4 py-3" /></div>
-            <div><label className="block text-sm font-semibold text-slate-700 mb-1">Guests</label><select className="w-full rounded-xl border border-slate-200 px-4 py-3"><option>1</option><option>2</option><option>3-4</option><option>5-6</option><option>7+</option></select></div>
-            <div className="flex items-end"><button className="w-full px-6 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Search</button></div>
-          </div>
+        <SectionTitle eyebrow="Properties" title="Available Vacation Rentals" subtitle="Click any property to view full details, gallery, pricing, and availability." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+          {vacationItems.map((item) => (<ListingCard key={item.id} item={item} />))}
         </div>
-        <div className="text-center py-12 text-slate-500"><p>Listings will be populated from Core.</p></div>
+        {vacationItems.length === 0 && <div className="text-center py-12 text-slate-500"><p>No properties available yet.</p></div>}
+        <div className="mt-8 text-center">
+          <Link href="/search?intent=vacation" className="inline-block px-8 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Advanced Search</Link>
+        </div>
       </div></section>
     </PageShell>
   );

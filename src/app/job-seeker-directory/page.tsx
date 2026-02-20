@@ -1,20 +1,25 @@
 'use client';
+import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
-import { StaffDirectoryDiagram } from '@/components/diagrams';
+import { WorkWithUsDiagram } from '@/components/diagrams';
+import { ListingCard } from '@/components/ListingCard';
+import { getAllSearchItems } from '@/lib/searchHubEngine';
 
 export default function Page() {
+  const jobItems = getAllSearchItems().filter((i) => i.intent === 'jobs');
+
   return (
     <PageShell>
-      <Hero title="Job Seeker Directory" subtitle="Search and filter candidates for staffing." ctaA="Get Started" ctaB="Learn More" diagram={<StaffDirectoryDiagram />} />
+      <Hero title="Job Board" subtitle="Find hospitality, property management, and tourism jobs across Greece." ctaA="Browse Jobs" ctaB="Post a Job" diagram={<WorkWithUsDiagram />} />
       <section className="section"><div className="container">
-        <div className="card p-6 mb-6">
-          <div className="grid md:grid-cols-3 gap-4">
-            <div><label className="block text-sm font-semibold text-slate-700 mb-1">Role Category</label><select className="w-full rounded-xl border border-slate-200 px-4 py-3"><option>All</option><option>Cleaning</option><option>Check-in</option><option>Maintenance</option><option>Cooking</option><option>Tours</option><option>Transport</option></select></div>
-            <div><label className="block text-sm font-semibold text-slate-700 mb-1">Location</label><input className="w-full rounded-xl border border-slate-200 px-4 py-3" placeholder="Destination or region" /></div>
-            <div className="flex items-end"><button className="w-full px-6 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Search</button></div>
-          </div>
+        <SectionTitle eyebrow="Open Positions" title="Current Job Listings" subtitle="Seasonal and full-time opportunities in tourism and property management." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+          {jobItems.map((item) => (<ListingCard key={item.id} item={item} />))}
         </div>
-        <div className="text-center py-12 text-slate-500"><p>Directory results will appear here.</p></div>
+        {jobItems.length === 0 && <div className="text-center py-12 text-slate-500"><p>No job listings yet.</p></div>}
+        <div className="mt-8 text-center">
+          <Link href="/search?intent=jobs" className="inline-block px-8 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Search All Jobs</Link>
+        </div>
       </div></section>
     </PageShell>
   );

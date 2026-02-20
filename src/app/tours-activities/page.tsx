@@ -1,17 +1,23 @@
+'use client';
 import Link from 'next/link';
 import { PageShell, Hero, SectionTitle } from '@/components/site';
-import { ToursActivitiesDiagram } from '@/components/diagrams';
+import { ListingCard } from '@/components/ListingCard';
+import { getAllSearchItems } from '@/lib/searchHubEngine';
 
 export default function Page() {
+  const items = getAllSearchItems().filter((i) => i.intent === 'activities');
+
   return (
     <PageShell>
-      <Hero title="Tours & Activities" subtitle="Discover unique experiences at every destination." ctaA="Get Started" ctaB="Learn More" diagram={<ToursActivitiesDiagram />} />
+      <Hero title="Tours & Activities" subtitle="Discover unique local experiences, tours, and activities across Greece." ctaA="Browse Activities" ctaB="List Yours" />
       <section className="section"><div className="container">
-        <SectionTitle title="Explore by Category" />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[{icon:'🚤',t:'Boats & Water Sports',d:'Sailing, kayaking, jet ski, and more.',href:'/activities-boats'},{icon:'🏔',t:'Outdoor Adventures',d:'Hiking, climbing, cycling, and nature tours.',href:'/activities-outdoor'},{icon:'🍷',t:'Food & Wine',d:'Tastings, cooking classes, local cuisine.',href:'/activities-food-wine'},{icon:'🧘',t:'Wellness & Spa',d:'Yoga retreats, spas, and relaxation.',href:'/activities-wellness'},{icon:'📍',t:'Destination Tours',d:'Guided tours by local experts.',href:'/activities-destination'},{icon:'🎭',t:'Cultural Experiences',d:'Museums, performances, local traditions.',href:'/discover'}].map(c => (
-            <Link key={c.t} href={c.href} className="card p-5 hover:shadow-lg transition-shadow"><p className="text-3xl">{c.icon}</p><h3 className="font-bold mt-2">{c.t}</h3><p className="text-slate-600 text-sm mt-1">{c.d}</p></Link>
-          ))}
+        <SectionTitle eyebrow="Explore" title="Featured Activities" subtitle="Curated experiences from local providers." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+          {items.map((item) => (<ListingCard key={item.id} item={item} />))}
+        </div>
+        {items.length === 0 && <div className="text-center py-12 text-slate-500"><p>No activities available yet.</p></div>}
+        <div className="mt-8 text-center">
+          <Link href="/search?intent=activities" className="inline-block px-8 py-3 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700">Search All Activities</Link>
         </div>
       </div></section>
     </PageShell>

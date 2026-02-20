@@ -1,89 +1,33 @@
 import Link from 'next/link';
+import { PageShell, Hero, SectionTitle } from '@/components/site';
 import { AboutPlatformDiagram } from '@/components/diagrams';
-import { Hero, PageShell, SectionTitle } from '@/components/site';
+import { coreMirrorBlogPosts } from '@/lib/coreMirror';
 
-const categories = ['All', 'Travel Tips', 'Property Growth', 'Hospitality Ops', 'Affiliate & Marketing', 'Company News'];
+export default function Page() {
+  const posts = coreMirrorBlogPosts;
 
-const posts = [
-  {
-    title: 'How Owners Can Increase Booking Conversion in 2026',
-    excerpt: 'Five practical improvements that help property owners convert more visitors into confirmed stays.',
-    date: 'Jan 28, 2026',
-    category: 'Property Growth',
-  },
-  {
-    title: 'Guest Experience Checklist for High-Season Rentals',
-    excerpt: 'A pre-arrival and on-stay checklist to improve reviews and repeat bookings.',
-    date: 'Jan 19, 2026',
-    category: 'Hospitality Ops',
-  },
-  {
-    title: 'Best Local Services to Bundle With Vacation Stays',
-    excerpt: 'How providers and managers can package cleaning, transfers, and concierge services.',
-    date: 'Jan 10, 2026',
-    category: 'Travel Tips',
-  },
-  {
-    title: 'Affiliate Growth Playbook: Turning Content Into Revenue',
-    excerpt: 'A starter framework for affiliates promoting travel and property offers through ClickyTour.',
-    date: 'Dec 22, 2025',
-    category: 'Affiliate & Marketing',
-  },
-  {
-    title: 'ClickyTour Platform Update: New Role Onboarding Flows',
-    excerpt: 'An overview of our latest updates across role pages, guidance content, and support links.',
-    date: 'Dec 12, 2025',
-    category: 'Company News',
-  },
-  {
-    title: 'Operations Metrics PM Companies Should Track Monthly',
-    excerpt: 'From occupancy and ADR to maintenance response time — a practical KPI breakdown.',
-    date: 'Dec 3, 2025',
-    category: 'Hospitality Ops',
-  },
-];
-
-export default function BlogPage() {
   return (
     <PageShell>
-      <Hero
-diagram={<AboutPlatformDiagram />}
-                title="ClickyTour Blog"
-        subtitle="Insights, guides, and updates for guests, owners, providers, agents and PM companies."
-        ctaA="Read Latest"
-        ctaB="Explore Categories"
-      />
-
-      
-
-      <section className="section section-soft">
-        <div className="container grid lg:grid-cols-[260px_minmax(0,1fr)] gap-6">
-          <aside className="card p-5 h-max">
-            <h3 className="font-bold text-slate-900">Categories</h3>
-            <div className="flex flex-wrap lg:flex-col gap-2 mt-4">
-              {categories.map((category) => (
-                <span key={category} className="pill text-center">{category}</span>
-              ))}
-            </div>
-          </aside>
-
-          <div>
-            <SectionTitle title="Latest Articles" subtitle="Fresh content and practical tips from the ClickyTour ecosystem." />
-            <div className="grid md:grid-cols-2 gap-4 mt-6">
-              {posts.map((post) => (
-                <article key={post.title} className="card p-5 flex flex-col">
-                  <div className="h-36 rounded-lg bg-gradient-to-br from-cyan-100 to-slate-100 border border-cyan-200" />
-                  <span className="inline-block text-xs rounded-full bg-cyan-50 text-cyan-700 px-2 py-1 w-fit mt-4">{post.category}</span>
-                  <h3 className="font-bold text-lg mt-3 text-slate-900">{post.title}</h3>
-                  <p className="text-sm text-slate-600 mt-2 flex-1">{post.excerpt}</p>
-                  <div className="text-xs text-slate-400 mt-4">{post.date}</div>
-                  <Link href="/blog/" className="text-cyan-700 text-sm font-semibold mt-2 inline-block">Read →</Link>
-                </article>
-              ))}
-            </div>
-          </div>
+      <Hero title="ClickyTour Blog" subtitle="Travel tips, owner insights, and partner guides." ctaA="Latest Posts" ctaB="Subscribe" diagram={<AboutPlatformDiagram />} />
+      <section className="section"><div className="container">
+        <SectionTitle eyebrow="Latest" title="Blog Posts" />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+          {posts.map((post) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
+              <img src={post.coverImage} alt={post.title} className="h-48 w-full object-cover transition-transform group-hover:scale-105" />
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-semibold text-teal-700">{post.category}</span>
+                  <span className="text-xs text-slate-400">{post.publishedAt}</span>
+                </div>
+                <h3 className="text-base font-semibold text-slate-900 group-hover:text-teal-700">{post.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm text-slate-500">{post.excerpt}</p>
+              </div>
+            </Link>
+          ))}
         </div>
-      </section>
+        {posts.length === 0 && <div className="text-center py-12 text-slate-500"><p>No blog posts yet.</p></div>}
+      </div></section>
     </PageShell>
   );
 }
