@@ -1,0 +1,35 @@
+import type { CoreMirrorPmc } from "./types";
+
+export const coreMirrorPmcs: CoreMirrorPmc[] = [
+  {
+    id: "ct-pmc-001",
+    slug: "aegean-property-management",
+    companyName: "Aegean Property Management",
+    logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=400&auto=format&fit=crop",
+    description: "Full-service property management company operating across Halkidiki. We handle everything from guest communications and cleaning coordination to revenue optimization and maintenance. Managing 45+ properties with an average guest rating of 4.7.",
+    areas: ["Halkidiki", "Thessaloniki"],
+    servicesOffered: ["Guest Management", "Cleaning Coordination", "Revenue Optimization", "Maintenance", "Owner Reporting", "Channel Management"],
+    portfolioCount: 45,
+    rating: 4.7,
+    reviewCount: 89,
+    subscriptionTier: "premium",
+    contactEmail: "info@aegean-pm.gr",
+    phone: "+30 2374 099 100",
+    website: "https://aegean-pm.example.com",
+    status: "active",
+  },
+  {
+    id: "ct-pmc-002",
+    slug: "island-stays-corfu",
+    companyName: "Island Stays Corfu",
+    description: "Boutique property management focused on Corfu island. Specializing in villa management for international owners. New to ClickyTour platform.",
+    areas: ["Corfu"],
+    servicesOffered: ["Guest Management", "Cleaning", "Key Exchange", "Property Inspections"],
+    portfolioCount: 12,
+    rating: 4.3,
+    reviewCount: 15,
+    subscriptionTier: "free",
+    contactEmail: "hello@islandstays-corfu.gr",
+    status: "active",
+  },
+];

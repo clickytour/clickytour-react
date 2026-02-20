@@ -1,0 +1,261 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  title             String
+  headline          String
+  shortDescription  String
+  detailDescription String   @db.Text
+  type              String   // "vacation" | "real-estate"
+  dealTypes         String[] // ["short_term_rent", "monthly_rent", "sale"]
+  status            String   @default("active")
+
+  // Location
+  area              String
+  region            String
+  country           String
+  beachDistanceM    Int?
+  lat               Float?
+  lng               Float?
+
+  // Metrics
+  guests            Int      @default(0)
+  bedrooms          Int      @default(0)
+  bathrooms         Int      @default(0)
+  areaSqm           Float    @default(0)
+
+  // Media
+  gallery           String[]
+  videoUrl          String?
+  tour3dUrl         String?
+
+  // Pricing
+  currency          String   @default("EUR")
+  basicFromPrice    Float    @default(0)
+  seasonalFromPrice Float?
+  seasonName        String?
+  minStayNights     Int      @default(1)
+  seasonalRates     Json?
+  unavailableDates  String[]
+
+  // Real estate specific
+  salePriceEur      Float?
+  monthlyRentEur    Float?
+  roiPercent        Float?
+
+  // Details
+  amenities         String[]
+  highlights        String[]
+  badges            String[]
+  policies          Json?
+  nearby            Json?
+  faqs              Json?
+
+  // Integrations
+  planyo            Json?
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([country, region])
+}
+
+model Hotel {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  shortSummary    String
+  description     String   @db.Text
+  hotelType       String
+  dealTypes       String[]
+  status          String   @default("active")
+
+  primaryImage    String
+  galleryImages   String[]
+  videoUrl        String?
+  tour3dUrl       String?
+
+  city            String
+  region          String
+  country         String
+
+  fromNightlyEur  Float    @default(0)
+  monthlyEur      Float?
+  saleEur         Float?
+
+  amenities       String[]
+  distances       Json?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  rooms           HotelRoom[]
+
+  @@index([status])
+}
+
+model HotelRoom {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  hotelSlug       String
+  title           String
+  roomType        String
+  quantity        Int      @default(1)
+  shortSummary    String
+  dealTypes       String[]
+
+  primaryImage    String
+  galleryImages   String[]
+  videoUrl        String?
+  tour3dUrl       String?
+
+  nightlyEur      Float    @default(0)
+  monthlyEur      Float?
+
+  maxGuests       Int      @default(2)
+  amenities       String[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  hotel           Hotel    @relation(fields: [hotelSlug], references: [slug])
+
+  @@index([hotelSlug])
+}
+
+model Service {
+  slug                  String   @id
+  businessName          String
+  legalName             String?
+  categoryId            String
+  subcategoryId         String
+  shortDescription      String
+  fullDescription       String   @db.Text
+  highlights            String[]
+  languagesSupported    String[]
+  email                 String
+  phone                 String
+  websiteUrl            String?
+  status                String   @default("active")
+
+  country               String
+  city                  String
+  lat                   Float?
+  lng                   Float?
+  serviceAreaCoverageKm Int?
+
+  primaryPhoto          String
+  galleryPhotos         String[]
+  promoVideoUrl         String?
+  logo                  String?
+
+  bookingType           String?
+  externalBookingLink   String?
+  priceList             Json?
+
+  audienceTargets       String[]
+  subscriptionPlan      String   @default("free")
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([status])
+}
+
+model BlogPost {
+  slug                String   @id
+  title               String
+  category            String
+  publishedAt         DateTime
+  excerpt             String
+  coverImage          String
+  content             String[]
+  relatedPropertySlug String?
+  status              String   @default("published")
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+}
+
+model JobListing {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  roleType        String
+  category        String
+  location        String
+  region          String
+  country         String
+  description     String   @db.Text
+  requirements    String[]
+  benefits        String[]
+  salaryRange     String?
+  companyName     String
+  companyLogo     String?
+  contactEmail    String
+  status          String   @default("open")
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+}
+
+model AgentProfile {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  photo            String?
+  bio              String?  @db.Text
+  areas            String[]
+  specialties      String[]
+  rating           Float?
+  reviewCount      Int      @default(0)
+  subscriptionTier String   @default("free")
+  contactEmail     String?
+  phone            String?
+  status           String   @default("active")
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status])
+}
+
+model PmcProfile {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  companyName      String
+  logo             String?
+  description      String?  @db.Text
+  areas            String[]
+  servicesOffered  String[]
+  portfolioCount   Int      @default(0)
+  rating           Float?
+  reviewCount      Int      @default(0)
+  subscriptionTier String   @default("free")
+  contactEmail     String?
+  phone            String?
+  website          String?
+  status           String   @default("active")
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status])
+}
