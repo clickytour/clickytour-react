@@ -7,14 +7,16 @@ export function generateStaticParams() {
   return coreMirrorBlogPosts.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = getBlogPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
   return { title: `${post.title} | ClickyTour Blog`, description: post.excerpt };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const post = getBlogPostBySlug(params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
   if (!post) notFound();
   return <PageShell><BlogPostSections post={post} /></PageShell>;
 }

@@ -7,15 +7,17 @@ export function generateStaticParams() {
   return coreMirrorHotels.map((h) => ({ slug: h.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const hotel = getHotelBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const hotel = getHotelBySlug(slug);
   if (!hotel) return { title: "Hotel Not Found" };
   return { title: `${hotel.title} | ClickyTour`, description: hotel.shortSummary };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const hotel = getHotelBySlug(params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const hotel = getHotelBySlug(slug);
   if (!hotel) notFound();
-  const rooms = getHotelRoomsByHotelSlug(params.slug);
+  const rooms = getHotelRoomsByHotelSlug(slug);
   return <PageShell><HotelDetailSections hotel={hotel} rooms={rooms} activeMode="short_term_rent" /></PageShell>;
 }
