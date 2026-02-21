@@ -10,6 +10,11 @@ const calculators: Record<string, React.ComponentType> = {
   "golden-visa-calculator": dynamic(() => import("./GoldenVisaCalculator")),
   "ferry-island-planner": dynamic(() => import("./FerryIslandPlanner")),
   "property-valuation": dynamic(() => import("./PropertyValuation")),
+  "occupancy-heatmap": dynamic(() => import("./OccupancyHeatmap")),
+  "guest-guidebook": dynamic(() => import("./GuidebookBuilder")),
+  "review-response-generator": dynamic(() => import("./ReviewResponseGenerator")),
+  "contract-generator": dynamic(() => import("./ContractGenerator")),
+  "expense-tracker": dynamic(() => import("./ExpenseTracker")),
 };
 
 export default function ToolCalculatorEmbed({ slug }: { slug: string }) {
