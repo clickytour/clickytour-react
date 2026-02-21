@@ -102,14 +102,15 @@ export default function GoldenVisaCalculator() {
       {/* Zone Map Summary */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: "250,000", zones: "Mainland, small islands", color: "emerald" },
-          { label: "400,000", zones: "Crete, Rhodes, Corfu, large islands", color: "amber" },
-          { label: "800,000", zones: "Athens, Thessaloniki, Mykonos, Santorini", color: "rose" },
+          { label: "250,000", value: 250000, zones: "Mainland, small islands", color: "emerald" },
+          { label: "400,000", value: 400000, zones: "Crete, Rhodes, Corfu, large islands", color: "amber" },
+          { label: "800,000", value: 800000, zones: "Athens, Thessaloniki, Mykonos, Santorini", color: "rose" },
         ].map((t) => (
-          <div key={t.label} className={`rounded-xl border-2 p-4 text-center ${zone.threshold === +t.label.replace(/,/g, "") ? `border-${t.color}-500 bg-${t.color}-50` : "border-slate-200 bg-white"}`}>
-            <p className={`text-2xl font-bold ${zone.threshold === +t.label.replace(/,/g, "") ? `text-${t.color}-700` : "text-slate-700"}`}>{t.label}</p>
+          <a key={t.label} href={`/real-estate-buy?minPrice=${t.value}&intent=golden-visa`} className={`block rounded-xl border-2 p-4 text-center transition hover:shadow-lg cursor-pointer ${zone.threshold === t.value ? `border-${t.color}-500 bg-${t.color}-50` : "border-slate-200 bg-white hover:border-slate-300"}`}>
+            <p className={`text-2xl font-bold ${zone.threshold === t.value ? `text-${t.color}-700` : "text-slate-700"}`}>{t.label}</p>
             <p className="text-xs text-slate-500 mt-1">{t.zones}</p>
-          </div>
+            <p className={`text-[10px] mt-2 font-semibold ${zone.threshold === t.value ? `text-${t.color}-600` : "text-cyan-600"}`}>Search properties &rarr;</p>
+          </a>
         ))}
       </div>
 
@@ -258,7 +259,7 @@ export default function GoldenVisaCalculator() {
             <a href={`/real-estate-buy?minPrice=${zone.threshold}&region=${encodeURIComponent(zone.name.split(" (")[0])}`} className="rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-cyan-700 text-center hover:bg-cyan-50 whitespace-nowrap">
               Search Properties for Sale
             </a>
-            <a href="/directory/agents" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
+            <a href="/directory/agents/category/real-estate-brokers" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
               Find a Real Estate Agent
             </a>
             <a href="/owners-real-estate-invest" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
