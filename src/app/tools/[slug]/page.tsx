@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageShell, SectionTitle } from "@/components/site";
 import { TOOLS, TOOL_CATEGORIES, TOOL_ROLES, getToolBySlug } from "@/lib/tools";
 import ToolCalculatorEmbed from "@/components/tools/ToolCalculatorEmbed";
+import ToolNavScope from "@/components/tools/ToolNavScope";
 
 export async function generateStaticParams() {
   return TOOLS.map((t) => ({ slug: t.slug }));
@@ -31,6 +32,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
 
   return (
     <PageShell>
+      <ToolNavScope primaryRole={tool.primaryRole || tool.roles[0] || "all"} />
       {/* Hero */}
       <section className={`relative overflow-hidden py-20 text-white ${isComingSoon ? "bg-gradient-to-br from-slate-800 to-slate-700" : "bg-gradient-to-br from-slate-900 via-slate-800 to-violet-900"}`}>
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />

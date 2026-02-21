@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { PageShell } from "@/components/site";
+import { PageShell, useNavScopeOverride } from "@/components/site";
 import { TOOLS, TOOL_CATEGORIES, TOOL_ROLES } from "@/lib/tools";
 import type { Tool } from "@/lib/tools";
 
@@ -57,6 +57,9 @@ function ToolCard({ tool }: { tool: Tool }) {
 }
 
 export default function ToolsHubPage() {
+  const { setOverride } = useNavScopeOverride();
+  useEffect(() => { setOverride("explore"); return () => setOverride(null); }, [setOverride]);
+
   const [roleFilter, setRoleFilter] = useState("");
   const [catFilter, setCatFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
