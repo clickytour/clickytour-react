@@ -7,6 +7,9 @@ const calculators: Record<string, React.ComponentType> = {
   "investment-analyzer": dynamic(() => import("./InvestmentAnalyzer")),
   "commission-calculator": dynamic(() => import("./CommissionCalculator")),
   "rental-income-estimator": dynamic(() => import("./RentalIncomeEstimator")),
+  "golden-visa-calculator": dynamic(() => import("./GoldenVisaCalculator")),
+  "ferry-island-planner": dynamic(() => import("./FerryIslandPlanner")),
+  "property-valuation": dynamic(() => import("./PropertyValuation")),
 };
 
 export default function ToolCalculatorEmbed({ slug }: { slug: string }) {
