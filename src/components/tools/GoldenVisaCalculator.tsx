@@ -40,8 +40,8 @@ const RESIDENCY_BENEFITS = [
 ];
 
 export default function GoldenVisaCalculator() {
-  const [zoneIdx, setZoneIdx] = useState(0);
-  const [propertyValue, setPropertyValue] = useState(ZONES[0].threshold);
+  const [zoneIdx, setZoneIdx] = useState(9); // Default: Halkidiki
+  const [propertyValue, setPropertyValue] = useState(ZONES[9].threshold);
   const [sqm, setSqm] = useState(80);
   const [rentalStrategy, setRentalStrategy] = useState<"str" | "ltr" | "none">("str");
   const [familyMembers, setFamilyMembers] = useState(1);
@@ -261,6 +261,9 @@ export default function GoldenVisaCalculator() {
             </a>
             <a href="/directory/agents/category/real-estate-brokers" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
               Find a Real Estate Agent
+            </a>
+            <a href={`/directory/property-managers/${zone.name.split(" (")[0].toLowerCase().replace(/\s+/g, "-").replace(/[\/&]/g, "")}`} className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
+              Verified PMCs in {zone.name.split(" (")[0]}
             </a>
             <a href="/owners-real-estate-invest" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
               Investment Guide
