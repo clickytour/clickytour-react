@@ -1124,11 +1124,11 @@ function useContextualFooter(): FooterContext {
   return { hero, cols: [...contextual, ...fixed] };
 }
 
-export function Footer({ hideHero }: { hideHero?: boolean } = {}) {
+export function Footer({ hideHero, flush }: { hideHero?: boolean; flush?: boolean } = {}) {
   const { hero, cols: footerCols } = useContextualFooter();
 
   return (
-    <footer className="bg-[#0F2B46] text-white mt-14">
+    <footer className={`bg-[#0F2B46] text-white ${flush ? '' : 'mt-14'}`}>
       {!hideHero && <div className="border-b border-cyan-900/40">
         <div className="container py-10 grid md:grid-cols-2 gap-8 items-center">
           <div>
@@ -1195,12 +1195,12 @@ export function Footer({ hideHero }: { hideHero?: boolean } = {}) {
   );
 }
 
-export function PageShell({ children, hideFooterHero }: { children: ReactNode; hideFooterHero?: boolean }) {
+export function PageShell({ children, hideFooterHero, flushFooter }: { children: ReactNode; hideFooterHero?: boolean; flushFooter?: boolean }) {
   return (
     <NavScopeOverrideProvider>
       <Header />
       <main>{children}</main>
-      <Footer hideHero={hideFooterHero} />
+      <Footer hideHero={hideFooterHero} flush={flushFooter} />
     </NavScopeOverrideProvider>
   );
 }
