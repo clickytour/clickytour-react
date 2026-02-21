@@ -238,6 +238,36 @@ export default function GoldenVisaCalculator() {
         </div>
       </div>
 
+      {/* CTA: Search Real Estate */}
+      <div className="rounded-2xl bg-gradient-to-r from-cyan-700 to-blue-800 p-5 text-white">
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex-1">
+            <h4 className="text-lg font-bold">Find Golden Visa Properties on ClickyTour</h4>
+            <p className="text-sm text-cyan-100 mt-1">
+              Browse real estate listings across Greece with verified sale prices and locations.
+              Filter by region, price range, and property type to find your Golden Visa investment.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-2">
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px]">&#10003; Verified Listings</span>
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px]">&#10003; Sale Prices</span>
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px]">&#10003; Place ID / Location Data</span>
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px]">&#10003; Direct Owner Contact</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <a href={`/real-estate-buy?minPrice=${zone.threshold}&region=${encodeURIComponent(zone.name.split(" (")[0])}`} className="rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-cyan-700 text-center hover:bg-cyan-50 whitespace-nowrap">
+              Search Properties for Sale
+            </a>
+            <a href="/directory/agents" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
+              Find a Real Estate Agent
+            </a>
+            <a href="/owners-real-estate-invest" className="rounded-lg border border-white/40 px-5 py-2 text-xs font-medium text-white text-center hover:bg-white/10 whitespace-nowrap">
+              Investment Guide
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
         <p className="text-xs text-amber-800">
           <strong>Important Disclaimer:</strong> This calculator provides estimates based on publicly available data as of early 2026. Golden Visa thresholds, tax rates, and legal requirements may change. 
