@@ -3,7 +3,7 @@ import { PageShell } from "@/components/site";
 
 export default function NotFound() {
   return (
-    <PageShell>
+    <PageShell hideFooterHero>
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-[#0F2B46] to-cyan-900">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-10">
