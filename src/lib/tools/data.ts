@@ -495,6 +495,40 @@ export const TOOLS: Tool[] = [
     ],
   },
 
+  // ── FLAGSHIP Interactive Tools ──
+  {
+    slug: "vacation-owner-calculator",
+    name: "Vacation Property Owner Calculator",
+    tagline: "Complete ROI calculator for Greek vacation rental property owners",
+    description: "Research-backed calculator covering 50 Greek destinations with real market data. Calculates gross revenue (seasonal pricing × occupancy), all operating expenses (cleaning, maintenance, utilities, insurance, STR fees), management fees comparison (self-managed to 30% PMC), Greek tax liability (2026 individual progressive scale or corporate 22% + 5% dividend), net profit, yield, and Golden Visa eligibility. References ClickyTour operating model.",
+    category: "calculator",
+    status: "active",
+    roles: ["owner"],
+    primaryRole: "owner",
+    icon: "chart",
+    color: "emerald",
+    hasDemo: true,
+    demoMode: "sandbox",
+    features: [
+      "50 Greek tourism destinations with real ADR & occupancy data",
+      "7 property types (1-BR apt to luxury villa)",
+      "5 management models (self-managed → premium PMC)",
+      "2026 Greek tax scales (individual progressive 15-45% & corporate 22%+5%)",
+      "Full expense breakdown (cleaning, laundry, maintenance, utilities, insurance, STR fees)",
+      "Seasonal pricing engine (peak/shoulder/off-season rates)",
+      "Golden Visa eligibility check with link to GV calculator",
+      "Net yield / ROI calculation",
+      "Individual vs Company ownership comparison",
+      "ClickyTour operating model integration",
+    ],
+    useCases: [
+      { role: "Owners", cases: ["Calculate net rental income for any Greek property", "Compare management options (self vs PMC vs ClickyTour)", "Understand tax implications (individual vs company)", "Plan property investment ROI"] },
+      { role: "Agents", cases: ["Show clients realistic rental projections", "Compare regions for investment recommendations", "Demonstrate ClickyTour value proposition"] },
+    ],
+    inputs: ["Region", "Property type & size", "Management model", "Ownership type", "Custom nightly rate", "Pool", "Property count"],
+    outputs: ["Gross revenue", "Full expense breakdown", "Tax calculation", "Net profit", "Monthly income", "Net yield/ROI", "Expense distribution chart", "Golden Visa eligibility"],
+  },
+
   // ── MEDIUM PRIORITY Interactive Tools ──
   {
     slug: "itinerary-builder",

@@ -10,6 +10,7 @@ const calculators: Record<string, React.ComponentType> = {
   "golden-visa-calculator": dynamic(() => import("./GoldenVisaCalculator")),
   "ferry-island-planner": dynamic(() => import("./FerryIslandPlanner")),
   "property-valuation": dynamic(() => import("./PropertyValuation")),
+  "vacation-owner-calculator": dynamic(() => import("./VacationOwnerCalculator")),
   "itinerary-builder": dynamic(() => import("./ItineraryBuilder")),
   "property-comparison": dynamic(() => import("./PropertyComparison")),
   "events-calendar": dynamic(() => import("./EventsCalendar")),
