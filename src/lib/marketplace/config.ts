@@ -211,8 +211,18 @@ export const DIRECTORY_CONFIG: Record<
 
 /** Greek regions for geo-targeted pages */
 export const GREEK_REGIONS = [
+  // Tier 1: Top tourism destinations
   "Athens", "Thessaloniki", "Crete", "Mykonos", "Santorini",
   "Halkidiki", "Rhodes", "Corfu", "Zakynthos", "Kefalonia",
+  // Tier 2: High-demand islands & mainland
   "Paros", "Naxos", "Lefkada", "Skiathos", "Kos",
   "Peloponnese", "Pelion", "Thassos", "Samos", "Lesvos",
+  // Tier 3: SEO expansion — searched destinations
+  "Hydra", "Spetses", "Milos", "Ios", "Syros",
+  "Skopelos", "Alonissos", "Karpathos", "Leros", "Patmos",
+  "Chios", "Ikaria", "Aegina", "Poros", "Kalymnos",
+  "Nafplio", "Meteora", "Ioannina", "Kavala", "Volos",
+  "Alexandroupoli", "Preveza", "Kastoria", "Drama", "Serres",
+  "Chalkida", "Loutraki", "Nafpaktos", "Kalamata", "Sparta",
+  "Olympia", "Delphi", "Mani", "Monemvasia", "Galaxidi",
 ] as const;
